@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "ca.nika.it.gear5"
         minSdk 23
-        targetSdk 29
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
