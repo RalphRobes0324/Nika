@@ -1,8 +1,9 @@
+<!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
+<!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
 <resources>
     <string name="app_name">Gear5</string>
     <string name="play">Play</string>
     <string name="score">Score</string>
     <string name="login">Login</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
