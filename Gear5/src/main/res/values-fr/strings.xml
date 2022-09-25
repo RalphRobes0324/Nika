@@ -6,4 +6,8 @@
     <string name="score">Score</string>
     <string name="login">Connexion</string>
     <string name="hello_blank_fragment">Bonjour fragment vierge</string>
+    <string name="Gear5">GEAR 5!!</string>
+    <string name="ExitApp">Souhaitez-vous quitter l\'application?</string>
+    <string name="Yes">Oui</string>
+    <string name="No">Non</string>
 </resources>
