@@ -12,4 +12,5 @@
     <string name="No">Non</string>
     <string name="A">A</string>
     <string name="B">B</string>
+    <string name="name_score">Name: | Score:</string>
 </resources>
