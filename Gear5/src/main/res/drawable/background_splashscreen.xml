@@ -9,7 +9,7 @@
 
     <item>
         <bitmap
-            android:gravity="bottom"
+            android:gravity="center"
             android:src="@drawable/nika_name" />
     </item>
 
