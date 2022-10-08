@@ -16,7 +16,7 @@
 
     <!-- Splash Screen -->
     <style name="ca.nika.it.gear5.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/background_splashscreen</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
     
