@@ -10,4 +10,6 @@
     <string name="ExitApp">Do you wish to exit the app?</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
+    <string name="A">A</string>
+    <string name="B">B</string>
 </resources>

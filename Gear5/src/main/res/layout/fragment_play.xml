@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
 <!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#F5F5DC"
     tools:context=".PlayFragment">
+
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nikaButtonA"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="552dp"
+        android:text="@string/A"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:cornerRadius="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nikaButtonB"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="472dp"
+        android:text="@string/B"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:cornerRadius="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/nikaJoystick"
+        android:layout_width="129dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="229dp"
+        android:layout_marginTop="496dp"
+        android:src="@drawable/joystick_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
