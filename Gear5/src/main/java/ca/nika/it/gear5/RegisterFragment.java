@@ -100,7 +100,6 @@ public class RegisterFragment extends Fragment {
                 username.setError(getString(R.string.warning_msg_reg_username_not_maching),iconError);
             }
 
-
         }
 
     }
