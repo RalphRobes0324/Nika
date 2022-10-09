@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "340033231529",
+    "project_id": "nika-gear5",
+    "storage_bucket": "nika-gear5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340033231529:android:1b37a5359bf3d6cb2227b8",
+        "android_client_info": {
+          "package_name": "ca.nika.it.gear5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340033231529-mkfh634mgpp2k3fuqlepq6mt3uss2imh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdxu8cSGF5oMyUP4abWvDzsYkkPETT1d8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340033231529-mkfh634mgpp2k3fuqlepq6mt3uss2imh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
