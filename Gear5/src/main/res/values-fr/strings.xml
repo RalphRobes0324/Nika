@@ -36,4 +36,7 @@
     <string name="warning_msg_reg_pwd">Missing Password</string>
     <string name="warning_msg_reg_confir">Missing Confirmation Password</string>
     <string name="warning_msg_msg_username">Missing Username</string>
+    <string name="warning_msg_reg_username_not_maching">Please Enter Valid Username</string>
+    <string name="warning_msg_reg_confir_not_maching">Password did not match</string>
+    <string name="warning_msg_reg_pwd_not_maching">Password must be longer then 5 characters</string>
 </resources>
