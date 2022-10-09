@@ -20,4 +20,5 @@
     <string name="login_page_password">Mot de passe</string>
     <string name="login_page_loginbutton">Connexion</string>
     <string name="login_page_registerbutton">Sinscrire</string>
+    <string name="reg_page_confirm_password">Confirmez le mot de passe</string>
 </resources>
