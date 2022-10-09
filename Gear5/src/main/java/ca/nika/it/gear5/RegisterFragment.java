@@ -14,11 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 
 public class RegisterFragment extends Fragment {
     Button loginBtn, regBtn;
-    FragmentNavi fragmentNavi;
+    LinearLayout linearLayout;
     private EditText username;
     private EditText password;
     private EditText confirmation;
@@ -41,6 +42,10 @@ public class RegisterFragment extends Fragment {
         username = (EditText) view.findViewById(R.id.reg_username);
         password = (EditText) view.findViewById(R.id.reg_password);
         confirmation = (EditText) view.findViewById(R.id.reg_confirmation_pwd);
+        linearLayout = (LinearLayout) view.findViewById(R.id.test);
+
+
+
 
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +69,7 @@ public class RegisterFragment extends Fragment {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
+
         if(TextUtils.isEmpty(username.getText().toString().trim())) username.setError(getString(R.string.warning_msg_reg),iconError);
         if(TextUtils.isEmpty(password.getText().toString().trim())) username.setError(getString(R.string.warning_msg_reg),iconError);
         if(TextUtils.isEmpty(confirmation.getText().toString().trim())) username.setError(getString(R.string.warning_msg_reg),iconError);
