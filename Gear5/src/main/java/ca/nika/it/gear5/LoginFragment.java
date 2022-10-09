@@ -14,17 +14,16 @@ import android.widget.Button;
 
 
 public class LoginFragment extends Fragment {
-    Button registerBtn;
+    Button registerBtn,loginBtn;
 
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_register, container, false);
-        registerBtn = (Button) view.findViewById(R.id.btn_register);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        registerBtn = (Button) view.findViewById(R.id.btn_login);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +31,6 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
 
         return view;
     }

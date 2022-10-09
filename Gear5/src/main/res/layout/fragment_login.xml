@@ -77,8 +77,8 @@
                 android:layout_marginEnd="40dp"/>
 
             <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:id="@+id/btn_register"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"

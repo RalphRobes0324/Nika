@@ -6,5 +6,4 @@ import org.jetbrains.annotations.NotNull;
 
 public interface FragmentNavi {
     void naviFrag(Fragment fragment, boolean addToStack);
-
 }
