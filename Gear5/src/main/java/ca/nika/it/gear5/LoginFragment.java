@@ -14,7 +14,8 @@ import android.widget.Button;
 
 
 public class LoginFragment extends Fragment {
-    Button registerBtn,loginBtn;
+    Button registerBtn;
+    FragmentNavi fragmentNavi;
 
 
     @Override
@@ -23,14 +24,16 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        registerBtn = (Button) view.findViewById(R.id.btn_login);
+        registerBtn = (Button) view.findViewById(R.id.btn_register);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                fragmentNavi.naviFrag(new RegisterFragment(),false);
             }
         });
+
+
 
         return view;
     }

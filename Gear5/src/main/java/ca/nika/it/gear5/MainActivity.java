@@ -14,7 +14,7 @@ import android.view.Menu;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements FragmentNavi{
 
     ActivityMainBinding binding;
 
@@ -49,6 +49,17 @@ public class MainActivity extends AppCompatActivity{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
+    }
+    @Override
+    public void naviFrag(Fragment fragment, boolean addToStack) {
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment);
+        if(addToStack){
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
+
     }
 
     @Override
