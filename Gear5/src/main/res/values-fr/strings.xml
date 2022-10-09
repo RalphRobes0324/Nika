@@ -17,4 +17,5 @@
     <string name="username">Username</string>
     <string name="top_score">Top Score:</string>
     <string name="currency">Currency:</string>
+    <string name="login_page_password">Mot de passe</string>
 </resources>
