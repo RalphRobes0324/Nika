@@ -84,7 +84,7 @@ public class RegisterFragment extends Fragment {
                 && password.getText().length() > 1
                 && confirmation.getText().length() > 1){
 
-            if(username.getText().toString().matches("^[a-z0-9_-]{3,15}$")){
+            if(username.getText().toString().matches("^[A-Za-z][a-z0-9_-]{3,15}$")){
                 if (password.getText().toString().length()>=5) {
                     if(confirmation.getText().toString().equals(password.getText().toString())){
                         Toast.makeText(getActivity().getApplicationContext(),"Register Successful",Toast.LENGTH_SHORT).show();

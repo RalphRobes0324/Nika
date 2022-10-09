@@ -59,7 +59,7 @@ public class LoginFragment extends Fragment {
                 else{
                     if(username.getText().length() > 1
                             && password.getText().length() > 1){
-                        if(username.getText().toString().matches("^[a-z0-9_-]{3,15}$")){
+                        if(username.getText().toString().matches("^[A-Za-z][a-z0-9_-]{3,15}$")){
                             if (password.getText().toString().length()>=5) {
                                 openMainActivity();
                             }
