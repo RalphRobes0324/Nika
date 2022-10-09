@@ -18,4 +18,6 @@
     <string name="top_score">Top Score:</string>
     <string name="currency">Currency:</string>
     <string name="login_page_password">Password</string>
+    <string name="login_page_loginbutton">Login</string>
+    <string name="login_page_registerbutton">Register</string>
 </resources>

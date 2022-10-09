@@ -39,7 +39,8 @@
             app:boxBackgroundColor="#696969"
             android:layout_marginTop="50dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp">
+            android:layout_marginEnd="40dp"
+            android:textStyle="bold">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -50,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/login_page_password"
+            android:textStyle="bold"
             android:textColorHint="@color/white"
             app:boxBackgroundColor="#696969"
             android:layout_marginTop="10dp"
@@ -60,5 +62,31 @@
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_page_loginbutton"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/btn_register"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_page_registerbutton"
+                android:layout_toLeftOf="@id/btn_login"
+                android:layout_marginEnd="40dp"/>
+
+
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>
