@@ -33,7 +33,7 @@
     <string name="joystick_color">Joystick Color</string>
     <string name="error_msg_missing_username">Please Enter Username</string>
     <string name="welcome">welcome</string>
-    <string name="error_msg_missing_pwd">Please input Password</string>
-    <string name="error_msg_missing_confir">Please input your password one more time</string>
-    <string name="warning_msg_reg">Missing Information</string>
+    <string name="warning_msg_reg_confir">Missing Confirmation Password</string>
+    <string name="warning_msg_reg_pwd">Missing Password</string>
+    <string name="warning_msg_msg_username">Missing Username</string>
 </resources>
