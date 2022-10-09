@@ -8,23 +8,23 @@
 
         android:id="@+id/Settings"
         android:icon="@drawable/ic_settings"
-        android:title="Settings"
+        android:title="@string/settings"
         app:showAsAction="ifRoom|withText"/>
 
     <item
         android:id="@+id/Profile"
-        android:title="Profile"
+        android:title="@string/Profile"
         app:showAsAction="ifRoom"/>
         <!--android:icon="@drawable/ic_profile"-->
 
     <item
         android:id="@+id/leaderboard"
-        android:title="Leaderboard"
+        android:title="@string/leaderboard"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/Connect"
-        android:title="Connect"
+        android:title="@string/connect"
         app:showAsAction="never"/>
 
 

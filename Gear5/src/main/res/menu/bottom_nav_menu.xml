@@ -8,6 +8,6 @@
         android:title="@string/score"
         android:icon="@drawable/ic_baseline_score"/>
     <item android:id="@+id/profile"
-        android:title="@string/profile"
+        android:title="@string/Profile"
         android:icon="@drawable/ic_baseline_profile"/>
 </menu>
