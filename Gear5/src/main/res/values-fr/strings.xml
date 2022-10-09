@@ -20,6 +20,7 @@
     <string name="login_page_password">Mot de passe</string>
     <string name="login_page_loginButton">Connexion</string>
     <string name="login_page_registerButton">Sinscrire</string>
+    <string name="reg_page_confirm_password">Confirm Password</string>
     <string name="settings">Settings</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="connect">Connect</string>
