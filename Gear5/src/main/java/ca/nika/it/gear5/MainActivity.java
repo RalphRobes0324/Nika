@@ -14,15 +14,13 @@ import android.view.Menu;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentNavi {
 
     ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -78,6 +76,18 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 }).show();
+
+    }
+
+    @Override
+    public void naviFrag(Fragment fragment, boolean addToStack) {
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment);
+        if(addToStack){
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
 
     }
 }
