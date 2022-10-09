@@ -14,7 +14,8 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/test">
 
         <ImageView
             android:layout_width="100dp"
@@ -64,6 +65,7 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -82,6 +84,7 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_confirmation_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
