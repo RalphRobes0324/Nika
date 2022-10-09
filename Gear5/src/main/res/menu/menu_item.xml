@@ -1,35 +1,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
     <item
 
-        app:showAsAction="always"
-        android:icon="@drawable/ic_more_vert"
-        android:title="">
-        <menu>
+        android:id="@+id/Settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        app:showAsAction="ifRoom|withText"/>
 
-            <item
-                android:id="@+id/leaderboard"
-                android:title="Leaderboard"
-                app:showAsAction="never"/>
+    <item
+        android:id="@+id/Profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile"
+        app:showAsAction="ifRoom"/>
 
-            <item
-                android:id="@+id/Profile"
-                android:title="Profile"
-                app:showAsAction="never"/>
+    <item
+        android:id="@+id/leaderboard"
+        android:title="Leaderboard"
+        app:showAsAction="never"/>
 
-            <item
-                android:id="@+id/Connect"
-                android:title="Connect"
-                app:showAsAction="never"/>
+    <item
+        android:id="@+id/Connect"
+        android:title="Connect"
+        app:showAsAction="never"/>
 
-            <item
-                android:id="@+id/Settings"
-                android:icon="@drawable/ic_settings"
-                android:title="Settings"
-                app:showAsAction="never"/>
 
-        </menu>
-
-    </item>
 
 </menu>
