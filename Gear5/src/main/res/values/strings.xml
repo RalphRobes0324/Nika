@@ -32,4 +32,7 @@
     <string name="mute_audio">Mute Audio</string>
     <string name="joystick_color">Joystick Color</string>
     <string name="error_msg_missing_username">Please Enter Username</string>
+    <string name="welcome">welcome</string>
+    <string name="error_msg_missing_pwd">Please input Password</string>
+    <string name="error_msg_missing_confir">Please input your password one more time</string>
 </resources>

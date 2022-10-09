@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/play"
-        android:title="@string/play"
-        android:icon="@drawable/ic_baseline_play" />
-    <item android:id="@+id/score"
-        android:title="@string/score"
-        android:icon="@drawable/ic_baseline_score"/>
-    <item android:id="@+id/profile"
-        android:title="@string/Profile"
-        android:icon="@drawable/ic_baseline_profile"/>
+    <item
+        android:id="@+id/welcome"
+        android:icon="@drawable/ic_baseline_play"
+        android:title="@string/welcome"
+        android:visible="false"/>
+    <item
+        android:id="@+id/play"
+        android:icon="@drawable/ic_baseline_play"
+        android:title="@string/play" />
+    <item
+        android:id="@+id/score"
+        android:icon="@drawable/ic_baseline_score"
+        android:title="@string/score" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_baseline_profile"
+        android:title="@string/Profile" />
 </menu>
