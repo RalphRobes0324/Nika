@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.score:
                     replaceFragment(new ScoreFragment());
                     break;
-                case R.id.login:
+                case R.id.profile:
                     replaceFragment(new ProfileFragment());
                     break;
             }

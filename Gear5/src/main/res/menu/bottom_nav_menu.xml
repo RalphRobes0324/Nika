@@ -7,7 +7,7 @@
     <item android:id="@+id/score"
         android:title="@string/score"
         android:icon="@drawable/ic_baseline_score"/>
-    <item android:id="@+id/login"
-        android:title="@string/login"
-        android:icon="@drawable/ic_baseline_login"/>
+    <item android:id="@+id/profile"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_baseline_profile"/>
 </menu>
