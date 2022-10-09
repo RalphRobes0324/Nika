@@ -5,7 +5,7 @@
         android:id="@+id/welcome"
         android:icon="@drawable/ic_baseline_play"
         android:title="@string/welcome"
-        android:visible="false" />
+        android:visible="false"/>
     <item
         android:id="@+id/play"
         android:icon="@drawable/ic_baseline_play"
