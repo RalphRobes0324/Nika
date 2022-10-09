@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity{
 
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new ProfileFragment());
-
+        //replaceFragment(new ProfileFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 

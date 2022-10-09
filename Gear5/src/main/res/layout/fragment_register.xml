@@ -46,6 +46,7 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -63,6 +64,7 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -81,6 +83,7 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_confirmation_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
