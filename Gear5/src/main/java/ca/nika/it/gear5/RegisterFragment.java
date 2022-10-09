@@ -61,10 +61,12 @@ public class RegisterFragment extends Fragment {
     }
 
     private void validateEmptyForm() {
-        //Drawable icon = AppCompatResources;
-        if (TextUtils.isEmpty(username.getText().toString().trim())){
-            username.setError(getString(R.string.error_msg_missing_username));
-        }
+        Drawable iconError = AppCompatResources.getDrawable(requireContext(),
+                R.drawable.ic_baseline_error_24);
+        iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
+        if(TextUtils.isEmpty(username.getText().toString().trim())) username.setError(getString(R.string.error_msg_missing_username),iconError);
+        if(TextUtils.isEmpty(password.getText().toString().trim())) username.setError(getString(R.string.error_msg_missing_pwd),iconError);
+        if(TextUtils.isEmpty(confirmation.getText().toString().trim())) username.setError(getString(R.string.error_msg_missing_confir),iconError);
 
 
     }
