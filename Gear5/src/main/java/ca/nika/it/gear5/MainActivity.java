@@ -9,8 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
@@ -91,4 +93,13 @@ public class MainActivity extends AppCompatActivity implements FragmentNavi{
     }
 
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if (id == R.id.Settings) {
+            replaceFragment(new SettingsFragment());
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
