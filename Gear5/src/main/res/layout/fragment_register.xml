@@ -22,7 +22,7 @@
             android:layout_marginTop="90dp"
             android:adjustViewBounds="true"
 
-            android:src="@drawable/background_splash" />
+            android:src="@drawable/nika_logo_transparent" />
 
         <TextView
             android:layout_width="wrap_content"
