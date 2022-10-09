@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
@@ -47,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_item,menu);
+        return true;
+    }
+
     @Override
     public void onBackPressed(){
         new AlertDialog.Builder(this)
