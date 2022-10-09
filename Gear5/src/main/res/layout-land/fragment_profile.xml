@@ -9,6 +9,27 @@
     android:background="@drawable/wallpaper5"
     tools:context=".ProfileFragment">
 
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="112dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="448dp"
+        android:layout_marginTop="56dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/devil_fruit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/choose_image_btn"
+        android:layout_width="89dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="536dp"
+        android:layout_marginTop="136dp"
+        android:text="@string/click_to_add_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
