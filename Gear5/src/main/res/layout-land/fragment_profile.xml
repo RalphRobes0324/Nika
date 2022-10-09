@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
+    android:background="@drawable/wallpaper5"
     tools:context=".ProfileFragment">
 
     <TextView
@@ -33,6 +33,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/username"
         android:textSize="40sp"
+        android:textColor="#FFFF00"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,6 +45,7 @@
         android:layout_marginTop="72dp"
         android:text="@string/top_score"
         android:textSize="40sp"
+        android:textColor="#FFFF00"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,6 +57,7 @@
         android:layout_marginTop="136dp"
         android:text="@string/currency"
         android:textSize="40sp"
+        android:textColor="#FFFF00"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
