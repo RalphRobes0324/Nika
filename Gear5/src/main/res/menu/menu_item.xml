@@ -14,8 +14,8 @@
     <item
         android:id="@+id/Profile"
         android:title="Profile"
-        android:icon="@drawable/ic_profile"
         app:showAsAction="ifRoom"/>
+        <!--android:icon="@drawable/ic_profile"-->
 
     <item
         android:id="@+id/leaderboard"

@@ -21,9 +21,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new PlayFragment());
+        replaceFragment(new LoginFragment());
+
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 

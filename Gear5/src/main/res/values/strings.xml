@@ -17,4 +17,5 @@
     <string name="username">Username</string>
     <string name="top_score">Top Score:</string>
     <string name="currency">Currency:</string>
+    <string name="login_title_gear5">Gear5</string>
 </resources>
