@@ -4,7 +4,7 @@
     <string name="app_name">Gear5</string>
     <string name="play">Play</string>
     <string name="score">Score</string>
-    <string name="login">Login</string>
+    <string name="profile">profile</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Gear5">GEAR 5!!</string>
     <string name="ExitApp">Do you wish to exit the app?</string>
@@ -13,4 +13,8 @@
     <string name="A">A</string>
     <string name="B">B</string>
     <string name="name_score">Name: | Score:</string>
+    <string name="logout">Logout</string>
+    <string name="username">Username</string>
+    <string name="top_score">Top Score:</string>
+    <string name="currency">Currency:</string>
 </resources>
