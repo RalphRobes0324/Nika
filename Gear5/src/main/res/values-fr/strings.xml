@@ -35,4 +35,5 @@
     <string name="welcome">welcome</string>
     <string name="error_msg_missing_pwd">Veuillez entrer le mot de passe</string>
     <string name="error_msg_missing_confir">Veuillez entrer votre mot de passe une fois de plus</string>
+    <string name="warning_msg_reg">Missing Information</string>
 </resources>
