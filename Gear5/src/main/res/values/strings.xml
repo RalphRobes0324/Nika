@@ -25,4 +25,5 @@
     <string name="leaderboard">Leaderboard</string>
     <string name="connect">Connect</string>
     <string name="error_msg_missing_username">Please Enter Username</string>
+    <string name="welcome">welcome</string>
 </resources>
