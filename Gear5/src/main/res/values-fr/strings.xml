@@ -31,4 +31,5 @@
     <string name="green">Green</string>
     <string name="mute_audio">Mute Audio</string>
     <string name="joystick_color">Joystick Color</string>
+    <string name="error_msg_missing_username">Please Enter Username</string>
 </resources>
