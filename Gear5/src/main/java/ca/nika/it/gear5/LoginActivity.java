@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentNavi {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.Gear5)
                 .setMessage(R.string.ExitApp)
-                .setIcon(R.drawable.devilfruit)
+                .setIcon(R.drawable.devil_fruit)
                 .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
