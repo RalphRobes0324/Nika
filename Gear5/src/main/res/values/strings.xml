@@ -13,4 +13,8 @@
     <string name="A">A</string>
     <string name="B">B</string>
     <string name="name_score">Name: | Score:</string>
+    <string name="logout">Logout</string>
+    <string name="username">Username</string>
+    <string name="top_score">Top Score:</string>
+    <string name="currency">Currency:</string>
 </resources>
