@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import kotlin.text.Regex;
 
 
 public class RegisterFragment extends Fragment {
@@ -45,8 +48,6 @@ public class RegisterFragment extends Fragment {
         linearLayout = (LinearLayout) view.findViewById(R.id.test);
 
 
-
-
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +69,6 @@ public class RegisterFragment extends Fragment {
     private void validateEmptyForm() {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
-
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
         if(username.getText().toString().equals("") && username.getText().length() <= 0){
             username.setError(getString(R.string.warning_msg_msg_username),iconError);
@@ -80,7 +80,27 @@ public class RegisterFragment extends Fragment {
             confirmation.setError(getString(R.string.warning_msg_reg_confir),iconError);
         }
 
+        if(username.getText().length() > 1
+                && password.getText().length() > 1
+                && confirmation.getText().length() > 1){
 
+            if(username.getText().toString().matches("^[a-z0-9_-]{3,15}$")){
+                if (password.getText().toString().length()>=5) {
+                    if(confirmation.getText().toString().equals(password.getText().toString())){
+                        Toast.makeText(getActivity().getApplicationContext(),"Register Successful",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        confirmation.setError(getString(R.string.warning_msg_reg_confir_not_maching),iconError);
+                    }
+                }
+                else{
+                    password.setError(getString(R.string.warning_msg_reg_pwd_not_maching),iconError);
+                }
+            }else{
+                username.setError(getString(R.string.warning_msg_reg_username_not_maching),iconError);
+            }
+
+        }
 
     }
 
