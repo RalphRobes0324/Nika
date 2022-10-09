@@ -3,6 +3,8 @@
 package ca.nika.it.gear5;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +18,7 @@ import android.widget.Button;
 
 
 public class LoginFragment extends Fragment {
-    Button registerBtn;
+    Button registerBtn, loginBtn;
     FragmentNavi fragmentNavi;
 
     private void replaceFragment(Fragment fragment){
@@ -33,7 +35,19 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         registerBtn = (Button) view.findViewById(R.id.btn_register);
+        loginBtn = (Button) view.findViewById(R.id.btn_login);
 
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMainActivity();
+            }
+
+            private void openMainActivity() {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

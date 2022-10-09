@@ -9,6 +9,7 @@
     android:background="#F5F5DC"
     tools:context=".PlayFragment">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,8 +21,8 @@
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="416dp"
+        android:layout_marginStart="608dp"
+        android:layout_marginTop="92dp"
         android:text="@string/A"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -34,8 +35,8 @@
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="208dp"
-        android:layout_marginTop="512dp"
+        android:layout_marginStart="504dp"
+        android:layout_marginTop="164dp"
         android:text="@string/B"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -48,8 +49,8 @@
         android:id="@+id/nikaJoystick"
         android:layout_width="129dp"
         android:layout_height="106dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="108dp"
         android:src="@drawable/joystick_img"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

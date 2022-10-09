@@ -2,7 +2,6 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,14 +10,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
@@ -32,8 +26,7 @@ public class MainActivity extends AppCompatActivity{
 
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new PlayFragment());
-
+        //replaceFragment(new ProfileFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -91,9 +84,6 @@ public class MainActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id == R.id.Settings) {
-//            BottomNavigationView btmNav = findViewById(R.id.bottomNavigationView);
-//            btmNav.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-//            btmNav.getMenu().findItem(R.id.play).getIcon().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             replaceFragment(new SettingsFragment());
             return true;
         }
