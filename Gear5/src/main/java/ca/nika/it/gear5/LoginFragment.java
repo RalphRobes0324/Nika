@@ -57,16 +57,16 @@ public class LoginFragment extends Fragment {
                 Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                         R.drawable.ic_baseline_error_24);
                 iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
-                if(username.getText().toString().equals("") && username.getText().length() <= 0){
+                if(username.getText().toString().equals(getString(R.string.blank)) && username.getText().length() <= 0){
                     username.setError(getString(R.string.warning_msg_msg_username),iconError);
                 }
-                else if(password.getText().toString().equals("") && password.getText().length() <= 0){
+                else if(password.getText().toString().equals(getString(R.string.blank)) && password.getText().length() <= 0){
                     password.setError(getString(R.string.warning_msg_reg_pwd),iconError);
                 }
                 else{
                     if(username.getText().length() > 1
                             && password.getText().length() > 1){
-                        if(username.getText().toString().matches("^[A-Za-z0-9_-]{3,15}$")){
+                        if(username.getText().toString().matches(getString(R.string.limits))){
                             if (password.getText().toString().length()>=5) {
                                 String userCheck = username.getText().toString().trim();
                                 String pwdCheck = password.getText().toString().trim();
@@ -87,17 +87,17 @@ public class LoginFragment extends Fragment {
             }
 
             private void validateDBForm(String id, Drawable icon) {
-                databaseReference = FirebaseDatabase.getInstance().getReference("users");
+                databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.users));
                 databaseReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
                             if (task.getResult().exists()){
                                 DataSnapshot dataSnapshot = task.getResult();
-                                String usernameDB = String.valueOf(dataSnapshot.child("username").getValue(String.class));
+                                String usernameDB = String.valueOf(dataSnapshot.child(getString(R.string.username2)).getValue(String.class));
                                 Bundle result = new Bundle();
-                                result.putString("df",usernameDB);
-                                getParentFragmentManager().setFragmentResult("dataForm",result);
+                                result.putString(getString(R.string.df),usernameDB);
+                                getParentFragmentManager().setFragmentResult(getString(R.string.dataForm),result);
 
 
                                 openMainActivity();
