@@ -40,4 +40,5 @@
     <string name="warning_msg_reg_pwd_not_maching">Please Enter at least 5 characters</string>
     <string name="warning_msg_reg_username_not_maching">Please Enter Valid Username</string>
     <string name="click_to_add_image">click to add image</string>
+    <string name="success_msg_reg">Register Successful</string>
 </resources>

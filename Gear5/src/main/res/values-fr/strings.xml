@@ -40,4 +40,5 @@
     <string name="warning_msg_reg_confir_not_maching">Le mot de passe ne correspond pas</string>
     <string name="warning_msg_reg_pwd_not_maching">Veuillez entrer au moins 5 caractères</string>
     <string name="click_to_add_image">cliquez pour ajouter une image</string>
+    <string name="success_msg_reg">Register Successful</string>
 </resources>

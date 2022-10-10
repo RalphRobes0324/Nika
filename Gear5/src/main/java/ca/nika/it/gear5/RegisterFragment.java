@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +16,23 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import kotlin.text.Regex;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RegisterFragment extends Fragment {
     Button loginBtn, regBtn;
     LinearLayout linearLayout;
+    private String name,pwd,id;
     private EditText username;
     private EditText password;
     private EditText confirmation;
+
+    private FirebaseAuth firebaseAuth;
+
+    private FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -45,7 +52,10 @@ public class RegisterFragment extends Fragment {
         username = (EditText) view.findViewById(R.id.reg_username);
         password = (EditText) view.findViewById(R.id.reg_password);
         confirmation = (EditText) view.findViewById(R.id.reg_confirmation_pwd);
-        linearLayout = (LinearLayout) view.findViewById(R.id.test);
+        //firebaseAuth = FirebaseAuth.auth;
+
+        //linearLayout = (LinearLayout) view.findViewById(R.id.test);
+
 
 
         regBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +97,17 @@ public class RegisterFragment extends Fragment {
             if(username.getText().toString().matches("^[A-Za-z0-9_-]{3,15}$")){
                 if (password.getText().toString().length()>=5) {
                     if(confirmation.getText().toString().equals(password.getText().toString())){
-                        Toast.makeText(getActivity().getApplicationContext(),"Register Successful",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.success_msg_reg),Toast.LENGTH_SHORT).show();
+                        rootNode = FirebaseDatabase.getInstance();
+                        reference = rootNode.getReference("user");
+
+                        name = username.getText().toString();
+                        pwd = password.getText().toString();
+                        id = name + pwd;
+
+                        UserClass helperClass = new UserClass(name,pwd);
+                        reference.child(id).setValue(helperClass);
+
                     }
                     else{
                         confirmation.setError(getString(R.string.warning_msg_reg_confir_not_maching),iconError);
