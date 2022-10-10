@@ -51,4 +51,5 @@
     <string name="username2">username</string>
     <string name="limits">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
+    <string name="warning_msg_reg_account_exist">This account exist</string>
 </resources>

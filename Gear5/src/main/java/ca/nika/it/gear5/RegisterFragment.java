@@ -5,6 +5,7 @@ package ca.nika.it.gear5;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,7 +19,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,6 +34,7 @@ public class RegisterFragment extends Fragment {
     private EditText username;
     private EditText password;
     private EditText confirmation;
+    DatabaseReference databaseReference;
 
     private FirebaseAuth firebaseAuth;
 
@@ -99,19 +104,11 @@ public class RegisterFragment extends Fragment {
             if(username.getText().toString().matches(getString(R.string.limits))){
                 if (password.getText().toString().length()>=5) {
                     if(confirmation.getText().toString().equals(password.getText().toString())){
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.success_msg_reg),Toast.LENGTH_SHORT).show();
-                        rootNode = FirebaseDatabase.getInstance();
-                        reference = rootNode.getReference(getString(R.string.users));
-
                         name = username.getText().toString();
                         pwd = password.getText().toString();
                         id = name + pwd;
-
-                        UserClass helperClass = new UserClass(name,pwd);
-                        reference.child(id).setValue(helperClass);
-
-                        returnLoginFrag();
-
+                        validateFromDB(id,name,pwd,iconError);
+                        //returnLoginFrag();
                     }
                     else{
                         confirmation.setError(getString(R.string.warning_msg_reg_confir_not_maching),iconError);
@@ -128,8 +125,36 @@ public class RegisterFragment extends Fragment {
 
     }
 
-    private void returnLoginFrag() {
-        replaceFragment(new LoginFragment());
+    private void validateFromDB(String checkUserDB_ID,String userEnter, String pwdEnter, Drawable icon) {
+        databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.users));
+        databaseReference.child(checkUserDB_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult().exists()){
+                        username.setError(getString(R.string.warning_msg_reg_account_exist),icon);
+                    }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.success_msg_reg),Toast.LENGTH_SHORT).show();
+                        rootNode = FirebaseDatabase.getInstance();
+                        reference = rootNode.getReference(getString(R.string.users));
+                        UserClass helperClass = new UserClass(userEnter,pwdEnter);
+                        reference.child(checkUserDB_ID).setValue(helperClass);
+                        returnLoginFrag();
+                    }
+                }
+                else{
+                    username.setError(getString(R.string.error_msg_login_read),icon);
+                }
+
+            }
+
+            private void returnLoginFrag() {
+                replaceFragment(new LoginFragment());
+            }
+        });
     }
+
+
 
 }
