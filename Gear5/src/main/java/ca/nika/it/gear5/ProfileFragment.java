@@ -80,9 +80,13 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
+        getParentFragmentManager().clearFragmentResultListener(getString(R.string.df));
+
 
         mImageVIew = view.findViewById(R.id.nikaProfileView);
         mChooseBtn = view.findViewById(R.id.nikaImgBtn);
+
+
         mChooseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
