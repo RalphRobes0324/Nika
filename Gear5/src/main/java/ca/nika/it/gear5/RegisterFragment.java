@@ -101,7 +101,7 @@ public class RegisterFragment extends Fragment {
                     if(confirmation.getText().toString().equals(password.getText().toString())){
                         Toast.makeText(getActivity().getApplicationContext(), getString(R.string.success_msg_reg),Toast.LENGTH_SHORT).show();
                         rootNode = FirebaseDatabase.getInstance();
-                        reference = rootNode.getReference("user");
+                        reference = rootNode.getReference("users");
 
                         name = username.getText().toString();
                         pwd = password.getText().toString();
@@ -109,6 +109,8 @@ public class RegisterFragment extends Fragment {
 
                         UserClass helperClass = new UserClass(name,pwd);
                         reference.child(id).setValue(helperClass);
+
+                        returnLoginFrag();
 
                     }
                     else{
@@ -124,6 +126,10 @@ public class RegisterFragment extends Fragment {
 
         }
 
+    }
+
+    private void returnLoginFrag() {
+        replaceFragment(new LoginFragment());
     }
 
 }

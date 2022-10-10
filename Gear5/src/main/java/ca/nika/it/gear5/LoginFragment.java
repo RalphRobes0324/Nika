@@ -6,8 +6,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,12 +20,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
 
 
 public class LoginFragment extends Fragment {
     Button registerBtn, loginBtn;
     private EditText username;
     private EditText password;
+    DatabaseReference databaseReference;
 
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -60,7 +72,10 @@ public class LoginFragment extends Fragment {
                             && password.getText().length() > 1){
                         if(username.getText().toString().matches("^[A-Za-z0-9_-]{3,15}$")){
                             if (password.getText().toString().length()>=5) {
-                                validateDBForm();
+                                String userCheck = username.getText().toString().trim();
+                                String pwdCheck = password.getText().toString().trim();
+                                String id = userCheck + pwdCheck;
+                                validateDBForm(userCheck,pwdCheck,id);
                             }
                             else{
                                 password.setError(getString(R.string.warning_msg_reg_pwd_not_maching),iconError);
@@ -73,8 +88,30 @@ public class LoginFragment extends Fragment {
                     }
                 }
             }
-            private void validateDBForm() {
+            private void validateDBForm(String user, String pwd, String id) {
+                databaseReference = FirebaseDatabase.getInstance().getReference("users");
+                databaseReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            if (task.getResult().exists()){
+                                DataSnapshot dataSnapshot = task.getResult();
+                                //String usernameDB = String.valueOf(dataSnapshot.child("username").getValue())
+                                Toast.makeText(getActivity().getApplicationContext(),"found",Toast.LENGTH_SHORT)
+                                        .show();
+                                openMainActivity();
+                            }else{
+                                Toast.makeText(getActivity().getApplicationContext(),"Failed to find",Toast.LENGTH_SHORT)
+                                        .show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(getActivity().getApplicationContext(),"Failed to Read",Toast.LENGTH_SHORT)
+                                    .show();
+                        }
 
+                    }
+                });
 
             }
             private void openMainActivity() {
