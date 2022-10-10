@@ -103,7 +103,6 @@ public class LoginFragment extends Fragment {
                                 //result.putInt(getString(R.string.df_tScore),topScore);
                                 getParentFragmentManager().setFragmentResult(getString(R.string.dataForm),result);
 
-
                                 openMainActivity();
                             }else{
                                 username.setError(getString(R.string.error_msg_login),icon);

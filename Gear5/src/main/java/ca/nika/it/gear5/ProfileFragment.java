@@ -6,12 +6,14 @@ import static android.app.Activity.RESULT_OK;
 
 import static ca.nika.it.gear5.R.string.PermissionDenied;
 import static ca.nika.it.gear5.R.string.PermissionGranted;
+import static ca.nika.it.gear5.R.string.df;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -80,7 +83,6 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
-        getParentFragmentManager().clearFragmentResultListener(getString(R.string.df));
 
 
         mImageVIew = view.findViewById(R.id.nikaProfileView);
