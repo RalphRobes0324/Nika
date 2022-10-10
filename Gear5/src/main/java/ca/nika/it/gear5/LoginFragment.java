@@ -99,15 +99,11 @@ public class LoginFragment extends Fragment {
                                 //String usernameDB = String.valueOf(dataSnapshot.child("username").getValue())
                                 openMainActivity();
                             }else{
-                                username.setError(getString(R.string.warning_msg_reg_username_not_maching),icon);
-                                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_msg_login),Toast.LENGTH_SHORT)
-                                        .show();
+                                username.setError(getString(R.string.error_msg_login),icon);
                             }
                         }
                         else{
-                            username.setError(getString(R.string.warning_msg_reg_username_not_maching),icon);
-                            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_msg_login_read),Toast.LENGTH_SHORT)
-                                    .show();
+                            username.setError(getString(R.string.error_msg_login_read),icon);
                         }
 
                     }
