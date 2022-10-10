@@ -24,7 +24,6 @@ public class LoginFragment extends Fragment {
     Button registerBtn, loginBtn;
     private EditText username;
     private EditText password;
-    FragmentNavi fragmentNavi;
 
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

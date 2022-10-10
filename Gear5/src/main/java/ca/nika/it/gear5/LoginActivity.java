@@ -10,7 +10,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-public class LoginActivity extends AppCompatActivity implements FragmentNavi {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,17 +20,6 @@ public class LoginActivity extends AppCompatActivity implements FragmentNavi {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new LoginFragment())
                 .commit();
-    }
-
-    @Override
-    public void naviFrag(Fragment fragment, boolean addToStack) {
-        FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, fragment);
-        if(addToStack){
-            transaction.addToBackStack(null);
-        }
-        transaction.commit();
     }
 
     @Override
