@@ -60,7 +60,7 @@ public class LoginFragment extends Fragment {
                             && password.getText().length() > 1){
                         if(username.getText().toString().matches("^[A-Za-z0-9_-]{3,15}$")){
                             if (password.getText().toString().length()>=5) {
-                                openMainActivity();
+                                validateDBForm();
                             }
                             else{
                                 password.setError(getString(R.string.warning_msg_reg_pwd_not_maching),iconError);
@@ -73,16 +73,13 @@ public class LoginFragment extends Fragment {
                     }
                 }
             }
+            private void validateDBForm() {
 
+
+            }
             private void openMainActivity() {
-                validateForm();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
-            }
-
-            private void validateForm() {
-
-
             }
         });
 
