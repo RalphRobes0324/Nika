@@ -4,6 +4,9 @@ package ca.nika.it.gear5;
 
 import static android.app.Activity.RESULT_OK;
 
+import static ca.nika.it.gear5.R.string.PermissionDenied;
+import static ca.nika.it.gear5.R.string.PermissionGranted;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -53,10 +56,12 @@ public class ProfileFragment extends Fragment {
                         PackageManager.PERMISSION_GRANTED) {
                     pickImageFromGallery();
 
+                    Snackbar.make(getView(), PermissionGranted, Snackbar.LENGTH_SHORT)
+                            .show();
 
 
                 } else {
-                    Snackbar.make(getView(), "Permission Denied", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(getView(), PermissionDenied, Snackbar.LENGTH_SHORT)
                             .show();
                 }
             }
