@@ -45,11 +45,19 @@
     <string name="PermissionDenied">Permission refusée</string>
     <string name="error_msg_login">Impossible de trouver</string>
     <string name="error_msg_login_read">Impossible de lire</string>
-    <string name="dataForm">dataForm</string> <!-- Dont change this -->
-    <string name="users">users</string> <!-- Dont change this -->
-    <string name="df">df</string> <!-- Dont change this -->
-    <string name="username2">username</string> <!-- Dont change this -->
+
+    <!--vv Don't change anything in this group vv-->
+    <string name="dataForm">dataForm</string>
+    <string name="users">users</string>
+    <string name="df">df</string>
+    <string name="username2">username</string>
     <string name="limits">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
     <string name="warning_msg_reg_account_exist">This account exist</string>
+    <string name="currency2">currency</string>
+    <string name="topCurrency">topCurrency</string>
+    <string name="df_curr">df_curr</string>
+    <string name="df_tScore">df_tScore</string>
+    <!--^^ Don't change anything in this group ^^-->
+
 </resources>
