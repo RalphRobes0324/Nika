@@ -49,11 +49,11 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        loginBtn = (Button) view.findViewById(R.id.btn_login_reg);
-        regBtn = (Button) view.findViewById(R.id.btn_register_reg);
-        username = (EditText) view.findViewById(R.id.reg_username);
-        password = (EditText) view.findViewById(R.id.reg_password);
-        confirmation = (EditText) view.findViewById(R.id.reg_confirmation_pwd);
+        loginBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
+        regBtn = (Button) view.findViewById(R.id.nika_btn_register_reg);
+        username = (EditText) view.findViewById(R.id.nika_reg_username);
+        password = (EditText) view.findViewById(R.id.nika_reg_password);
+        confirmation = (EditText) view.findViewById(R.id.nika_reg_confirmation_pwd);
         //firebaseAuth = FirebaseAuth.auth;
 
         //linearLayout = (LinearLayout) view.findViewById(R.id.test);

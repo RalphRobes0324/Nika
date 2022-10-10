@@ -17,7 +17,7 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/test">
+        android:id="@+id/nikaLinearLayout">
 
         <ImageView
             android:layout_width="100dp"
@@ -28,6 +28,7 @@
             android:src="@drawable/nika_logo_transparent" />
 
         <TextView
+            android:id="@+id/nikaGear5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
@@ -38,6 +39,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nikaTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -49,13 +51,14 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_username"
+                android:id="@+id/nika_reg_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nikaTextInput2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -67,7 +70,7 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_password"
+                android:id="@+id/nika_reg_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -75,6 +78,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nikaTextInput3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -86,7 +90,7 @@
             app:boxBackgroundColor="#696969">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_confirmation_pwd"
+                android:id="@+id/nika_reg_confirmation_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -94,12 +98,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
+            android:id="@+id/nikaRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login_reg"
+                android:id="@+id/nika_btn_login_reg"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
@@ -109,11 +114,11 @@
                 android:text="@string/login_page_loginButton" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_register_reg"
+                android:id="@+id/nika_btn_register_reg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
-                android:layout_toStartOf="@id/btn_login_reg"
+                android:layout_toStartOf="@id/nika_btn_login_reg"
                 android:text="@string/login_page_registerButton"
                 android:textColor="@color/white"
                 android:textStyle="bold" />

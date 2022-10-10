@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(binding.getRoot());
         //replaceFragment(new ProfileFragment());
 
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+        binding.nikaBottomNavigationView.setOnItemSelectedListener(item -> {
 
             switch(item.getItemId()){
                 case R.id.play:
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(R.id.nikaFrameLayout,fragment);
         fragmentTransaction.commit();
     }
 
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity{
 
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if (id == R.id.Settings) {
+        if (id == R.id.nikaSettings) {
             replaceFragment(new SettingsFragment());
             return true;
         }

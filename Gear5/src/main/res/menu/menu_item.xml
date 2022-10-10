@@ -1,3 +1,5 @@
+<!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
+<!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -5,24 +7,25 @@
 
 
     <item
-        android:id="@+id/Settings"
+        android:id="@+id/nikaSettings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/Profile"
+        android:id="@+id/nikaProfile"
+        android:icon="@drawable/ic_baseline_profile"
         android:title="@string/Profile"
         app:showAsAction="ifRoom"/>
-        <!--android:icon="@drawable/ic_profile"-->
+       
 
     <item
-        android:id="@+id/leaderboard"
+        android:id="@+id/nikaLeaderboard"
         android:title="@string/leaderboard"
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/Connect"
+        android:id="@+id/nikaConnect"
         android:title="@string/connect"
         app:showAsAction="never"/>
 

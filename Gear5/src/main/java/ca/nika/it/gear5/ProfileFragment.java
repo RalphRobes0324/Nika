@@ -22,7 +22,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -82,8 +81,8 @@ public class ProfileFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        mImageVIew = view.findViewById(R.id.image_view);
-        mChooseBtn = view.findViewById(R.id.choose_image_btn);
+        mImageVIew = view.findViewById(R.id.nikaProfileView);
+        mChooseBtn = view.findViewById(R.id.nikaImgBtn);
         mChooseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

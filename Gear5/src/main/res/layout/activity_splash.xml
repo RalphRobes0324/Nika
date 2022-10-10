@@ -6,7 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
-    android:background="@drawable/background_splash">
+    android:background="@drawable/wallpaper"
+    tools:context=".SplashActivity">
+
+
+    <ImageView
+        android:id="@+id/nikaImageView2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="215dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/nika_logo_transparent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@
 
 
     <ScrollView
+        android:id="@+id/nikaSV"
         android:layout_width="375dp"
         android:layout_height="460dp"
         android:layout_marginStart="16dp"
@@ -19,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/nikaLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/black"
@@ -35,6 +37,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace1"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -48,6 +51,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace2"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -61,6 +65,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace3"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -74,6 +79,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace4"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -87,6 +93,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace5"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -100,6 +107,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace6"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -113,6 +121,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace8"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -126,6 +135,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace9"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -139,6 +149,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace10"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -152,6 +163,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace11"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -165,6 +177,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace12"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -178,6 +191,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace13"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -191,6 +205,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace14"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
@@ -204,6 +219,7 @@
                 android:textStyle="bold" />
 
             <Space
+                android:id="@+id/nikaSpace15"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 

@@ -10,7 +10,7 @@
     tools:context=".ProfileFragment">
 
     <ImageView
-        android:id="@+id/image_view"
+        android:id="@+id/nikaProfileView"
         android:layout_width="112dp"
         android:layout_height="106dp"
         android:layout_marginStart="448dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/choose_image_btn"
+        android:id="@+id/nikaImgBtn"
         android:layout_width="89dp"
         android:layout_height="0dp"
         android:layout_marginStart="536dp"
@@ -29,12 +29,6 @@
         android:text="@string/click_to_add_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/nikaLogout"

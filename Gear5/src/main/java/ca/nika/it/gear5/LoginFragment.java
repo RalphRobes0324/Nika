@@ -2,11 +2,8 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -50,10 +46,10 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        registerBtn = (Button) view.findViewById(R.id.btn_register);
-        loginBtn = (Button) view.findViewById(R.id.btn_login);
-        username = (EditText) view.findViewById(R.id.login_username);
-        password = (EditText) view.findViewById(R.id.login_password);
+        registerBtn = (Button) view.findViewById(R.id.nika_btn_register);
+        loginBtn = (Button) view.findViewById(R.id.nika_btn_login);
+        username = (EditText) view.findViewById(R.id.nika_login_username);
+        password = (EditText) view.findViewById(R.id.nika_login_password);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
