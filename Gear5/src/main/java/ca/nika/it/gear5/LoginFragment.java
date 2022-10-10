@@ -95,8 +95,12 @@ public class LoginFragment extends Fragment {
                             if (task.getResult().exists()){
                                 DataSnapshot dataSnapshot = task.getResult();
                                 String usernameDB = String.valueOf(dataSnapshot.child(getString(R.string.username2)).getValue(String.class));
+                                int curr = Integer.valueOf(dataSnapshot.child("currency").getValue(Integer.class));
+                                int topScore = Integer.valueOf(dataSnapshot.child("topCurrency").getValue(Integer.class));
                                 Bundle result = new Bundle();
                                 result.putString(getString(R.string.df),usernameDB);
+                                result.putInt("df_curr",curr);
+                                result.putInt("df_tScore",topScore);
                                 getParentFragmentManager().setFragmentResult(getString(R.string.dataForm),result);
 
 
