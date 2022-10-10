@@ -10,7 +10,7 @@
         android:id="@+id/nikaSettings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
-        app:showAsAction="always"/>
+        app:showAsAction="always|withText"/>
 
     <item
         android:id="@+id/nikaProfile"
