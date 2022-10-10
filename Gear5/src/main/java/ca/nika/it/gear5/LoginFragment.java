@@ -76,6 +76,7 @@ public class LoginFragment extends Fragment {
                                 String pwdCheck = password.getText().toString().trim();
                                 String id = userCheck + pwdCheck;
                                 validateDBForm(id, iconError);
+
                             }
                             else{
                                 password.setError(getString(R.string.warning_msg_reg_pwd_not_maching),iconError);
@@ -88,6 +89,7 @@ public class LoginFragment extends Fragment {
                     }
                 }
             }
+
             private void validateDBForm(String id, Drawable icon) {
                 databaseReference = FirebaseDatabase.getInstance().getReference("users");
                 databaseReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -96,7 +98,12 @@ public class LoginFragment extends Fragment {
                         if(task.isSuccessful()){
                             if (task.getResult().exists()){
                                 DataSnapshot dataSnapshot = task.getResult();
-                                //String usernameDB = String.valueOf(dataSnapshot.child("username").getValue())
+                                String usernameDB = String.valueOf(dataSnapshot.child("username").getValue(String.class));
+                                Bundle result = new Bundle();
+                                result.putString("df",usernameDB);
+                                getParentFragmentManager().setFragmentResult("dataForm",result);
+
+
                                 openMainActivity();
                             }else{
                                 username.setError(getString(R.string.error_msg_login),icon);
