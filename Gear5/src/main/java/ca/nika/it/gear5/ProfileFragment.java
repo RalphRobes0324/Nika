@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class ProfileFragment extends Fragment {
 
     ImageView mImageVIew;
@@ -50,8 +52,12 @@ public class ProfileFragment extends Fragment {
                 if (grantResults.length > 0 && grantResults[0] ==
                         PackageManager.PERMISSION_GRANTED) {
                     pickImageFromGallery();
+
+
+
                 } else {
-                    Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), "Permission Denied", Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             }
         }
