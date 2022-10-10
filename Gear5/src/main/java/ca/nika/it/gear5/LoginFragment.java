@@ -75,7 +75,7 @@ public class LoginFragment extends Fragment {
                                 String userCheck = username.getText().toString().trim();
                                 String pwdCheck = password.getText().toString().trim();
                                 String id = userCheck + pwdCheck;
-                                validateDBForm(userCheck,pwdCheck,id);
+                                validateDBForm(userCheck,pwdCheck,id, iconError);
                             }
                             else{
                                 password.setError(getString(R.string.warning_msg_reg_pwd_not_maching),iconError);
@@ -88,7 +88,7 @@ public class LoginFragment extends Fragment {
                     }
                 }
             }
-            private void validateDBForm(String user, String pwd, String id) {
+            private void validateDBForm(String user, String pwd, String id, Drawable icon) {
                 databaseReference = FirebaseDatabase.getInstance().getReference("users");
                 databaseReference.child(id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -97,16 +97,16 @@ public class LoginFragment extends Fragment {
                             if (task.getResult().exists()){
                                 DataSnapshot dataSnapshot = task.getResult();
                                 //String usernameDB = String.valueOf(dataSnapshot.child("username").getValue())
-                                Toast.makeText(getActivity().getApplicationContext(),"found",Toast.LENGTH_SHORT)
-                                        .show();
                                 openMainActivity();
                             }else{
-                                Toast.makeText(getActivity().getApplicationContext(),"Failed to find",Toast.LENGTH_SHORT)
+                                username.setError(getString(R.string.warning_msg_reg_username_not_maching),icon);
+                                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_msg_login),Toast.LENGTH_SHORT)
                                         .show();
                             }
                         }
                         else{
-                            Toast.makeText(getActivity().getApplicationContext(),"Failed to Read",Toast.LENGTH_SHORT)
+                            username.setError(getString(R.string.warning_msg_reg_username_not_maching),icon);
+                            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_msg_login_read),Toast.LENGTH_SHORT)
                                     .show();
                         }
 

@@ -43,4 +43,6 @@
     <string name="success_msg_reg">Register Successful</string>
     <string name="PermissionGranted">Permission Granted</string>
     <string name="PermissionDenied">Permission Denied</string>
+    <string name="error_msg_login">Failed to find</string>
+    <string name="error_msg_login_read">Failed to Read</string>
 </resources>
