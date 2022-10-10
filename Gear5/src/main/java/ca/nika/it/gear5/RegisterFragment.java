@@ -31,6 +31,7 @@ public class RegisterFragment extends Fragment {
     Button loginBtn, regBtn;
     LinearLayout linearLayout;
     private String name,pwd,id;
+    private int currency, topscore;
     private EditText username;
     private EditText password;
     private EditText confirmation;
@@ -107,7 +108,9 @@ public class RegisterFragment extends Fragment {
                         name = username.getText().toString();
                         pwd = password.getText().toString();
                         id = name + pwd;
-                        validateFromDB(id,name,pwd,iconError);
+                        currency = 1000;
+                        topscore = 0;
+                        validateFromDB(id,name,pwd,iconError, currency, topscore);
                         //returnLoginFrag();
                     }
                     else{
@@ -125,7 +128,7 @@ public class RegisterFragment extends Fragment {
 
     }
 
-    private void validateFromDB(String checkUserDB_ID,String userEnter, String pwdEnter, Drawable icon) {
+    private void validateFromDB(String checkUserDB_ID,String userEnter, String pwdEnter, Drawable icon, int currency, int userScore) {
         databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.users));
         databaseReference.child(checkUserDB_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -138,7 +141,7 @@ public class RegisterFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), getString(R.string.success_msg_reg),Toast.LENGTH_SHORT).show();
                         rootNode = FirebaseDatabase.getInstance();
                         reference = rootNode.getReference(getString(R.string.users));
-                        UserClass helperClass = new UserClass(userEnter,pwdEnter);
+                        UserClass helperClass = new UserClass(userEnter,pwdEnter,currency,userScore);
                         reference.child(checkUserDB_ID).setValue(helperClass);
                         returnLoginFrag();
                     }

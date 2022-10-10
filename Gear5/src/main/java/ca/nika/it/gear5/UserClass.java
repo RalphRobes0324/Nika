@@ -4,14 +4,19 @@ package ca.nika.it.gear5;
 
 public class UserClass {
     String username,password;
+    int currency, topScore;
 
     public UserClass() {
 
     }
 
-    public UserClass(String username, String password) {
+
+
+    public UserClass(String username, String password, int currency, int topScore) {
         this.username = username;
         this.password = password;
+        this.currency = currency;
+        this.topScore = topScore;
     }
 
     public String getUsername() {
@@ -28,5 +33,21 @@ public class UserClass {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(int currency) {
+        this.currency = currency;
+    }
+
+    public int getTopScore() {
+        return topScore;
+    }
+
+    public void setTopScore(int topScore) {
+        this.topScore = topScore;
     }
 }
