@@ -92,9 +92,9 @@ public class RegisterFragment extends Fragment {
             confirmation.setError(getString(R.string.warning_msg_reg_confir),iconError);
         }
 
-        if(username.getText().length() > 1
-                && password.getText().length() > 1
-                && confirmation.getText().length() > 1){
+        if(username.getText().length() >= 1
+                && password.getText().length() >= 1
+                && confirmation.getText().length() >= 1){
 
             if(username.getText().toString().matches(getString(R.string.limits))){
                 if (password.getText().toString().length()>=5) {
