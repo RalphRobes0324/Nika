@@ -20,23 +20,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/nikaImgBtn"
-        android:layout_width="89dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="106dp"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="149dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="132dp"
         android:text="@string/click_to_add_image"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        app:cornerRadius="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/nikaLogout"
-        android:layout_width="193dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="521dp"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="141dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="548dp"
+        android:elevation="100dp"
         android:text="@string/logout"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
