@@ -45,6 +45,7 @@
     <string name="PermissionDenied">Permission refusée</string>
     <string name="error_msg_login">Impossible de trouver</string>
     <string name="error_msg_login_read">Impossible de lire</string>
+    <string name="login_page_remember_me">Remember me</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
