@@ -2,7 +2,9 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -16,7 +18,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +34,7 @@ import com.google.firebase.ktx.Firebase;
 
 public class LoginFragment extends Fragment {
     Button registerBtn, loginBtn;
+    CheckBox remember;
     private EditText username;
     private EditText password;
     DatabaseReference databaseReference;
@@ -46,10 +52,15 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        ///Remember if check is checked
+
+        ///
+
         registerBtn = (Button) view.findViewById(R.id.nika_btn_register);
         loginBtn = (Button) view.findViewById(R.id.nika_btn_login);
         username = (EditText) view.findViewById(R.id.nika_login_username);
         password = (EditText) view.findViewById(R.id.nika_login_password);
+        remember = (CheckBox) view.findViewById(R.id.nika_cd_rememberMe);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +83,6 @@ public class LoginFragment extends Fragment {
                                 String pwdCheck = password.getText().toString().trim();
                                 String id = userCheck + pwdCheck;
                                 validateDBForm(id, iconError);
-
                             }
                             else{
                                 password.setError(getString(R.string.warning_msg_reg_pwd_not_maching),iconError);
@@ -93,15 +103,15 @@ public class LoginFragment extends Fragment {
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
                             if (task.getResult().exists()){
-                                DataSnapshot dataSnapshot = task.getResult();
-                                String usernameDB = String.valueOf(dataSnapshot.child(getString(R.string.username2)).getValue(String.class));
+                                //DataSnapshot dataSnapshot = task.getResult();
+                               //String usernameDB = String.valueOf(dataSnapshot.child(getString(R.string.username2)).getValue(String.class));
                                 //int curr = Integer.valueOf(dataSnapshot.child(getString(R.string.currency2)).getValue(Integer.class));
                                 //int topScore = Integer.valueOf(dataSnapshot.child(getString(R.string.topCurrency)).getValue(Integer.class));
-                                Bundle result = new Bundle();
-                                result.putString(getString(R.string.df),usernameDB);
+                               // Bundle result = new Bundle();
+                               // result.putString(getString(R.string.df),usernameDB);
                                 //result.putInt(getString(R.string.df_curr),curr);
                                 //result.putInt(getString(R.string.df_tScore),topScore);
-                                getParentFragmentManager().setFragmentResult(getString(R.string.dataForm),result);
+                                //getParentFragmentManager().setFragmentResult(getString(R.string.dataForm),result);
 
                                 openMainActivity();
                             }else{
@@ -121,6 +131,7 @@ public class LoginFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
