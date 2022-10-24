@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/purplewallpaper"
-    tools:context=".RetailStartUpScreenActivity"
+    android:background="@drawable/testwallpaper"
+    tools:context=".RetailStartUpFragment"
     android:padding="30dp"
     android:id="@+id/retailActivity">
 
@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/press_start_2p"
+            android:layout_marginTop="20dp"
             android:text="Pick"
             android:textColor="@color/white"
             android:textSize="10sp"
@@ -41,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="20dp">
             <Button
                 android:id="@+id/nika_retail_login_btn"
                 android:layout_width="0dp"
