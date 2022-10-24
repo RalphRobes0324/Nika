@@ -8,6 +8,8 @@ import static ca.nika.it.gear5.R.string.PermissionDenied;
 import static ca.nika.it.gear5.R.string.PermissionGranted;
 import static ca.nika.it.gear5.R.string.df;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,7 @@ public class ProfileFragment extends Fragment {
 
     ImageView mImageVIew;
     Button mChooseBtn;
+    Button btn;
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
     private View view;
@@ -107,6 +110,32 @@ public class ProfileFragment extends Fragment {
                 } else {
                     pickImageFromGallery();
                 }
+            }
+        });
+
+        btn = view.findViewById(R.id.nikaLogout);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.logout)
+                        .setMessage(R.string.ask_logout)
+                        .setIcon(R.drawable.devil_fruit)
+                        .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+
+
             }
         });
 

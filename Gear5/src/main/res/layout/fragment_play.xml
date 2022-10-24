@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaper3"
+    android:background="@drawable/img_3"
     tools:context=".PlayFragment">
 
     <TextView
@@ -20,8 +20,8 @@
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="416dp"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="420dp"
         android:text="@string/A"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -34,8 +34,8 @@
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="208dp"
-        android:layout_marginTop="512dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="516dp"
         android:text="@string/B"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -48,9 +48,19 @@
         android:id="@+id/nikaJoystick"
         android:layout_width="129dp"
         android:layout_height="106dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="460dp"
-        android:src="@drawable/joystick_img"
+        android:src="@drawable/img_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/nikaLogo"
+        android:layout_width="235dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/nika"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

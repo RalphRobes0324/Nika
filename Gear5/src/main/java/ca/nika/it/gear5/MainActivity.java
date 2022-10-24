@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity{
             replaceFragment(new SettingsFragment());
             return true;
         }
+        if (id == R.id.nikaProfile) {
+            replaceFragment(new ProfileFragment());
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

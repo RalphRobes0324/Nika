@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaper3"
+    android:background="@drawable/img_3"
     tools:context=".PlayFragment">
 
 
@@ -17,25 +17,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/nikaButtonA"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="608dp"
-        android:layout_marginTop="92dp"
-        android:text="@string/A"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:cornerRadius="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/nikaButtonB"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="504dp"
+        android:layout_marginStart="444dp"
         android:layout_marginTop="164dp"
         android:text="@string/B"
         android:textSize="40sp"
@@ -45,13 +31,37 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nikaButtonA"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="548dp"
+        android:layout_marginTop="92dp"
+        android:text="@string/A"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:cornerRadius="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
-        android:id="@+id/nikaJoystick"
-        android:layout_width="129dp"
-        android:layout_height="106dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="108dp"
-        android:src="@drawable/joystick_img"
+    android:id="@+id/nikaJoystick"
+    android:layout_width="129dp"
+    android:layout_height="106dp"
+    android:layout_marginStart="108dp"
+    android:layout_marginTop="112dp"
+    android:src="@drawable/img_4"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/nikaLogo"
+        android:layout_width="235dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/nika"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
