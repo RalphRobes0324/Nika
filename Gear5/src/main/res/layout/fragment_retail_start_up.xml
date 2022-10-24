@@ -8,7 +8,7 @@
     tools:context=".RetailStartUpScreenActivity"
     android:padding="30dp"
     android:id="@+id/retailActivity">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

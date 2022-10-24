@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, new LoginFragment())
+                .add(R.id.container, new RetailStartUpFragment())
                 .commit();
     }
 
