@@ -46,7 +46,7 @@
     <string name="error_msg_login">Impossible de trouver</string>
     <string name="error_msg_login_read">Impossible de lire</string>
     <string name="login_page_remember_me">Remember me</string>
-
+    <string name="welcome_to_gear5_title_retail">Welcome to GEAR5</string>
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
     <string name="users">users</string>

@@ -3,8 +3,6 @@
 package ca.nika.it.gear5;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,7 +16,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, new RetailStartUpFragment())
+                .add(R.id.container, new GEAR5StartUpFragment())
                 .commit();
     }
 

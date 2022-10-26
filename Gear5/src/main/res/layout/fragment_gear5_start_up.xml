@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/testwallpaper"
-    tools:context=".RetailStartUpFragment"
+    android:background="@drawable/purple_gradient_wallpaper"
+    tools:context=".GEAR5StartUpFragment"
     android:padding="30dp"
-    android:id="@+id/retailActivity">
+    android:id="@+id/startupFrag">
 
     <LinearLayout
+        android:id="@+id/fram_Startup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,17 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:src="@drawable/nika_logo_transparent" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/press_start_2p"
-            android:text="Welcome to GEAR5"
             android:layout_marginTop="120dp"
-            android:textSize="36sp"
-            android:textAllCaps="true"
+            android:fontFamily="@font/press_start_2p"
+            android:text="@string/welcome_to_gear5_title_retail"
             android:textAlignment="center"
-            android:textColor="@color/white"/>
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,20 +46,31 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
             <Button
-                android:id="@+id/nika_retail_login_btn"
+                android:id="@+id/nika_startup_login_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/login_page_loginButton"
+                android:onClick="callLoginScreen"
                 android:layout_weight="1"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@drawable/custom_button_version1_state"
+                android:transitionName="transition_login"/>
             <Button
-                android:id="@+id/nika_retail_reg_btn"
+                android:id="@+id/nika_startup_reg_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/login_page_registerButton"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:background="@drawable/custom_button_version2_state"/>
         </LinearLayout>
+
     </LinearLayout>
+
+
 
 </ScrollView>
