@@ -47,6 +47,12 @@
     <string name="error_msg_login_read">Failed to Read</string>
     <string name="login_page_remember_me">Remember me</string>
     <string name="welcome_to_gear5_title_retail">Welcome to GEAR 5</string>
+    <string name="ask_logout">Do you want to Log Out?</string>
+    <string name="create_account_title_registerfrag">Create Account</string>
+    <string name="register_btn_txt_done">Done</string>
+    <string name="forgot_password_forgotFrag_title">Forgot Password</string>
+    <string name="email_registration">Email</string>
+    <string name="please_provide_your_email_of_your_account">Provide your account email for which you want to reset your password</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
@@ -60,7 +66,8 @@
     <string name="topCurrency">topCurrency</string>
     <string name="df_curr">df_curr</string>
     <string name="df_tScore">df_tScore</string>
-    <string name="ask_logout">Do you want to Log Out?</string>
+    <string name="next_btn_forgotpwd">Next</string>
+    <string name="code_otpfrag">Co\nde</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>

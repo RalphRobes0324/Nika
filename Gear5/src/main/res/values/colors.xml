@@ -11,4 +11,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="levander">#E6E6FA</color>
     <color name="violet">#710193</color>
+    <color name="light_grey">#D3D3D3</color>
+    <color name="light_yellow">#ffffe0</color>
+    <color name="yellow">#F4EA56</color>
 </resources>

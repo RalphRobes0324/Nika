@@ -1,9 +1,7 @@
 package ca.nika.it.gear5;
 
-import android.app.ActivityOptions;
 import android.os.Bundle;
 
-import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 
@@ -30,7 +27,7 @@ public class GEAR5StartUpFragment extends Fragment {
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.exit_startup, R.anim.enter_login);
+        transaction.setCustomAnimations(R.anim.exit_startup, R.anim.enter_login_from_startup);
         transaction.addToBackStack(null);
         transaction.replace(R.id.container, fragment);
         transaction.commit();

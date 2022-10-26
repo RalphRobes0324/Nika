@@ -33,7 +33,7 @@ import com.google.firebase.ktx.Firebase;
 
 
 public class LoginFragment extends Fragment {
-    Button registerBtn, loginBtn;
+    private Button registerBtn, loginBtn;
     CheckBox remember;
     private EditText username;
     private EditText password;
@@ -41,9 +41,11 @@ public class LoginFragment extends Fragment {
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.exit_reg, R.anim.enter_login_from_reg);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
     }
 
     @Override
@@ -52,9 +54,15 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        ///Remember if check is checked
+        registerBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
 
-        ///
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new RegisterFragment());
+            }
+        });
+
         return view;
     }
 

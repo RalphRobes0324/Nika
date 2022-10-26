@@ -1,132 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
 <!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaper"
-
-    tools:context=".LoginFragment">
-
+    android:background="@drawable/purple_graident_wallpaper_v2"
+    tools:context=".RegisterFragment"
+    android:padding="30dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/nikaLinearLayout">
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            android:adjustViewBounds="true"
-
-            android:src="@drawable/nika_logo_transparent" />
-
-        <TextView
-            android:id="@+id/nikaGear5"
+            android:id="@+id/nika_signup_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:text="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_account_title_registerfrag"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white"
-            android:textSize="60sp" />
+            android:textSize="40dp"
+            android:fontFamily="@font/press_start_2p"
+            android:textAllCaps="true"/>
 
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nikaTextInput"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="40dp"
-            android:hint="@string/username"
-            android:textColorHint="@color/white"
-            android:textStyle="bold"
-            app:boxBackgroundColor="#696969">
+            android:layout_height="wrap_content" android:orientation="vertical"
+            android:layout_marginTop="40dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nika_reg_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nikaTextInput2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:hint="@string/login_page_password"
-            android:textColorHint="@color/white"
-            android:textStyle="bold"
-            app:boxBackgroundColor="#696969">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nika_reg_password"
+            <!-- Username input -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/username"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                app:startIconTint="@color/white"
+                app:hintTextColor="@color/white"
+                android:textColorHint="@color/white"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/white">
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nikaTextInput3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:hint="@string/reg_page_confirm_password"
-            android:textColorHint="@color/white"
-            android:textStyle="bold"
-            app:boxBackgroundColor="#696969">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nika_reg_confirmation_pwd"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Email input -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/email_registration"
+                app:startIconDrawable="@drawable/ic_baseline_email_24"
+                app:startIconTint="@color/white"
+                app:hintTextColor="@color/white"
+                android:textColorHint="@color/white"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/white">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Password input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/login_page_password"
+                app:hintTextColor="@color/white"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                android:textColorHint="@color/white"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:startIconTint="@color/white"
+                app:endIconMode="password_toggle"
+                app:endIconCheckable="false"
+                app:endIconTint="@color/white">
 
-        <RelativeLayout
-            android:id="@+id/nikaRelativeLayout"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:textColor="@color/white"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Re-enter Password input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/reg_page_confirm_password"
+                app:hintTextColor="@color/white"
+                app:boxStrokeColor="@color/white"
+                android:textColorHint="@color/white"
+                app:boxStrokeWidthFocused="2dp"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:startIconTint="@color/white"
+                app:endIconMode="password_toggle"
+                app:endIconCheckable="false"
+                app:endIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:textColor="@color/black"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/nika_btn_register_done"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp">
+            android:text="@string/register_btn_txt_done"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_version3_state"
+            android:layout_marginTop="20dp"
+            android:elevation="5dp"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/nika_btn_login_reg"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="40dp"
-                android:text="@string/login_page_loginButton" />
+        <Button
+            android:id="@+id/nika_btn_register_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_page_loginButton"
+            android:textColor="@color/white"
+            android:background="#0000"
+            android:layout_marginTop="5dp"
+            android:elevation="5dp"/>
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-                android:id="@+id/nika_btn_register_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:layout_toStartOf="@id/nika_btn_login_reg"
-                android:text="@string/login_page_registerButton"
-                android:elevation="100dp"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

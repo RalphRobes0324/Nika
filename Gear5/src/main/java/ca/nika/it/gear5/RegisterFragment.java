@@ -2,14 +2,8 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,21 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.ktx.Firebase;
 
 
 public class RegisterFragment extends Fragment {
-    Button registerBtn, loginBtn;
+    private Button doneBtn, loginBtn;
     CheckBox remember;
     private EditText username;
     private EditText password;
@@ -41,9 +27,11 @@ public class RegisterFragment extends Fragment {
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.exit_reg, R.anim.enter_login_from_reg);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
     }
 
     @Override
@@ -52,9 +40,24 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        ///Remember if check is checked
+       loginBtn = (Button) view.findViewById(R.id.nika_btn_register_login);
+       doneBtn = (Button) view.findViewById(R.id.nika_btn_register_done);
 
-        ///
+       loginBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               replaceFragment(new LoginFragment());
+           }
+       });
+
+       doneBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+           }
+       });
+
+
         return view;
     }
 
