@@ -72,6 +72,7 @@
     <string name="code_otpfrag">Co\nde</string>
     <string name="ok_newpwdfrag">ok</string>
     <string name="new_password_newpwdfrag">New Password</string>
+    <string name="verify_code_otpFrag">Verify Code</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>

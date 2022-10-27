@@ -48,6 +48,7 @@ public class ForgotPasswordFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 replaceFragment(new UserPhoneValidationFragment());
+                String code = emailEditxt.getText().toString();
             }
         });
 

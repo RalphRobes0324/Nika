@@ -49,16 +49,14 @@
             android:textSize="18sp" />
 
         <com.hbb20.CountryCodePicker
-            android:id="@+id/nika_countrypicker_userPhoneFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/nika_countrypicker_userPhoneFrag"
             android:layout_marginTop="20dp"
             app:ccp_autoDetectCountry="true"
             app:ccp_showFlag="true"
             app:ccp_showNameCode="true"
             app:ccp_showFullName="true"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_drawable"
             />
 
         <com.google.android.material.textfield.TextInputLayout

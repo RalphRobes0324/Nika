@@ -1,5 +1,6 @@
 package ca.nika.it.gear5.LoginSetup;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.hbb20.CountryCodePicker;
 
@@ -23,13 +25,36 @@ public class UserPhoneValidationFragment extends Fragment {
     Button nextBtn;
     CountryCodePicker countryCodePicker;
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, String text) {
+        //storing data
+        Bundle bundle = new Bundle();
+        bundle.putString("key",text);
+        //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.exit_reg, R.anim.enter_login_from_reg);
         transaction.addToBackStack(null);
+        //sending data
+        fragment.setArguments(bundle);
         transaction.replace(R.id.container, fragment);
         transaction.commit();
+    }
+
+
+
+    private void validatePhoneNo(String text, String userNumber, Context context) {
+        if(userNumber.isEmpty()){
+            Toast.makeText(context,"IT IS EMPTY",Toast.LENGTH_SHORT).show();
+        }else{
+            if(text.matches("^[+][0-9]{10,13}$")){
+                replaceFragment(new VerifyOTPFragment(), text);
+
+            }
+            else{
+                Toast.makeText(context,"Invalid number",Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     @Override
@@ -44,10 +69,21 @@ public class UserPhoneValidationFragment extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String code =  countryCodePicker.getSelectedCountryCode();
+                String userNumber = userPhoneInput.getText().toString();
+
+                Context context = getActivity().getApplicationContext();
+                String text = "+"+code+userNumber;
+
+                validatePhoneNo(text,userNumber,context);
+
+
 
             }
         });
 
+
         return view;
     }
+
 }
