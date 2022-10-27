@@ -55,6 +55,7 @@
     <string name="please_provide_your_email_of_your_account">Provide your account email to reset your password</string>
     <string name="enter_password_sent_in_your_email_otpFrag">Enter Recovery Code Sent In Your Email</string>
     <string name="verification_otpFrag">Verification</string>
+    <string name="review">Review</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>

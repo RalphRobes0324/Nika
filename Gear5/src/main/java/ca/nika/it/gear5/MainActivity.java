@@ -86,8 +86,7 @@ public class MainActivity extends AppCompatActivity{
             replaceFragment(new SettingsFragment());
             return true;
         }
-        if (id == R.id.nikaProfile) {
-            replaceFragment(new ProfileFragment());
+        if (id == R.id.nikaReview) {
             return true;
         }
 
