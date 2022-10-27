@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity{
             return true;
         }
         if (id == R.id.nikaReview) {
+            replaceFragment(new ReviewFragment());
             return true;
         }
 
