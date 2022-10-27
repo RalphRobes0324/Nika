@@ -47,19 +47,19 @@
     <string name="error_msg_login_read">Impossible de lire</string>
     <string name="login_page_remember_me">Remember me</string>
     <string name="welcome_to_gear5_title_retail">Welcome to GEAR5</string>
-    <string name="forgot_password_forgotFrag_title">Forgot Password</string>
-    <string name="ask_logout">Do you want to Log Out?</string>
-    <string name="create_account_title_registerfrag">Create Account</string>
-    <string name="register_btn_txt_done">Done</string>
+    <string name="forgot_password_forgotFrag_title">Mot de passe oublié</string>
+    <string name="ask_logout">Voulez-vous vous déconnecter?</string>
+    <string name="create_account_title_registerfrag">Créer un compte</string>
+    <string name="register_btn_txt_done">Fait</string>
     <string name="email_registration">Email</string>
-    <string name="please_provide_your_email_of_your_account">Provide your account email to reset your password</string>
-    <string name="enter_password_sent_in_your_email_otpFrag">Enter Recovery Code Sent In Your Email</string>
-    <string name="verification_otpFrag">Verification</string>
-    <string name="next_btn_forgotpwd">Next</string>
+    <string name="please_provide_your_email_of_your_account">Indiquez l\'adresse e-mail de votre compte pour réinitialiser votre mot de passe</string>
+    <string name="enter_password_sent_in_your_email_otpFrag">Entrez le code de récupération envoyé dans votre e-mail</string>
+    <string name="verification_otpFrag">Vérification</string>
+    <string name="next_btn_forgotpwd">Prochain</string>
     <string name="code_otpfrag">Co\nde</string>
-    <string name="ok_newpwdfrag">ok</string>
-    <string name="new_password_newpwdfrag">New Password</string>
-    <string name="review">Review</string>
+    <string name="ok_newpwdfrag">d\'accord</string>
+    <string name="new_password_newpwdfrag">nouveau mot de passe</string>
+    <string name="review">Examen</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
