@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/purple_graident_wallpaper_v2"
-    tools:context=".LoginFragment"
+    tools:context=".LoginSetup.LoginFragment"
     android:padding="30dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,6 +99,7 @@
                     android:textColor="@color/black"/>
 
                 <Button
+                    android:id="@+id/nika_btn_forgotPwd_loginFrag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#00000000"

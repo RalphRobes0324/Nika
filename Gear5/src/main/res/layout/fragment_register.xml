@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/purple_graident_wallpaper_v2"
-    tools:context=".RegisterFragment"
+    tools:context=".LoginSetup.RegisterFragment"
     android:padding="30dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,6 +59,7 @@
             </com.google.android.material.textfield.TextInputLayout>
             <!-- Email input -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nika_edittxt_email_regfrag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

@@ -1,12 +1,15 @@
 // CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
-package ca.nika.it.gear5;
+package ca.nika.it.gear5.LoginSetup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import ca.nika.it.gear5.LoginSetup.GEAR5StartUpFragment;
+import ca.nika.it.gear5.R;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package ca.nika.it.gear5;
+package ca.nika.it.gear5.LoginSetup;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import ca.nika.it.gear5.R;
 
 
 public class GEAR5StartUpFragment extends Fragment {

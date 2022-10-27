@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
+<!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".VerifyOTPFragment"
+    tools:context=".LoginSetup.VerifyOTPFragment"
 
     android:background="@drawable/purple_gradient_wallpaperv3">
 
@@ -37,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Verification"
+            android:text="@string/verification_otpFrag"
             android:textSize="24sp"
             android:fontFamily="@font/press_start_2p"
             android:textColor="@color/black"
@@ -48,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="Enter Password Sent In Your Email"
+            android:text="@string/enter_password_sent_in_your_email_otpFrag"
             android:textSize="16sp"
             android:fontFamily="@font/muli"
             android:textColor="@color/black"
@@ -69,10 +71,18 @@
             style="@style/PinWidget.PinView"
             android:inputType="number"
             android:cursorVisible="true"
-            app:cursorColor="@color/black"/>
+            app:cursorColor="@color/black"
+            app:hideLineWhenFilled="true"
+            app:itemRadius="5dp"/>
 
-
-
+        <Button
+            android:id="@+id/nika_btn_otp_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Verify Code"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_version3_state"/>
 
     </LinearLayout>
 

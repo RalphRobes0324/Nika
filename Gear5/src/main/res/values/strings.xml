@@ -52,7 +52,9 @@
     <string name="register_btn_txt_done">Done</string>
     <string name="forgot_password_forgotFrag_title">Forgot Password</string>
     <string name="email_registration">Email</string>
-    <string name="please_provide_your_email_of_your_account">Provide your account email for which you want to reset your password</string>
+    <string name="please_provide_your_email_of_your_account">Provide your account email to reset your password</string>
+    <string name="enter_password_sent_in_your_email_otpFrag">Enter Recovery Code Sent In Your Email</string>
+    <string name="verification_otpFrag">Verification</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
@@ -68,6 +70,8 @@
     <string name="df_tScore">df_tScore</string>
     <string name="next_btn_forgotpwd">Next</string>
     <string name="code_otpfrag">Co\nde</string>
+    <string name="ok_newpwdfrag">ok</string>
+    <string name="new_password_newpwdfrag">New Password</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>

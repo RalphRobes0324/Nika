@@ -6,7 +6,6 @@ import static android.app.Activity.RESULT_OK;
 
 import static ca.nika.it.gear5.R.string.PermissionDenied;
 import static ca.nika.it.gear5.R.string.PermissionGranted;
-import static ca.nika.it.gear5.R.string.df;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,7 +14,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +24,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import ca.nika.it.gear5.LoginSetup.LoginActivity;
 
 public class ProfileFragment extends Fragment {
 

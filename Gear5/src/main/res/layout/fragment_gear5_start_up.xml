@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/purple_gradient_wallpaper"
-    tools:context=".GEAR5StartUpFragment"
+    tools:context=".LoginSetup.GEAR5StartUpFragment"
     android:padding="30dp"
     android:id="@+id/startupFrag">
 
