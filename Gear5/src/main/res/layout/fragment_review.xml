@@ -12,6 +12,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <RatingBar
+            android:id="@+id/nika_ratingbar_reviewFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="5"
+            android:stepSize="0.5"
+            android:progressTint="@color/purple_200"
+            android:progressBackgroundTint="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"/>
+        
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nika_edittxt_name_reviewFrag"
             android:layout_width="match_parent"
