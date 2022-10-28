@@ -16,6 +16,7 @@
         tools:targetApi="31">
         <activity
             android:name=".LoginSetup.LoginActivity"
+            android:theme="@style/Theme.Gear52"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

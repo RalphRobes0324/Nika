@@ -57,24 +57,25 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center"/>
-        
+
         <com.chaos.view.PinView
             android:id="@+id/nika_pinview_otpFrag"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:itemCount="6"
-            app:itemWidth="50dp"
-            app:itemHeight="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            app:lineColor="@color/black"
-            android:itemBackground="@color/light_grey"
+            android:layout_height="60dp"
             style="@style/PinWidget.PinView"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:inputType="number"
-            android:cursorVisible="true"
-            app:cursorColor="@color/black"
-            app:hideLineWhenFilled="true"
-            app:itemRadius="5dp"/>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:itemCount="6"
+            android:itemBackground="@color/light_grey"
+            app:itemRadius="10dp"
+            app:itemSpacing="10dp"
+            app:viewType="rectangle">
+
+        </com.chaos.view.PinView>
 
         <Button
             android:id="@+id/nika_btn_otp_verify_code"

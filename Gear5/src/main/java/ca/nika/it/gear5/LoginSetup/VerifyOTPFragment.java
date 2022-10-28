@@ -1,6 +1,8 @@
 package ca.nika.it.gear5.LoginSetup;
 
+
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,10 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -58,33 +63,52 @@ public class VerifyOTPFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_verify_o_t_p, container, false);
 
+        Bundle bundle = this.getArguments();
+        String phoneNo= bundle.getString("key");
 
+        sendVerificationCodeToUser(phoneNo);
 
         pinView = (PinView) view.findViewById(R.id.nika_pinview_otpFrag);
         verifyBtn = (Button) view.findViewById(R.id.nika_btn_otp_verify_code);
         mAuth = FirebaseAuth.getInstance();
 
-        Bundle bundle = this.getArguments();
-        String phoneNo= bundle.getString("key");
+        //PinView
+        pinView.requestFocus();
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-        String userPin  = pinView.getText().toString().trim();
-
-
-        sendVerificationCodeToUser(phoneNo);
-        verifyBtn.setOnClickListener(new View.OnClickListener() {
+        pinView.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                //Toast.makeText(getActivity().getApplicationCont text(),data,Toast.LENGTH_SHORT).show();
-                if(userPin.isEmpty()){
-                    //verifyCode(userPin);
-                    Toast.makeText(getActivity().getApplicationContext(), "Hello?", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getActivity().getApplicationContext(), "Hello!", Toast.LENGTH_SHORT).show();
-                }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                verifyBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(charSequence.toString().length()==6){
+                            String userInputCode  = charSequence.toString().trim();
+                            verifyCode(userInputCode);
+                        }
+                        else{
+                            Toast.makeText(getActivity().getApplicationContext(), "Not Working", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
 
             }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
+
+
+        //String userPin  = pinView.getText().toString().trim();
 
         return view;
     }
@@ -109,9 +133,7 @@ public class VerifyOTPFragment extends Fragment {
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
             String code = phoneAuthCredential.getSmsCode();
             Toast.makeText(getActivity().getApplicationContext(),code,Toast.LENGTH_SHORT).show();
-            pinView.setText(code);
             if(code != null){
-                pinView.setText(code);
                 verifyCode(code);
             }
 
@@ -138,7 +160,7 @@ public class VerifyOTPFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(getActivity().getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                            replaceFragment(new SetNewPasswordFragment());
                         }
                         else{
                             if(task.getException() instanceof FirebaseAuthInvalidCredentialsException){
