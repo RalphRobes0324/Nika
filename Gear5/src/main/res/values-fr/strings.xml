@@ -74,6 +74,7 @@
     <string name="df_curr">df_curr</string>
     <string name="df_tScore">df_tScore</string>
     <string name="verify_code_otpFrag">Verify Code</string>
+    <string name="submit">SUBMIT</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>
