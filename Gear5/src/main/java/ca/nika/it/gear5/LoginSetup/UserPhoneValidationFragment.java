@@ -44,14 +44,14 @@ public class UserPhoneValidationFragment extends Fragment {
 
     private void validatePhoneNo(String text, String userNumber, Context context) {
         if(userNumber.isEmpty()){
-            Toast.makeText(context,"IT IS EMPTY",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Enter number",Toast.LENGTH_SHORT).show();
         }else{
             if(text.matches("^[+][0-9]{10,13}$")){
                 replaceFragment(new VerifyOTPFragment(), text);
 
             }
             else{
-                Toast.makeText(context,"Invalid number",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "This is not a number",Toast.LENGTH_SHORT).show();
             }
         }
 

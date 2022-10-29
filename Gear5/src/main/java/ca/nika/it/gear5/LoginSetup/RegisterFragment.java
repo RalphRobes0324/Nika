@@ -2,8 +2,10 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.LoginSetup;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,19 +16,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import ca.nika.it.gear5.LoginSetup.LoginFragment;
 import ca.nika.it.gear5.R;
 
 
 public class RegisterFragment extends Fragment {
     private Button doneBtn, loginBtn;
-    CheckBox remember;
-    private EditText username;
-    private EditText password;
+    private CheckBox remember;
+    EditText usernameInput, passwordInput, emailInput, confirmPasswordInput;
+
     DatabaseReference databaseReference;
+
+    //data being stored in
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -46,6 +52,15 @@ public class RegisterFragment extends Fragment {
        loginBtn = (Button) view.findViewById(R.id.nika_btn_register_login);
        doneBtn = (Button) view.findViewById(R.id.nika_btn_register_done);
 
+
+
+       //User Input
+        usernameInput = (EditText) view.findViewById(R.id.nika_username_regFrag);
+        passwordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwd_regfrag);
+        emailInput = (EditText) view.findViewById(R.id.nika_edittxt_email_regfrag);
+        confirmPasswordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwdConfirm_regfrag);
+
+
        loginBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -56,12 +71,82 @@ public class RegisterFragment extends Fragment {
        doneBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               String username = usernameInput.getText().toString().trim();
+               String password = passwordInput.getText().toString().trim();
+               String email = emailInput.getText().toString().trim();
+               String confirmPassword = confirmPasswordInput.getText().toString().trim();
+               int startCurrency = 500;
+               int startScore = 0;
+
+               validateUser(username,password, email, confirmPassword ,startCurrency, startScore);
+
 
            }
        });
 
 
         return view;
+    }
+
+    private void validateUser(String username, String password, String email,
+                              String confirmPassword, int startCurrency, int startScore) {
+        Drawable iconError = AppCompatResources.getDrawable(requireContext(),
+                R.drawable.ic_baseline_error_24);
+        iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
+
+        if(username.isEmpty()) {
+            usernameInput.setError(getString(R.string.warning_msg_msg_username), iconError);
+        }
+        if (password.isEmpty()){
+            passwordInput.setError(getString(R.string.warning_msg_reg_pwd), iconError);
+        }
+        if (confirmPassword.isEmpty()){
+            confirmPasswordInput.setError(getString(R.string.warning_msg_reg_confir), iconError);
+        }
+        if(email.isEmpty()){
+            emailInput.setError("Enter Email",iconError);
+        }
+        else{
+            if (username.matches(getString(R.string.limits))){
+                if(email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+                    if(password.matches(getString(R.string.limits))){
+                        if(confirmPassword.matches(password)){
+                            storeNewUserdata(username, email, password, startCurrency, startScore);
+                            //Toast.makeText(getActivity().getApplicationContext(), "Success", Toast.LENGTH_SHORT ).show();
+                        }
+                        else{
+                            confirmPasswordInput.setError(getString(R.string.warning_msg_reg_confir_not_maching), iconError);
+                        }
+                    }
+                    else{
+                        passwordInput.setError(getString(R.string.warning_msg_reg_pwd),iconError);
+                    }
+                }
+                else{
+                   emailInput.setError("Email invalid", iconError);
+                }
+            }
+            else{
+                usernameInput.setError("Username must be 5 characters or long", iconError);
+            }
+        }
+
+
+
+    }
+    private void storeNewUserdata(String username, String email, String password, int startCurrency, int startScore) {
+        FirebaseDatabase rootNode;
+        DatabaseReference reference;
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("users");
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore);
+        String userId = username + password;
+        reference.child(userId).setValue(userClass);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
+
     }
 
 }

@@ -93,7 +93,7 @@ public class VerifyOTPFragment extends Fragment {
                             verifyCode(userInputCode);
                         }
                         else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Not Working", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Enter code", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

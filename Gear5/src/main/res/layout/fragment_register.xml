@@ -52,6 +52,7 @@
                 app:boxStrokeColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_username_regFrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/white"
@@ -59,7 +60,6 @@
             </com.google.android.material.textfield.TextInputLayout>
             <!-- Email input -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nika_edittxt_email_regfrag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -74,6 +74,7 @@
                 app:boxStrokeColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_edittxt_email_regfrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/white"
@@ -96,6 +97,7 @@
                 app:endIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_edittxt_pwd_regfrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="SpeakableTextPresentCheck"
@@ -120,6 +122,7 @@
                 app:endIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_edittxt_pwdConfirm_regfrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="SpeakableTextPresentCheck"
