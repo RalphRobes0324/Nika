@@ -60,12 +60,12 @@
     <string name="ok_newpwdfrag">d\'accord</string>
     <string name="new_password_newpwdfrag">nouveau mot de passe</string>
     <string name="review">Examen</string>
-    <string name="submit">SUBMIT</string>
-    <string name="rating_default_5_star">Rating (Default 5 Stars):</string>
-    <string name="name_optional">Name (Optional)</string>
-    <string name="phone_optional">Phone (Optional)</string>
-    <string name="email_optional">Email (Optional)</string>
-    <string name="comment_optional">Comment (Optional)</string>
+    <string name="submit">NOUS FAIRE PARVENIR</string>
+    <string name="rating_default_5_star">Évaluation (par défaut 5 étoiles):</string>
+    <string name="name_optional">Nom (Optionnel)</string>
+    <string name="phone_optional">Téléphoner (Optionnel)</string>
+    <string name="email_optional">Email (Optionnel)</string>
+    <string name="comment_optional">Commentaire (Optionnel)</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
