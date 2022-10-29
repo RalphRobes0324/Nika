@@ -56,6 +56,12 @@
     <string name="enter_password_sent_in_your_email_otpFrag">Enter Recovery Code Sent In Your Email</string>
     <string name="verification_otpFrag">Verification</string>
     <string name="review">Review</string>
+    <string name="submit">SUBMIT</string>
+    <string name="rating_default_5_star">Rating (Default 5 Stars):</string>
+    <string name="name_optional">Name (Optional)</string>
+    <string name="phone_optional">Phone (Optional)</string>
+    <string name="email_optional">Email (Optional)</string>
+    <string name="comment_optional">Comment (Optional)</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
@@ -74,7 +80,6 @@
     <string name="ok_newpwdfrag">ok</string>
     <string name="new_password_newpwdfrag">New Password</string>
     <string name="verify_code_otpFrag">Verify Code</string>
-    <string name="submit">SUBMIT</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>

@@ -12,6 +12,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="@string/rating_default_5_star"/>
+
         <RatingBar
             android:id="@+id/nika_ratingbar_reviewFrag"
             android:layout_width="wrap_content"
@@ -28,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Name"
+            android:hint="@string/name_optional"
             app:startIconDrawable="@drawable/ic_baseline_person_24"
             app:startIconTint="@color/white"
             app:hintTextColor="@color/white"
@@ -50,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Phone"
+            android:hint="@string/phone_optional"
             app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
             app:startIconTint="@color/white"
             app:hintTextColor="@color/white"
@@ -72,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Email"
+            android:hint="@string/email_optional"
             app:startIconDrawable="@drawable/ic_baseline_email_24"
             app:startIconTint="@color/white"
             app:hintTextColor="@color/white"
@@ -94,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Comment"
+            android:hint="@string/comment_optional"
             app:hintTextColor="@color/white"
             android:textColorHint="@color/white"
             app:endIconMode="clear_text"
