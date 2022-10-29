@@ -62,6 +62,7 @@
     <string name="phone_optional">Phone (Optional)</string>
     <string name="email_optional">Email (Optional)</string>
     <string name="comment_optional">Comment (Optional)</string>
+    <string name="balance">Balance</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
@@ -80,7 +81,6 @@
     <string name="ok_newpwdfrag">ok</string>
     <string name="new_password_newpwdfrag">New Password</string>
     <string name="verify_code_otpFrag">Verify Code</string>
-    <string name="balance">Balance</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>

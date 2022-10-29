@@ -66,6 +66,7 @@
     <string name="phone_optional">Téléphoner (Optionnel)</string>
     <string name="email_optional">Email (Optionnel)</string>
     <string name="comment_optional">Commentaire (Optionnel)</string>
+    <string name="balance">Solde</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
@@ -80,7 +81,6 @@
     <string name="df_curr">df_curr</string>
     <string name="df_tScore">df_tScore</string>
     <string name="verify_code_otpFrag">Verify Code</string>
-    <string name="balance">Balance</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>
