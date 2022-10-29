@@ -80,6 +80,7 @@
     <string name="ok_newpwdfrag">ok</string>
     <string name="new_password_newpwdfrag">New Password</string>
     <string name="verify_code_otpFrag">Verify Code</string>
+    <string name="balance">Balance</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>

@@ -17,7 +17,12 @@
         android:icon="@drawable/ic_baseline_star_24"
         android:title="@string/review"
         app:showAsAction="ifRoom"/>
-       
+
+    <item
+        android:id="@+id/nikaBalance"
+        android:icon="@drawable/ic_baseline_cash_24"
+        android:title="@string/balance"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/nikaLeaderboard"
