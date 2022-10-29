@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity{
             replaceFragment(new ReviewFragment());
             return true;
         }
+        if (id == R.id.nikaBalance) {
+            replaceFragment(new BalanceFragment());
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
