@@ -5,6 +5,7 @@ package ca.nika.it.gear5.LoginSetup;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,8 +20,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.R;
 
@@ -104,15 +109,15 @@ public class RegisterFragment extends Fragment {
             confirmPasswordInput.setError(getString(R.string.warning_msg_reg_confir), iconError);
         }
         if(email.isEmpty()){
-            emailInput.setError("Enter Email",iconError);
+            emailInput.setError(getString(R.string.warning_msg_reg_email),iconError);
         }
         else{
             if (username.matches(getString(R.string.limits))){
-                if(email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+                if(email.matches(getString(R.string.limits_email_reg))){
                     if(password.matches(getString(R.string.limits))){
                         if(confirmPassword.matches(password)){
-                            storeNewUserdata(username, email, password, startCurrency, startScore);
-                            //Toast.makeText(getActivity().getApplicationContext(), "Success", Toast.LENGTH_SHORT ).show();
+                            String userId = username + password;
+                            validateDBFirebaseEmail(userId,username, email, password, startCurrency, startScore);
                         }
                         else{
                             confirmPasswordInput.setError(getString(R.string.warning_msg_reg_confir_not_maching), iconError);
@@ -123,29 +128,85 @@ public class RegisterFragment extends Fragment {
                     }
                 }
                 else{
-                   emailInput.setError("Email invalid", iconError);
+                   emailInput.setError(getString(R.string.warning_email_reg_email_limits), iconError);
                 }
             }
             else{
-                usernameInput.setError("Username must be 5 characters or long", iconError);
+                usernameInput.setError(getString(R.string.warning_username_length_reg), iconError);
             }
         }
 
 
 
     }
-    private void storeNewUserdata(String username, String email, String password, int startCurrency, int startScore) {
+
+
+    private void validateDBFirebaseEmail(String userId, String username, String email, String password, int startCurrency, int startScore) {
+        Drawable iconError = AppCompatResources.getDrawable(requireContext(),
+                R.drawable.ic_baseline_error_24);
+        iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userEmailRef = databaseReference.child(getString(R.string.childRef_reg_regFrag));
+        Query queryEmails = userEmailRef.orderByChild(getString(R.string.emailRef_reg_regFrag)).equalTo(email);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists()){
+                    validateDBFirebaseUsername(userId, username,email,password,startCurrency, startScore);
+                }
+                else{
+                    emailInput.setError(getString(R.string.warning_email_used_regFrag), iconError);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        queryEmails.addListenerForSingleValueEvent(eventListener);
+
+    }
+
+    private void validateDBFirebaseUsername(String userId, String username, String email, String password, int startCurrency, int startScore) {
+        Drawable iconError = AppCompatResources.getDrawable(requireContext(),
+                R.drawable.ic_baseline_error_24);
+        iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userEmailRef = databaseReference.child(getString(R.string.childRef_reg_regFrag));
+        Query queryEmails = userEmailRef.orderByChild(getString(R.string.usernameRef_reg_regregFrag)).equalTo(username);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists()){
+                    storeNewUserdata(userId, username,email,password,startCurrency, startScore);
+                }
+                else{
+                    usernameInput.setError(getString(R.string.warning_username_used_regFrag), iconError);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        queryEmails.addListenerForSingleValueEvent(eventListener);
+
+    }
+
+
+
+    private void storeNewUserdata(String userId, String username, String email, String password, int startCurrency, int startScore) {
         FirebaseDatabase rootNode;
         DatabaseReference reference;
-
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("users");
+        reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
         UserClass userClass = new UserClass(username, password, email, startCurrency, startScore);
-        String userId = username + password;
         reference.child(userId).setValue(userClass);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
-
+        replaceFragment(new LoginFragment());
 
     }
 

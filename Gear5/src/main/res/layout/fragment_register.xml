@@ -40,68 +40,72 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/username"
                 app:startIconDrawable="@drawable/ic_baseline_person_24"
-                app:startIconTint="@color/white"
-                app:hintTextColor="@color/white"
-                android:textColorHint="@color/white"
+                app:startIconTint="@color/black"
+                app:hintTextColor="@color/black"
+                android:textColorHint="@color/black"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
+                app:endIconTint="@color/black"
                 app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeColor="@color/white">
+                app:boxStrokeColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nika_username_regFrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/press_start_2p"
+                    android:background="@drawable/custom_edittextbox"
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Email input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/email_registration"
                 app:startIconDrawable="@drawable/ic_baseline_email_24"
-                app:startIconTint="@color/white"
-                app:hintTextColor="@color/white"
-                android:textColorHint="@color/white"
+                app:startIconTint="@color/black"
+                app:hintTextColor="@color/black"
+                android:textColorHint="@color/black"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
+                app:endIconTint="@color/black"
                 app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeColor="@color/white">
+                app:boxStrokeColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nika_edittxt_email_regfrag"
+                    android:background="@drawable/custom_edittextbox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/press_start_2p"
                     android:inputType="textEmailAddress"/>
             </com.google.android.material.textfield.TextInputLayout>
             <!-- Password input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/login_page_password"
-                app:hintTextColor="@color/white"
-                app:boxStrokeColor="@color/white"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                app:startIconTint="@color/white"
+                app:startIconTint="@color/black"
                 app:endIconMode="password_toggle"
                 app:endIconCheckable="false"
-                app:endIconTint="@color/white">
+                app:endIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nika_edittxt_pwd_regfrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="SpeakableTextPresentCheck"
-                    android:textColor="@color/white"
+                    android:background="@drawable/custom_edittextbox"
+                    android:fontFamily="@font/press_start_2p"
+                    android:textColor="@color/black"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -109,23 +113,25 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/reg_page_confirm_password"
-                app:hintTextColor="@color/white"
-                app:boxStrokeColor="@color/white"
-                android:textColorHint="@color/white"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/black"
                 app:boxStrokeWidthFocused="2dp"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                app:startIconTint="@color/white"
+                app:startIconTint="@color/black"
                 app:endIconMode="password_toggle"
                 app:endIconCheckable="false"
-                app:endIconTint="@color/white">
+                android:layout_marginTop="5dp"
+                app:endIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nika_edittxt_pwdConfirm_regfrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="SpeakableTextPresentCheck"
+                    android:fontFamily="@font/press_start_2p"
+                    android:background="@drawable/custom_edittextbox"
                     android:textColor="@color/black"
                     android:inputType="textPassword" />
 
