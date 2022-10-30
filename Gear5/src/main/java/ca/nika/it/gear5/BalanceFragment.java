@@ -38,10 +38,10 @@ public class BalanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("500 Gears")
-                        .setMessage("Purchase 500 Gears?")
-                        .setPositiveButton("Confirm",null)
-                        .setNegativeButton("Cancel",null)
+                        .setTitle(R.string.gear500title)
+                        .setMessage(R.string.gear500msg)
+                        .setPositiveButton(R.string.confirm,null)
+                        .setNegativeButton(R.string.cancel,null)
                         .show();
             }
         });
@@ -50,10 +50,10 @@ public class BalanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("1000 Gears")
-                        .setMessage("Purchase 1000 Gears?")
-                        .setPositiveButton("Confirm",null)
-                        .setNegativeButton("Cancel",null)
+                        .setTitle(R.string.gear1000title)
+                        .setMessage(R.string.gear1100msg)
+                        .setPositiveButton(R.string.confirm,null)
+                        .setNegativeButton(R.string.cancel,null)
                         .show();
             }
         });
@@ -62,10 +62,10 @@ public class BalanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("2200 Gears")
-                        .setMessage("Purchase 2200 Gears?")
-                        .setPositiveButton("Confirm",null)
-                        .setNegativeButton("Cancel",null)
+                        .setTitle(R.string.gear2200title)
+                        .setMessage(R.string.gear2200msg)
+                        .setPositiveButton(R.string.confirm,null)
+                        .setNegativeButton(R.string.cancel,null)
                         .show();
             }
         });
@@ -74,10 +74,10 @@ public class BalanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("5700 Gears")
-                        .setMessage("Purchase 5700 Gears?")
-                        .setPositiveButton("Confirm",null)
-                        .setNegativeButton("Cancel",null)
+                        .setTitle(R.string.gear5700title)
+                        .setMessage(R.string.gear5700msg)
+                        .setPositiveButton(R.string.confirm,null)
+                        .setNegativeButton(R.string.cancel,null)
                         .show();
             }
         });
@@ -86,10 +86,10 @@ public class BalanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("11600 Gears")
-                        .setMessage("Purchase 11600 Gears?")
-                        .setPositiveButton("Confirm",null)
-                        .setNegativeButton("Cancel",null)
+                        .setTitle(R.string.gear11600title)
+                        .setMessage(R.string.gear11600msg)
+                        .setPositiveButton(R.string.confirm,null)
+                        .setNegativeButton(R.string.cancel,null)
                         .show();
             }
         });
