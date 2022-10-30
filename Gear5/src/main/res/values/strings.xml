@@ -1,6 +1,28 @@
 <!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
 <!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
 <resources>
+
+    <!--vv Don't change anything in this group vv-->
+    <string name="dataForm">dataForm</string>
+    <string name="users">users</string>
+    <string name="df">df</string>
+    <string name="username2">username</string>
+    <string name="limits">^[A-Za-z0-9_-]{3,15}$</string>
+    <string name="blank" />
+    <string name="warning_msg_reg_account_exist">This account exist</string>
+    <string name="df_curr">df_curr</string>
+    <string name="df_tScore">df_tScore</string>
+    <string name="limits_email_reg">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
+    <string name="childRef_reg_regFrag">users</string>
+    <string name="emailRef_reg_regFrag">email</string>
+    <string name="usernameRef_reg_regregFrag">username</string>
+    <string name="SettingsPref">SettingsPref</string>
+    <string name="getBooleanId">getBooleanId</string>
+    <string name="getBooleanId2">getBooleanId2</string>
+    <string name="checkRadioButtonId">checkRadioButtonId</string>
+    <string name="checkRadioButtonId2">checkRadioButtonId2</string>
+    <!--^^ Don't change anything in this group ^^-->
+
     <string name="app_name">Gear5</string>
     <string name="play">Play</string>
     <string name="score">Score</string>
@@ -88,21 +110,5 @@
     <string name="topCurrency">topCurrency</string>
     <string name="warning_email_used_regFrag">Email being used</string>
     <string name="warning_username_used_regFrag">Username being used</string>
-
-    <!--vv Don't change anything in this group vv-->
-    <string name="dataForm">dataForm</string>
-    <string name="users">users</string>
-    <string name="df">df</string>
-    <string name="username2">username</string>
-    <string name="limits">^[A-Za-z0-9_-]{3,15}$</string>
-    <string name="blank" />
-    <string name="warning_msg_reg_account_exist">This account exist</string>
-    <string name="df_curr">df_curr</string>
-    <string name="df_tScore">df_tScore</string>
-    <string name="limits_email_reg">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
-    <string name="childRef_reg_regFrag">users</string>
-    <string name="emailRef_reg_regFrag">email</string>
-    <string name="usernameRef_reg_regregFrag">username</string>
-    <!--^^ Don't change anything in this group ^^-->
 
 </resources>

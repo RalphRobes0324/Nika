@@ -90,7 +90,7 @@ public class SettingsFragment extends Fragment {
 
 
     public void doSave()  {
-        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences("Settings3", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         int checkedRadioButtonId = radioJoystick.getCheckedRadioButtonId();
@@ -106,11 +106,11 @@ public class SettingsFragment extends Fragment {
             if (a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
 
-        editor.putInt("checkRadioButtonId", checkedRadioButtonId);
-        editor.putInt("checkRadioButtonId2", checkedRadioButtonId2);
+        editor.putInt(getString(R.string.checkRadioButtonId), checkedRadioButtonId);
+        editor.putInt(getString(R.string.checkRadioButtonId2), checkedRadioButtonId2);
 
-        editor.putBoolean("getBooleanId", getBoolean);
-        editor.putBoolean("getBooleanId2", getBoolean2);
+        editor.putBoolean(getString(R.string.getBooleanId), getBoolean);
+        editor.putBoolean(getString(R.string.getBooleanId2), getBoolean2);
 
 
 
@@ -119,13 +119,13 @@ public class SettingsFragment extends Fragment {
     }
 
     private void loadGameSetting()  {
-        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences("Settings3", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
 
         if(sharedPreferences!= null) {
-            int checkedRadioButtonId = sharedPreferences.getInt("checkRadioButtonId", R.id.nikaRB1);
-            int checkedRadioButtonId2 = sharedPreferences.getInt("checkRadioButtonId2", R.id.nikaRB4);
-            boolean getBoolean = sharedPreferences.getBoolean("getBooleanId", aBoolean);
-            boolean getBoolean2 = sharedPreferences.getBoolean("getBooleanId2", aBoolean2);
+            int checkedRadioButtonId = sharedPreferences.getInt(getString(R.string.checkRadioButtonId), R.id.nikaRB1);
+            int checkedRadioButtonId2 = sharedPreferences.getInt(getString(R.string.checkRadioButtonId2), R.id.nikaRB4);
+            boolean getBoolean = sharedPreferences.getBoolean(getString(R.string.getBooleanId), aBoolean);
+            boolean getBoolean2 = sharedPreferences.getBoolean(getString(R.string.getBooleanId2), aBoolean2);
 
             this.radioJoystick.check(checkedRadioButtonId);
             this.radioButton.check(checkedRadioButtonId2);
