@@ -113,4 +113,7 @@
     <string name="warning_pwd_length_reg">Password must be 5 characters or long</string>
     <string name="warning_msg_username_loginFrag">Username Invalid</string>
     <string name="warning_msg_pwd_loginFrag">Password Invalid</string>
+    <string name="login_with_loginFrag">Login with</string>
+    <string name="google_loginFrag">Google</string>
+    <string name="sign_up_with_regFrag">Sign-up with</string>
 </resources>

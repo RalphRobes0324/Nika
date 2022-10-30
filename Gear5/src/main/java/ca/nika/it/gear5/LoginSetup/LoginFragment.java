@@ -13,12 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +40,7 @@ public class LoginFragment extends Fragment {
     private Button registerBtn, loginBtn, forgortpwdBtn;
     private CheckBox remember;
     private EditText usernameInput, passwordInput;
+    private LinearLayout linearLayout;
 
     DatabaseReference databaseReference;
 
@@ -62,6 +65,15 @@ public class LoginFragment extends Fragment {
 
         usernameInput = (EditText) view.findViewById(R.id.nika_edittext_username_loginFrag);
         passwordInput = (EditText) view.findViewById(R.id.nika_edittext_pwd_loginFrag);
+
+        linearLayout = (LinearLayout) view.findViewById(R.id.google_signIn_btn_logiBtn);
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity().getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
