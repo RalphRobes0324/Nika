@@ -67,6 +67,18 @@
     <string name="email_optional">Email (Optionnel)</string>
     <string name="comment_optional">Commentaire (Optionnel)</string>
     <string name="balance">Solde</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
+    <string name="gear500title">500 Gears</string>
+    <string name="gear1000title">1000 Gears</string>
+    <string name="gear2200title">2200 Gears</string>
+    <string name="gear5700title">5700 Gears</string>
+    <string name="gear11600title">11600 Gears</string>
+    <string name="gear11600msg">Acheter 11600 Gears?</string>
+    <string name="gear5700msg">Acheter 5700 Gears?</string>
+    <string name="gear2200msg">Acheter 2200 Gears?</string>
+    <string name="gear1100msg">Acheter 1000 Gears?</string>
+    <string name="gear500msg">Acheter 500 Gears?</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
@@ -81,15 +93,6 @@
     <string name="df_curr">df_curr</string>
     <string name="df_tScore">df_tScore</string>
     <string name="verify_code_otpFrag">Verify Code</string>
-    <string name="confirm">Confirm</string>
-    <string name="cancel">Cancel</string>
-    <string name="gear500title">500 Gears</string>
-    <string name="gear1000title">1000 Gears</string>
-    <string name="gear11600msg">Purchase 11600 Gears?</string>
-    <string name="gear5700msg">Purchase 5700 Gears?</string>
-    <string name="gear2200msg">Purchase 2200 Gears?</string>
-    <string name="gear1100msg">Purchase 1000 Gears?</string>
-    <string name="gear500msg">Purchase 500 Gears?</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>
