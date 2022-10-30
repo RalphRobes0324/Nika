@@ -3,6 +3,7 @@
 package ca.nika.it.gear5.LoginSetup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 
 
@@ -114,7 +116,6 @@ public class LoginFragment extends Fragment {
             }
         }
 
-
     }
 
     private void validateUserFireBase(String username, String password) {
@@ -124,8 +125,27 @@ public class LoginFragment extends Fragment {
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChild(userId)){
+                    //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
+                }
+                else{
+                    usernameInput.setError(getString(R.string.warning_msg_username_loginFrag),iconError);
+                    passwordInput.setError(getString(R.string.warning_msg_pwd_loginFrag),iconError);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
 
     }
 
