@@ -124,7 +124,7 @@ public class RegisterFragment extends Fragment {
                         }
                     }
                     else{
-                        passwordInput.setError(getString(R.string.warning_msg_reg_pwd),iconError);
+                        passwordInput.setError(getString(R.string.warning_pwd_length_reg),iconError);
                     }
                 }
                 else{
@@ -175,8 +175,8 @@ public class RegisterFragment extends Fragment {
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userEmailRef = databaseReference.child(getString(R.string.childRef_reg_regFrag));
-        Query queryEmails = userEmailRef.orderByChild(getString(R.string.usernameRef_reg_regregFrag)).equalTo(username);
+        DatabaseReference userNameRef = databaseReference.child(getString(R.string.childRef_reg_regFrag));
+        Query queryUsernames = userNameRef.orderByChild(getString(R.string.usernameRef_reg_regregFrag)).equalTo(username);
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -193,7 +193,7 @@ public class RegisterFragment extends Fragment {
 
             }
         };
-        queryEmails.addListenerForSingleValueEvent(eventListener);
+        queryUsernames.addListenerForSingleValueEvent(eventListener);
 
     }
 

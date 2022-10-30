@@ -39,7 +39,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/username"
                 app:hintTextColor="@color/white"
                 app:boxStrokeColor="@color/black"
@@ -50,6 +49,7 @@
                 app:endIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_edittext_username_loginFrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="SpeakableTextPresentCheck"
@@ -63,9 +63,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/login_page_password"
-                app:hintTextColor="@color/black"
+                app:hintTextColor="@color/white"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
@@ -75,6 +74,7 @@
                 app:endIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_edittext_pwd_loginFrag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="SpeakableTextPresentCheck"
@@ -109,8 +109,10 @@
             </RelativeLayout>
 
             <!-- loging button -->
+
             <!--Title login with -->
             <Button
+                android:id="@+id/nika_btn_login_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

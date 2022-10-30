@@ -110,5 +110,7 @@
     <string name="topCurrency">topCurrency</string>
     <string name="warning_email_used_regFrag">Email being used</string>
     <string name="warning_username_used_regFrag">Username being used</string>
-
+    <string name="warning_pwd_length_reg">Password must be 5 characters or long</string>
+    <string name="warning_msg_username_loginFrag">Username Invalid</string>
+    <string name="warning_msg_pwd_loginFrag">Password Invalid</string>
 </resources>
