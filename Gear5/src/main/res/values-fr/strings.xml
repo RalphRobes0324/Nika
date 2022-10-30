@@ -84,6 +84,8 @@
     <string name="warning_username_length_reg">Username must be 5 characters or long</string>
     <string name="warning_msg_reg_email">Enter Email</string>
     <string name="verify_code_otpFrag">Verify Code</string>
+    <string name="warning_username_used_regFrag">Username being used</string>
+    <string name="warning_email_used_regFrag">Email being used</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
@@ -100,9 +102,7 @@
     <string name="limits_email_reg">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
     <string name="childRef_reg_regFrag">users</string>
     <string name="emailRef_reg_regFrag">email</string>
-    <string name="warning_email_used_regFrag">Email being used</string>
     <string name="usernameRef_reg_regregFrag">username</string>
-    <string name="warning_username_used_regFrag">Username being used</string>
     <!--^^ Don't change anything in this group ^^-->
 
 </resources>
