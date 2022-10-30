@@ -79,6 +79,7 @@
     <string name="gear2200msg">Acheter 2200 Gears?</string>
     <string name="gear1100msg">Acheter 1000 Gears?</string>
     <string name="gear500msg">Acheter 500 Gears?</string>
+    <string name="purchase_currency">DEVISE D\'ACHAT</string>
 
     <!--vv Don't change anything in this group vv-->
     <string name="dataForm">dataForm</string>
