@@ -2,8 +2,10 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -65,6 +67,7 @@ public class SettingsFragment extends Fragment {
         aBoolean = checkbox.isChecked();
         aBoolean2 = checkbox2.isChecked();
 
+
         this.buttonSave = (Button) this.v.findViewById(R.id.button);
 
         this.buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +88,7 @@ public class SettingsFragment extends Fragment {
         return v;
     }
 
+
     public void doSave()  {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences("Settings3", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -95,11 +99,19 @@ public class SettingsFragment extends Fragment {
         Boolean getBoolean = checkbox.isChecked();
         Boolean getBoolean2 = checkbox2.isChecked();
 
+        Activity a = getActivity();
+        if (getBoolean2 == true) {
+            if (a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else {
+            if (a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
+
         editor.putInt("checkRadioButtonId", checkedRadioButtonId);
         editor.putInt("checkRadioButtonId2", checkedRadioButtonId2);
 
         editor.putBoolean("getBooleanId", getBoolean);
         editor.putBoolean("getBooleanId2", getBoolean2);
+
 
 
         editor.apply();
