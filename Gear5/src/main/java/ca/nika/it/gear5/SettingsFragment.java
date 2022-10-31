@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,16 @@ public class SettingsFragment extends Fragment {
 
     private Button buttonSave;
 
+    private RadioGroup radio;
+    private RadioButton radioRed;
+    private RadioButton radioYellow;
+    private RadioButton radioGreen;
+
+
+    int radioButtonID;
+    int idx;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +79,12 @@ public class SettingsFragment extends Fragment {
         aBoolean2 = checkbox2.isChecked();
 
 
+        radio = v.findViewById(R.id.nikaRG2);
+
+        this.radioRed = (RadioButton) this.v.findViewById(R.id.nikaRB4);
+        this.radioYellow = (RadioButton) this.v.findViewById(R.id.nikaRB5);
+        this.radioGreen = (RadioButton) this.v.findViewById(R.id.nikaRB6);
+
         this.buttonSave = (Button) this.v.findViewById(R.id.button);
 
         this.buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -75,12 +92,12 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 SettingsFragment.this.doSave();
 
-//                Bundle bundle = new Bundle();
-//                int radioButtonID = radioJoystick.getCheckedRadioButtonId();
-//                View radioButton = radioJoystick.findViewById(radioButtonID);
-//                int idx = radioJoystick.indexOfChild(radioButton);
-//                bundle.putInt("password",idx);
-//                getParentFragmentManager().setFragmentResult("getPassword",bundle);
+                Bundle bundle = new Bundle();
+                int radioButtonID = radio.getCheckedRadioButtonId();
+                View radioButton = radio.findViewById(radioButtonID);
+                int idx = radio.indexOfChild(radioButton);
+                bundle.putInt("bundlePass",idx);
+                getParentFragmentManager().setFragmentResult("getBundlePass",bundle);
             }
         });
 
@@ -112,8 +129,6 @@ public class SettingsFragment extends Fragment {
         editor.putBoolean(getString(R.string.getBooleanId), getBoolean);
         editor.putBoolean(getString(R.string.getBooleanId2), getBoolean2);
 
-
-
         editor.apply();
 
     }
@@ -140,5 +155,9 @@ public class SettingsFragment extends Fragment {
         }
 
     }
+
+
+
+
 
 }
