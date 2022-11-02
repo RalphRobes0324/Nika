@@ -116,4 +116,5 @@
     <string name="login_with_loginFrag">Login with</string>
     <string name="google_loginFrag">Google</string>
     <string name="sign_up_with_regFrag">Sign-up with</string>
+    <string name="pick">Pick</string>
 </resources>
