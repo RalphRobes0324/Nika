@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,11 +34,9 @@ import ca.nika.it.gear5.R;
 public class RegisterFragment extends Fragment {
     private Button doneBtn, loginBtn;
     private CheckBox remember;
+    private LinearLayout googBtn;
     EditText usernameInput, passwordInput, emailInput, confirmPasswordInput;
 
-    DatabaseReference databaseReference;
-
-    //data being stored in
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -57,6 +56,9 @@ public class RegisterFragment extends Fragment {
        loginBtn = (Button) view.findViewById(R.id.nika_btn_register_login);
        doneBtn = (Button) view.findViewById(R.id.nika_btn_register_done);
 
+       //Google btn
+        googBtn = (LinearLayout) view.findViewById(R.id.google_signIn_btn_regfrag);
+
 
 
        //User Input
@@ -64,6 +66,14 @@ public class RegisterFragment extends Fragment {
         passwordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwd_regfrag);
         emailInput = (EditText) view.findViewById(R.id.nika_edittxt_email_regfrag);
         confirmPasswordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwdConfirm_regfrag);
+
+        googBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
 
        loginBtn.setOnClickListener(new View.OnClickListener() {

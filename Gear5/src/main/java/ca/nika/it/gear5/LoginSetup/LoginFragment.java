@@ -40,7 +40,7 @@ public class LoginFragment extends Fragment {
     private Button registerBtn, loginBtn, forgortpwdBtn;
     private CheckBox remember;
     private EditText usernameInput, passwordInput;
-    private LinearLayout linearLayout;
+    private LinearLayout googleBtn;
 
     DatabaseReference databaseReference;
 
@@ -66,12 +66,12 @@ public class LoginFragment extends Fragment {
         usernameInput = (EditText) view.findViewById(R.id.nika_edittext_username_loginFrag);
         passwordInput = (EditText) view.findViewById(R.id.nika_edittext_pwd_loginFrag);
 
-        linearLayout = (LinearLayout) view.findViewById(R.id.google_signIn_btn_logiBtn);
+        googleBtn = (LinearLayout) view.findViewById(R.id.google_signIn_btn_logiBtn);
 
-        linearLayout.setOnClickListener(new View.OnClickListener() {
+        googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
             }
         });
 
