@@ -13,7 +13,6 @@ import ca.nika.it.gear5.LoginSetup.GEAR5StartUpFragment;
 import ca.nika.it.gear5.R;
 
 public class LoginActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
