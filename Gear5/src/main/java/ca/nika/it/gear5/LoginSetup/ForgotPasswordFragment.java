@@ -54,10 +54,10 @@ public class ForgotPasswordFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //replaceFragment(new UserPhoneValidationFragment());
-                String _email = emailEditxt.getText().toString().trim();
+                replaceFragment(new UserPhoneValidationFragment());
+                //String _email = emailEditxt.getText().toString().trim();
                 //Toast.makeText(getActivity().getApplicationContext(), "Hello World", Toast.LENGTH_LONG).show();
-                validateUserEmail(_email);
+                //validateUserEmail(_email);
 
             }
         });
@@ -69,23 +69,7 @@ public class ForgotPasswordFragment extends Fragment {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("email");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(email)){
-                    replaceFragment(new UserPhoneValidationFragment());
-                }
-                else{
-                    emailEditxt.setError("Email Invalid", iconError);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 
