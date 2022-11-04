@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_2"
+    android:background="@drawable/wallpaper"
     tools:context=".ProfileFragment">
 
     <ImageView
@@ -56,6 +56,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="188dp"
+        android:fontFamily="monospace"
         android:text="@string/username"
         android:textColor="#FFFF00"
         android:textSize="40sp"
@@ -64,25 +65,27 @@
 
     <TextView
         android:id="@+id/nikaTopScore"
-        android:layout_width="216dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="256dp"
+        android:layout_width="262dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="360dp"
+        android:fontFamily="monospace"
         android:text="@string/top_score"
         android:textColor="#FFFF00"
-        android:textSize="40sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nikaCurrency"
-        android:layout_width="205dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="344dp"
+        android:layout_width="225dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="432dp"
+        android:fontFamily="monospace"
         android:text="@string/currency"
         android:textColor="#FFFF00"
-        android:textSize="40sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
