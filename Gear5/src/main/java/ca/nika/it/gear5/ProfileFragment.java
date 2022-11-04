@@ -8,12 +8,15 @@ import static ca.nika.it.gear5.R.string.PermissionDenied;
 import static ca.nika.it.gear5.R.string.PermissionGranted;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,8 @@ import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.OutputStream;
+
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
 
 public class ProfileFragment extends Fragment {
@@ -34,10 +39,10 @@ public class ProfileFragment extends Fragment {
     ImageView mImageVIew;
     Button mChooseBtn;
     Button btn;
+
+
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
-    private static final String SHARED_PREFS = "sharedPrefs";
-
     private View view;
 
     @Override
@@ -92,6 +97,8 @@ public class ProfileFragment extends Fragment {
         mImageVIew = view.findViewById(R.id.nikaProfileView);
         mChooseBtn = view.findViewById(R.id.nikaImgBtn);
 
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.click_to_add_image), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         mChooseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,11 +112,13 @@ public class ProfileFragment extends Fragment {
                     } else {
 
                         pickImageFromGallery();
+                        loadImage();
 
                     }
 
                 } else {
                     pickImageFromGallery();
+                    loadImage();
                 }
             }
         });
@@ -142,5 +151,31 @@ public class ProfileFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void loadImage() {
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.click_to_add_image), Context.MODE_PRIVATE);
+    }
+
+    public void doSave() {
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.click_to_add_image), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                if (getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_DENIED) {
+                    String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                    requestPermissions(permissions, PERMISSION_CODE);
+                } else {
+
+                    pickImageFromGallery();
+                    loadImage();
+
+                }
+
+            }
+        editor.apply();
+
     }
 }

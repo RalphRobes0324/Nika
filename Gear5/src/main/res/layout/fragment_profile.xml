@@ -9,25 +9,25 @@
     android:background="@drawable/wallpaper"
     tools:context=".ProfileFragment">
 
+
     <ImageView
         android:id="@+id/nikaProfileView"
         android:layout_width="112dp"
         android:layout_height="106dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/devil_fruit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nikaImgBtn"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="149dp"
         android:layout_height="40dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="136dp"
         android:text="@string/click_to_add_image"
         android:textSize="9sp"
         android:textStyle="bold"
@@ -38,11 +38,12 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nikaLogout"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="141dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="548dp"
+        android:layout_width="181dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="544dp"
         android:elevation="100dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/logout"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -52,14 +53,14 @@
 
     <TextView
         android:id="@+id/nikaUsername"
-        android:layout_width="201dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="188dp"
-        android:fontFamily="monospace"
+        android:layout_width="217dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/username"
         android:textColor="#FFFF00"
-        android:textSize="40sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,9 +68,9 @@
         android:id="@+id/nikaTopScore"
         android:layout_width="262dp"
         android:layout_height="62dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="360dp"
-        android:fontFamily="monospace"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/top_score"
         android:textColor="#FFFF00"
         android:textSize="20dp"
@@ -80,13 +81,26 @@
         android:id="@+id/nikaCurrency"
         android:layout_width="225dp"
         android:layout_height="86dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="432dp"
-        android:fontFamily="monospace"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="152dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/currency"
         android:textColor="#FFFF00"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="291dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="276dp"
+        android:layout_marginEnd="48dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Recent Scores"
+        android:textColor="#FFFF00"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
