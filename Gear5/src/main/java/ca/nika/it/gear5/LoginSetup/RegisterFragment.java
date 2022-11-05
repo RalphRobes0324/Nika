@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -35,7 +36,8 @@ public class RegisterFragment extends Fragment {
     private Button doneBtn, loginBtn;
     private CheckBox remember;
     private LinearLayout googBtn;
-    EditText usernameInput, passwordInput, emailInput, confirmPasswordInput;
+    EditText usernameInput, passwordInput, emailInput, confirmPasswordInput, phoneInput;
+    ImageView backButton;
 
 
     private void replaceFragment(Fragment fragment) {
@@ -53,19 +55,21 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-       loginBtn = (Button) view.findViewById(R.id.nika_btn_register_login);
-       doneBtn = (Button) view.findViewById(R.id.nika_btn_register_done);
+        loginBtn = (Button) view.findViewById(R.id.nika_btn_register_login);
+        doneBtn = (Button) view.findViewById(R.id.nika_btn_register_done);
+        backButton = (ImageView) view.findViewById(R.id.nika_signup_back_button);
 
-       //Google btn
+        //Google btn
         googBtn = (LinearLayout) view.findViewById(R.id.google_signIn_btn_regfrag);
 
 
 
-       //User Input
+        //User Input
         usernameInput = (EditText) view.findViewById(R.id.nika_username_regFrag);
         passwordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwd_regfrag);
         emailInput = (EditText) view.findViewById(R.id.nika_edittxt_email_regfrag);
         confirmPasswordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwdConfirm_regfrag);
+        phoneInput = (EditText) view.findViewById(R.id.nika_edittxt_phone_regfrag);
 
         googBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,35 +80,43 @@ public class RegisterFragment extends Fragment {
 
 
 
-       loginBtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               replaceFragment(new LoginFragment());
-           }
-       });
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new LoginFragment());
+            }
+        });
 
-       doneBtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               String username = usernameInput.getText().toString().trim();
-               String password = passwordInput.getText().toString().trim();
-               String email = emailInput.getText().toString().trim();
-               String confirmPassword = confirmPasswordInput.getText().toString().trim();
-               int startCurrency = 500;
-               int startScore = 0;
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = usernameInput.getText().toString().trim();
+                String password = passwordInput.getText().toString().trim();
+                String email = emailInput.getText().toString().trim();
+                String confirmPassword = confirmPasswordInput.getText().toString().trim();
+                String phone = phoneInput.getText().toString().trim();
+                int startCurrency = 500;
+                int startScore = 0;
 
-               validateUser(username,password, email, confirmPassword ,startCurrency, startScore);
+                validateUser(username,password, email, confirmPassword ,startCurrency, startScore , phone);
 
 
-           }
-       });
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new GEAR5StartUpFragment());
+            }
+        });
 
 
         return view;
     }
 
     private void validateUser(String username, String password, String email,
-                              String confirmPassword, int startCurrency, int startScore) {
+                              String confirmPassword, int startCurrency, int startScore, String phone) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -121,13 +133,21 @@ public class RegisterFragment extends Fragment {
         if(email.isEmpty()){
             emailInput.setError(getString(R.string.warning_msg_reg_email),iconError);
         }
+        if (phone.isEmpty()){
+            phoneInput.setError("Enter Phone Number", iconError);
+        }
         else{
             if (username.matches(getString(R.string.limits))){
                 if(email.matches(getString(R.string.limits_email_reg))){
                     if(password.matches(getString(R.string.limits))){
                         if(confirmPassword.matches(password)){
-                            String userId = username + password;
-                            validateDBFirebaseEmail(userId,username, email, password, startCurrency, startScore);
+                            if (phone.matches("[0-9]{10,13}$")) {
+                                String userId = username + password;
+                                validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone);
+                            }
+                            else {
+                                phoneInput.setError("Invalid Phone", iconError);
+                            }
                         }
                         else{
                             confirmPasswordInput.setError(getString(R.string.warning_msg_reg_confir_not_maching), iconError);
@@ -138,7 +158,7 @@ public class RegisterFragment extends Fragment {
                     }
                 }
                 else{
-                   emailInput.setError(getString(R.string.warning_email_reg_email_limits), iconError);
+                    emailInput.setError(getString(R.string.warning_email_reg_email_limits), iconError);
                 }
             }
             else{
@@ -151,7 +171,8 @@ public class RegisterFragment extends Fragment {
     }
 
 
-    private void validateDBFirebaseEmail(String userId, String username, String email, String password, int startCurrency, int startScore) {
+    private void validateDBFirebaseEmail(String userId, String username, String email, String password,
+                                         int startCurrency, int startScore, String phone) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -163,7 +184,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.exists()){
-                    validateDBFirebaseUsername(userId, username,email,password,startCurrency, startScore);
+                    validateDBFirebaseUsername(userId, username,email,password,startCurrency, startScore, phone);
                 }
                 else{
                     emailInput.setError(getString(R.string.warning_email_used_regFrag), iconError);
@@ -179,7 +200,8 @@ public class RegisterFragment extends Fragment {
 
     }
 
-    private void validateDBFirebaseUsername(String userId, String username, String email, String password, int startCurrency, int startScore) {
+    private void validateDBFirebaseUsername(String userId, String username, String email, String password,
+                                            int startCurrency, int startScore, String phone) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -191,7 +213,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.exists()){
-                    storeNewUserdata(userId, username,email,password,startCurrency, startScore);
+                    storeNewUserdata(userId, username,email,password,startCurrency, startScore, phone);
                 }
                 else{
                     usernameInput.setError(getString(R.string.warning_username_used_regFrag), iconError);
@@ -209,12 +231,13 @@ public class RegisterFragment extends Fragment {
 
 
 
-    private void storeNewUserdata(String userId, String username, String email, String password, int startCurrency, int startScore) {
+    private void storeNewUserdata(String userId, String username, String email,
+                                  String password, int startCurrency, int startScore, String phone) {
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
-        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore);
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone);
         reference.child(userId).setValue(userClass);
         replaceFragment(new LoginFragment());
 
