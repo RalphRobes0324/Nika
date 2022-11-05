@@ -135,9 +135,9 @@ public class ProfileFragment extends Fragment {
                         .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
-                                SharedPreferences preferences = getActivity().getSharedPreferences("checkbox", MODE_PRIVATE);
+                                SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("remember", "false");
+                                editor.putString(getString(R.string.remember), getString(R.string.unchecked));
                                 editor.apply();
 
                                 Intent intent = new Intent(getActivity(), LoginActivity.class);

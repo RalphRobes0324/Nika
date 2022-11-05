@@ -96,15 +96,15 @@ public class LoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "true");
+                    editor.putString(getString(R.string.remember), getString(R.string.checked));
                     editor.apply();
 
                 } else if (!compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "false");
+                    editor.putString(getString(R.string.remember), getString(R.string.unchecked));
                     editor.apply();
                 }
             }

@@ -23,6 +23,10 @@
     <string name="getBooleanId2">getBooleanId2</string>
     <string name="checkRadioButtonId">checkRadioButtonId</string>
     <string name="checkRadioButtonId2">checkRadioButtonId2</string>
+    <string name="remember">remember</string>
+    <string name="unchecked">false</string>
+    <string name="checkbox">checkbox</string>
+    <string name="checked">true</string>
     <!--^^ Don't change anything in this group ^^-->
 
     <string name="app_name">Gear5</string>
