@@ -55,6 +55,12 @@ public class MainActivity extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_item,menu);
+
+
+        menu.findItem(R.id.nikaSettings).getActionView().setOnClickListener(view -> {
+            this.replaceFragment(new SettingsFragment());
+        });
+
         return true;
     }
 
