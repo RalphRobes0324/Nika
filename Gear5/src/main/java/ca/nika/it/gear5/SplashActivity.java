@@ -5,6 +5,7 @@ package ca.nika.it.gear5;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -13,12 +14,21 @@ import ca.nika.it.gear5.LoginSetup.LoginActivity;
 public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("remember","");
+
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class)); //change to login activity when done
-                finish();
+
+                if (checkbox.equals("true")) {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
+                } else if (checkbox.equals("false")) {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class)); //change to login activity when done
+                    finish();
+                }
             }
         }, 2000);
     }

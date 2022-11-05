@@ -3,6 +3,7 @@
 package ca.nika.it.gear5;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 import static ca.nika.it.gear5.R.string.PermissionDenied;
 import static ca.nika.it.gear5.R.string.PermissionGranted;
@@ -134,6 +135,11 @@ public class ProfileFragment extends Fragment {
                         .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
+                                SharedPreferences preferences = getActivity().getSharedPreferences("checkbox", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("remember", "false");
+                                editor.apply();
+
                                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                                 startActivity(intent);
                             }

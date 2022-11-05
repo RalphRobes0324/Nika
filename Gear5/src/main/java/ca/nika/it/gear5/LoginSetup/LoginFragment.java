@@ -2,8 +2,11 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.LoginSetup;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -19,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -42,6 +46,7 @@ public class LoginFragment extends Fragment {
     private EditText usernameInput, passwordInput;
     private LinearLayout googleBtn;
 
+
     DatabaseReference databaseReference;
 
     private void replaceFragment(Fragment fragment) {
@@ -62,6 +67,7 @@ public class LoginFragment extends Fragment {
         registerBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
         forgortpwdBtn = (Button) view.findViewById(R.id.nika_btn_forgotPwd_loginFrag);
         loginBtn = (Button) view.findViewById(R.id.nika_btn_login_login);
+        remember = (CheckBox) view.findViewById(R.id.rememberMe);
 
         usernameInput = (EditText) view.findViewById(R.id.nika_edittext_username_loginFrag);
         passwordInput = (EditText) view.findViewById(R.id.nika_edittext_pwd_loginFrag);
@@ -82,6 +88,25 @@ public class LoginFragment extends Fragment {
                 String _pwd = passwordInput.getText().toString().trim();
                 validateUserAndPwd(_username, _pwd);
 
+            }
+        });
+
+
+        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked()) {
+                    SharedPreferences preferences = getActivity().getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "true");
+                    editor.apply();
+
+                } else if (!compoundButton.isChecked()) {
+                    SharedPreferences preferences = getActivity().getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.apply();
+                }
             }
         });
 
@@ -143,6 +168,7 @@ public class LoginFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChild(userId)){
                     //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
