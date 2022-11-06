@@ -38,7 +38,15 @@ public class ForgotPasswordFragment extends Fragment {
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.exit_reg, R.anim.enter_login_from_reg);
+        transaction.setCustomAnimations(R.anim.exit_startup, R.anim.enter_login_from_startup);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
+    }
+    private void reverseReplaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left, R.anim.anim_slide_out_right, R.anim.anim_slide_in_right);
         transaction.addToBackStack(null);
         transaction.replace(R.id.container, fragment);
         transaction.commit();
@@ -69,7 +77,7 @@ public class ForgotPasswordFragment extends Fragment {
         backpressArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new LoginFragment());
+                reverseReplaceFragment(new LoginFragment());
             }
         });
 
