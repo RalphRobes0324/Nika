@@ -170,7 +170,7 @@ public class LoginFragment extends Fragment {
         forgortpwdBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new SetNewPasswordFragment());
+                replaceFragment(new ForgotPasswordFragment());
             }
         });
 
