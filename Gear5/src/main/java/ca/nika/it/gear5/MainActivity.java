@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id == R.id.nikaSettings) {
@@ -98,6 +99,10 @@ public class MainActivity extends AppCompatActivity{
         }
         if (id == R.id.nikaBalance) {
             replaceFragment(new BalanceFragment());
+            return true;
+        }
+        if (id == R.id.nikaConnect) {
+            replaceFragment(new BluetoothFragment());
             return true;
         }
 
