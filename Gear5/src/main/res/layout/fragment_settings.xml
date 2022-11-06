@@ -10,137 +10,161 @@
     tools:context=".SettingsFragment">
 
 
-    <TextView
-        android:id="@+id/nikaTV1"
-        android:layout_width="201dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="48dp"
-        android:text="@string/joystick_color"
-        android:textColor="#FFFF00"
-        android:textSize="30sp"
+    <ScrollView
+        android:id="@+id/nikaSV"
+        android:layout_width="375dp"
+        android:layout_height="460dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nikaTV4"
-        android:layout_width="205dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="464dp"
-        android:text="@string/portrait"
-        android:textColor="#FFFF00"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/nikaCB1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="388dp"
-        app:buttonTint="#FFFF00"
-        app:layout_constraintStart_toEndOf="@+id/nikaTV3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nikaTV3"
-        android:layout_width="205dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="388dp"
-        android:text="@string/mute_audio"
-        android:textColor="#FFFF00"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/nikaCB2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="476dp"
-        app:buttonTint="#FFFF00"
-        app:layout_constraintStart_toEndOf="@+id/nikaTV4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nikaTV2"
-        android:layout_width="203dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="212dp"
-        android:text="@string/button_color"
-        android:textColor="#FFFF00"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/nikaRG1"
-        android:layout_width="101dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/nikaTV1"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/nikaRB1"
+        <LinearLayout
+            android:id="@+id/nikaLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:textColor="#FFFF00"
-            android:text="@string/red" />
+            android:divider="@color/black"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/nikaRB2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFF00"
-            android:text="@string/yellow" />
+            <TextView
+                android:id="@+id/nikaTV1"
+                android:layout_width="201dp"
+                android:layout_height="42dp"
+                android:text="@string/joystick_color"
+                android:textColor="#FFFF00"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/nikaRB3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFF00"
-            android:text="@string/green" />
-    </RadioGroup>
+            <RadioGroup
+                android:id="@+id/nikaRG1"
+                android:layout_width="101dp"
+                android:layout_height="150dp"
+                app:layout_constraintStart_toEndOf="@+id/nikaTV1"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <RadioGroup
-        android:id="@+id/nikaRG2"
-        android:layout_width="102dp"
-        android:layout_height="154dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="212dp"
-        app:layout_constraintStart_toEndOf="@+id/nikaTV2"
-        app:layout_constraintTop_toTopOf="parent">
+                <RadioButton
+                    android:id="@+id/nikaRB1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/red"
+                    android:textColor="#FFFF00" />
 
-        <RadioButton
-            android:id="@+id/nikaRB4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:textColor="#FFFF00"
-            android:text="@string/red" />
+                <RadioButton
+                    android:id="@+id/nikaRB2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yellow"
+                    android:textColor="#FFFF00" />
 
-        <RadioButton
-            android:id="@+id/nikaRB5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFF00"
-            android:text="@string/yellow" />
+                <RadioButton
+                    android:id="@+id/nikaRB3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/green"
+                    android:textColor="#FFFF00" />
+            </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/nikaRB6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFF00"
-            android:text="@string/green" />
-    </RadioGroup>
+            <Space
+                android:id="@+id/nikaSpace1"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/nikaTV2"
+                android:layout_width="203dp"
+                android:layout_height="43dp"
+                android:text="@string/button_color"
+                android:textColor="#FFFF00"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/nikaRG2"
+                android:layout_width="102dp"
+                android:layout_height="154dp"
+                app:layout_constraintStart_toEndOf="@+id/nikaTV2"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/nikaRB4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/red"
+                    android:textColor="#FFFF00" />
+
+                <RadioButton
+                    android:id="@+id/nikaRB5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yellow"
+                    android:textColor="#FFFF00" />
+
+                <RadioButton
+                    android:id="@+id/nikaRB6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/green"
+                    android:textColor="#FFFF00" />
+            </RadioGroup>
+
+            <Space
+                android:id="@+id/nikaSpace2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/nikaTV3"
+                android:layout_width="205dp"
+                android:layout_height="39dp"
+                android:text="@string/mute_audio"
+                android:textColor="#FFFF00"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/nikaCB1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:buttonTint="#FFFF00"
+                app:layout_constraintStart_toEndOf="@+id/nikaTV3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Space
+                android:id="@+id/nikaSpace3"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/nikaTV4"
+                android:layout_width="205dp"
+                android:layout_height="77dp"
+                android:text="@string/portrait"
+                android:textColor="#FFFF00"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/nikaCB2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:buttonTint="#FFFF00"
+                app:layout_constraintStart_toEndOf="@+id/nikaTV4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Space
+                android:id="@+id/nikaSpace4"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/button"
