@@ -1,5 +1,10 @@
 package ca.nika.it.gear5;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +12,140 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BluetoothFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Set;
+
 public class BluetoothFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final int REQUEST_ENABLE_BT = 0;
+    private static final int REQUEST_DISCOVER_BT = 1;
+    private View v;
+    TextView mStatusBlueTv;
+    TextView mPairedTv;
+    ImageView mBlueIv;
+    Button mOnBtn;
+    Button mOffBtn;
+    Button mDiscoverBtn;
+    Button mPairedBtn;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public BluetoothFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BluetoothFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BluetoothFragment newInstance(String param1, String param2) {
-        BluetoothFragment fragment = new BluetoothFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    BluetoothAdapter mBlueAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bluetooth, container, false);
+        super.onCreate(savedInstanceState);
+        v = inflater.inflate(R.layout.fragment_bluetooth, container, false);
+
+
+        this.mStatusBlueTv = (TextView) this.v.findViewById(R.id.statusBluetoothTv);
+        this.mPairedTv = (TextView) this.v.findViewById(R.id.pairedTv);
+        this.mBlueIv = (ImageView) this.v.findViewById(R.id.bluetoothIv);
+        this.mOnBtn = (Button) this.v.findViewById(R.id.onBtn);
+        this.mOffBtn = (Button) this.v.findViewById(R.id.offBtn);
+        this.mDiscoverBtn = (Button) this.v.findViewById(R.id.discoverableBtn);
+        this.mPairedBtn = (Button) this.v.findViewById(R.id.pairedBtn);
+
+        //adapter
+        mBlueAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        //check if bluetooth is available or not
+        if (mBlueAdapter == null) {
+            mStatusBlueTv.setText("Bluetooth is not available");
+        } else {
+            mStatusBlueTv.setText("Bluetooth is available");
+        }
+
+        //set image according to bluetooth status(on/off)
+        if (mBlueAdapter.isEnabled()) {
+            mBlueIv.setImageResource(R.drawable.b_on);
+        } else {
+            mBlueIv.setImageResource(R.drawable.b_off);
+        }
+
+        //on btn click
+        mOnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mBlueAdapter.isEnabled()) {
+                    showToast("Turning On Bluetooth...");
+                    //intent to on bluetooth
+                    Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(intent, REQUEST_ENABLE_BT);
+                } else {
+                    showToast("Bluetooth is already on");
+                }
+            }
+        });
+        //discover bluetooth btn click
+        mDiscoverBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBlueAdapter.isDiscovering()) {
+                    showToast("Making Your Device Discoverable");
+                    Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+                    startActivityForResult(intent, REQUEST_DISCOVER_BT);
+                }
+            }
+        });
+        //off btn click
+        mOffBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBlueAdapter.isEnabled()) {
+                    mBlueAdapter.disable();
+                    showToast("Turning Bluetooth Off");
+                    mBlueIv.setImageResource(R.drawable.b_off);
+                } else {
+                    showToast("Bluetooth is already off");
+                }
+            }
+        });
+        //get paired devices btn click
+        mPairedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBlueAdapter.isEnabled()) {
+                    mPairedTv.setText("Paired Devices");
+                    Set<BluetoothDevice> devices = mBlueAdapter.getBondedDevices();
+                    for (BluetoothDevice device : devices) {
+                        mPairedTv.append("\nDevice: " + device.getName() + ", " + device);
+                    }
+                } else {
+                    //bluetooth is off so can't get paired devices
+                    showToast("Turn on bluetooth to get paired devices");
+                }
+            }
+        });
+
+        return v;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case REQUEST_ENABLE_BT:
+                if (resultCode == RESULT_OK){
+                    //bluetooth is on
+                    mBlueIv.setImageResource(R.drawable.b_on);
+                    showToast("Bluetooth is on");
+                }
+                else {
+                    //user denied to turn bluetooth on
+                    showToast("couldn't on bluetooth");
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    //toast message function
+    private void showToast(String msg){
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+
 }
