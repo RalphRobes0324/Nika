@@ -30,13 +30,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -55,18 +61,20 @@ import ca.nika.it.gear5.R;
 
 
 public class LoginFragment extends Fragment {
+    private static final int RC_SIGN_IN = 1;
+
     private Button registerBtn, loginBtn, forgortpwdBtn;
     private CheckBox remember;
     private EditText usernameInput, passwordInput;
     private LinearLayout googleBtn;
     private ImageView backButton;
 
-    private GoogleSignInClient client;
+    private FirebaseAuth mAuth;
+    GoogleSignInClient mGoogleSignInClient;
 
 
 
 
-    DatabaseReference databaseReference;
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -77,17 +85,22 @@ public class LoginFragment extends Fragment {
         transaction.commit();
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        //google
-        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("340033231529-mkfh634mgpp2k3fuqlepq6mt3uss2imh.apps.googleusercontent.com")
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        client = GoogleSignIn.getClient(getActivity(),options);
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+        mAuth = FirebaseAuth.getInstance();
+
+
         //
         registerBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
         forgortpwdBtn = (Button) view.findViewById(R.id.nika_btn_forgotPwd_loginFrag);
@@ -103,8 +116,9 @@ public class LoginFragment extends Fragment {
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = client.getSignInIntent();
-                startActivityForResult(intent, 1234);
+                Intent intent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(intent, RC_SIGN_IN);
+
             }
         });
 
@@ -165,33 +179,42 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1234){
+        if (requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
+            try{
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                FirebaseAuth.getInstance().signInWithCredential(credential)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()){
-                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(intent);
-                                    getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
-                                }else{
-                                    Toast.makeText(getActivity().getApplicationContext(),"Auth Failed"
-                                            , Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });
-
-            }catch (ApiException e){
-                Toast.makeText(getActivity().getApplicationContext(),"Failed sign-in Google",
-                        Toast.LENGTH_SHORT).show();
-
+                firebaseAuthWithGoogle(account);
+            }catch (ApiException e) {
+                Toast.makeText(getActivity().getApplicationContext(), "Failed Phase 1", Toast.LENGTH_SHORT)
+                        .show();
             }
         }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //update(user);
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
+                        }else{
+                            Toast.makeText(getActivity().getApplicationContext(), "Failed Phase 2", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
     }
 
     private void validateUserAndPwd(String username, String password) {
