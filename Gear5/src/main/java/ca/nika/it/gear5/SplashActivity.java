@@ -22,14 +22,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                if (checkbox.equals(getString(R.string.checked))) {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                    finish();
-                } else if (checkbox.equals(getString(R.string.unchecked))) {
+                //if (checkbox.equals(getString(R.string.checked))) {
+                  //  startActivity(new Intent(SplashActivity.this, MainActivity.class));
+               //     finish();
+          //      } else if (checkbox.equals(getString(R.string.unchecked))) {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }
-            }
+      //      }
         }, 2000);
     }
 }
