@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -58,10 +59,10 @@ public class LoginFragment extends Fragment {
     private CheckBox remember;
     private EditText usernameInput, passwordInput;
     private LinearLayout googleBtn;
+    private ImageView backButton;
 
-    private static final int REQ_ONE_TAP = 1;
-    GoogleSignInClient mGoogleSignInClient;
-    private boolean showOneTapUI = true;
+    private GoogleSignInClient client;
+
 
 
 
@@ -81,14 +82,18 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-
-
-
+        //google
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("340033231529-mkfh634mgpp2k3fuqlepq6mt3uss2imh.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        client = GoogleSignIn.getClient(getActivity(),options);
+        //
         registerBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
         forgortpwdBtn = (Button) view.findViewById(R.id.nika_btn_forgotPwd_loginFrag);
         loginBtn = (Button) view.findViewById(R.id.nika_btn_login_login);
         remember = (CheckBox) view.findViewById(R.id.rememberMe);
+        backButton = (ImageView) view.findViewById(R.id.nika_login_back_button);
 
         usernameInput = (EditText) view.findViewById(R.id.nika_edittext_username_loginFrag);
         passwordInput = (EditText) view.findViewById(R.id.nika_edittext_pwd_loginFrag);
@@ -98,13 +103,15 @@ public class LoginFragment extends Fragment {
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //google
-                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build();
-                mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-                signIn();
+                Intent intent = client.getSignInIntent();
+                startActivityForResult(intent, 1234);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new GEAR5StartUpFragment());
             }
         });
 
@@ -155,43 +162,36 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, REQ_ONE_TAP);
-    }
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQ_ONE_TAP){
+        if(requestCode == 1234){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try{
+            try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account.getIdToken());
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                FirebaseAuth.getInstance().signInWithCredential(credential)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()){
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
+                                }else{
+                                    Toast.makeText(getActivity().getApplicationContext(),"Auth Failed"
+                                            , Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
 
             }catch (ApiException e){
-                Toast.makeText(getActivity().getApplicationContext(), "Failed Sign-in Google", Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(getActivity().getApplicationContext(),"Failed sign-in Google",
+                        Toast.LENGTH_SHORT).show();
+
             }
         }
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        }
-                        else{
-                            Toast.makeText(getActivity().getApplicationContext(),
-                                    "Authentication Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 
     private void validateUserAndPwd(String username, String password) {
