@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -38,16 +36,8 @@ public class SettingsFragment extends Fragment {
     Boolean aBoolean2;
 
     private Button buttonSave;
-
-    private RadioGroup radio;
-    private RadioButton radioRed;
-    private RadioButton radioYellow;
-    private RadioButton radioGreen;
-
-
-    int radioButtonID;
-    int idx;
-
+    private RadioGroup radioJoyClr;
+    private RadioGroup radioBtnClr;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,26 +54,15 @@ public class SettingsFragment extends Fragment {
         radioJoystick = v.findViewById(R.id.nikaRG1);
         radioButton = v.findViewById(R.id.nikaRG2);
 
-        this.radioJR = (RadioButton) this.v.findViewById(R.id.nikaRB1);
-        this.radioJY = (RadioButton) this.v.findViewById(R.id.nikaRB2);
-        this.radioJG = (RadioButton) this.v.findViewById(R.id.nikaRB3);
-
-        this.radioBR = (RadioButton) this.v.findViewById(R.id.nikaRB4);
-        this.radioBY = (RadioButton) this.v.findViewById(R.id.nikaRB5);
-        this.radioBG = (RadioButton) this.v.findViewById(R.id.nikaRB6);
-
         this.checkbox = (CheckBox) this.v.findViewById(R.id.nikaCB1);
         this.checkbox2 = (CheckBox) this.v.findViewById(R.id.nikaCB2);
 
         aBoolean = checkbox.isChecked();
         aBoolean2 = checkbox2.isChecked();
 
+        radioJoyClr = v.findViewById(R.id.nikaRG1);
+        radioBtnClr = v.findViewById(R.id.nikaRG2);
 
-        radio = v.findViewById(R.id.nikaRG2);
-
-        this.radioRed = (RadioButton) this.v.findViewById(R.id.nikaRB4);
-        this.radioYellow = (RadioButton) this.v.findViewById(R.id.nikaRB5);
-        this.radioGreen = (RadioButton) this.v.findViewById(R.id.nikaRB6);
 
         this.buttonSave = (Button) this.v.findViewById(R.id.button);
 
@@ -93,11 +72,17 @@ public class SettingsFragment extends Fragment {
                 SettingsFragment.this.doSave();
 
                 Bundle bundle = new Bundle();
-                int radioButtonID = radio.getCheckedRadioButtonId();
-                View radioButton = radio.findViewById(radioButtonID);
-                int idx = radio.indexOfChild(radioButton);
+                int radioButtonID = radioBtnClr.getCheckedRadioButtonId();
+                View radioButton = radioBtnClr.findViewById(radioButtonID);
+                int idx = radioBtnClr.indexOfChild(radioButton);
                 bundle.putInt("bundlePass",idx);
+
+                radioButtonID = radioJoyClr.getCheckedRadioButtonId();
+                radioButton = radioJoyClr.findViewById(radioButtonID);
+                idx = radioJoyClr.indexOfChild(radioButton);
+                bundle.putInt("bundlePass2",idx);
                 getParentFragmentManager().setFragmentResult("getBundlePass",bundle);
+
             }
         });
 
