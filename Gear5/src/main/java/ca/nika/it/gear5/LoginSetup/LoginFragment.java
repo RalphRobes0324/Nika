@@ -11,12 +11,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +24,27 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.MainActivity;
@@ -41,13 +52,20 @@ import ca.nika.it.gear5.R;
 
 
 public class LoginFragment extends Fragment {
+    private static final int RC_SIGN_IN = 1;
+
     private Button registerBtn, loginBtn, forgortpwdBtn;
     private CheckBox remember;
     private EditText usernameInput, passwordInput;
     private LinearLayout googleBtn;
+    private ImageView backButton;
+
+    FirebaseAuth mAuth;
+    GoogleSignInClient mGoogleSignInClient;
 
 
-    DatabaseReference databaseReference;
+
+
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -58,16 +76,38 @@ public class LoginFragment extends Fragment {
         transaction.commit();
     }
 
+    private void reverseReplaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left, R.anim.anim_slide_out_right, R.anim.anim_slide_in_right);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
+    }
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+        mAuth = FirebaseAuth.getInstance();
+
+
+        //
         registerBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
         forgortpwdBtn = (Button) view.findViewById(R.id.nika_btn_forgotPwd_loginFrag);
         loginBtn = (Button) view.findViewById(R.id.nika_btn_login_login);
         remember = (CheckBox) view.findViewById(R.id.rememberMe);
+        backButton = (ImageView) view.findViewById(R.id.nika_login_back_button);
 
         usernameInput = (EditText) view.findViewById(R.id.nika_edittext_username_loginFrag);
         passwordInput = (EditText) view.findViewById(R.id.nika_edittext_pwd_loginFrag);
@@ -77,7 +117,16 @@ public class LoginFragment extends Fragment {
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity().getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                Intent intent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(intent, RC_SIGN_IN);
+
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reverseReplaceFragment(new GEAR5StartUpFragment());
             }
         });
 
@@ -126,6 +175,47 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try{
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            }catch (ApiException e) {
+                Toast.makeText(getActivity().getApplicationContext(), "Failed Phase 1", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //update(user);
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
+                        }else{
+                            Toast.makeText(getActivity().getApplicationContext(), "Failed Phase 2", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
     }
 
     private void validateUserAndPwd(String username, String password) {

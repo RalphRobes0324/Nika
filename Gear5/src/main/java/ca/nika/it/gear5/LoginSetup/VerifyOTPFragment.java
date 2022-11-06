@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -43,6 +44,7 @@ public class VerifyOTPFragment extends Fragment {
     Button verifyBtn;
     String codeBySystem, verificationId;
     FirebaseAuth mAuth;
+    ImageView crossBtn;
 
 
     public VerifyOTPFragment(){
@@ -57,6 +59,17 @@ public class VerifyOTPFragment extends Fragment {
         transaction.commit();
     }
 
+    private void crossReplaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.exit_reg, R.anim.enter_login_from_reg);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
+    }
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,7 +83,15 @@ public class VerifyOTPFragment extends Fragment {
 
         pinView = (PinView) view.findViewById(R.id.nika_pinview_otpFrag);
         verifyBtn = (Button) view.findViewById(R.id.nika_btn_otp_verify_code);
+        crossBtn = (ImageView) view.findViewById(R.id.nika_otp_cross_button);
         mAuth = FirebaseAuth.getInstance();
+
+        crossBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                crossReplaceFragment(new UserPhoneValidationFragment());
+            }
+        });
 
         //PinView
         pinView.requestFocus();

@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (checkbox.equals(getString(R.string.checked))) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
-                } else if (checkbox.equals(getString(R.string.unchecked))) {
+                } else {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }

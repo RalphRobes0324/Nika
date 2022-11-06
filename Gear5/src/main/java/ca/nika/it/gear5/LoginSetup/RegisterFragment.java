@@ -2,10 +2,12 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.LoginSetup;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,7 +23,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,8 +47,6 @@ import ca.nika.it.gear5.R;
 
 public class RegisterFragment extends Fragment {
     private Button doneBtn, loginBtn;
-    private CheckBox remember;
-    private LinearLayout googBtn;
     EditText usernameInput, passwordInput, emailInput, confirmPasswordInput, phoneInput;
     ImageView backButton;
 
@@ -59,9 +70,6 @@ public class RegisterFragment extends Fragment {
         doneBtn = (Button) view.findViewById(R.id.nika_btn_register_done);
         backButton = (ImageView) view.findViewById(R.id.nika_signup_back_button);
 
-        //Google btn
-        googBtn = (LinearLayout) view.findViewById(R.id.google_signIn_btn_regfrag);
-
 
 
         //User Input
@@ -71,12 +79,6 @@ public class RegisterFragment extends Fragment {
         confirmPasswordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwdConfirm_regfrag);
         phoneInput = (EditText) view.findViewById(R.id.nika_edittxt_phone_regfrag);
 
-        googBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
 
@@ -99,8 +101,6 @@ public class RegisterFragment extends Fragment {
                 int startScore = 0;
 
                 validateUser(username,password, email, confirmPassword ,startCurrency, startScore , phone);
-
-
             }
         });
 
@@ -114,6 +114,13 @@ public class RegisterFragment extends Fragment {
 
         return view;
     }
+
+
+
+
+
+
+
 
     private void validateUser(String username, String password, String email,
                               String confirmPassword, int startCurrency, int startScore, String phone) {

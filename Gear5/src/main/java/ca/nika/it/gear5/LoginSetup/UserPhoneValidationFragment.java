@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.hbb20.CountryCodePicker;
@@ -24,6 +25,7 @@ public class UserPhoneValidationFragment extends Fragment {
     EditText userPhoneInput;
     Button nextBtn;
     CountryCodePicker countryCodePicker;
+    ImageView backButton;
 
     private void replaceFragment(Fragment fragment, String text) {
         //storing data
@@ -32,10 +34,19 @@ public class UserPhoneValidationFragment extends Fragment {
         //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.exit_reg, R.anim.enter_login_from_reg);
+        transaction.setCustomAnimations(R.anim.exit_startup, R.anim.enter_login_from_reg);
         transaction.addToBackStack(null);
         //sending data
         fragment.setArguments(bundle);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
+    }
+
+    private void reverseReplaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left, R.anim.anim_slide_out_right, R.anim.anim_slide_in_right);
+        transaction.addToBackStack(null);
         transaction.replace(R.id.container, fragment);
         transaction.commit();
     }
@@ -65,6 +76,15 @@ public class UserPhoneValidationFragment extends Fragment {
         userPhoneInput = (EditText) view.findViewById(R.id.nika_edittxt_phone_forgorFrag);
         nextBtn = (Button) view.findViewById(R.id.nika_btn_forgotPwd_next_phone);
         countryCodePicker = (CountryCodePicker) view.findViewById(R.id.nika_countrypicker_userPhoneFrag);
+        backButton = (ImageView) view.findViewById(R.id.nika_userPhone_back_button);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reverseReplaceFragment(new ForgotPasswordFragment());
+            }
+        });
+
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
