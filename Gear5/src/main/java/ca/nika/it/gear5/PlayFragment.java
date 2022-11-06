@@ -24,10 +24,11 @@ public class PlayFragment extends Fragment {
     Button btnB;
     private View v;
     RelativeLayout layout_joystick;
-    ImageView image_joystick, image_border;
     TextView textView1, textView2, textView3, textView4, textView5;
+    int num2;
 
     JoyStickClass js;
+    int JoystickColor;
 
     public PlayFragment() {
         // Required empty public constructor
@@ -50,13 +51,13 @@ public class PlayFragment extends Fragment {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-
-
         getParentFragmentManager().setFragmentResultListener("getBundlePass", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 int num = result.getInt("bundlePass");
+                int num2 = result.getInt("bundlePass2");
                 editor.putInt("Index", num);
+                editor.putInt("Index2", num2);
                 editor.apply();
                 loadGameSetting();
 
@@ -73,7 +74,19 @@ public class PlayFragment extends Fragment {
 
         layout_joystick = (RelativeLayout) v.findViewById(R.id.layout_joystick);
 
-        js = new JoyStickClass(getActivity().getApplicationContext(), layout_joystick, R.drawable.red_circle);
+        switch (num2) {
+            case 0:
+                JoystickColor = R.drawable.red_circle;
+                break;
+            case 1:
+                JoystickColor = R.drawable.yellow_circle;
+                break;
+            case 2:
+                JoystickColor = R.drawable.green_circle;
+                break;
+        }
+
+        js = new JoyStickClass(getActivity().getApplicationContext(), layout_joystick, JoystickColor);
         js.setStickSize(270, 270);
         js.setLayoutSize(500, 500);
 //        js.setLayoutAlpha(150);
@@ -130,6 +143,7 @@ public class PlayFragment extends Fragment {
 
         if(sharedPreferences!= null) {
             int num = sharedPreferences.getInt("Index", R.id.nikaRB4);
+            num2 = sharedPreferences.getInt("Index2", R.id.nikaRB1);
 
             switch (num) {
                 case 0:
@@ -145,9 +159,12 @@ public class PlayFragment extends Fragment {
                     btnB.setBackgroundColor(btnB.getContext().getResources().getColor(R.color.green));
                     break;
             }
+
         } else {
             btnA.setBackgroundColor(btnA.getContext().getResources().getColor(R.color.red));
             btnB.setBackgroundColor(btnB.getContext().getResources().getColor(R.color.red));
+
+            num2 = 0;
         }
 
     }
