@@ -10,9 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:gravity="center">
 
-        <!--Display whether bluetooth is available or not-->
+
         <TextView
             android:id="@+id/statusBluetoothTv"
             android:layout_width="match_parent"
@@ -21,11 +22,7 @@
             android:textAlignment="center"
             android:textSize="20sp"
             android:textColor="#000"/>
-        <!--Bluetooth icon (on/off)-->
-        <!--On Button-->
-        <!--Off btn-->
 
-        <!--Discoverable button-->
         <ImageView
             android:id="@+id/bluetoothIv"
             android:layout_width="100dp"
@@ -55,15 +52,7 @@
             android:layout_height="wrap_content"
             android:text="Discoverable"
             style="@style/Base.Widget.AppCompat.Button.Colored"/>
-        <!--Get list of paired devices button-->
-        <Button
-            android:id="@+id/pairedBtn"
-            android:minWidth="200dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Get Paired Devices"
-            style="@style/Base.Widget.AppCompat.Button.Colored"/>
-        <!--Show paired devices here-->
+
         <TextView
             android:id="@+id/pairedTv"
             android:minWidth="200dp"

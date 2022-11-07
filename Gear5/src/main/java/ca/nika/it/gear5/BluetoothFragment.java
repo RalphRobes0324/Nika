@@ -25,12 +25,12 @@ public class BluetoothFragment extends Fragment {
     private static final int REQUEST_DISCOVER_BT = 1;
     private View v;
     TextView mStatusBlueTv;
-    TextView mPairedTv;
+
     ImageView mBlueIv;
     Button mOnBtn;
     Button mOffBtn;
     Button mDiscoverBtn;
-    Button mPairedBtn;
+
 
     BluetoothAdapter mBlueAdapter;
 
@@ -42,12 +42,11 @@ public class BluetoothFragment extends Fragment {
 
 
         this.mStatusBlueTv = (TextView) this.v.findViewById(R.id.statusBluetoothTv);
-        this.mPairedTv = (TextView) this.v.findViewById(R.id.pairedTv);
         this.mBlueIv = (ImageView) this.v.findViewById(R.id.bluetoothIv);
         this.mOnBtn = (Button) this.v.findViewById(R.id.onBtn);
         this.mOffBtn = (Button) this.v.findViewById(R.id.offBtn);
         this.mDiscoverBtn = (Button) this.v.findViewById(R.id.discoverableBtn);
-        this.mPairedBtn = (Button) this.v.findViewById(R.id.pairedBtn);
+
 
         //adapter
         mBlueAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -85,7 +84,7 @@ public class BluetoothFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mBlueAdapter.isDiscovering()) {
-                    showToast("Making Your Device Discoverable");
+                    showToast("Device Will now be Discoverable");
                     Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                     startActivityForResult(intent, REQUEST_DISCOVER_BT);
                 }
@@ -101,22 +100,6 @@ public class BluetoothFragment extends Fragment {
                     mBlueIv.setImageResource(R.drawable.b_off);
                 } else {
                     showToast("Bluetooth is already off");
-                }
-            }
-        });
-        //get paired devices btn click
-        mPairedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mBlueAdapter.isEnabled()) {
-                    mPairedTv.setText("Paired Devices");
-                    Set<BluetoothDevice> devices = mBlueAdapter.getBondedDevices();
-                    for (BluetoothDevice device : devices) {
-                        mPairedTv.append("\nDevice: " + device.getName() + ", " + device);
-                    }
-                } else {
-                    //bluetooth is off so can't get paired devices
-                    showToast("Turn on bluetooth to get paired devices");
                 }
             }
         });
