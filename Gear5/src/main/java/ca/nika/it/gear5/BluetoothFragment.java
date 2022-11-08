@@ -7,6 +7,8 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -87,7 +89,17 @@ public class BluetoothFragment extends Fragment {
                     showToast("Device Will now be Discoverable");
                     Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                     startActivityForResult(intent, REQUEST_DISCOVER_BT);
-                }
+
+                    String message = "WARNING! Your device is now visible";
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
+
+                    builder.setSmallIcon(R.drawable.ic_message);
+                    builder.setContentTitle("My title");
+                    builder.setContentText("Warning, your bluetooth device will be visible to others!");
+                    builder.setAutoCancel(true);
+
+
+                                }
             }
         });
         //off btn click
