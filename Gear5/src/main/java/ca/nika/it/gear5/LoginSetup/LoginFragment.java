@@ -2,6 +2,7 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.LoginSetup;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
@@ -10,8 +11,11 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,12 +38,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,7 +56,6 @@ import ca.nika.it.gear5.R;
 
 
 public class LoginFragment extends Fragment {
-    private static final int RC_SIGN_IN = 1;
 
     private Button registerBtn, loginBtn, forgortpwdBtn;
     private CheckBox remember;
@@ -60,11 +63,32 @@ public class LoginFragment extends Fragment {
     private LinearLayout googleBtn;
     private ImageView backButton;
 
-    FirebaseAuth mAuth;
-    GoogleSignInClient mGoogleSignInClient;
+    ActivityResultLauncher<Intent> mGoogle = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult activityResult) {
+                    int result = activityResult.getResultCode();
+                    Intent data = activityResult.getData();
+                    if (result == RESULT_OK){
+                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                        try {
+                            GoogleSignInAccount account = task.getResult(ApiException.class);
+                            firebaseAuthWithGoogle(account);
+                        } catch (ApiException e) {
+                            Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
 
+                    }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(), "Failed Activity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+    );
 
-
+    private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth mAuth;
 
 
     private void replaceFragment(Fragment fragment) {
@@ -92,15 +116,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-        mAuth = FirebaseAuth.getInstance();
-
+        createRequest();
 
         //
         registerBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
@@ -113,13 +129,13 @@ public class LoginFragment extends Fragment {
         passwordInput = (EditText) view.findViewById(R.id.nika_edittext_pwd_loginFrag);
 
         googleBtn = (LinearLayout) view.findViewById(R.id.google_signIn_btn_logiBtn);
+        mAuth = FirebaseAuth.getInstance();
+
 
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(intent, RC_SIGN_IN);
-
+                signIn();
             }
         });
 
@@ -177,19 +193,9 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try{
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            }catch (ApiException e) {
-                Toast.makeText(getActivity().getApplicationContext(), "Failed Phase 1", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        mGoogle.launch(signInIntent);
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
@@ -200,23 +206,23 @@ public class LoginFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //update(user);
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                            getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
-                        }else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Failed Phase 2", Toast.LENGTH_SHORT)
-                                    .show();
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG)
-                                .show();
+                        else{
+                            Toast.makeText(getActivity(), "Auth Failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
+
+    private void createRequest() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity().getApplicationContext(),gso);
+        
+    }
+
 
     private void validateUserAndPwd(String username, String password) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
