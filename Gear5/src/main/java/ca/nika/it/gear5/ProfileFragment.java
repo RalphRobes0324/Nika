@@ -140,8 +140,7 @@ public class ProfileFragment extends Fragment {
                                 editor.putString(getString(R.string.remember), getString(R.string.unchecked));
                                 editor.apply();
 
-                                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                startActivity(intent);
+                                System.exit(0);
                             }
                         })
                         .setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
