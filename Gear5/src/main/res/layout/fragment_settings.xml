@@ -162,6 +162,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp" />
 
+            <TextView
+                android:id="@+id/nikaTV5"
+                android:layout_width="205dp"
+                android:layout_height="77dp"
+                android:text="Show Joystick Stats"
+                android:textColor="#FFFF00"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/nikaCB3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:buttonTint="#FFFF00"
+                app:layout_constraintStart_toEndOf="@+id/nikaTV4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Space
+                android:id="@+id/nikaSpace5"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
 
         </LinearLayout>
     </ScrollView>
