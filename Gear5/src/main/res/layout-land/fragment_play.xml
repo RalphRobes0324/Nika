@@ -6,13 +6,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_3"
+    android:background="@drawable/play_background_landscape"
     tools:context=".PlayFragment">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,8 +22,8 @@
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="444dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginStart="632dp"
+        android:layout_marginTop="196dp"
         android:text="@string/B"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -36,8 +37,8 @@
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="548dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="648dp"
+        android:layout_marginTop="100dp"
         android:text="@string/A"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -47,10 +48,10 @@
 
     <ImageView
         android:id="@+id/nikaLogo"
-        android:layout_width="235dp"
-        android:layout_height="168dp"
-        android:layout_marginStart="236dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="158dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/nika"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,14 +60,15 @@
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_margin="10dp"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="256dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="44dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/nikaButtonB"
+        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintStart_toEndOf="@+id/layout_joystick"
+        app:layout_constraintTop_toBottomOf="@+id/nikaLogo">
 
         <TextView
             android:id="@+id/textView1"
@@ -75,7 +77,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="X"
-            android:textColor="#444444"
+            android:textColor="#FFFF00"
             android:textSize="20dp" />
 
         <TextView
@@ -85,7 +87,7 @@
             android:layout_below="@+id/textView1"
             android:layout_alignParentLeft="true"
             android:text="Y"
-            android:textColor="#444444"
+            android:textColor="#FFFF00"
             android:textSize="20dp" />
 
         <TextView
@@ -95,7 +97,7 @@
             android:layout_below="@+id/textView2"
             android:layout_alignParentLeft="true"
             android:text="Angle"
-            android:textColor="#444444"
+            android:textColor="#FFFF00"
             android:textSize="20dp" />
 
         <TextView
@@ -105,7 +107,7 @@
             android:layout_below="@+id/textView3"
             android:layout_alignParentLeft="true"
             android:text="Distance"
-            android:textColor="#444444"
+            android:textColor="#FFFF00"
             android:textSize="20dp" />
 
         <TextView
@@ -115,18 +117,18 @@
             android:layout_below="@+id/textView3"
             android:layout_alignParentLeft="true"
             android:text="Direction"
-            android:textColor="#444444"
+            android:textColor="#FFFF00"
             android:textSize="20dp" />
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/layout_joystick"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="155dp"
+        android:layout_height="146dp"
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/img_4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></RelativeLayout>
