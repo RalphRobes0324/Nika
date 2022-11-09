@@ -33,96 +33,97 @@
             android:layout_gravity="center_horizontal" />
         
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nika_edittxt_name_reviewFrag"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="@string/name_optional"
+            app:hintTextColor="@color/white"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
             app:startIconDrawable="@drawable/ic_baseline_person_24"
-            app:startIconTint="@color/white"
-            app:hintTextColor="@color/white"
-            android:textColorHint="@color/white"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/white"
-            app:boxStrokeWidthFocused="2dp"
-            app:boxStrokeColor="@color/white">
+            app:startIconTint="@color/black"
+            app:endIconTint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nika_edittxt_name_reviewFrag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
+                tools:ignore="SpeakableTextPresentCheck"
                 android:fontFamily="@font/press_start_2p"
-                android:inputType="textPersonName"/>
+                android:textColor="@color/black"
+                android:inputType="textPersonName"
+                android:background="@drawable/custom_edittextbox"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nika_edittxt_phone_reviewFrag"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="@string/phone_optional"
-            app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
-            app:startIconTint="@color/white"
             app:hintTextColor="@color/white"
-            android:textColorHint="@color/white"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/white"
+            app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            app:boxStrokeColor="@color/white">
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="@color/black"
+            app:endIconTint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nika_edittxt_phone_reviewFrag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
+                tools:ignore="SpeakableTextPresentCheck"
                 android:fontFamily="@font/press_start_2p"
-                android:inputType="phone"/>
+                android:textColor="@color/black"
+                android:inputType="phone"
+                android:background="@drawable/custom_edittextbox"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nika_edittxt_email_reviewFrag"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="@string/email_optional"
-            app:startIconDrawable="@drawable/ic_baseline_email_24"
-            app:startIconTint="@color/white"
             app:hintTextColor="@color/white"
-            android:textColorHint="@color/white"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/white"
+            app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            app:boxStrokeColor="@color/white">
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="@color/black"
+            app:endIconTint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nika_edittxt_email_reviewFrag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
+                tools:ignore="SpeakableTextPresentCheck"
                 android:fontFamily="@font/press_start_2p"
-                android:inputType="textEmailAddress"/>
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/custom_edittextbox"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nika_edittxt_comment_reviewFrag"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="@string/comment_optional"
             app:hintTextColor="@color/white"
-            android:textColorHint="@color/white"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/white"
+            app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            app:boxStrokeColor="@color/white">
+            app:startIconTint="@color/black"
+            app:endIconTint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nika_edittxt_comment_reviewFrag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:fontFamily="@font/press_start_2p"
+                android:textColor="@color/black"
+                android:background="@drawable/custom_edittextbox"
                 android:inputType="textMultiLine"
                 android:lines="10"
                 android:gravity="top"
                 android:overScrollMode="always"
-                android:fontFamily="@font/press_start_2p"
                 android:scrollbars="vertical"
                 android:scrollbarStyle="insideInset"
                 android:scrollHorizontally="false"/>
