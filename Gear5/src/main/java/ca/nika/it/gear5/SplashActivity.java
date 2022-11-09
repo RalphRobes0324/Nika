@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
+import ca.nika.it.gear5.LoginSetup.TypesOfSignIn.GoogleSignInActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
