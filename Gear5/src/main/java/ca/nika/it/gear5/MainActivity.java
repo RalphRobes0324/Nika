@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
@@ -34,9 +35,15 @@ public class MainActivity extends AppCompatActivity{
                     replaceFragment(new PlayFragment());
                     break;
                 case R.id.score:
+                    this.getWindow().getDecorView().setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_FULLSCREEN);
                     replaceFragment(new ScoreFragment());
                     break;
                 case R.id.profile:
+                    this.getWindow().getDecorView().setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_FULLSCREEN);
                     replaceFragment(new ProfileFragment());
                     break;
             }
