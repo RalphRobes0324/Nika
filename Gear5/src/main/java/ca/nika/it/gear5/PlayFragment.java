@@ -3,10 +3,13 @@
 package ca.nika.it.gear5;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
@@ -16,8 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import ca.nika.it.gear5.LoginSetup.LoginActivity;
+import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
 public class PlayFragment extends Fragment {
     Button btnA;
@@ -25,7 +32,7 @@ public class PlayFragment extends Fragment {
     private View v;
     RelativeLayout layout_joystick;
     TextView textView1, textView2, textView3, textView4, textView5;
-    int num2;
+    LinearLayout ll;
 
     JoyStickClass js;
     int JoystickColor;
@@ -55,14 +62,27 @@ public class PlayFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 int num = result.getInt("bundlePass");
-                int num2 = result.getInt("bundlePass2");
                 editor.putInt("Index", num);
-                editor.putInt("Index2", num2);
                 editor.apply();
                 loadGameSetting();
 
             }
         });
+
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+            this.getActivity().getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        } else {
+
+        }
 
         loadGameSetting();
 
@@ -74,17 +94,8 @@ public class PlayFragment extends Fragment {
 
         layout_joystick = (RelativeLayout) v.findViewById(R.id.layout_joystick);
 
-        switch (num2) {
-            case 0:
-                JoystickColor = R.drawable.red_circle;
-                break;
-            case 1:
-                JoystickColor = R.drawable.yellow_circle;
-                break;
-            case 2:
-                JoystickColor = R.drawable.green_circle;
-                break;
-        }
+
+        JoystickColor = R.drawable.red_circle;
 
         js = new JoyStickClass(getActivity().getApplicationContext(), layout_joystick, JoystickColor);
         js.setStickSize(270, 270);
@@ -140,10 +151,17 @@ public class PlayFragment extends Fragment {
 
     private void loadGameSetting()  {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        String checkbox = sharedPreferences.getString("stats",getString(R.string.blank));
+        ll = (LinearLayout) v.findViewById(R.id.linearLayout1);
 
         if(sharedPreferences!= null) {
             int num = sharedPreferences.getInt("Index", R.id.nikaRB4);
-            num2 = sharedPreferences.getInt("Index2", R.id.nikaRB1);
+
+            if (checkbox.equals(getString(R.string.checked))) {
+                ll.setVisibility(ll.VISIBLE);
+            } else {
+                ll.setVisibility(ll.INVISIBLE);
+            }
 
             switch (num) {
                 case 0:
@@ -163,8 +181,8 @@ public class PlayFragment extends Fragment {
         } else {
             btnA.setBackgroundColor(btnA.getContext().getResources().getColor(R.color.red));
             btnB.setBackgroundColor(btnB.getContext().getResources().getColor(R.color.red));
+            ll.setVisibility(ll.INVISIBLE);
 
-            num2 = 0;
         }
 
     }
