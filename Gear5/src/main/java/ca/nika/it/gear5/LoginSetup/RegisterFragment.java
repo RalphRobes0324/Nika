@@ -117,11 +117,6 @@ public class RegisterFragment extends Fragment {
 
 
 
-
-
-
-
-
     private void validateUser(String username, String password, String email,
                               String confirmPassword, int startCurrency, int startScore, String phone) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
