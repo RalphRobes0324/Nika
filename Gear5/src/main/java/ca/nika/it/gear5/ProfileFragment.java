@@ -28,6 +28,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -38,6 +40,7 @@ import ca.nika.it.gear5.LoginSetup.LoginActivity;
 public class ProfileFragment extends Fragment {
 
     ImageView mImageVIew;
+    TextView usernameTextView;
     Button mChooseBtn;
     Button btn;
 
@@ -93,6 +96,12 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
+        //Grabbing data from Main Activity
+        /*usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
+        Bundle data = getArguments();
+        String username = data.getString("userProfileData");
+        Toast.makeText(getActivity().getApplicationContext(), username, Toast.LENGTH_LONG).show();
+        /*usernameTextView.setText(username);*/
 
 
         mImageVIew = view.findViewById(R.id.nikaProfileView);

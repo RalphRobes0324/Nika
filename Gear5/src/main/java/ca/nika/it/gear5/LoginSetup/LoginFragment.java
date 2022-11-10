@@ -34,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
-import ca.nika.it.gear5.testFile.TestGoogleSignInActivity;
+import ca.nika.it.gear5.SignInFile.GoogleSignInActivity;
 
 
 public class LoginFragment extends Fragment {
@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment {
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TestGoogleSignInActivity.class);
+                Intent intent = new Intent(getActivity(), GoogleSignInActivity.class);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
             }
@@ -193,6 +193,7 @@ public class LoginFragment extends Fragment {
                     //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("userProfile", userId);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
                 }

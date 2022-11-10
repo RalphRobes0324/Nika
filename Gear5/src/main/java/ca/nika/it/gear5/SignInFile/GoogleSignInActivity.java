@@ -1,16 +1,10 @@
-package ca.nika.it.gear5.testFile;
+package ca.nika.it.gear5.SignInFile;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -29,7 +23,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 
-public class TestGoogleSignInActivity extends AppCompatActivity {
+public class GoogleSignInActivity extends AppCompatActivity {
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
     private FirebaseAuth mAuth;
@@ -93,7 +87,8 @@ public class TestGoogleSignInActivity extends AppCompatActivity {
 
     private void enterMainActivity() {
         finish();
-        Intent intent = new Intent(getApplicationContext(), TestMainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
     }
 }
