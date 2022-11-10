@@ -34,15 +34,6 @@ public class TestGoogleSignInActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
     private FirebaseAuth mAuth;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null){
-            enterMainActivity();
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +48,6 @@ public class TestGoogleSignInActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         mAuth = FirebaseAuth.getInstance();
-
 
         signIn();
 
