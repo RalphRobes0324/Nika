@@ -32,32 +32,17 @@ import ca.nika.it.gear5.R;
 public class TestGoogleSignInActivity extends AppCompatActivity {
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
-    FirebaseAuth mAuth;
-    ActivityResultLauncher<Intent> activityResultLauncher =
-            registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
-                    new ActivityResultCallback<ActivityResult>() {
-                        @Override
-                        public void onActivityResult(ActivityResult activityResult) {
-                            int result = activityResult.getResultCode();
-                            Intent data = activityResult.getData();
-                            if (result == RESULT_OK){
-                                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                                try {
-                                    task.getResult(ApiException.class);
-                                    enterMainActivity();
+    private FirebaseAuth mAuth;
 
-                                } catch (ApiException e) {
-                                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(), "Failed to Load", Toast.LENGTH_SHORT).show();
-                            }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            enterMainActivity();
+        }
 
-                        }
-                    }
-            );
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +53,10 @@ public class TestGoogleSignInActivity extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        mAuth = FirebaseAuth.getInstance();
 
 
         signIn();
@@ -82,16 +70,16 @@ public class TestGoogleSignInActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
+                try {
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
+                    firebaseAuthWithGoogle(account);
 
-            } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                } catch (ApiException e) {
+                    Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 
