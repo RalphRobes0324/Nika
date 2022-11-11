@@ -1,5 +1,6 @@
 package ca.nika.it.gear5.LoginSetup;
-
+// CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
+// CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 import android.content.Context;
 import android.os.Bundle;
 
