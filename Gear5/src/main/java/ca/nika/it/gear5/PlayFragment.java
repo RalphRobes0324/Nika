@@ -2,14 +2,19 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
@@ -37,6 +42,8 @@ public class PlayFragment extends Fragment {
     JoyStickClass js;
     int JoystickColor;
 
+
+
     public PlayFragment() {
         // Required empty public constructor
     }
@@ -54,6 +61,7 @@ public class PlayFragment extends Fragment {
 
         this.btnA = (Button) this.v.findViewById(R.id.nikaButtonA);
         this.btnB = (Button) this.v.findViewById(R.id.nikaButtonB);
+        final MediaPlayer ButtonClickMP = MediaPlayer.create(getActivity(), R.raw.btn_click_sound);
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -66,6 +74,20 @@ public class PlayFragment extends Fragment {
                 editor.apply();
                 loadGameSetting();
 
+            }
+        });
+
+        btnA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ButtonClickMP.start();
+            }
+        });
+
+        btnB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ButtonClickMP.start();
             }
         });
 
