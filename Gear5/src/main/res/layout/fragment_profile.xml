@@ -6,101 +6,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaper"
+    android:background="@drawable/gradient"
     tools:context=".ProfileFragment">
 
-
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nikaProfileView"
         android:layout_width="112dp"
         android:layout_height="106dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="64dp"
         android:scaleType="centerCrop"
         android:src="@drawable/devil_fruit"
+        app:civ_border_color="#ecf2f4"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/nikaImgBtn"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="149dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="132dp"
-        android:text="@string/click_to_add_image"
-        android:textSize="9sp"
-        android:textStyle="bold"
-        app:cornerRadius="28dp"
+    <LinearLayout
+        android:id="@+id/nikaLinearLayout"
+        android:layout_width="329dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="16dp"
+        android:background="#fff"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nikaProfileView">
 
-    <com.google.android.material.button.MaterialButton
+        <TextView
+            android:id="@+id/nikaUsername"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/username"
+            android:textAlignment="center"
+            android:textColor="#27214f"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/nikaTopScore"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/top_score"
+            android:textAlignment="center"
+            android:textColor="#27214f"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/nikaCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/currency"
+            android:textAlignment="center"
+            android:textColor="#27214f"
+            android:textSize="20sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/ProfileChange"
+                android:layout_width="275dp"
+                android:layout_height="55dp"
+                android:layout_gravity="top"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:text="Change Profile Icon"
+                android:textColor="#27214f"
+                android:textSize="20sp" />
+
+
+            <ImageButton
+                android:id="@+id/nikaImgBtn"
+                android:layout_width="55dp"
+                android:layout_height="53dp"
+                android:layout_gravity="top"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_change_profile"
+                android:text="@string/click_to_add_image"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
         android:id="@+id/nikaLogout"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="181dp"
         android:layout_height="60dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="540dp"
-        android:elevation="100dp"
-        android:fontFamily="@font/press_start_2p"
+        android:layout_gravity="center"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="#27214f"
+        android:background="@drawable/rounded_button"
         android:text="@string/logout"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:cornerRadius="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nikaUsername"
-        android:layout_width="217dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/press_start_2p"
-        android:text="@string/username"
-        android:textColor="#FFFF00"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nikaTopScore"
-        android:layout_width="262dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="88dp"
-        android:fontFamily="@font/press_start_2p"
-        android:text="@string/top_score"
-        android:textColor="#FFFF00"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nikaCurrency"
-        android:layout_width="225dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="152dp"
-        android:fontFamily="@font/press_start_2p"
-        android:text="@string/currency"
-        android:textColor="#FFFF00"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="291dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="324dp"
-        android:layout_marginEnd="68dp"
-        android:fontFamily="@font/press_start_2p"
-        android:text="Recent Scores"
-        android:textColor="#FFFF00"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nikaLinearLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

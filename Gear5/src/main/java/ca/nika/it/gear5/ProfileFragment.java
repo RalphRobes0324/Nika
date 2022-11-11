@@ -31,6 +31,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ import ca.nika.it.gear5.LoginSetup.LoginActivity;
 public class ProfileFragment extends Fragment {
 
     ImageView mImageView;
-    Button mChooseBtn;
+    ImageButton mChooseBtn;
     Button btn;
     TextView usernameTextView;
     String userID;
@@ -96,7 +97,7 @@ public class ProfileFragment extends Fragment {
 
             String getUserId = sharedPreferences.getString("userProfile", "");
 
-            usernameTextView.setText(getUserId);
+            usernameTextView.setText("Username : " + getUserId);
             Toast.makeText(getActivity().getApplicationContext(), getUserId, Toast.LENGTH_LONG).show();
 
         }
