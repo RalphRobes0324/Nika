@@ -30,11 +30,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
-import ca.nika.it.gear5.testFile.TestGoogleSignInActivity;
+import ca.nika.it.gear5.SignInFile.GoogleSignInActivity;
 
 
 public class LoginFragment extends Fragment {
@@ -89,7 +90,7 @@ public class LoginFragment extends Fragment {
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TestGoogleSignInActivity.class);
+                Intent intent = new Intent(getActivity(), GoogleSignInActivity.class);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
             }
@@ -179,26 +180,28 @@ public class LoginFragment extends Fragment {
     }
 
     private void validateUserFireBase(String username, String password) {
-        String userId = username + password;
         Context context = getActivity().getApplicationContext();
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query checkUser = databaseReference.orderByChild(getString(R.string.childRef_username)).equalTo(username);
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.hasChild(userId)){
-                    //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
+                if(snapshot.exists()){
+                    String passwordFromDB = snapshot.child(username).child(getString(R.string.childRef_password)).getValue(String.class);
+                    if(passwordFromDB.equals(password)){
+                        moveToMainActivity(username);
+                    }
+                    else{
+                        passwordInput.setError(getString(R.string.warning_msg_pwd_loginFrag),iconError);
+                    }
                 }
                 else{
                     usernameInput.setError(getString(R.string.warning_msg_username_loginFrag),iconError);
-                    passwordInput.setError(getString(R.string.warning_msg_pwd_loginFrag),iconError);
                 }
             }
 
@@ -207,6 +210,15 @@ public class LoginFragment extends Fragment {
 
             }
         });
+
+
+    }
+
+    private void moveToMainActivity(String userId){
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("userProfile", userId);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
 
     }
 

@@ -15,10 +15,12 @@ import ca.nika.it.gear5.LoginSetup.LoginActivity;
 public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+
         SharedPreferences preferences = getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
         String checkbox = preferences.getString(getString(R.string.remember),getString(R.string.blank));
 
-        super.onCreate(savedInstanceState);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

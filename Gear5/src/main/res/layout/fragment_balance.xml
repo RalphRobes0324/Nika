@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaper"
+    android:background="@drawable/wpbp"
     tools:context=".BalanceFragment">
 
     <LinearLayout
@@ -18,8 +18,16 @@
             android:text="@string/purchase_currency"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:fontFamily="@font/press_start_2p"
             android:layout_gravity="center_horizontal"
             android:textStyle="bold"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:rowCount="4">
 
         <ImageButton
             android:id="@+id/gear5_coin_500"
@@ -64,6 +72,7 @@
             android:maxHeight="200dp"
             android:scaleType="fitCenter"
             android:src="@drawable/gear5_5700_coin"/>
+        </GridLayout>
 
         <ImageButton
             android:id="@+id/gear5_coin_11600"

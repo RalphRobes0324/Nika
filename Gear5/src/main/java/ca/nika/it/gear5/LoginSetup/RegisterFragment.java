@@ -144,7 +144,7 @@ public class RegisterFragment extends Fragment {
                     if(password.matches(getString(R.string.limits))){
                         if(confirmPassword.matches(password)){
                             if (phone.matches("[0-9]{10,13}$")) {
-                                String userId = username + password;
+                                String userId = username;
                                 validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone);
                             }
                             else {
