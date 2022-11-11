@@ -9,16 +9,19 @@ import static ca.nika.it.gear5.R.string.PermissionDenied;
 import static ca.nika.it.gear5.R.string.PermissionGranted;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 
+import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,13 +34,13 @@ import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
 
 public class ProfileFragment extends Fragment {
 
-    ImageView mImageVIew;
+    ImageView mImageView;
     Button mChooseBtn;
     Button btn;
 
@@ -46,47 +49,50 @@ public class ProfileFragment extends Fragment {
     private static final int PERMISSION_CODE = 1001;
     private View view;
 
+    PreferenceManager preferenceManager;
+    Intent camera;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-    private void pickImageFromGallery() {
-
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, IMAGE_PICK_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        switch (requestCode) {
-            case PERMISSION_CODE:{
-                if (grantResults.length > 0 && grantResults[0] ==
-                        PackageManager.PERMISSION_GRANTED) {
-                    pickImageFromGallery();
-
-                    Snackbar.make(getView(), PermissionGranted, Snackbar.LENGTH_SHORT)
-                            .show();
-
-
-                } else {
-                    Snackbar.make(getView(), PermissionDenied, Snackbar.LENGTH_SHORT)
-                            .show();
-                }
-            }
-        }
-
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-            mImageVIew.setImageURI(data.getData());
+            mImageView.setImageURI(data.getData());
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==118&& resultCode==RESULT_OK){
+            Bitmap photo= (Bitmap) data.getExtras().get("data");
+            mImageView.setImageBitmap(photo);
+            ByteArrayOutputStream imgByte = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, imgByte);
+            byte[] b = imgByte.toByteArray();
+            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            preferenceManager.setString("image_data",encodedImage);
+
         }
     }
+
+    public void imgMethod() {
+            camera=new Intent();
+            camera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(camera,118);
+    }
+
+    public void loadImage() {
+        preferenceManager=PreferenceManager.getInstance(getActivity());
+
+        String previouslyEncodedImage = preferenceManager.getString("image_data");
+
+        if( !previouslyEncodedImage.equalsIgnoreCase("") ){
+            byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            mImageView.setImageBitmap(bitmap);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,33 +100,30 @@ public class ProfileFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        StrictMode.VmPolicy.Builder builder=new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        preferenceManager=PreferenceManager.getInstance(getActivity());
 
-        mImageVIew = view.findViewById(R.id.nikaProfileView);
+        mImageView = view.findViewById(R.id.nikaProfileView);
         mChooseBtn = view.findViewById(R.id.nikaImgBtn);
-
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.click_to_add_image), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         mChooseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_DENIED) {
-                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, PERMISSION_CODE);
-                    } else {
-
-                        pickImageFromGallery();
-                        loadImage();
-
+                if((ActivityCompat.checkSelfPermission(
+                        getActivity(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{
+                                Manifest.permission.CAMERA,
+                        },123);
                     }
-
-                } else {
-                    pickImageFromGallery();
+                }
+                else{
+                    imgMethod();
                     loadImage();
                 }
+
             }
         });
 
@@ -156,33 +159,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        loadImage();
 
         return view;
     }
 
-    private void loadImage() {
-        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.click_to_add_image), Context.MODE_PRIVATE);
-    }
-
-    public void doSave() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.click_to_add_image), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-                if (getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                        == PackageManager.PERMISSION_DENIED) {
-                    String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                    requestPermissions(permissions, PERMISSION_CODE);
-                } else {
-
-                    pickImageFromGallery();
-                    loadImage();
-
-                }
-
-            }
-        editor.apply();
-
-    }
 }
