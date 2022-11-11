@@ -27,6 +27,8 @@
     <string name="unchecked">false</string>
     <string name="checkbox">checkbox</string>
     <string name="checked">true</string>
+    <string name="childRef_username">username</string>
+    <string name="childRef_password">password</string>
     <!--^^ Don't change anything in this group ^^-->
 
     <string name="app_name">Gear5</string>
@@ -121,6 +123,4 @@
     <string name="google_loginFrag">Google</string>
     <string name="sign_up_with_regFrag">Sign-up with</string>
     <string name="pick">Pick</string>
-
-
 </resources>

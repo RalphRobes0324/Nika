@@ -186,13 +186,13 @@ public class LoginFragment extends Fragment {
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-        Query checkUser = databaseReference.orderByChild("username").equalTo(username);
+        Query checkUser = databaseReference.orderByChild(getString(R.string.childRef_username)).equalTo(username);
 
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    String passwordFromDB = snapshot.child(username).child("password").getValue(String.class);
+                    String passwordFromDB = snapshot.child(username).child(getString(R.string.childRef_password)).getValue(String.class);
                     if(passwordFromDB.equals(password)){
                         moveToMainActivity(username);
                     }
