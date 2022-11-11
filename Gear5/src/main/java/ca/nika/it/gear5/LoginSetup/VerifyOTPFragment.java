@@ -52,10 +52,20 @@ public class VerifyOTPFragment extends Fragment {
 
     }
     private void replaceFragment(Fragment fragment) {
+        Bundle bundle, bundleEmail;
+        //Catching email prev
+        bundleEmail = this.getArguments();
+        String catchEmail = bundleEmail.getString("key1");
+        //restoring it
+        bundle = new Bundle();
+        bundle.putString("final",catchEmail);
+        //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.exit_startup, R.anim.enter_login_from_startup);
         transaction.addToBackStack(null);
+        //sending
+        fragment.setArguments(bundle);
         transaction.replace(R.id.container, fragment);
         transaction.commit();
     }

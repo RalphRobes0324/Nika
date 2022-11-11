@@ -29,9 +29,14 @@ public class UserPhoneValidationFragment extends Fragment {
     ImageView backButton;
 
     private void replaceFragment(Fragment fragment, String text) {
+        Bundle bundle, bundleEmail;
+        //Getting email
+        bundleEmail = this.getArguments();
+        String catchEmail = bundleEmail.getString("emailId");
         //storing data
-        Bundle bundle = new Bundle();
+        bundle = new Bundle();
         bundle.putString("key",text);
+        bundle.putString("key1", catchEmail);
         //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

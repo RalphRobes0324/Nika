@@ -16,12 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.EmailAuthCredential;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,14 +30,22 @@ public class ForgotPasswordFragment extends Fragment {
     Button button;
     EditText emailEditxt, phoneEdittxt;
     ImageView backpressArrow;
-    private void replaceFragment(Fragment fragment) {
+
+    private void replaceFragment(Fragment fragment, String email) {
+        //Bundle email
+        Bundle bundle = new Bundle();
+        bundle.putString("emailId", email);
+        //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.exit_startup, R.anim.enter_login_from_startup);
         transaction.addToBackStack(null);
+        //sending
+        fragment.setArguments(bundle);
         transaction.replace(R.id.container, fragment);
         transaction.commit();
     }
+
     private void reverseReplaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -114,7 +117,7 @@ public class ForgotPasswordFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    replaceFragment(new UserPhoneValidationFragment());
+                    replaceFragment(new UserPhoneValidationFragment(), email);
                 }
                 else{
                     emailEditxt.setError(getString(R.string.warning_email_reg_email_limits), iconError);
