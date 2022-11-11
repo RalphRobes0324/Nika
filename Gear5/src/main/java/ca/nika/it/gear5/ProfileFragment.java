@@ -28,6 +28,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -38,6 +40,7 @@ import ca.nika.it.gear5.LoginSetup.LoginActivity;
 public class ProfileFragment extends Fragment {
 
     ImageView mImageVIew;
+    TextView usernameTextView;
     Button mChooseBtn;
     Button btn;
 
@@ -93,6 +96,11 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
+        //Grabbing data from Main Activity
+        Bundle userIdData = this.getArguments();
+        String userID = userIdData.getString("userIdData");
+
+        Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
 
         mImageVIew = view.findViewById(R.id.nikaProfileView);
@@ -140,7 +148,9 @@ public class ProfileFragment extends Fragment {
                                 editor.putString(getString(R.string.remember), getString(R.string.unchecked));
                                 editor.apply();
 
-                                System.exit(0);
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
                             }
                         })
                         .setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {

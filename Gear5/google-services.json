@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "340033231529",
-    "project_id": "nika-gear5",
-    "storage_bucket": "nika-gear5.appspot.com"
+    "project_number": "336427220125",
+    "firebase_url": "https://nika-gear5-d8780-default-rtdb.firebaseio.com",
+    "project_id": "nika-gear5-d8780",
+    "storage_bucket": "nika-gear5-d8780.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:340033231529:android:1b37a5359bf3d6cb2227b8",
+        "mobilesdk_app_id": "1:336427220125:android:8a974eb052de89de396874",
         "android_client_info": {
           "package_name": "ca.nika.it.gear5"
         }
       },
       "oauth_client": [
         {
-          "client_id": "340033231529-mkfh634mgpp2k3fuqlepq6mt3uss2imh.apps.googleusercontent.com",
+          "client_id": "336427220125-em0flgdkruqfbf4kmucfdna73nk6unie.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAdxu8cSGF5oMyUP4abWvDzsYkkPETT1d8"
+          "current_key": "AIzaSyBtR5sD7vBCyIUTkpgoU0llKBSxs5udLmg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "340033231529-mkfh634mgpp2k3fuqlepq6mt3uss2imh.apps.googleusercontent.com",
+              "client_id": "336427220125-em0flgdkruqfbf4kmucfdna73nk6unie.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

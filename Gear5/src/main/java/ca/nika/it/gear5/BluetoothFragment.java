@@ -90,23 +90,10 @@ public class BluetoothFragment extends Fragment {
         mDiscoverBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
                 if (mBlueAdapter.isDiscovering()) {
-                    showToast("Device Will now be Discoverable");
+                    showToast("Making Your Device Discoverable");
                     Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                     startActivityForResult(intent, REQUEST_DISCOVER_BT);
-                    addNotification();
-
-
                 }
             }
         });
@@ -115,16 +102,6 @@ public class BluetoothFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mBlueAdapter.isEnabled()) {
-                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
                     mBlueAdapter.disable();
                     showToast("Turning Bluetooth Off");
                     mBlueIv.setImageResource(R.drawable.b_off);
@@ -138,7 +115,7 @@ public class BluetoothFragment extends Fragment {
     }
 
     private void addNotification() {
-    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
 
         builder.setSmallIcon(R.drawable.ic_message);
         builder.setContentTitle("My title");

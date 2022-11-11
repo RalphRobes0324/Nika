@@ -2,7 +2,6 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.LoginSetup;
 
-import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
@@ -11,10 +10,6 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
@@ -30,21 +25,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
+import ca.nika.it.gear5.SignInFile.GoogleSignInActivity;
 
 
 public class LoginFragment extends Fragment {
@@ -63,32 +45,6 @@ public class LoginFragment extends Fragment {
     private LinearLayout googleBtn;
     private ImageView backButton;
 
-    ActivityResultLauncher<Intent> mGoogle = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult activityResult) {
-                    int result = activityResult.getResultCode();
-                    Intent data = activityResult.getData();
-                    if (result == RESULT_OK){
-                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                        try {
-                            GoogleSignInAccount account = task.getResult(ApiException.class);
-                            firebaseAuthWithGoogle(account);
-                        } catch (ApiException e) {
-                            Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                    else{
-                        Toast.makeText(getActivity().getApplicationContext(), "Failed Activity", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-    );
-
-    private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth mAuth;
 
 
     private void replaceFragment(Fragment fragment) {
@@ -116,7 +72,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        createRequest();
+        //createRequest();
 
         //
         registerBtn = (Button) view.findViewById(R.id.nika_btn_login_reg);
@@ -129,13 +85,13 @@ public class LoginFragment extends Fragment {
         passwordInput = (EditText) view.findViewById(R.id.nika_edittext_pwd_loginFrag);
 
         googleBtn = (LinearLayout) view.findViewById(R.id.google_signIn_btn_logiBtn);
-        mAuth = FirebaseAuth.getInstance();
-
 
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
+                Intent intent = new Intent(getActivity(), GoogleSignInActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
             }
         });
 
@@ -193,35 +149,6 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        mGoogle.launch(signInIntent);
-    }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        }
-                        else{
-                            Toast.makeText(getActivity(), "Auth Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    private void createRequest() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity().getApplicationContext(),gso);
-        
-    }
 
 
     private void validateUserAndPwd(String username, String password) {
@@ -266,6 +193,7 @@ public class LoginFragment extends Fragment {
                     //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("userProfile", userId);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
                 }
