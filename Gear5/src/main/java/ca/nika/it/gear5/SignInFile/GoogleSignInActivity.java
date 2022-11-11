@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import ca.nika.it.gear5.LoginSetup.LoginActivity;
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 
@@ -64,6 +65,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
                 } catch (ApiException e) {
                     Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    returnLogin();
             }
         }
 
@@ -80,9 +82,17 @@ public class GoogleSignInActivity extends AppCompatActivity {
                             enterMainActivity();
                         }else{
                             Toast.makeText(getApplicationContext(), "Failed to Auth", Toast.LENGTH_SHORT).show();
+                            returnLogin();
                         }
                     }
                 });
+    }
+
+    private void returnLogin() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.enter_login_from_startup, R.anim.exit_startup);
     }
 
     private void enterMainActivity() {
