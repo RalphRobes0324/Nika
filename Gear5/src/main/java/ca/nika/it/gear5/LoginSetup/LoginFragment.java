@@ -4,9 +4,11 @@ package ca.nika.it.gear5.LoginSetup;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -36,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 import ca.nika.it.gear5.SignInFile.GoogleSignInActivity;
+import ca.nika.it.gear5.SplashActivity;
 
 
 public class LoginFragment extends Fragment {
@@ -45,7 +48,6 @@ public class LoginFragment extends Fragment {
     private EditText usernameInput, passwordInput;
     private LinearLayout googleBtn;
     private ImageView backButton;
-
 
 
     private void replaceFragment(Fragment fragment) {
@@ -112,26 +114,6 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
-
-        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(getString(R.string.remember), getString(R.string.checked));
-                    editor.apply();
-
-                } else if (!compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(getString(R.string.remember), getString(R.string.unchecked));
-                    editor.apply();
-                }
-            }
-        });
-
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,9 +196,31 @@ public class LoginFragment extends Fragment {
 
     }
 
+    public void doSave(String userId)  {
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("userProfile", userId);
+
+        editor.apply();
+
+    }
+
     private void moveToMainActivity(String userId){
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        if (remember.isChecked()){
+            editor.putString(getString(R.string.remember), getString(R.string.checked));
+            editor.apply();
+        } else {
+            editor.putString(getString(R.string.remember), getString(R.string.unchecked));
+            editor.apply();
+        }
+
+        doSave(userId);
+
         Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("userProfile", userId);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
 

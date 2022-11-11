@@ -9,6 +9,7 @@ import static ca.nika.it.gear5.R.string.PermissionDenied;
 import static ca.nika.it.gear5.R.string.PermissionGranted;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -46,6 +47,7 @@ public class ProfileFragment extends Fragment {
     Button mChooseBtn;
     Button btn;
     TextView usernameTextView;
+    String userID;
 
 
     private static final int IMAGE_PICK_CODE = 1000;
@@ -87,6 +89,18 @@ public class ProfileFragment extends Fragment {
     public void loadImage() {
         preferenceManager=PreferenceManager.getInstance(getActivity());
 
+
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+
+        if(sharedPreferences!= null) {
+
+            String getUserId = sharedPreferences.getString("userProfile", "");
+
+            usernameTextView.setText(getUserId);
+            Toast.makeText(getActivity().getApplicationContext(), getUserId, Toast.LENGTH_LONG).show();
+
+        }
+
         String previouslyEncodedImage = preferenceManager.getString("image_data");
 
         if( !previouslyEncodedImage.equalsIgnoreCase("") ){
@@ -107,17 +121,9 @@ public class ProfileFragment extends Fragment {
         StrictMode.setVmPolicy(builder.build());
         preferenceManager=PreferenceManager.getInstance(getActivity());
 
-        //Grabbing data from Main Activity
-        Bundle userIdData = this.getArguments();
-        String userID = userIdData.getString("userIdData");
-        usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
-        usernameTextView.setText(userID);
-
-        Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
-        //Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
-
         mImageView = view.findViewById(R.id.nikaProfileView);
         mChooseBtn = view.findViewById(R.id.nikaImgBtn);
+        usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
 
         mChooseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
