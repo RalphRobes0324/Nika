@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
@@ -46,28 +45,33 @@ public class MainActivity extends AppCompatActivity{
                     this.getWindow().getDecorView().setSystemUiVisibility(
                             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                     | View.SYSTEM_UI_FLAG_FULLSCREEN);
-                    replaceFragment(new ProfileFragment());
-                    passUserData();
+                    //replaceFragment(new ProfileFragment());
+                    replaceAndPassDataFragment(new ProfileFragment());
                     break;
             }
 
             return true;
         });
     }
-    private void passUserData(){
+    private void replaceAndPassDataFragment(ProfileFragment profileFragment){
+        //Gets data from LoginFragment
         Intent intentFromLogin = getIntent();
-        String userProfileData = intentFromLogin.getStringExtra("userProfile");
+        String userProfileData = intentFromLogin.getStringExtra("userProfile"); //catching data
+
+        //Storing data to send
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", userProfileData);
+
         //Toast.makeText(this, userProfileData, Toast.LENGTH_LONG).show();
-        ProfileFragment data =  new ProfileFragment();
-        /*FragmentTransaction sendProfile = getSupportFragmentManager()
-                .beginTransaction();
-        Bundle dataUserProfile = new Bundle();
-        dataUserProfile.putString("userProfileData", userProfileData);
-        data.setArguments(dataUserProfile);
-        //sendProfile.replace(R.id.nikaFrameLayout, data).commit();*/
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-
+        //setting data and switching frag
+        profileFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.nikaFrameLayout,profileFragment);
+        fragmentTransaction.commit();
     }
+
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
