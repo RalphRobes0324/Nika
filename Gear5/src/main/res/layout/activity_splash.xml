@@ -21,4 +21,5 @@
         app:srcCompat="@drawable/nika_logo_transparent" />
 
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
