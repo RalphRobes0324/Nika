@@ -99,8 +99,10 @@ public class ProfileFragment extends Fragment {
         //Grabbing data from Main Activity
         Bundle userIdData = this.getArguments();
         String userID = userIdData.getString("userIdData");
+        usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
+        usernameTextView.setText(userID);
 
-        Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
 
         mImageVIew = view.findViewById(R.id.nikaProfileView);
