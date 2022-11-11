@@ -31,6 +31,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -43,6 +45,7 @@ public class ProfileFragment extends Fragment {
     ImageView mImageView;
     Button mChooseBtn;
     Button btn;
+    TextView usernameTextView;
 
 
     private static final int IMAGE_PICK_CODE = 1000;
@@ -103,6 +106,15 @@ public class ProfileFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder=new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         preferenceManager=PreferenceManager.getInstance(getActivity());
+
+        //Grabbing data from Main Activity
+        Bundle userIdData = this.getArguments();
+        String userID = userIdData.getString("userIdData");
+        usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
+        usernameTextView.setText(userID);
+
+        Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
         mImageView = view.findViewById(R.id.nikaProfileView);
         mChooseBtn = view.findViewById(R.id.nikaImgBtn);
