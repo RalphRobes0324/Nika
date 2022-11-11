@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
 
         //Storing data to send
         Bundle bundle = new Bundle();
-        bundle.putString("userID", userProfileData);
+        bundle.putString("userIdData", userProfileData);
 
         //Toast.makeText(this, userProfileData, Toast.LENGTH_LONG).show();
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -97,11 +97,10 @@ public class ProfileFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         //Grabbing data from Main Activity
-        /*usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
-        Bundle data = getArguments();
-        String username = data.getString("userProfileData");
-        Toast.makeText(getActivity().getApplicationContext(), username, Toast.LENGTH_LONG).show();
-        /*usernameTextView.setText(username);*/
+        Bundle userIdData = this.getArguments();
+        String userID = userIdData.getString("userIdData");
+
+        Toast.makeText(getActivity().getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
 
         mImageVIew = view.findViewById(R.id.nikaProfileView);
