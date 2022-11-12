@@ -103,7 +103,6 @@ public class SetNewPasswordFragment extends Fragment {
             if(newpwdNo.matches(getString(R.string.limits))){
                 if (confpwdNo.matches(newpwdNo)){
                     getUserDataFB(newpwdNo, emailNo);
-                    //Toast.makeText(getActivity().getApplicationContext(), "pass", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     confirmationEditText.setError(getString(R.string.warning_msg_reg_confir_not_maching), iconError);

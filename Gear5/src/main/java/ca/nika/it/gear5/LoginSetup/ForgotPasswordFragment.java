@@ -78,9 +78,7 @@ public class ForgotPasswordFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //replaceFragment(new UserPhoneValidationFragment());
                 String _email = emailEditxt.getText().toString().trim();
-                //Toast.makeText(getActivity().getApplicationContext(), "Hello World", Toast.LENGTH_LONG).show();
                 validateUserEmail(_email);
 
             }
@@ -127,7 +125,6 @@ public class ForgotPasswordFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     replaceFragment(new UserPhoneValidationFragment(), email);
-                    //replaceFragment(new SetNewPasswordFragment());
                 }
                 else{
                     emailEditxt.setError(getString(R.string.warning_email_reg_email_limits), iconError);
