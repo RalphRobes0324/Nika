@@ -24,7 +24,6 @@ import android.widget.RadioGroup;
 public class SettingsFragment extends Fragment {
     private View v;
     private RadioGroup radioJoystick;
-    private CheckBox stats;
     private RadioGroup radioButton;
 
     private CheckBox checkbox;
@@ -34,7 +33,6 @@ public class SettingsFragment extends Fragment {
     Boolean aBoolean2;
     Boolean aBoolean3;
 
-    private Button buttonSave;
     private RadioGroup radioJoyClr;
     private RadioGroup radioBtnClr;
 
@@ -66,9 +64,9 @@ public class SettingsFragment extends Fragment {
         radioBtnClr = v.findViewById(R.id.nikaRG2);
 
 
-        this.buttonSave = (Button) this.v.findViewById(R.id.button);
+        Button buttonSave = (Button) this.v.findViewById(R.id.button);
 
-        this.buttonSave.setOnClickListener(new View.OnClickListener() {
+        buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SettingsFragment.this.doSave();
@@ -88,7 +86,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        stats = (CheckBox) v.findViewById(R.id.nikaCB3);
+        CheckBox stats = (CheckBox) v.findViewById(R.id.nikaCB3);
 
         stats.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -103,6 +101,26 @@ public class SettingsFragment extends Fragment {
                     SharedPreferences preferences = getActivity().getSharedPreferences("SettingsPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("stats", getString(R.string.unchecked));
+                    editor.apply();
+                }
+            }
+        });
+
+        CheckBox audio = (CheckBox) v.findViewById(R.id.nikaCB1);
+
+        audio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked()) {
+                    SharedPreferences preferences = getActivity().getSharedPreferences("SettingsPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("audio", getString(R.string.checked));
+                    editor.apply();
+
+                } else if (!compoundButton.isChecked()) {
+                    SharedPreferences preferences = getActivity().getSharedPreferences("SettingsPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("audio", getString(R.string.unchecked));
                     editor.apply();
                 }
             }

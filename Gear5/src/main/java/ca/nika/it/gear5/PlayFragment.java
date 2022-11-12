@@ -2,19 +2,13 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
@@ -23,13 +17,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import ca.nika.it.gear5.LoginSetup.LoginActivity;
-import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
 public class PlayFragment extends Fragment {
     Button btnA;
@@ -38,7 +28,7 @@ public class PlayFragment extends Fragment {
     RelativeLayout layout_joystick;
     TextView textView1, textView2, textView3, textView4, textView5;
     LinearLayout ll;
-
+    Boolean playAudio;
     JoyStickClass js;
     int JoystickColor;
 
@@ -77,21 +67,6 @@ public class PlayFragment extends Fragment {
             }
         });
 
-        btnA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ButtonClickMP.start();
-            }
-        });
-
-        btnB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ButtonClickMP.start();
-            }
-        });
-
-
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
@@ -107,6 +82,24 @@ public class PlayFragment extends Fragment {
         }
 
         loadGameSetting();
+
+        btnA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!playAudio) {
+                    ButtonClickMP.start();
+                }
+            }
+        });
+
+        btnB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!playAudio) {
+                    ButtonClickMP.start();
+                }
+            }
+        });
 
         textView1 = (TextView) v.findViewById(R.id.textView1);
         textView2 = (TextView) v.findViewById(R.id.textView2);
@@ -173,16 +166,23 @@ public class PlayFragment extends Fragment {
 
     private void loadGameSetting()  {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-        String checkbox = sharedPreferences.getString("stats",getString(R.string.blank));
+        String statsCB = sharedPreferences.getString("stats",getString(R.string.blank));
+        String audioCB = sharedPreferences.getString("audio",getString(R.string.blank));
         ll = (LinearLayout) v.findViewById(R.id.linearLayout1);
 
         if(sharedPreferences!= null) {
             int num = sharedPreferences.getInt("Index", R.id.nikaRB4);
 
-            if (checkbox.equals(getString(R.string.checked))) {
+            if (statsCB.equals(getString(R.string.checked))) {
                 ll.setVisibility(ll.VISIBLE);
             } else {
                 ll.setVisibility(ll.INVISIBLE);
+            }
+
+            if (audioCB.equals(getString(R.string.checked))) {
+                playAudio = true;
+            } else {
+                playAudio = false;
             }
 
             switch (num) {
@@ -204,7 +204,7 @@ public class PlayFragment extends Fragment {
             btnA.setBackgroundColor(btnA.getContext().getResources().getColor(R.color.red));
             btnB.setBackgroundColor(btnB.getContext().getResources().getColor(R.color.red));
             ll.setVisibility(ll.INVISIBLE);
-
+            playAudio = false;
         }
 
     }
