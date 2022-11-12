@@ -61,26 +61,28 @@
             />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/white"
-            app:boxStrokeWidthFocused="2dp"
             android:hint="Phone"
-            app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
-            app:startIconTint="@color/white"
             app:hintTextColor="@color/white"
-            app:endIconMode="clear_text"
-            android:layout_marginTop="20dp"
-            app:endIconTint="@color/white"
-            android:textColorHint="@color/white">
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            android:textColorHint="@color/black"
+            app:startIconDrawable="@drawable/ic_baseline_smartphone_24"
+            app:startIconTint="@color/black"
+            app:endIconTint="@color/black">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nika_edittxt_phone_forgorFrag"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:inputType="phone"
-                />
+                android:layout_height="match_parent"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:background="@drawable/custom_edittextbox"
+                android:fontFamily="@font/press_start_2p"
+                android:textColor="@color/black"
+                android:inputType="number" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
