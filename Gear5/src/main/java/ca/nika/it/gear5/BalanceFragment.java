@@ -24,7 +24,6 @@ public class BalanceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
 
         ImageButton gear500=(ImageButton) view.findViewById(R.id.gear5_coin_500);
