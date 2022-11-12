@@ -102,14 +102,14 @@ public class ProfileFragment extends Fragment {
 
             String getUserId = sharedPreferences.getString("userProfile", "");
 
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-            Query checkUser = reference.orderByChild("username").equalTo(getUserId);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+            Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
             checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
-                        Integer userScore = snapshot.child(getUserId).child("topScore").getValue(Integer.class);
-                        Integer userCur = snapshot.child(getUserId).child("currency").getValue(Integer.class);
+                        Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                        Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
                         topScoreTextView.setText("Top Score: "+ userScore);
                         currencyTextView.setText("Currency: "+ userCur);
                         usernameTextView.setText("Username : " + getUserId);

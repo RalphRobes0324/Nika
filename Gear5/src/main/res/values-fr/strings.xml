@@ -35,6 +35,8 @@
     <string name="key_key1">key1</string>
     <string name="key_emailid">emailId</string>
     <string name="limits_phone_regex">^[+][0-9]{10,13}$</string>
+    <string name="childRef_topScore">topScore</string>
+    <string name="childRef_Currency">currency</string>
     <!--^^ Don't change anything in this group ^^-->
 
     <string name="app_name">Gear5</string>
