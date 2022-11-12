@@ -34,7 +34,7 @@ public class ForgotPasswordFragment extends Fragment {
     private void replaceFragment(Fragment fragment, String email) {
         //Bundle email
         Bundle bundle = new Bundle();
-        bundle.putString("emailId", email);
+        bundle.putString(getString(R.string.key_emailid), email);
         //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
