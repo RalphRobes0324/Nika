@@ -32,11 +32,11 @@ public class UserPhoneValidationFragment extends Fragment {
         Bundle bundle, bundleEmail;
         //Getting email
         bundleEmail = this.getArguments();
-        String catchEmail = bundleEmail.getString("emailId");
+        String catchEmail = bundleEmail.getString(getString(R.string.key_emailid));
         //storing data
         bundle = new Bundle();
-        bundle.putString("key",text);
-        bundle.putString("key1", catchEmail);
+        bundle.putString(getString(R.string.key_key),text);
+        bundle.putString(getString(R.string.key_key1), catchEmail);
         //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -61,14 +61,14 @@ public class UserPhoneValidationFragment extends Fragment {
 
     private void validatePhoneNo(String text, String userNumber, Context context) {
         if(userNumber.isEmpty()){
-            Toast.makeText(context, "Enter number",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, getString(R.string.warning_msg_num_userPhoneFrag),Toast.LENGTH_SHORT).show();
         }else{
-            if(text.matches("^[+][0-9]{10,13}$")){
+            if(text.matches(getString(R.string.limits_phone_regex))){
                 replaceFragment(new VerifyOTPFragment(), text);
 
             }
             else{
-                Toast.makeText(context, "This is not a number",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.warning_msg_num1_userPhoneFrag),Toast.LENGTH_SHORT).show();
             }
         }
 
