@@ -112,6 +112,7 @@ public class ProfileFragment extends Fragment {
                         Integer userCur = snapshot.child(getUserId).child("currency").getValue(Integer.class);
                         topScoreTextView.setText("Top Score: "+ userScore);
                         currencyTextView.setText("Currency: "+ userCur);
+                        usernameTextView.setText("Username : " + getUserId);
 
                     }
                 }
@@ -122,8 +123,6 @@ public class ProfileFragment extends Fragment {
                 }
             });
 
-            usernameTextView.setText("Username : " + getUserId);
-            //Toast.makeText(getActivity().getApplicationContext(), getUserId, Toast.LENGTH_LONG).show();
 
         }
 
