@@ -46,6 +46,15 @@ public class ForgotPasswordFragment extends Fragment {
         transaction.commit();
     }
 
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.exit_reg, R.anim.enter_login_from_reg);
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
+    }
+
     private void reverseReplaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -118,6 +127,7 @@ public class ForgotPasswordFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     replaceFragment(new UserPhoneValidationFragment(), email);
+                    //replaceFragment(new SetNewPasswordFragment());
                 }
                 else{
                     emailEditxt.setError(getString(R.string.warning_email_reg_email_limits), iconError);
