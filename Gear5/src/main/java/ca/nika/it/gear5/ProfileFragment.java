@@ -5,20 +5,16 @@ package ca.nika.it.gear5;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
-import static ca.nika.it.gear5.R.string.PermissionDenied;
-import static ca.nika.it.gear5.R.string.PermissionGranted;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -38,7 +34,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 
@@ -49,7 +52,7 @@ public class ProfileFragment extends Fragment {
     ImageView mImageView;
     ImageButton mChooseBtn;
     Button btn;
-    TextView usernameTextView;
+    TextView usernameTextView, topScoreTextView, currencyTextView;
     String userID;
 
 
@@ -99,8 +102,28 @@ public class ProfileFragment extends Fragment {
 
             String getUserId = sharedPreferences.getString("userProfile", "");
 
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+            Query checkUser = reference.orderByChild("username").equalTo(getUserId);
+            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        Integer userScore = snapshot.child(getUserId).child("topScore").getValue(Integer.class);
+                        Integer userCur = snapshot.child(getUserId).child("currency").getValue(Integer.class);
+                        topScoreTextView.setText("Top Score: "+ userScore);
+                        currencyTextView.setText("Currency: "+ userCur);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
             usernameTextView.setText("Username : " + getUserId);
-            Toast.makeText(getActivity().getApplicationContext(), getUserId, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity().getApplicationContext(), getUserId, Toast.LENGTH_LONG).show();
 
         }
 
@@ -127,6 +150,10 @@ public class ProfileFragment extends Fragment {
         mImageView = view.findViewById(R.id.nikaProfileView);
         mChooseBtn = view.findViewById(R.id.nikaImgBtn);
         usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
+        topScoreTextView = (TextView) view.findViewById(R.id.nikaTopScore);
+        currencyTextView = (TextView) view.findViewById(R.id.nikaCurrency);
+
+
 
         mChooseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
