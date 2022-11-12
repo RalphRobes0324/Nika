@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper"
+    tools:context=".BluetoothFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/statusBluetoothTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="#000"/>
+
+        <ImageView
+            android:id="@+id/bluetoothIv"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <Button
+            android:id="@+id/onBtn"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:minWidth="200dp"
+            android:text="Turn On" />
+
+        <Button
+            android:id="@+id/offBtn"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200dp"
+            android:text="Turn Off" />
+
+        <Button
+            android:id="@+id/discoverableBtn"
+            android:minWidth="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discoverable"
+            style="@style/Base.Widget.AppCompat.Button.Colored"/>
+
+        <TextView
+            android:id="@+id/pairedTv"
+            android:minWidth="200dp"
+            android:text=""
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>
