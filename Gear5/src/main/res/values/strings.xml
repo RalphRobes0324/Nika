@@ -29,6 +29,8 @@
     <string name="childRef_password">password</string>
     <string name="childReg_email">email</string>
     <string name="key_final_setnewpwdFrag">final</string>
+    <string name="key_key">key</string>
+    <string name="key_key1">key1</string>
     <!--^^ Don't change anything in this group ^^-->
 
     <string name="app_name">Gear5</string>
@@ -126,4 +128,7 @@
     <string name="sign_up_with_regFrag">Sign-up with</string>
     <string name="pick">Pick</string>
     <string name="complate_newpwd">Password Updated</string>
+
+    <string name="warning_msg_otpcode_verifyFrag">Enter code</string>
+    <string name="warning_msg_failAuth_varifyFrag">Failed</string>
 </resources>

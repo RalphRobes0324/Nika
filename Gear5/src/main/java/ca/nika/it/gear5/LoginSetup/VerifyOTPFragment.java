@@ -55,10 +55,10 @@ public class VerifyOTPFragment extends Fragment {
         Bundle bundle, bundleEmail;
         //Catching email prev
         bundleEmail = this.getArguments();
-        String catchEmail = bundleEmail.getString("key1");
+        String catchEmail = bundleEmail.getString(getString(R.string.key_key1));
         //restoring it
         bundle = new Bundle();
-        bundle.putString("final",catchEmail);
+        bundle.putString(getString(R.string.key_final_setnewpwdFrag),catchEmail);
         //animation
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -88,7 +88,7 @@ public class VerifyOTPFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_verify_o_t_p, container, false);
 
         Bundle bundle = this.getArguments();
-        String phoneNo= bundle.getString("key");
+        String phoneNo= bundle.getString(getString(R.string.key_key));
 
         sendVerificationCodeToUser(phoneNo);
 
@@ -125,7 +125,7 @@ public class VerifyOTPFragment extends Fragment {
                             verifyCode(userInputCode);
                         }
                         else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Enter code", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.warning_msg_otpcode_verifyFrag), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -196,7 +196,7 @@ public class VerifyOTPFragment extends Fragment {
                         }
                         else{
                             if(task.getException() instanceof FirebaseAuthInvalidCredentialsException){
-                                Toast.makeText(getActivity().getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.warning_msg_failAuth_varifyFrag), Toast.LENGTH_SHORT).show();
 
                             }
                         }
