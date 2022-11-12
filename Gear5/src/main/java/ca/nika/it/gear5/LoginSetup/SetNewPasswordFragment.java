@@ -62,7 +62,7 @@ public class SetNewPasswordFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_set_new_password, container, false);
 
         Bundle bundle = this.getArguments();
-        String _emailNo= bundle.getString("final");
+        String _emailNo= bundle.getString(getString(R.string.key_final_setnewpwdFrag));
 
 
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
@@ -123,7 +123,7 @@ public class SetNewPasswordFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     String userId = dataSnapshot.child(getString(R.string.childRef_username)).getValue().toString();
-                    String userEmailFound = snapshot.child(userId).child("email").getValue(String.class);
+                    String userEmailFound = snapshot.child(userId).child(getString(R.string.childReg_email)).getValue(String.class);
                     if(userEmailFound.matches(emailNo)){
                         storeNewPwd(userId, newpwdNo);
                         break;
@@ -143,7 +143,7 @@ public class SetNewPasswordFragment extends Fragment {
     private void storeNewPwd(String userId, String newpwdNo) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(userId).child(getString(R.string.childRef_password)).setValue(newpwdNo);
-        Toast.makeText(getActivity().getApplicationContext(), "Password Updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.complate_newpwd), Toast.LENGTH_SHORT).show();
         replaceFragment(new LoginFragment());
 
     }

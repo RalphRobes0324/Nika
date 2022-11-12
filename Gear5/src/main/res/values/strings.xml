@@ -27,6 +27,8 @@
     <string name="checked">true</string>
     <string name="childRef_username">username</string>
     <string name="childRef_password">password</string>
+    <string name="childReg_email">email</string>
+    <string name="key_final_setnewpwdFrag">final</string>
     <!--^^ Don't change anything in this group ^^-->
 
     <string name="app_name">Gear5</string>
@@ -123,4 +125,5 @@
     <string name="google_loginFrag">Google</string>
     <string name="sign_up_with_regFrag">Sign-up with</string>
     <string name="pick">Pick</string>
+    <string name="complate_newpwd">Password Updated</string>
 </resources>
