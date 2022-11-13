@@ -53,8 +53,6 @@ public class ProfileFragment extends Fragment {
     ImageButton mChooseBtn;
     Button btn;
     TextView usernameTextView, topScoreTextView, currencyTextView;
-    String userID;
-
 
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
