@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
+<!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true" android:drawable="@drawable/custom_button_google_pressed"/>
     <item android:state_pressed="false" android:drawable="@drawable/custom_button_google_normal"/>

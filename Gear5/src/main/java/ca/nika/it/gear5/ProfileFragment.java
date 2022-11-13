@@ -54,6 +54,7 @@ public class ProfileFragment extends Fragment {
     Button btn;
     TextView usernameTextView, topScoreTextView, currencyTextView;
 
+
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
     private View view;
@@ -79,15 +80,15 @@ public class ProfileFragment extends Fragment {
             photo.compress(Bitmap.CompressFormat.JPEG, 100, imgByte);
             byte[] b = imgByte.toByteArray();
             String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-            preferenceManager.setString("image_data",encodedImage);
+            preferenceManager.setString(getString(R.string.image_data),encodedImage);
 
         }
     }
 
     public void imgMethod() {
-            camera=new Intent();
-            camera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(camera,118);
+        camera=new Intent();
+        camera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera,118);
     }
 
     public void loadImage() {
@@ -98,7 +99,7 @@ public class ProfileFragment extends Fragment {
 
         if(sharedPreferences!= null) {
 
-            String getUserId = sharedPreferences.getString("userProfile", "");
+            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
             Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
@@ -108,10 +109,9 @@ public class ProfileFragment extends Fragment {
                     if(snapshot.exists()){
                         Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
                         Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                        topScoreTextView.setText("Top Score: "+ userScore);
-                        currencyTextView.setText("Currency: "+ userCur);
-                        usernameTextView.setText("Username : " + getUserId);
-
+                        usernameTextView.setText(getString(R.string.usernameDisplay) + getUserId);
+                        topScoreTextView.setText(getString(R.string.scoreDisplay)+ userScore);
+                        currencyTextView.setText(getString(R.string.currencyDisplay)+ userCur + getString(R.string.gears));
                     }
                 }
 
@@ -124,7 +124,7 @@ public class ProfileFragment extends Fragment {
 
         }
 
-        String previouslyEncodedImage = preferenceManager.getString("image_data");
+        String previouslyEncodedImage = preferenceManager.getString(getString(R.string.image_data));
 
         if( !previouslyEncodedImage.equalsIgnoreCase("") ){
             byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
