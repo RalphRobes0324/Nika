@@ -4,17 +4,19 @@ package ca.nika.it.gear5;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-public class BalanceFragment extends Fragment {
+public class BalanceFragment extends Fragment{
 
     PreferenceManager preferenceManager;
 
@@ -59,7 +61,12 @@ public class BalanceFragment extends Fragment {
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.gear500title)
                         .setMessage(R.string.gear500msg)
-                        .setPositiveButton(R.string.confirm,null)
+                        .setPositiveButton(R.string.confirm,new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                openDialog();
+                            }
+                        })
                         .setNegativeButton(R.string.cancel,null)
                         .show();
             }
@@ -115,4 +122,10 @@ public class BalanceFragment extends Fragment {
 
         return view;
     }
+
+    public void openDialog() {
+        PaymentDialog paymentDialog = new PaymentDialog();
+        paymentDialog.show(getFragmentManager(),"payment dialog");
+    }
+
 }
