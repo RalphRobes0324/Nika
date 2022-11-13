@@ -79,7 +79,7 @@ public class ReviewFragment extends Fragment {
                 int tag = 0;
                 int starRating = ratingBar.getNumStars();
                 float getRating = ratingBar.getRating();
-                String overall = "" + (getRating/starRating);
+                String overall = "" + ((getRating/starRating)*100) + "%";
                 //Getting Data
                 String username = usernameInput.getText().toString().trim();
                 String userPhone = userPhoneInput.getText().toString().trim();
