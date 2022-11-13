@@ -106,11 +106,11 @@
         android:layout_gravity="center"
         android:layout_marginTop="44dp"
         android:fontFamily="@font/montserrat_bold"
-        android:textColor="#27214f"
-        android:background="@drawable/rounded_button_normal"
+        android:textColor="@color/white"
         android:text="@string/logout"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nikaLinearLayout" />
