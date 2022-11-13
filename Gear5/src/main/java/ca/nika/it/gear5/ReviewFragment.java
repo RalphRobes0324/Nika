@@ -143,7 +143,7 @@ public class ReviewFragment extends Fragment {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
         builder.setContentTitle(getString(R.string.title));
         builder.setContentText(getString(R.string.reviewReply));
-        builder.setSmallIcon(R.drawable.ic_message);
+        builder.setSmallIcon(R.drawable.devil_fruit);
         builder.setAutoCancel(true);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
         managerCompat.notify(1,builder.build());
