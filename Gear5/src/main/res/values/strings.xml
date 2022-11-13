@@ -181,4 +181,10 @@
     <string name="direction_left">Direction : Left</string>
     <string name="direction_up_left">Direction : Up Left</string>
     <string name="direction_center">Direction : Center</string>
+    <string name="name_on_card">Name on Card</string>
+    <string name="pay">Pay</string>
+    <string name="payment">Payment</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="cvv">CVV</string>
 </resources>
