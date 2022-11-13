@@ -166,7 +166,7 @@
                 android:id="@+id/nikaTV5"
                 android:layout_width="205dp"
                 android:layout_height="77dp"
-                android:text="Show Joystick Stats"
+                android:text="@string/show_joystick_stats"
                 android:textColor="#FFFF00"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -193,11 +193,11 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="588dp"
-        android:text="save"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nikaSV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

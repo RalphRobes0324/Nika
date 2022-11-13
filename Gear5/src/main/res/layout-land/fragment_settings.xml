@@ -146,7 +146,7 @@
                 android:id="@+id/nikaTV5"
                 android:layout_width="205dp"
                 android:layout_height="77dp"
-                android:text="Show Joystick Stats"
+                android:text="@string/show_joystick_stats"
                 android:textColor="#FFFF00"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +184,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="604dp"
         android:layout_marginTop="103dp"
-        android:text="save"
+        android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

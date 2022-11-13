@@ -51,9 +51,9 @@ public class SettingsFragment extends Fragment {
         radioJoystick = v.findViewById(R.id.nikaRG1);
         radioButton = v.findViewById(R.id.nikaRG2);
 
-        this.checkbox = (CheckBox) this.v.findViewById(R.id.nikaCB1);
-        this.checkbox2 = (CheckBox) this.v.findViewById(R.id.nikaCB2);
-        this.checkbox3 = (CheckBox) this.v.findViewById(R.id.nikaCB3);
+        this.checkbox = this.v.findViewById(R.id.nikaCB1);
+        this.checkbox2 = this.v.findViewById(R.id.nikaCB2);
+        this.checkbox3 = this.v.findViewById(R.id.nikaCB3);
 
         aBoolean = checkbox.isChecked();
         aBoolean2 = checkbox2.isChecked();
@@ -92,15 +92,15 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("SettingsPref", MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.SettingsPref), MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("stats", getString(R.string.checked));
+                    editor.putString(getString(R.string.stats), getString(R.string.checked));
                     editor.apply();
 
                 } else if (!compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("SettingsPref", MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.SettingsPref), MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("stats", getString(R.string.unchecked));
+                    editor.putString(getString(R.string.stats), getString(R.string.unchecked));
                     editor.apply();
                 }
             }
@@ -112,15 +112,15 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("SettingsPref", MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.SettingsPref), MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("audio", getString(R.string.checked));
+                    editor.putString(getString(R.string.audio), getString(R.string.checked));
                     editor.apply();
 
                 } else if (!compoundButton.isChecked()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("SettingsPref", MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.SettingsPref), MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("audio", getString(R.string.unchecked));
+                    editor.putString(getString(R.string.audio), getString(R.string.unchecked));
                     editor.apply();
                 }
             }
@@ -154,7 +154,7 @@ public class SettingsFragment extends Fragment {
 
         editor.putBoolean(getString(R.string.getBooleanId), getBoolean);
         editor.putBoolean(getString(R.string.getBooleanId2), getBoolean2);
-        editor.putBoolean("getBooleanId3", getBoolean3);
+        editor.putBoolean(getString(R.string.getBooleanId3), getBoolean3);
 
         editor.apply();
 
@@ -168,7 +168,7 @@ public class SettingsFragment extends Fragment {
             int checkedRadioButtonId2 = sharedPreferences.getInt(getString(R.string.checkRadioButtonId2), R.id.nikaRB4);
             boolean getBoolean = sharedPreferences.getBoolean(getString(R.string.getBooleanId), aBoolean);
             boolean getBoolean2 = sharedPreferences.getBoolean(getString(R.string.getBooleanId2), aBoolean2);
-            boolean getBoolean3 = sharedPreferences.getBoolean("getBooleanId3", aBoolean3);
+            boolean getBoolean3 = sharedPreferences.getBoolean(getString(R.string.getBooleanId3), aBoolean3);
 
             this.radioJoystick.check(checkedRadioButtonId);
             this.radioButton.check(checkedRadioButtonId2);
@@ -179,9 +179,9 @@ public class SettingsFragment extends Fragment {
         } else {
             this.radioJoystick.check(R.id.nikaRB1);
             this.radioButton.check(R.id.nikaRB4);
-            this.checkbox.setChecked(aBoolean);
-            this.checkbox2.setChecked(aBoolean2);
-            this.checkbox3.setChecked(aBoolean3);
+            this.checkbox.setChecked(false);
+            this.checkbox2.setChecked(false);
+            this.checkbox3.setChecked(false);
         }
 
     }

@@ -2,7 +2,7 @@
 <!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
 <resources>
 
-    <!--vv Don't change anything in this group vv-->
+    <!--vv Don't change anything in this group. Related to shared preference or passing values  vv-->
     <string name="dataForm">dataForm</string>
     <string name="users">users</string>
     <string name="df">df</string>
@@ -19,6 +19,7 @@
     <string name="SettingsPref">SettingsPref</string>
     <string name="getBooleanId">getBooleanId</string>
     <string name="getBooleanId2">getBooleanId2</string>
+    <string name="getBooleanId3">getBooleanId3</string>
     <string name="checkRadioButtonId">checkRadioButtonId</string>
     <string name="checkRadioButtonId2">checkRadioButtonId2</string>
     <string name="remember">remember</string>
@@ -35,7 +36,11 @@
     <string name="limits_phone_regex">^[+][0-9]{10,13}$</string>
     <string name="childRef_topScore">topScore</string>
     <string name="childRef_Currency">currency</string>
-    <!--^^ Don't change anything in this group ^^-->
+    <string name="image_data">image_data</string>
+    <string name="audio">audio</string>
+    <string name="stats">stats</string>
+    <string name="userProfile">userProfile</string>
+    <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
     <string name="play">Play</string>
@@ -137,4 +142,16 @@
     <string name="warning_msg_num_userPhoneFrag">Enter number</string>
     <string name="warning_msg_num1_userPhoneFrag">This is not a number</string>
     <string name="code_opt_landfrag">CODE</string>
+    <string name="change_profile_icon">Change Profile Icon</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
+    <string name="angle">Angle</string>
+    <string name="distance">Distance</string>
+    <string name="direction">Direction</string>
+    <string name="save">save</string>
+    <string name="show_joystick_stats">Show Joystick Stats</string>
+    <string name="gears">\u0020Gears</string>
+    <string name="usernameDisplay">Username :\u0020</string>
+    <string name="scoreDisplay">Top Score :\u0020</string>
+    <string name="currencyDisplay">Currency :\u0020</string>
 </resources>

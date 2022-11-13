@@ -85,7 +85,7 @@
                 android:layout_gravity="top"
                 android:fontFamily="@font/montserrat_bold"
                 android:gravity="center_vertical"
-                android:text="Change Profile Icon"
+                android:text="@string/change_profile_icon"
                 android:textColor="#27214f"
                 android:textSize="20sp" />
 
