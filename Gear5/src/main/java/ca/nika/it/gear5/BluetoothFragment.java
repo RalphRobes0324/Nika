@@ -84,10 +84,11 @@ public class BluetoothFragment extends Fragment {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+                startActivityForResult(intent, REQUEST_DISCOVER_BT);
                 if (mBlueAdapter.isDiscovering()) {
                     showToast("Making Your Device Discoverable");
-                    Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-                    startActivityForResult(intent, REQUEST_DISCOVER_BT);
+
                 }
             }
         });
