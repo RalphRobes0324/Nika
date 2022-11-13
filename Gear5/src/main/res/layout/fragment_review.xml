@@ -50,11 +50,11 @@
                 android:id="@+id/nika_edittxt_name_reviewFrag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="SpeakableTextPresentCheck"
+                android:background="@drawable/custom_edittextbox"
                 android:fontFamily="@font/press_start_2p"
-                android:textColor="@color/black"
                 android:inputType="textPersonName"
-                android:background="@drawable/custom_edittextbox"/>
+                android:textColor="@color/black"
+                tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
