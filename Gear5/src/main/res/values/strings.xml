@@ -195,4 +195,7 @@
     <string name="card_exp_length_req">Expiration Date length should be 4</string>
     <string name="card_cvv_req">CVV is Required</string>
     <string name="card_cvv_length_req">CVV length should be 3</string>
+    <string name="payment_processed">Your payment has been processed!</string>
+    <string name="g5_payment">Gear5 Payment</string>
+    <string name="g5_pay_notif">Gear5 Payment Notification</string>
 </resources>

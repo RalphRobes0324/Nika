@@ -40,7 +40,7 @@ public class BalanceFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("Gear5 Payment Notification","Gear5 Payment Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(getString(R.string.g5_pay_notif),getString(R.string.g5_pay_notif), NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
         }
@@ -159,9 +159,9 @@ public class BalanceFragment extends Fragment{
     }
 
     public void sendNotification(){
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(getContext(),"Gear5 Payment Notification");
-        notification.setContentTitle("Gear5 Payment");
-        notification.setContentTitle("Your payment has been processed!");
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(getContext(),getString(R.string.g5_pay_notif));
+        notification.setContentTitle(getString(R.string.g5_payment));
+        notification.setContentTitle(getString(R.string.payment_processed));
         notification.setSmallIcon(R.drawable.devil_fruit);
         notification.setAutoCancel(true);
 
