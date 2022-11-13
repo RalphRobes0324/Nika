@@ -3,19 +3,12 @@
 package ca.nika.it.gear5;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.NOTIFICATION_SERVICE;
-
-import android.Manifest;
-import android.app.NotificationManager;
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -25,8 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Set;
 
 public class BluetoothFragment extends Fragment {
 
@@ -90,6 +81,7 @@ public class BluetoothFragment extends Fragment {
         });
         //discover bluetooth btn click
         mDiscoverBtn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
                 if (mBlueAdapter.isDiscovering()) {
@@ -101,6 +93,7 @@ public class BluetoothFragment extends Fragment {
         });
         //off btn click
         mOffBtn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
                 if (mBlueAdapter.isEnabled()) {
@@ -114,14 +107,6 @@ public class BluetoothFragment extends Fragment {
         });
 
         return v;
-    }
-
-    private void addNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
-
-        builder.setSmallIcon(R.drawable.ic_message);
-        builder.setContentTitle("My title");
-        builder.setContentText("Warning, your bluetooth device will be visible to others!");
     }
 
     @Override
