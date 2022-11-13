@@ -2,7 +2,7 @@
 <!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
 <resources>
 
-    <!--vv Don't change anything in this group vv-->
+    <!--vv Don't change anything in this group. Related to shared preference or passing values  vv-->
     <string name="dataForm">dataForm</string>
     <string name="users">users</string>
     <string name="df">df</string>
@@ -42,7 +42,15 @@
     <string name="audio">audio</string>
     <string name="stats">stats</string>
     <string name="userProfile">userProfile</string>
-    <!--^^ Don't change anything in this group ^^-->
+    <string name="notification">Notification</string>
+    <string name="myNotification">My Notification</string>
+    <string name="title">Gear 5</string>
+    <string name="bundlePass">bundlePass</string>
+    <string name="bundlePass2">bundlePass2</string>
+    <string name="getBundlePass">getBundlePass</string>
+    <string name="data">data</string>
+    <string name="getIndex">getIndex</string>
+    <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
     <string name="play">Jouer</string>
@@ -154,4 +162,21 @@
     <string name="usernameDisplay">Username :\u0020</string>
     <string name="scoreDisplay">Top Score :\u0020</string>
     <string name="currencyDisplay">Currency :\u0020</string>
+    <string name="reviewSubmitted">Review submitted</string>
+    <string name="reviewReply">Thank you for your review</string>
+    <string name="x_display">X : \u0020</string>
+    <string name="y_display">Y : \u0020</string>
+    <string name="angle_display">Angle : \u0020</string>
+    <string name="distance_display">Distance : \u0020</string>
+    <string name="direction_display">Direction :</string>
+    <string name="direction_up">Direction : Up</string>
+    <string name="direction_up_right">Direction : Up Right</string>
+    <string name="direction_right">Direction : Right</string>
+    <string name="direction_down_right">Direction : Down Right</string>
+    <string name="direction_down">Direction : Down</string>
+    <string name="direction_down_left">Direction : Down Left</string>
+    <string name="direction_left">Direction : Left</string>
+    <string name="direction_up_left">Direction : Up Left</string>
+    <string name="direction_center">Direction : Center</string>
+
 </resources>

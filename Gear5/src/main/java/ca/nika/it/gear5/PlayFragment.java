@@ -56,11 +56,11 @@ public class PlayFragment extends Fragment {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        getParentFragmentManager().setFragmentResultListener("getBundlePass", this, new FragmentResultListener() {
+        getParentFragmentManager().setFragmentResultListener(getString(R.string.getBundlePass), this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                int num = result.getInt("bundlePass");
-                editor.putInt("Index", num);
+                int num = result.getInt(getString(R.string.bundlePass));
+                editor.putInt(getString(R.string.getIndex), num);
                 editor.apply();
                 loadGameSetting();
 
@@ -125,37 +125,37 @@ public class PlayFragment extends Fragment {
                 js.drawStick(arg1);
                 if(arg1.getAction() == MotionEvent.ACTION_DOWN
                         || arg1.getAction() == MotionEvent.ACTION_MOVE) {
-                    textView1.setText("X : " + String.valueOf(js.getX()));
-                    textView2.setText("Y : " + String.valueOf(js.getY()));
-                    textView3.setText("Angle : " + String.valueOf(js.getAngle()));
-                    textView4.setText("Distance : " + String.valueOf(js.getDistance()));
+                    textView1.setText(getString(R.string.x_display) + String.valueOf(js.getX()));
+                    textView2.setText(getString(R.string.y_display) + String.valueOf(js.getY()));
+                    textView3.setText(getString(R.string.angle_display) + String.valueOf(js.getAngle()));
+                    textView4.setText(getString(R.string.distance_display) + String.valueOf(js.getDistance()));
 
                     int direction = js.get8Direction();
                     if(direction == JoyStickClass.STICK_UP) {
-                        textView5.setText("Direction : Up");
+                        textView5.setText(R.string.direction_up);
                     } else if(direction == JoyStickClass.STICK_UPRIGHT) {
-                        textView5.setText("Direction : Up Right");
+                        textView5.setText(R.string.direction_up_right);
                     } else if(direction == JoyStickClass.STICK_RIGHT) {
-                        textView5.setText("Direction : Right");
+                        textView5.setText(R.string.direction_right);
                     } else if(direction == JoyStickClass.STICK_DOWNRIGHT) {
-                        textView5.setText("Direction : Down Right");
+                        textView5.setText(R.string.direction_down_right);
                     } else if(direction == JoyStickClass.STICK_DOWN) {
-                        textView5.setText("Direction : Down");
+                        textView5.setText(R.string.direction_down);
                     } else if(direction == JoyStickClass.STICK_DOWNLEFT) {
-                        textView5.setText("Direction : Down Left");
+                        textView5.setText(R.string.direction_down_left);
                     } else if(direction == JoyStickClass.STICK_LEFT) {
-                        textView5.setText("Direction : Left");
+                        textView5.setText(R.string.direction_left);
                     } else if(direction == JoyStickClass.STICK_UPLEFT) {
-                        textView5.setText("Direction : Up Left");
+                        textView5.setText(R.string.direction_up_left);
                     } else if(direction == JoyStickClass.STICK_NONE) {
-                        textView5.setText("Direction : Center");
+                        textView5.setText(R.string.direction_center);
                     }
                 } else if(arg1.getAction() == MotionEvent.ACTION_UP) {
-                    textView1.setText("X :");
-                    textView2.setText("Y :");
-                    textView3.setText("Angle :");
-                    textView4.setText("Distance :");
-                    textView5.setText("Direction :");
+                    textView1.setText(getString(R.string.x_display));
+                    textView2.setText(getString(R.string.y_display));
+                    textView3.setText(getString(R.string.angle_display));
+                    textView4.setText(getString(R.string.distance_display));
+                    textView5.setText(getString(R.string.direction_display));
                 }
                 return true;
             }
@@ -166,12 +166,12 @@ public class PlayFragment extends Fragment {
 
     private void loadGameSetting()  {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-        String statsCB = sharedPreferences.getString("stats",getString(R.string.blank));
-        String audioCB = sharedPreferences.getString("audio",getString(R.string.blank));
+        String statsCB = sharedPreferences.getString(getString(R.string.stats),getString(R.string.blank));
+        String audioCB = sharedPreferences.getString(getString(R.string.audio),getString(R.string.blank));
         ll = (LinearLayout) v.findViewById(R.id.linearLayout1);
 
         if(sharedPreferences!= null) {
-            int num = sharedPreferences.getInt("Index", R.id.nikaRB4);
+            int num = sharedPreferences.getInt(getString(R.string.getIndex), R.id.nikaRB4);
 
             if (statsCB.equals(getString(R.string.checked))) {
                 ll.setVisibility(ll.VISIBLE);

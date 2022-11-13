@@ -75,13 +75,13 @@ public class SettingsFragment extends Fragment {
                 int radioButtonID = radioBtnClr.getCheckedRadioButtonId();
                 View radioButton = radioBtnClr.findViewById(radioButtonID);
                 int idx = radioBtnClr.indexOfChild(radioButton);
-                bundle.putInt("bundlePass",idx);
+                bundle.putInt(getString(R.string.bundlePass),idx);
 
                 radioButtonID = radioJoyClr.getCheckedRadioButtonId();
                 radioButton = radioJoyClr.findViewById(radioButtonID);
                 idx = radioJoyClr.indexOfChild(radioButton);
-                bundle.putInt("bundlePass2",idx);
-                getParentFragmentManager().setFragmentResult("getBundlePass",bundle);
+                bundle.putInt(getString(R.string.bundlePass2),idx);
+                getParentFragmentManager().setFragmentResult(getString(R.string.getBundlePass),bundle);
 
             }
         });

@@ -60,22 +60,21 @@ public class ReviewFragment extends Fragment {
 
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("Notification","My Notification",NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(getString(R.string.notification),getString(R.string.myNotification),NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = requireContext().getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
 
-
-
         }
+
         Button submit=(Button)view.findViewById(R.id.submit_review);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Review submitted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
 
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),"Notification");
-                builder.setContentTitle("Gear 5");
-                builder.setContentText("Thank you for your review");
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
+                builder.setContentTitle(getString(R.string.title));
+                builder.setContentText(getString(R.string.reviewReply));
                 builder.setSmallIcon(R.drawable.ic_message);
                 builder.setAutoCancel(true);
 

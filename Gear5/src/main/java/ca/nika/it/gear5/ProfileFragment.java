@@ -74,7 +74,7 @@ public class ProfileFragment extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==118&& resultCode==RESULT_OK){
-            Bitmap photo= (Bitmap) data.getExtras().get("data");
+            Bitmap photo= (Bitmap) data.getExtras().get(getString(R.string.data));
             mImageView.setImageBitmap(photo);
             ByteArrayOutputStream imgByte = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.JPEG, 100, imgByte);
@@ -126,7 +126,7 @@ public class ProfileFragment extends Fragment {
 
         String previouslyEncodedImage = preferenceManager.getString(getString(R.string.image_data));
 
-        if( !previouslyEncodedImage.equalsIgnoreCase("") ){
+        if( !previouslyEncodedImage.equalsIgnoreCase(getString(R.string.blank)) ){
             byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
             mImageView.setImageBitmap(bitmap);

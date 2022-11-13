@@ -10,6 +10,7 @@
     <string name="limits">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
     <string name="warning_msg_reg_account_exist">This account exist</string>
+    <string name="currency2">currency</string>
     <string name="df_curr">df_curr</string>
     <string name="df_tScore">df_tScore</string>
     <string name="limits_email_reg">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
@@ -40,6 +41,14 @@
     <string name="audio">audio</string>
     <string name="stats">stats</string>
     <string name="userProfile">userProfile</string>
+    <string name="notification">Notification</string>
+    <string name="myNotification">My Notification</string>
+    <string name="title">Gear 5</string>
+    <string name="bundlePass">bundlePass</string>
+    <string name="bundlePass2">bundlePass2</string>
+    <string name="getBundlePass">getBundlePass</string>
+    <string name="data">data</string>
+    <string name="getIndex">getIndex</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -125,7 +134,6 @@
     <string name="warning_msg_reg_email">Enter Email</string>
     <string name="warning_email_reg_email_limits">Email invalid</string>
     <string name="warning_username_length_reg">Username must be 5 characters or long</string>
-    <string name="currency2">currency</string>
     <string name="topCurrency">topCurrency</string>
     <string name="warning_email_used_regFrag">Email being used</string>
     <string name="warning_username_used_regFrag">Username being used</string>
@@ -154,4 +162,20 @@
     <string name="usernameDisplay">Username :\u0020</string>
     <string name="scoreDisplay">Top Score :\u0020</string>
     <string name="currencyDisplay">Currency :\u0020</string>
+    <string name="reviewSubmitted">Review submitted</string>
+    <string name="reviewReply">Thank you for your review</string>
+    <string name="x_display">X : \u0020</string>
+    <string name="y_display">Y : \u0020</string>
+    <string name="angle_display">Angle : \u0020</string>
+    <string name="distance_display">Distance : \u0020</string>
+    <string name="direction_display">Direction :</string>
+    <string name="direction_up">Direction : Up</string>
+    <string name="direction_up_right">Direction : Up Right</string>
+    <string name="direction_right">Direction : Right</string>
+    <string name="direction_down_right">Direction : Down Right</string>
+    <string name="direction_down">Direction : Down</string>
+    <string name="direction_down_left">Direction : Down Left</string>
+    <string name="direction_left">Direction : Left</string>
+    <string name="direction_up_left">Direction : Up Left</string>
+    <string name="direction_center">Direction : Center</string>
 </resources>
