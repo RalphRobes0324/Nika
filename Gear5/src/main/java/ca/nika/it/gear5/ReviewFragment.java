@@ -85,8 +85,18 @@ public class ReviewFragment extends Fragment {
                 String userPhone = userPhoneInput.getText().toString().trim();
                 String userEmail = userEmailInput.getText().toString().trim();
                 String userComment = userCommentInput.getText().toString().trim();
-
-
+                if (username.isEmpty()){
+                    username = null;
+                }
+                if(userPhone.isEmpty()){
+                    userPhone = null;
+                }
+                if(userEmail.isEmpty()){
+                    userEmail = null;
+                }
+                if(userComment.isEmpty()){
+                    userComment = null;
+                }
                 validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment);
                 //validateFBUser2(0);
 
@@ -108,7 +118,7 @@ public class ReviewFragment extends Fragment {
     private void validateFBUser(String overall, String getUserId, int tag, String username,
                                 String userPhone, String userEmail, String userComment) {
         int userTag = tag + 1;
-        String newUserId = getUserId + userTag;
+        String newUserId = getUserId + "GEAR" + userTag;
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("reviews");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -132,7 +142,6 @@ public class ReviewFragment extends Fragment {
 
     private void storeDataFB(String newUserId, String overall,
                              String username, String userPhone, String userEmail, String userComment) {
-
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("reviews");
         UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment);
