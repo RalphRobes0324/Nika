@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -21,6 +22,8 @@ public class BalanceFragment extends Fragment{
     PreferenceManager preferenceManager;
     EditText editTextNumber,editTextEXP,editTextCVV;
     AlertDialog dialog;
+    Button pay;
+    String num,exp,cvv;
 
     public BalanceFragment() {
         // Required empty public constructor
@@ -33,7 +36,6 @@ public class BalanceFragment extends Fragment{
 
     public void loadImage() {
         preferenceManager = PreferenceManager.getInstance(getActivity());
-
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
 
@@ -155,48 +157,54 @@ public class BalanceFragment extends Fragment{
         editTextNumber = view.findViewById(R.id.edit_card_num);
         editTextEXP = view.findViewById(R.id.edit_card_exp);
         editTextCVV = view.findViewById(R.id.edit_card_cvv);
+        pay = view.findViewById(R.id.pay_button);
 
         builder.setView(view);
 
         dialog = builder.create();
 
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                num = editTextNumber.getText().toString();
+                exp = editTextEXP.getText().toString();
+                cvv = editTextCVV.getText().toString();
+
+                if(num.isEmpty()){
+                    editTextNumber.setError("Card Number is Required");
+                    editTextNumber.requestFocus();
+                }
+
+                else if(num.length()!=16){
+                    editTextNumber.setError("Card Number length should be 16");
+                    editTextNumber.requestFocus();
+                }
+
+                else if(exp.isEmpty()){
+                    editTextEXP.setError("Expiration Date is Required");
+                    editTextEXP.requestFocus();
+                }
+
+                else if(exp.length()!=4){
+                    editTextEXP.setError("Expiration Date length should be 4");
+                    editTextEXP.requestFocus();
+                }
+
+                else if(cvv.isEmpty()){
+                    editTextCVV.setError("CVV is Required");
+                    editTextCVV.requestFocus();
+                }
+
+                else if(cvv.length()!=3){
+                    editTextCVV.setError("CVV length should be 3");
+                    editTextCVV.requestFocus();
+                }
+
+                else dialog.dismiss();
+            }
+        });
+
         dialog.show();
     }
-
-    /*(num.isEmpty()){
-            editTextNumber.setError("Card Number is Required");
-            editTextNumber.requestFocus();
-            button.setEnabled(false);
-        }
-
-        if(num.length()!=16){
-            editTextNumber.setError("Card Number length should be 16");
-            editTextNumber.requestFocus();
-            button.setEnabled(false);
-        }
-
-        if(exp.isEmpty()){
-            editTextEXP.setError("Expiration Date is Required");
-            editTextEXP.requestFocus();
-            button.setEnabled(false);
-        }
-
-        if(exp.length()!=4){
-            editTextNumber.setError("Expiration Date length should be 4");
-            editTextNumber.requestFocus();
-            button.setEnabled(false);
-        }
-
-        if(cvv.isEmpty()){
-            editTextEXP.setError("CVV is Required");
-            editTextEXP.requestFocus();
-            button.setEnabled(false);
-        }
-
-        if(cvv.length()!=3){
-            editTextCVV.setError("CVV length should be 3");
-            editTextCVV.requestFocus();
-            button.setEnabled(false);
-        }*/
-
 }

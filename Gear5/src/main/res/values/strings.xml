@@ -188,4 +188,5 @@
     <string name="expiration_date">Expiration Date</string>
     <string name="cvv">CVV</string>
     <string name="Continue">Continue</string>
+    <string name="PAY">PAY</string>
 </resources>
