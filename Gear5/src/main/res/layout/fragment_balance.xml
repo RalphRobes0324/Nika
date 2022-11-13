@@ -25,55 +25,57 @@
             android:textStyle="bold"/>
 
         <GridLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="2"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:rowCount="4">
 
-        <ImageButton
-            android:id="@+id/gear5_coin_500"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center_horizontal"
-            android:maxWidth="200dp"
-            android:maxHeight="200dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/gear5_500_coin"/>
+            <ImageButton
+                android:id="@+id/gear5_coin_500"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center_horizontal"
+                android:maxWidth="200dp"
+                android:maxHeight="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/gear5_500_coin"/>
 
-        <ImageButton
-            android:id="@+id/gear5_coin_1000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center_horizontal"
-            android:maxWidth="200dp"
-            android:maxHeight="200dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/gear5_1000_coin"/>
+            <ImageButton
+                android:id="@+id/gear5_coin_1000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center_horizontal"
+                android:maxWidth="200dp"
+                android:maxHeight="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/gear5_1000_coin"/>
 
-        <ImageButton
-            android:id="@+id/gear5_coin_2200"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center_horizontal"
-            android:maxWidth="200dp"
-            android:maxHeight="200dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/gear5_2200_coin"/>
+            <ImageButton
+                android:id="@+id/gear5_coin_2200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center_horizontal"
+                android:maxWidth="200dp"
+                android:maxHeight="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/gear5_2200_coin"/>
 
-        <ImageButton
-            android:id="@+id/gear5_coin_5700"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center_horizontal"
-            android:maxWidth="200dp"
-            android:maxHeight="200dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/gear5_5700_coin"/>
+            <ImageButton
+                android:id="@+id/gear5_coin_5700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center_horizontal"
+                android:maxWidth="200dp"
+                android:maxHeight="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/gear5_5700_coin"/>
+
         </GridLayout>
 
         <ImageButton

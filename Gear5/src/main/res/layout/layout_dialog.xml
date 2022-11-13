@@ -5,17 +5,32 @@
     android:padding="16dp">
 
     <EditText
-        android:hint="Name on Card"
-        android:id="@+id/edit_card_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
         android:id="@+id/edit_card_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Card Number"
-        android:layout_below="@+id/edit_card_name"
-        android:layout_alignParentStart="true"/>
+        android:hint="@string/card_number"
+        android:layout_alignParentStart="true"
+        android:inputType="number"
+        android:maxLength="16"/>
+
+    <EditText
+        android:id="@+id/edit_card_exp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/expiration_date"
+        android:layout_below="@+id/edit_card_num"
+        android:layout_alignParentStart="true"
+        android:inputType="date"
+        android:maxLength="4"/>
+
+    <EditText
+        android:id="@+id/edit_card_cvv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/cvv"
+        android:layout_below="@+id/edit_card_exp"
+        android:layout_alignParentStart="true"
+        android:inputType="number"
+        android:maxLength="3"/>
 
 </RelativeLayout>

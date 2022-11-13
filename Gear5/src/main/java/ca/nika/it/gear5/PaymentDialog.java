@@ -11,8 +11,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class PaymentDialog extends AppCompatDialogFragment {
-    private EditText editTextName;
     private EditText editTextNumber;
+    private EditText editTextEXP;
+    private EditText editTextCVV;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -22,22 +23,23 @@ public class PaymentDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.layout_dialog,null);
 
         builder.setView(view)
-                .setTitle("Payment")
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.payment)
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 })
-                .setPositiveButton("Pay", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.pay, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
 
-        editTextName = view.findViewById(R.id.edit_card_name);
         editTextNumber = view.findViewById(R.id.edit_card_num);
+        editTextEXP = view.findViewById(R.id.edit_card_exp);
+        editTextCVV = view.findViewById(R.id.edit_card_cvv);
 
         return builder.create();
     }
