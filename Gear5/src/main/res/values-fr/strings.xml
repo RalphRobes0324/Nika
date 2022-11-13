@@ -189,4 +189,10 @@
     <string name="cvv">CVV</string>
     <string name="Continue">Continue</string>
     <string name="PAY">PAY</string>
+    <string name="card_num_req">Card Number is Required</string>
+    <string name="card_num_length_req">Card Number length should be 16</string>
+    <string name="card_exp_req">Expiration Date is Required</string>
+    <string name="card_exp_length_req">Expiration Date length should be 4</string>
+    <string name="card_cvv_req">CVV is Required</string>
+    <string name="card_cvv_length_req">CVV length should be 3</string>
 </resources>

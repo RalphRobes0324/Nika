@@ -3,11 +3,17 @@
 package ca.nika.it.gear5;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -32,6 +38,12 @@ public class BalanceFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("Gear5 Payment Notification","Gear5 Payment Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(channel);
+        }
     }
 
     public void loadImage() {
@@ -146,6 +158,17 @@ public class BalanceFragment extends Fragment{
         return view;
     }
 
+    public void sendNotification(){
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(getContext(),"Gear5 Payment Notification");
+        notification.setContentTitle("Gear5 Payment");
+        notification.setContentTitle("Your payment has been processed!");
+        notification.setSmallIcon(R.drawable.devil_fruit);
+        notification.setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+        managerCompat.notify(1,notification.build());
+    }
+
     public void openDialog() {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
@@ -172,36 +195,39 @@ public class BalanceFragment extends Fragment{
                 cvv = editTextCVV.getText().toString();
 
                 if(num.isEmpty()){
-                    editTextNumber.setError("Card Number is Required");
+                    editTextNumber.setError(getString(R.string.card_num_req));
                     editTextNumber.requestFocus();
                 }
 
                 else if(num.length()!=16){
-                    editTextNumber.setError("Card Number length should be 16");
+                    editTextNumber.setError(getString(R.string.card_num_length_req));
                     editTextNumber.requestFocus();
                 }
 
                 else if(exp.isEmpty()){
-                    editTextEXP.setError("Expiration Date is Required");
+                    editTextEXP.setError(getString(R.string.card_exp_req));
                     editTextEXP.requestFocus();
                 }
 
                 else if(exp.length()!=4){
-                    editTextEXP.setError("Expiration Date length should be 4");
+                    editTextEXP.setError(getString(R.string.card_exp_length_req));
                     editTextEXP.requestFocus();
                 }
 
                 else if(cvv.isEmpty()){
-                    editTextCVV.setError("CVV is Required");
+                    editTextCVV.setError(getString(R.string.card_cvv_req));
                     editTextCVV.requestFocus();
                 }
 
                 else if(cvv.length()!=3){
-                    editTextCVV.setError("CVV length should be 3");
+                    editTextCVV.setError(getString(R.string.card_cvv_length_req));
                     editTextCVV.requestFocus();
                 }
 
-                else dialog.dismiss();
+                else{
+                    dialog.dismiss();
+                    sendNotification();
+                }
             }
         });
 
