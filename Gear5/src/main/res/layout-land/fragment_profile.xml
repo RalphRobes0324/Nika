@@ -34,9 +34,9 @@
 
     <LinearLayout
         android:id="@+id/nikaLinearLayout"
-        android:layout_width="327dp"
-        android:layout_height="195dp"
-        android:background="#fff"
+        android:layout_width="336dp"
+        android:layout_height="244dp"
+        android:background="@drawable/grey_transparent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/username"
             android:textAlignment="center"
-            android:textColor="#27214f"
+            android:textColor="#fff"
             android:textSize="20sp" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/top_score"
             android:textAlignment="center"
-            android:textColor="#27214f"
+            android:textColor="#fff"
             android:textSize="20sp" />
 
         <TextView
@@ -70,31 +70,21 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/currency"
             android:textAlignment="center"
-            android:textColor="#27214f"
+            android:textColor="#fff"
             android:textSize="20sp" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/ProfileChange"
-                android:layout_width="274dp"
-                android:layout_height="55dp"
-                android:layout_gravity="top"
-                android:fontFamily="@font/montserrat_bold"
-                android:gravity="center_vertical"
-                android:text="@string/change_profile_icon"
-                android:textColor="#27214f"
-                android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:gravity="center">
 
 
             <ImageButton
                 android:id="@+id/nikaImgBtn"
-                android:layout_width="55dp"
-                android:layout_height="53dp"
-                android:layout_gravity="top"
+                android:layout_width="129dp"
+                android:layout_height="79dp"
+                android:layout_gravity="center_vertical"
                 android:adjustViewBounds="true"
                 android:background="@null"
                 android:scaleType="fitCenter"
