@@ -15,6 +15,8 @@
         android:layout_height="295dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="28dp"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarThumbVertical="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,15 +28,6 @@
             android:orientation="horizontal"
             android:rowCount="4">
 
-            <TextView
-                android:id="@+id/nikaTV1"
-                android:layout_width="201dp"
-                android:layout_height="42dp"
-                android:text="@string/joystick_color"
-                android:textColor="#FFFF00"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/nikaTV2"
@@ -46,35 +39,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioGroup
-                android:id="@+id/nikaRG1"
-                android:layout_width="101dp"
-                android:layout_height="150dp"
-                app:layout_constraintStart_toEndOf="@+id/nikaTV1"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <RadioButton
-                    android:id="@+id/nikaRB1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/red"
-                    android:textColor="#FFFF00" />
-
-                <RadioButton
-                    android:id="@+id/nikaRB2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/yellow"
-                    android:textColor="#FFFF00" />
-
-                <RadioButton
-                    android:id="@+id/nikaRB3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/green"
-                    android:textColor="#FFFF00" />
-            </RadioGroup>
+            <TextView
+                android:id="@+id/nikaTV5"
+                android:layout_width="205dp"
+                android:layout_height="77dp"
+                android:text="@string/show_joystick_stats"
+                android:textColor="#FFFF00"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
                 android:id="@+id/nikaRG2"
@@ -105,6 +78,14 @@
                     android:text="@string/green"
                     android:textColor="#FFFF00" />
             </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/nikaCB3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:buttonTint="#FFFF00"
+                app:layout_constraintStart_toEndOf="@+id/nikaTV4"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/nikaTV3"
@@ -142,37 +123,12 @@
                 app:layout_constraintStart_toEndOf="@+id/nikaTV4"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/nikaTV5"
-                android:layout_width="205dp"
-                android:layout_height="77dp"
-                android:text="@string/show_joystick_stats"
-                android:textColor="#FFFF00"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <Space
-                android:id="@+id/nikaSpace4"
-                android:layout_width="210dp"
-                android:layout_height="76dp" />
-
-            <CheckBox
-                android:id="@+id/nikaCB3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:buttonTint="#FFFF00"
-                app:layout_constraintStart_toEndOf="@+id/nikaTV4"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <Space
                 android:id="@+id/nikaSpace5"
                 android:layout_width="210dp"
                 android:layout_height="76dp" />
 
-            <Space
-                android:id="@+id/nikaSpace6"
-                android:layout_width="210dp"
-                android:layout_height="76dp" />
 
 
         </GridLayout>

@@ -18,23 +18,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class SettingsFragment extends Fragment {
-    private View v;
-    private RadioGroup radioJoystick;
-    private RadioGroup radioButton;
 
-    private CheckBox checkbox;
-    private CheckBox checkbox2;
-    private CheckBox checkbox3;
-    Boolean aBoolean;
+    private RadioGroup radioBtnClr;
+    private CheckBox muteCB;
+    private CheckBox lockCB;
+    private CheckBox statsCB;
+    private View v;
+    Boolean aBoolean1;
     Boolean aBoolean2;
     Boolean aBoolean3;
-
-    private RadioGroup radioJoyClr;
-    private RadioGroup radioBtnClr;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,23 +43,20 @@ public class SettingsFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        radioJoystick = v.findViewById(R.id.nikaRG1);
-        radioButton = v.findViewById(R.id.nikaRG2);
 
-        this.checkbox = this.v.findViewById(R.id.nikaCB1);
-        this.checkbox2 = this.v.findViewById(R.id.nikaCB2);
-        this.checkbox3 = this.v.findViewById(R.id.nikaCB3);
+        radioBtnClr = v.findViewById(R.id.nikaRG1);
 
-        aBoolean = checkbox.isChecked();
-        aBoolean2 = checkbox2.isChecked();
-        aBoolean3 = checkbox3.isChecked();
+        this.muteCB = this.v.findViewById(R.id.nikaCB1);
+        this.lockCB = this.v.findViewById(R.id.nikaCB2);
+        this.statsCB = this.v.findViewById(R.id.nikaCB3);
 
-
-        radioJoyClr = v.findViewById(R.id.nikaRG1);
-        radioBtnClr = v.findViewById(R.id.nikaRG2);
+        aBoolean1 = muteCB.isChecked();
+        aBoolean2 = lockCB.isChecked();
+        aBoolean3 = statsCB.isChecked();
 
 
         Button buttonSave = (Button) this.v.findViewById(R.id.button);
+        CheckBox stats = (CheckBox) v.findViewById(R.id.nikaCB3);
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +68,10 @@ public class SettingsFragment extends Fragment {
                 View radioButton = radioBtnClr.findViewById(radioButtonID);
                 int idx = radioBtnClr.indexOfChild(radioButton);
                 bundle.putInt(getString(R.string.bundlePass),idx);
-
-                radioButtonID = radioJoyClr.getCheckedRadioButtonId();
-                radioButton = radioJoyClr.findViewById(radioButtonID);
-                idx = radioJoyClr.indexOfChild(radioButton);
-                bundle.putInt(getString(R.string.bundlePass2),idx);
                 getParentFragmentManager().setFragmentResult(getString(R.string.getBundlePass),bundle);
 
             }
         });
-
-        CheckBox stats = (CheckBox) v.findViewById(R.id.nikaCB3);
 
         stats.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -135,12 +120,11 @@ public class SettingsFragment extends Fragment {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        int checkedRadioButtonId = radioJoystick.getCheckedRadioButtonId();
-        int checkedRadioButtonId2 = radioButton.getCheckedRadioButtonId();
+        int checkedRadioButtonId2 = radioBtnClr.getCheckedRadioButtonId();
 
-        Boolean getBoolean = checkbox.isChecked();
-        Boolean getBoolean2 = checkbox2.isChecked();
-        Boolean getBoolean3 = checkbox3.isChecked();
+        boolean getBoolean1 = muteCB.isChecked();
+        boolean getBoolean2 = lockCB.isChecked();
+        boolean getBoolean3 = statsCB.isChecked();
 
         Activity a = getActivity();
         if (getBoolean2 == true) {
@@ -149,10 +133,9 @@ public class SettingsFragment extends Fragment {
             if (a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
 
-        editor.putInt(getString(R.string.checkRadioButtonId), checkedRadioButtonId);
         editor.putInt(getString(R.string.checkRadioButtonId2), checkedRadioButtonId2);
 
-        editor.putBoolean(getString(R.string.getBooleanId), getBoolean);
+        editor.putBoolean(getString(R.string.getBooleanId), getBoolean1);
         editor.putBoolean(getString(R.string.getBooleanId2), getBoolean2);
         editor.putBoolean(getString(R.string.getBooleanId3), getBoolean3);
 
@@ -164,24 +147,21 @@ public class SettingsFragment extends Fragment {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
 
         if(sharedPreferences!= null) {
-            int checkedRadioButtonId = sharedPreferences.getInt(getString(R.string.checkRadioButtonId), R.id.nikaRB1);
             int checkedRadioButtonId2 = sharedPreferences.getInt(getString(R.string.checkRadioButtonId2), R.id.nikaRB4);
-            boolean getBoolean = sharedPreferences.getBoolean(getString(R.string.getBooleanId), aBoolean);
+            boolean getBoolean = sharedPreferences.getBoolean(getString(R.string.getBooleanId), aBoolean1);
             boolean getBoolean2 = sharedPreferences.getBoolean(getString(R.string.getBooleanId2), aBoolean2);
             boolean getBoolean3 = sharedPreferences.getBoolean(getString(R.string.getBooleanId3), aBoolean3);
 
-            this.radioJoystick.check(checkedRadioButtonId);
-            this.radioButton.check(checkedRadioButtonId2);
-            this.checkbox.setChecked(getBoolean);
-            this.checkbox2.setChecked(getBoolean2);
-            this.checkbox3.setChecked(getBoolean3);
+            this.radioBtnClr.check(checkedRadioButtonId2);
+            this.muteCB.setChecked(getBoolean);
+            this.lockCB.setChecked(getBoolean2);
+            this.statsCB.setChecked(getBoolean3);
 
         } else {
-            this.radioJoystick.check(R.id.nikaRB1);
-            this.radioButton.check(R.id.nikaRB4);
-            this.checkbox.setChecked(false);
-            this.checkbox2.setChecked(false);
-            this.checkbox3.setChecked(false);
+            this.radioBtnClr.check(R.id.nikaRB4);
+            this.muteCB.setChecked(false);
+            this.lockCB.setChecked(false);
+            this.statsCB.setChecked(false);
         }
 
     }

@@ -63,7 +63,6 @@ public class PlayFragment extends Fragment {
                 editor.putInt(getString(R.string.getIndex), num);
                 editor.apply();
                 loadGameSetting();
-
             }
         });
 
@@ -77,8 +76,6 @@ public class PlayFragment extends Fragment {
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        } else {
-
         }
 
         loadGameSetting();
