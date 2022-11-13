@@ -79,7 +79,7 @@ public class ReviewFragment extends Fragment {
                 int tag = 0;
                 int starRating = ratingBar.getNumStars();
                 float getRating = ratingBar.getRating();
-                String overall = "" + (getRating/starRating);
+                String overall = "" + ((getRating/starRating)*100) + getString(R.string.key_precent);
                 //Getting Data
                 String username = usernameInput.getText().toString().trim();
                 String userPhone = userPhoneInput.getText().toString().trim();
@@ -98,16 +98,7 @@ public class ReviewFragment extends Fragment {
                     userComment = null;
                 }
                 validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment);
-                //validateFBUser2(0);
 
-                Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
-                builder.setContentTitle(getString(R.string.title));
-                builder.setContentText(getString(R.string.reviewReply));
-                builder.setSmallIcon(R.drawable.ic_message);
-                builder.setAutoCancel(true);
-                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
-                managerCompat.notify(1,builder.build());
 
             }
 
@@ -118,8 +109,8 @@ public class ReviewFragment extends Fragment {
     private void validateFBUser(String overall, String getUserId, int tag, String username,
                                 String userPhone, String userEmail, String userComment) {
         int userTag = tag + 1;
-        String newUserId = getUserId + "GEAR" + userTag;
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("reviews");
+        String newUserId = getUserId + getString(R.string.key_GEAR) + userTag;
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childReg_reviews));
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -143,11 +134,18 @@ public class ReviewFragment extends Fragment {
     private void storeDataFB(String newUserId, String overall,
                              String username, String userPhone, String userEmail, String userComment) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference("reviews");
+        DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
         UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment);
         reference.child(newUserId).setValue(userReviewClass);
 
+        //Notification
+        Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
+        builder.setContentTitle(getString(R.string.title));
+        builder.setContentText(getString(R.string.reviewReply));
+        builder.setSmallIcon(R.drawable.ic_message);
+        builder.setAutoCancel(true);
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
+        managerCompat.notify(1,builder.build());
     }
-
-
 }

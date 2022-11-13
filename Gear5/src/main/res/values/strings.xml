@@ -49,6 +49,9 @@
     <string name="getBundlePass">getBundlePass</string>
     <string name="data">data</string>
     <string name="getIndex">getIndex</string>
+    <string name="childReg_reviews">reviews</string>
+    <string name="key_precent">%</string>
+    <string name="key_GEAR">GEAR</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
