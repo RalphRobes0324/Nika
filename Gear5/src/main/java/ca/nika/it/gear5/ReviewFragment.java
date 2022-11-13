@@ -98,16 +98,7 @@ public class ReviewFragment extends Fragment {
                     userComment = null;
                 }
                 validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment);
-                //validateFBUser2(0);
 
-                Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
-                builder.setContentTitle(getString(R.string.title));
-                builder.setContentText(getString(R.string.reviewReply));
-                builder.setSmallIcon(R.drawable.ic_message);
-                builder.setAutoCancel(true);
-                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
-                managerCompat.notify(1,builder.build());
 
             }
 
@@ -146,7 +137,15 @@ public class ReviewFragment extends Fragment {
         DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
         UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment);
         reference.child(newUserId).setValue(userReviewClass);
+
+        //Notification
+        Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
+        builder.setContentTitle(getString(R.string.title));
+        builder.setContentText(getString(R.string.reviewReply));
+        builder.setSmallIcon(R.drawable.ic_message);
+        builder.setAutoCancel(true);
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
+        managerCompat.notify(1,builder.build());
     }
-
-
 }
