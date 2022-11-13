@@ -13,10 +13,10 @@
 
     <!--Stroke size and color-->
     <stroke android:width="10dp"
-        android:color="#fff" />
+        android:color="#000" />
 
     <!--Fill Color of the Button-->
-    <gradient android:angle="-90"
-        android:startColor="#00000000"
-        android:endColor="#00000000"  />
+    <solid
+        android:color="@color/light_grey"/>
+    
 </shape>
