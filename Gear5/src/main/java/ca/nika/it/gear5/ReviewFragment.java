@@ -79,7 +79,7 @@ public class ReviewFragment extends Fragment {
                 int tag = 0;
                 int starRating = ratingBar.getNumStars();
                 float getRating = ratingBar.getRating();
-                String overall = "" + ((getRating/starRating)*100) + "%";
+                String overall = "" + ((getRating/starRating)*100) + getString(R.string.key_precent);
                 //Getting Data
                 String username = usernameInput.getText().toString().trim();
                 String userPhone = userPhoneInput.getText().toString().trim();
@@ -118,7 +118,7 @@ public class ReviewFragment extends Fragment {
     private void validateFBUser(String overall, String getUserId, int tag, String username,
                                 String userPhone, String userEmail, String userComment) {
         int userTag = tag + 1;
-        String newUserId = getUserId + "GEAR" + userTag;
+        String newUserId = getUserId + getString(R.string.key_GEAR) + userTag;
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childReg_reviews));
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -146,7 +146,6 @@ public class ReviewFragment extends Fragment {
         DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
         UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment);
         reference.child(newUserId).setValue(userReviewClass);
-
     }
 
 
