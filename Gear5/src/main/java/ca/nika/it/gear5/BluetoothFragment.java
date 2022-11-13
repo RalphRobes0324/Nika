@@ -109,14 +109,6 @@ public class BluetoothFragment extends Fragment {
         return v;
     }
 
-    private void addNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
-
-        builder.setSmallIcon(R.drawable.ic_message);
-        builder.setContentTitle("My title");
-        builder.setContentText("Warning, your bluetooth device will be visible to others!");
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
