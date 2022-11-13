@@ -8,7 +8,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -53,9 +52,9 @@ public class BluetoothFragment extends Fragment {
 
         //check if bluetooth is available or not
         if (mBlueAdapter == null) {
-            mStatusBlueTv.setText("Bluetooth is not available");
+            mStatusBlueTv.setText(R.string.bluetoothUnavailable);
         } else {
-            mStatusBlueTv.setText("Bluetooth is available");
+            mStatusBlueTv.setText(R.string.bluetoothAvailable);
         }
 
         //set image according to bluetooth status(on/off)
@@ -70,12 +69,12 @@ public class BluetoothFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!mBlueAdapter.isEnabled()) {
-                    showToast("Turning On Bluetooth...");
+                    showToast(getString(R.string.turningOnBluetooth));
                     //intent to on bluetooth
                     Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(intent, REQUEST_ENABLE_BT);
                 } else {
-                    showToast("Bluetooth is already on");
+                    showToast(getString(R.string.bluetoothAlreadyOn));
                 }
             }
         });
@@ -87,7 +86,7 @@ public class BluetoothFragment extends Fragment {
                 Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 startActivityForResult(intent, REQUEST_DISCOVER_BT);
                 if (mBlueAdapter.isDiscovering()) {
-                    showToast("Making Your Device Discoverable");
+                    showToast(getString(R.string.deviceDiscoverable));
 
                 }
             }
@@ -99,10 +98,10 @@ public class BluetoothFragment extends Fragment {
             public void onClick(View v) {
                 if (mBlueAdapter.isEnabled()) {
                     mBlueAdapter.disable();
-                    showToast("Turning Bluetooth Off");
+                    showToast(getString(R.string.turningOffBluetooth));
                     mBlueIv.setImageResource(R.drawable.b_off);
                 } else {
-                    showToast("Bluetooth is already off");
+                    showToast(getString(R.string.bluetoothAlreadyOff));
                 }
             }
         });
@@ -117,11 +116,11 @@ public class BluetoothFragment extends Fragment {
                 if (resultCode == RESULT_OK){
                     //bluetooth is on
                     mBlueIv.setImageResource(R.drawable.b_on);
-                    showToast("Bluetooth is on");
+                    showToast(getString(R.string.bluetoothOn));
                 }
                 else {
                     //user denied to turn bluetooth on
-                    showToast("couldn't on bluetooth");
+                    showToast(getString(R.string.bluetoothDenied));
                 }
                 break;
         }

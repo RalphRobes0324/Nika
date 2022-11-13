@@ -198,4 +198,13 @@
     <string name="payment_processed">Your payment has been processed!</string>
     <string name="g5_payment">Gear5 Payment</string>
     <string name="g5_pay_notif">Gear5 Payment Notification</string>
+    <string name="turningOnBluetooth">Turning On Bluetooth...</string>
+    <string name="bluetoothAlreadyOn">Bluetooth is already on</string>
+    <string name="turningOffBluetooth">Turning Bluetooth Off</string>
+    <string name="bluetoothAlreadyOff">Bluetooth is already off</string>
+    <string name="bluetoothOn">Bluetooth is on</string>
+    <string name="bluetoothDenied">couldn\'t turn on bluetooth</string>
+    <string name="bluetoothUnavailable">Bluetooth is not available</string>
+    <string name="bluetoothAvailable">Bluetooth is available</string>
+    <string name="deviceDiscoverable">Making Your Device Discoverable</string>
 </resources>
