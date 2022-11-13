@@ -3,6 +3,8 @@
 package ca.nika.it.gear5;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +16,8 @@ import android.widget.ImageButton;
 
 public class BalanceFragment extends Fragment {
 
+    PreferenceManager preferenceManager;
+
     public BalanceFragment() {
         // Required empty public constructor
     }
@@ -21,6 +25,20 @@ public class BalanceFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public void loadImage() {
+        preferenceManager = PreferenceManager.getInstance(getActivity());
+
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+
+        if (sharedPreferences != null) {
+
+            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+
+
+        }
     }
 
     @Override

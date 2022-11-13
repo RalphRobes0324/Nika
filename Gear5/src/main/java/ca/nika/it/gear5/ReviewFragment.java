@@ -5,9 +5,11 @@ package ca.nika.it.gear5;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -18,7 +20,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 public class ReviewFragment extends Fragment {
+
+    PreferenceManager preferenceManager;
 
     public ReviewFragment() {
     }
@@ -26,6 +37,20 @@ public class ReviewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public void loadImage() {
+        preferenceManager = PreferenceManager.getInstance(getActivity());
+
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+
+        if (sharedPreferences != null) {
+
+            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+
+
+        }
     }
 
     @Override
