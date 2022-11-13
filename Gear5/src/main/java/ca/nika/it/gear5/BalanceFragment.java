@@ -30,6 +30,7 @@ public class BalanceFragment extends Fragment{
     AlertDialog dialog;
     Button pay;
     String num,exp,cvv;
+    int amount;
 
     public BalanceFragment() {
         // Required empty public constructor
@@ -79,6 +80,7 @@ public class BalanceFragment extends Fragment{
                         .setPositiveButton(R.string.Continue,new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                amount = 500;
                                 openDialog();
                             }
                         })
@@ -96,6 +98,7 @@ public class BalanceFragment extends Fragment{
                         .setPositiveButton(R.string.Continue,new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                amount = 1000;
                                 openDialog();
                             }
                         })
@@ -113,6 +116,7 @@ public class BalanceFragment extends Fragment{
                         .setPositiveButton(R.string.Continue,new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                amount = 2200;
                                 openDialog();
                             }
                         })
@@ -130,6 +134,7 @@ public class BalanceFragment extends Fragment{
                         .setPositiveButton(R.string.Continue,new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                amount = 5700;
                                 openDialog();
                             }
                         })
@@ -147,6 +152,7 @@ public class BalanceFragment extends Fragment{
                         .setPositiveButton(R.string.Continue,new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                amount = 11600;
                                 openDialog();
                             }
                         })
