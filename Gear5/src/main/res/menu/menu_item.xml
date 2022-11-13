@@ -17,18 +17,13 @@
         android:id="@+id/nikaReview"
         android:icon="@drawable/ic_baseline_star_24"
         android:title="@string/review"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always|withText"/>
 
     <item
         android:id="@+id/nikaBalance"
         android:icon="@drawable/ic_baseline_cash_24"
         android:title="@string/balance"
         app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/nikaLeaderboard"
-        android:title="@string/leaderboard"
-        app:showAsAction="never"/>
 
     <item
         android:id="@+id/nikaConnect"
