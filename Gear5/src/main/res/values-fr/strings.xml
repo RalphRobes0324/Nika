@@ -50,6 +50,7 @@
     <string name="getBundlePass">getBundlePass</string>
     <string name="data">data</string>
     <string name="getIndex">getIndex</string>
+    <string name="childReg_reviews">reviews</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -178,5 +179,4 @@
     <string name="direction_left">Direction : Left</string>
     <string name="direction_up_left">Direction : Up Left</string>
     <string name="direction_center">Direction : Center</string>
-
 </resources>

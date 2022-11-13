@@ -119,7 +119,7 @@ public class ReviewFragment extends Fragment {
                                 String userPhone, String userEmail, String userComment) {
         int userTag = tag + 1;
         String newUserId = getUserId + "GEAR" + userTag;
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("reviews");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childReg_reviews));
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -143,7 +143,7 @@ public class ReviewFragment extends Fragment {
     private void storeDataFB(String newUserId, String overall,
                              String username, String userPhone, String userEmail, String userComment) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference("reviews");
+        DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
         UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment);
         reference.child(newUserId).setValue(userReviewClass);
 
