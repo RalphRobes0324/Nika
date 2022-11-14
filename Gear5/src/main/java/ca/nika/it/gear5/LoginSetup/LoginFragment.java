@@ -200,7 +200,7 @@ public class LoginFragment extends Fragment {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("userProfile", userId);
+        editor.putString(getString(R.string.userProfile), userId);
 
         editor.apply();
 

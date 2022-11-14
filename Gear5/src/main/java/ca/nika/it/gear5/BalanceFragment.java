@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -22,14 +23,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class BalanceFragment extends Fragment{
 
     PreferenceManager preferenceManager;
+
     EditText editTextNumber,editTextEXP,editTextCVV;
     AlertDialog dialog;
     Button pay;
-    String num,exp,cvv;
+    String num,exp,cvv, getUserID;
     int amount;
 
     public BalanceFragment() {
@@ -47,22 +57,16 @@ public class BalanceFragment extends Fragment{
         }
     }
 
-    public void loadImage() {
-        preferenceManager = PreferenceManager.getInstance(getActivity());
-
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-
-        if (sharedPreferences != null) {
-
-            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
+
+        //Share Preferences
+        preferenceManager = PreferenceManager.getInstance(getActivity());
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        //Getting data from Share Preferences
+        getUserID = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
 
         ImageButton gear500=(ImageButton) view.findViewById(R.id.gear5_coin_500);
         ImageButton gear1000=(ImageButton) view.findViewById(R.id.gear5_coin_1000);
@@ -87,6 +91,7 @@ public class BalanceFragment extends Fragment{
                         .setNegativeButton(R.string.cancel,null)
                         .show();
             }
+
         });
 
         gear1000.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +169,31 @@ public class BalanceFragment extends Fragment{
         return view;
     }
 
+    private void updateUserCurrFirebase() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+        Query checkUser  = databaseReference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserID);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Integer userCurrentCurr = snapshot.child(getUserID).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                    int sum = userCurrentCurr.intValue() + amount;
+                    Integer newSum = new Integer(sum);
+                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_Currency)).setValue(newSum);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public void sendNotification(){
         NotificationCompat.Builder notification = new NotificationCompat.Builder(getContext(),getString(R.string.g5_pay_notif));
         notification.setContentTitle(getString(R.string.g5_payment));
@@ -233,6 +263,7 @@ public class BalanceFragment extends Fragment{
                 }
 
                 else{
+                    updateUserCurrFirebase();
                     dialog.dismiss();
                     sendNotification();
                 }

@@ -20,13 +20,6 @@ public class GEAR5StartUpFragment extends Fragment {
     private Button registerBtn, loginBtn;
     private LinearLayout linearLayout;
 
-    /*private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
-    }*/
-
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -35,7 +28,6 @@ public class GEAR5StartUpFragment extends Fragment {
         transaction.replace(R.id.container, fragment);
         transaction.commit();
     }
-
 
 
     @Override

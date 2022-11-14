@@ -139,9 +139,6 @@ public class VerifyOTPFragment extends Fragment {
             }
         });
 
-
-        //String userPin  = pinView.getText().toString().trim();
-
         return view;
     }
 
