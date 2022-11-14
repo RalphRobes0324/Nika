@@ -88,7 +88,6 @@ public class BalanceFragment extends Fragment{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 amount = 500;
-                                updateUserCurrFirebase();
                                 openDialog();
                             }
                         })
@@ -175,16 +174,17 @@ public class BalanceFragment extends Fragment{
 
     private void updateUserCurrFirebase() {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUser  = databaseReference.orderByChild("username").equalTo(getUserID);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+        Query checkUser  = databaseReference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserID);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    String userCurrentCurr = snapshot.child("password").getValue(Integer.class).toString();
-                    //int userNewAmount = userCurrentCurr + 10;
-                    //DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                   // mDatabase.child("username").child(getUserID).child("currency").setValue(userNewAmount);
+                if(snapshot.exists()){
+                    Integer userCurrentCurr = snapshot.child(getUserID).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                    int sum = userCurrentCurr.intValue() + amount;
+                    Integer newSum = new Integer(sum);
+                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_Currency)).setValue(newSum);
 
                 }
 
@@ -264,6 +264,7 @@ public class BalanceFragment extends Fragment{
                 }
 
                 else{
+                    updateUserCurrFirebase();
                     dialog.dismiss();
                     sendNotification();
                 }
