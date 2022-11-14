@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,7 +55,7 @@ public class ProfileFragment extends Fragment {
     Button btn;
     TextView usernameTextView, topScoreTextView, currencyTextView;
 
-
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int IMAGE_PICK_CODE = 1000;
     private View view;
 
@@ -132,6 +133,19 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Snackbar.make(getActivity().findViewById(android.R.id.content),
+                        getString(R.string.PermissionGranted), Snackbar.LENGTH_LONG).show();
+            } else {
+                Snackbar.make(getActivity().findViewById(android.R.id.content),
+                        getString(R.string.PermissionDenied), Snackbar.LENGTH_LONG).show();
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -158,9 +172,9 @@ public class ProfileFragment extends Fragment {
                 if((ActivityCompat.checkSelfPermission(
                         getActivity(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(new String[]{
-                                Manifest.permission.CAMERA,
-                        },123);
+                        if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                        }
                     }
                 }
                 else{
