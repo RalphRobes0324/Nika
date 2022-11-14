@@ -51,6 +51,7 @@ public class RegisterFragment extends Fragment {
     ImageView backButton;
 
 
+    //Single responsibility as it will replace the current fragment to a new one that accomplishes its single goal/responsibility
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -232,7 +233,7 @@ public class RegisterFragment extends Fragment {
     }
 
 
-
+    //command design pattern, stores the information into a class which can later be added in the firebase
     private void storeNewUserdata(String userId, String username, String email,
                                   String password, int startCurrency, int startScore, String phone) {
         FirebaseDatabase rootNode;

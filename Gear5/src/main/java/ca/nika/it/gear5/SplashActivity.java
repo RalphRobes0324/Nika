@@ -25,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
+                //This utilizes KISS as everything is very simplified and easy for anyone to understand, it checks the current activity and if the checkbox is true to determine where to go
                 if (checkbox.equals(getString(R.string.checked))) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();

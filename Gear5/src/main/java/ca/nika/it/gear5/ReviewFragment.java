@@ -85,6 +85,8 @@ public class ReviewFragment extends Fragment {
                 String userPhone = userPhoneInput.getText().toString().trim();
                 String userEmail = userEmailInput.getText().toString().trim();
                 String userComment = userCommentInput.getText().toString().trim();
+
+                //This utilizes KISS as everything is very simplified and easy for anyone to understand
                 if (username.isEmpty()){
                     username = null;
                 }
