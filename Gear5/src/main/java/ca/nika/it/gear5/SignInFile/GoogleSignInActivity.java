@@ -1,3 +1,5 @@
+// CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
+// CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.SignInFile;
 
 import androidx.annotation.NonNull;
@@ -58,7 +60,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
     private void signIn() {
         Intent intent = googleSignInClient.getSignInIntent();
         startActivityForResult(intent, 1000);
-        //activityResultLauncher.launch(intent);
     }
 
     @Override
@@ -88,7 +89,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             enterMainActivity();
                         }else{
-                            Toast.makeText(getApplicationContext(), "Failed to Auth", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.failAuth, Toast.LENGTH_SHORT).show();
                             returnLogin();
                         }
                     }

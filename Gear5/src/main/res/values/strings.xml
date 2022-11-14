@@ -207,4 +207,5 @@
     <string name="bluetoothUnavailable">Bluetooth is not available</string>
     <string name="bluetoothAvailable">Bluetooth is available</string>
     <string name="deviceDiscoverable">Making Your Device Discoverable</string>
+    <string name="failAuth">Failed to Authenticate</string>
 </resources>

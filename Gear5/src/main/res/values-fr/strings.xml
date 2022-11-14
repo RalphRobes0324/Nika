@@ -207,4 +207,5 @@
     <string name="bluetoothUnavailable">Le Bluetooth n\'est pas disponible</string>
     <string name="bluetoothAvailable">Bluetooth est disponible</string>
     <string name="deviceDiscoverable">Rendre votre appareil détectable</string>
+    <string name="failAuth">Échec de l\'authentification</string>
 </resources>
