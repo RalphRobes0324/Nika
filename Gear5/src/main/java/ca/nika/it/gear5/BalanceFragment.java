@@ -181,8 +181,8 @@ public class BalanceFragment extends Fragment{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    int userCurrentCurr = snapshot.child("password").getValue(Integer.class).intValue();
-                    int userNewAmount = userCurrentCurr + 10;
+                    String userCurrentCurr = snapshot.child("password").getValue(Integer.class).toString();
+                    //int userNewAmount = userCurrentCurr + 10;
                     //DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                    // mDatabase.child("username").child(getUserID).child("currency").setValue(userNewAmount);
 
