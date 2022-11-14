@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -22,14 +23,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class BalanceFragment extends Fragment{
 
     PreferenceManager preferenceManager;
+
     EditText editTextNumber,editTextEXP,editTextCVV;
     AlertDialog dialog;
     Button pay;
-    String num,exp,cvv;
+    String num,exp,cvv, getUserID;
     int amount;
 
     public BalanceFragment() {
@@ -47,22 +57,19 @@ public class BalanceFragment extends Fragment{
         }
     }
 
-    public void loadImage() {
-        preferenceManager = PreferenceManager.getInstance(getActivity());
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
 
-        if (sharedPreferences != null) {
-
-            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
+
+        //Share Preferences
+        preferenceManager = PreferenceManager.getInstance(getActivity());
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        //Getting data from Share Preferences
+        getUserID = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
 
         ImageButton gear500=(ImageButton) view.findViewById(R.id.gear5_coin_500);
         ImageButton gear1000=(ImageButton) view.findViewById(R.id.gear5_coin_1000);
@@ -81,12 +88,14 @@ public class BalanceFragment extends Fragment{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 amount = 500;
+                                updateUserCurrFirebase();
                                 openDialog();
                             }
                         })
                         .setNegativeButton(R.string.cancel,null)
                         .show();
             }
+
         });
 
         gear1000.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +171,30 @@ public class BalanceFragment extends Fragment{
         });
 
         return view;
+    }
+
+    private void updateUserCurrFirebase() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        Query checkUser  = databaseReference.orderByChild("username").equalTo(getUserID);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    int userCurrentCurr = snapshot.child("password").getValue(Integer.class).intValue();
+                    int userNewAmount = userCurrentCurr + 10;
+                    //DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                   // mDatabase.child("username").child(getUserID).child("currency").setValue(userNewAmount);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void sendNotification(){
