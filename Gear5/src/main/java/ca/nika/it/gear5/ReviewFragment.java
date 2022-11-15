@@ -14,6 +14,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,8 @@ public class ReviewFragment extends Fragment {
         userEmailInput = (EditText) view.findViewById(R.id.nika_edittxt_email_reviewFrag);
         userCommentInput = (EditText) view.findViewById(R.id.nika_edittxt_comment_reviewFrag);
 
+        String modelPhone = Build.MODEL;
+
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(getString(R.string.notification),getString(R.string.myNotification),NotificationManager.IMPORTANCE_DEFAULT);
@@ -97,7 +100,7 @@ public class ReviewFragment extends Fragment {
                 if(userComment.isEmpty()){
                     userComment = null;
                 }
-                validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment);
+                validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment, modelPhone);
 
 
             }
@@ -107,7 +110,7 @@ public class ReviewFragment extends Fragment {
         return view;
     }
     private void validateFBUser(String overall, String getUserId, int tag, String username,
-                                String userPhone, String userEmail, String userComment) {
+                                String userPhone, String userEmail, String userComment, String modelPhone) {
         int userTag = tag + 1;
         String newUserId = getUserId + getString(R.string.key_GEAR) + userTag;
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childReg_reviews));
@@ -115,10 +118,10 @@ public class ReviewFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.hasChild(newUserId)){
-                    storeDataFB(newUserId, overall, username, userPhone, userEmail, userComment);
+                    storeDataFB(newUserId, overall, username, userPhone, userEmail, userComment, modelPhone);
                 }
                 else{
-                    validateFBUser(overall, getUserId, userTag,username, userPhone, userEmail, userComment);
+                    validateFBUser(overall, getUserId, userTag,username, userPhone, userEmail, userComment, modelPhone);
                 }
             }
             @Override
@@ -132,10 +135,10 @@ public class ReviewFragment extends Fragment {
     }
 
     private void storeDataFB(String newUserId, String overall,
-                             String username, String userPhone, String userEmail, String userComment) {
+                             String username, String userPhone, String userEmail, String userComment, String modelPhone) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
-        UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment);
+        UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment, modelPhone);
         reference.child(newUserId).setValue(userReviewClass);
 
         //Notification
