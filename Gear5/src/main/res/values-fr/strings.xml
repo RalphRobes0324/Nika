@@ -53,6 +53,7 @@
     <string name="childReg_reviews">reviews</string>
     <string name="key_precent">%</string>
     <string name="key_GEAR">GEAR</string>
+    <string name="onlineLink">https://cdn.discordapp.com/attachments/1016365164070707271/1041874520191008798/unknown.png</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -208,4 +209,8 @@
     <string name="bluetoothAvailable">Bluetooth est disponible</string>
     <string name="deviceDiscoverable">Rendre votre appareil détectable</string>
     <string name="failAuth">Échec de l\'authentification</string>
+    <string name="loadingImage">Chargement de l\'image</string>
+    <string name="errorOccured">Une erreur s\'est produite !</string>
+    <string name="nameDisplay">Nom: \u0020</string>
+    <string name="topScore">\u0020 | Meilleur score: \u0020"</string>
 </resources>
