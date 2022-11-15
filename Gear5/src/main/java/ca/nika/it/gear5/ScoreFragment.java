@@ -65,11 +65,9 @@ public class ScoreFragment extends Fragment {
                     arrayListOfUsers.add(username);
                 }
 
-                //Log.d("TAG", test);
-
-                nikaScore1TextView.setText(arrayListOfUsers.get(0) + ":" + arrayListOfUserScores.get(0).intValue());
-                nikaScore2TextView.setText(arrayListOfUsers.get(1) + ":" + arrayListOfUserScores.get(1).intValue());
-                nikaScore3TextView.setText(arrayListOfUsers.get(2) + ":" + arrayListOfUserScores.get(2).intValue());
+                nikaScore1TextView.setText(arrayListOfUsers.get(0) + arrayListOfUserScores.get(0).intValue());
+                nikaScore2TextView.setText(arrayListOfUsers.get(1)  + arrayListOfUserScores.get(1).intValue());
+                nikaScore3TextView.setText(arrayListOfUsers.get(2)  + arrayListOfUserScores.get(2).intValue());
 
                 int end = arrayListOfUsers.size();
                 int start = 0;
