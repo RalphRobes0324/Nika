@@ -13,3 +13,13 @@
 ## Profile Fragment has runtime permission in order to access your phone gallery to place an image on the profile location
 ## New Push buttons on Play Fragment that currently have no functionality but will serve as controls alongside the joystick
 ## Score Fragment has no functionality but its the location of where we'll list the leaderboard and top scores
+
+#Deliverable 3 
+## App now saves Login information with "remember me"
+## You are able to login Via Google
+## Joystick is now functional, and you are able to customize it with different colours
+## You can connect your device via Bluetooth 
+## Save your customized avatar on the profile
+## Write your review based on app experience
+## Select and purchase virtual currency
+## Score is functional, but sorting is not operational  
