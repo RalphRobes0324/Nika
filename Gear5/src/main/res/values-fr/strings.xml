@@ -36,6 +36,7 @@
     <string name="key_key1">key1</string>
     <string name="key_emailid">emailId</string>
     <string name="limits_phone_regex">^[+][0-9]{10,13}$</string>
+    <string name="phone_regex">[0-9]{10,13}$</string>
     <string name="childRef_topScore">topScore</string>
     <string name="childRef_Currency">currency</string>
     <string name="image_data">image_data</string>
@@ -54,6 +55,7 @@
     <string name="key_precent">%</string>
     <string name="key_GEAR">GEAR</string>
     <string name="onlineLink">https://cdn.discordapp.com/attachments/1016365164070707271/1041874520191008798/unknown.png</string>
+    <string name="plus">+</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -213,4 +215,6 @@
     <string name="errorOccured">Une erreur s\'est produite !</string>
     <string name="nameDisplay">Nom: \u0020</string>
     <string name="topScore">\u0020 | Meilleur score: \u0020"</string>
+    <string name="enterPhoneNumber">Entrez le numéro de téléphone</string>
+    <string name="invalidPhone">Téléphone invalide</string>
 </resources>

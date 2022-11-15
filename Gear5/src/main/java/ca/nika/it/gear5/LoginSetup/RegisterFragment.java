@@ -137,19 +137,19 @@ public class RegisterFragment extends Fragment {
             emailInput.setError(getString(R.string.warning_msg_reg_email),iconError);
         }
         if (phone.isEmpty()){
-            phoneInput.setError("Enter Phone Number", iconError);
+            phoneInput.setError(getString(R.string.enterPhoneNumber), iconError);
         }
         else{
             if (username.matches(getString(R.string.limits))){
                 if(email.matches(getString(R.string.limits_email_reg))){
                     if(password.matches(getString(R.string.limits))){
                         if(confirmPassword.matches(password)){
-                            if (phone.matches("[0-9]{10,13}$")) {
+                            if (phone.matches(getString(R.string.phone_regex))) {
                                 String userId = username;
                                 validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone);
                             }
                             else {
-                                phoneInput.setError("Invalid Phone", iconError);
+                                phoneInput.setError(getString(R.string.invalidPhone), iconError);
                             }
                         }
                         else{

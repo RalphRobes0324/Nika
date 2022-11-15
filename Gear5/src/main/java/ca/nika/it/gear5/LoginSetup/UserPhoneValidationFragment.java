@@ -99,7 +99,7 @@ public class UserPhoneValidationFragment extends Fragment {
                 String userNumber = userPhoneInput.getText().toString();
 
                 Context context = getActivity().getApplicationContext();
-                String text = "+"+code+userNumber;
+                String text = getString(R.string.plus)+code+userNumber;
 
                 validatePhoneNo(text,userNumber,context);
 
