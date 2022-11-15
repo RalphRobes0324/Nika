@@ -51,14 +51,13 @@ public class ScoreFragment extends Fragment {
         nikaScore1TextView = (TextView) view.findViewById(R.id.nikaScore1);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
+        DatabaseReference myRef = database.getReference(getString(R.string.childRef_reg_regFrag));
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()){
-                    String username = item.child("username").getValue().toString();
+                    String username = item.child(getString(R.string.childRef_username)).getValue().toString();
                     arrayListOfUsers.add(username);
-                    Log.d("MYAPP", username);
                 }
                 nikaScore1TextView.setText(arrayListOfUsers.get(0));
                 int end = arrayListOfUsers.size();
