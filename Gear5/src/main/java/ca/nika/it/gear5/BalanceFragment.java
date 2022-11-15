@@ -205,6 +205,7 @@ public class BalanceFragment extends Fragment{
         managerCompat.notify(1,notification.build());
     }
 
+    //builder design pattern, alertdialog.builder that user can interact with
     public void openDialog() {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
@@ -230,6 +231,7 @@ public class BalanceFragment extends Fragment{
                 exp = editTextEXP.getText().toString();
                 cvv = editTextCVV.getText().toString();
 
+                //This utilizes KISS as everything is very simplified and easy for anyone to understand
                 if(num.isEmpty()){
                     editTextNumber.setError(getString(R.string.card_num_req));
                     editTextNumber.requestFocus();
