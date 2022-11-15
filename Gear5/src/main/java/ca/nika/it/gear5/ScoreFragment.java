@@ -32,7 +32,7 @@ public class ScoreFragment extends Fragment {
 
     String nikaScoreDisplay1;
     ArrayList<String> arrayListOfUsers = new ArrayList<String>();
-
+    ArrayList<Integer> arrayListOfUserScores = new ArrayList<Integer>();
 
     public ScoreFragment() {
 
@@ -60,11 +60,17 @@ public class ScoreFragment extends Fragment {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()){
                     String username = item.child(getString(R.string.childRef_username)).getValue().toString();
+                    Integer userScore = item.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                    arrayListOfUserScores.add(userScore);
                     arrayListOfUsers.add(username);
                 }
-                nikaScore1TextView.setText(arrayListOfUsers.get(0));
-                nikaScore2TextView.setText(arrayListOfUsers.get(1));
-                nikaScore3TextView.setText(arrayListOfUsers.get(2));
+
+                //Log.d("TAG", test);
+
+                nikaScore1TextView.setText(arrayListOfUsers.get(0) + ":" + arrayListOfUserScores.get(0).intValue());
+                nikaScore2TextView.setText(arrayListOfUsers.get(1) + ":" + arrayListOfUserScores.get(1).intValue());
+                nikaScore3TextView.setText(arrayListOfUsers.get(2) + ":" + arrayListOfUserScores.get(2).intValue());
+
                 int end = arrayListOfUsers.size();
                 int start = 0;
 
