@@ -60,10 +60,10 @@ public class ScoreFragment extends Fragment {
                     arrayListOfUsers.add(username);
                     Log.d("MYAPP", username);
                 }
-                //nikaScore1TextView.setText(arrayListOfUsers.get(0));
+                nikaScore1TextView.setText(arrayListOfUsers.get(0));
                 int end = arrayListOfUsers.size();
                 int start = 0;
-                sortArray(arrayListOfUsers, start, end);
+
 
 
             }
@@ -74,16 +74,12 @@ public class ScoreFragment extends Fragment {
             }
         });
 
-        //String user = arrayListOfUsers.get(0);
-        //Log.d("MYAPP", user);
+
 
 
         return view;
 
     }
 
-    private void sortArray(ArrayList<String> arrayListOfUsers, int start, int end) {
 
-
-    }
 }
