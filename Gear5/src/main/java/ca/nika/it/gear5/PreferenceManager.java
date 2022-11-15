@@ -6,7 +6,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PreferenceManager {
+    /*
 
+    In this java class, we were unable to remove the hardcoded version of these strings used, it would cause an error, and since these strings
+    do not display inside of the fragments, it should be fine to not require french translation.
+
+     */
     private static  PreferenceManager INSTANCE;
     private  static SharedPreferences preferences;
 
