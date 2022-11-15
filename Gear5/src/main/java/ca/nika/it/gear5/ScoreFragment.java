@@ -28,7 +28,8 @@ import ca.nika.it.gear5.LoginSetup.UserClass;
 
 public class ScoreFragment extends Fragment {
 
-    private TextView nikaScore1TextView;
+    private TextView nikaScore1TextView, nikaScore2TextView, nikaScore3TextView;
+
     String nikaScoreDisplay1;
     ArrayList<String> arrayListOfUsers = new ArrayList<String>();
 
@@ -49,6 +50,8 @@ public class ScoreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
         nikaScore1TextView = (TextView) view.findViewById(R.id.nikaScore1);
+        nikaScore2TextView = (TextView) view.findViewById(R.id.nikaScore2);
+        nikaScore3TextView = (TextView) view.findViewById(R.id.nikaScore3);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(getString(R.string.childRef_reg_regFrag));
@@ -60,6 +63,8 @@ public class ScoreFragment extends Fragment {
                     arrayListOfUsers.add(username);
                 }
                 nikaScore1TextView.setText(arrayListOfUsers.get(0));
+                nikaScore2TextView.setText(arrayListOfUsers.get(1));
+                nikaScore3TextView.setText(arrayListOfUsers.get(2));
                 int end = arrayListOfUsers.size();
                 int start = 0;
 
