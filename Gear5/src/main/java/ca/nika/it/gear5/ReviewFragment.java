@@ -16,7 +16,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +36,7 @@ public class ReviewFragment extends Fragment {
     private String getUserId;
     private RatingBar ratingBar;
     private EditText usernameInput, userPhoneInput, userEmailInput, userCommentInput;
+    AlertDialog dialog;
 
     public ReviewFragment() {
     }
@@ -90,6 +90,7 @@ public class ReviewFragment extends Fragment {
                 String userEmail = userEmailInput.getText().toString().trim();
                 String userComment = userCommentInput.getText().toString().trim();
 
+
                 //This utilizes KISS as everything is very simplified and easy for anyone to understand
                 if (username.isEmpty()){
                     username = null;
@@ -103,6 +104,7 @@ public class ReviewFragment extends Fragment {
                 if(userComment.isEmpty()){
                     userComment = null;
                 }
+                LoadingDialog();
                 validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment, modelPhone);
 
 
@@ -153,5 +155,19 @@ public class ReviewFragment extends Fragment {
         builder.setAutoCancel(true);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
         managerCompat.notify(1,builder.build());
+    }
+
+    public void LoadingDialog(){
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(R.string.payment);
+
+        View view = getLayoutInflater().inflate(R.layout.load_dialog,null);
+
+        builder.setView(view);
+        dialog = builder.create();
+        dialog.show();
     }
 }
