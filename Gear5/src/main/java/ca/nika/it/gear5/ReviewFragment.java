@@ -16,6 +16,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,10 +105,7 @@ public class ReviewFragment extends Fragment {
                 if(userComment.isEmpty()){
                     userComment = null;
                 }
-                LoadingDialog();
                 validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment, modelPhone);
-
-
             }
 
         });
@@ -146,15 +144,23 @@ public class ReviewFragment extends Fragment {
         UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment, modelPhone);
         reference.child(newUserId).setValue(userReviewClass);
 
-        //Notification
-        Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
-        builder.setContentTitle(getString(R.string.title));
-        builder.setContentText(getString(R.string.reviewReply));
-        builder.setSmallIcon(R.drawable.devil_fruit);
-        builder.setAutoCancel(true);
-        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
-        managerCompat.notify(1,builder.build());
+        LoadingDialog();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+                //Notification
+                Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
+                builder.setContentTitle(getString(R.string.title));
+                builder.setContentText(getString(R.string.reviewReply));
+                builder.setSmallIcon(R.drawable.devil_fruit);
+                builder.setAutoCancel(true);
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
+                managerCompat.notify(1,builder.build());
+            }
+        },5000);
     }
 
     public void LoadingDialog(){
@@ -162,9 +168,9 @@ public class ReviewFragment extends Fragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(R.string.payment);
 
         View view = getLayoutInflater().inflate(R.layout.load_dialog,null);
+        builder.setCancelable(false);
 
         builder.setView(view);
         dialog = builder.create();
