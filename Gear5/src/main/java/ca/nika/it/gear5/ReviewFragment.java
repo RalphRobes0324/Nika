@@ -37,8 +37,6 @@ public class ReviewFragment extends Fragment {
     private String getUserId;
     private RatingBar ratingBar;
     private EditText usernameInput, userPhoneInput, userEmailInput, userCommentInput;
-    AlertDialog dialog;
-    Activity activity;
 
     public ReviewFragment() {
     }
@@ -155,16 +153,5 @@ public class ReviewFragment extends Fragment {
         builder.setAutoCancel(true);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
         managerCompat.notify(1,builder.build());
-    }
-
-    private void startLoading(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-
-        LayoutInflater inflater = activity.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.load_dialog,null));
-        builder.setCancelable(true);
-
-        dialog=builder.create();
-        dialog.show();
     }
 }
