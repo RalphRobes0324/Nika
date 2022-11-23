@@ -217,5 +217,6 @@
     <string name="topScore">\u0020 | Top Score: \u0020"</string>
     <string name="enterPhoneNumber">Enter Phone Number</string>
     <string name="invalidPhone">Invalid Phone</string>
+    <string name="loading">Loading...</string>
 
 </resources>

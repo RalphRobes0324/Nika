@@ -217,4 +217,5 @@
     <string name="topScore">\u0020 | Meilleur score: \u0020"</string>
     <string name="enterPhoneNumber">Entrez le numéro de téléphone</string>
     <string name="invalidPhone">Téléphone invalide</string>
+    <string name="loading">Loading...</string>
 </resources>
