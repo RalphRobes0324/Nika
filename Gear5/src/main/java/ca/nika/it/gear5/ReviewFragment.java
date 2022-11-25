@@ -2,7 +2,6 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -46,8 +45,6 @@ public class ReviewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -145,6 +142,7 @@ public class ReviewFragment extends Fragment {
         reference.child(newUserId).setValue(userReviewClass);
 
         LoadingDialog();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -174,6 +172,7 @@ public class ReviewFragment extends Fragment {
 
         builder.setView(view);
         dialog = builder.create();
+
         dialog.show();
     }
 }
