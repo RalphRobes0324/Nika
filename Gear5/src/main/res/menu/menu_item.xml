@@ -28,6 +28,7 @@
     <item
         android:id="@+id/nikaConnect"
         android:title="@string/connect"
+        android:icon="@drawable/ic_btc"
         app:showAsAction="never"/>
 
 
