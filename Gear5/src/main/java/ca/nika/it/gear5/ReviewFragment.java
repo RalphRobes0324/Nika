@@ -2,6 +2,7 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -14,7 +15,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class ReviewFragment extends Fragment {
     private String getUserId;
     private RatingBar ratingBar;
     private EditText usernameInput, userPhoneInput, userEmailInput, userCommentInput;
-
+    AlertDialog dialog;
 
     public ReviewFragment() {
     }
@@ -44,8 +45,6 @@ public class ReviewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,6 +88,7 @@ public class ReviewFragment extends Fragment {
                 String userEmail = userEmailInput.getText().toString().trim();
                 String userComment = userCommentInput.getText().toString().trim();
 
+
                 //This utilizes KISS as everything is very simplified and easy for anyone to understand
                 if (username.isEmpty()){
                     username = null;
@@ -103,8 +103,6 @@ public class ReviewFragment extends Fragment {
                     userComment = null;
                 }
                 validateFBUser(overall, getUserId, tag,username, userPhone, userEmail, userComment, modelPhone);
-
-
             }
 
         });
@@ -138,19 +136,44 @@ public class ReviewFragment extends Fragment {
 
     private void storeDataFB(String newUserId, String overall,
                              String username, String userPhone, String userEmail, String userComment, String modelPhone) {
+
+        LoadingDialog();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+                //Notification
+                Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
+                builder.setContentTitle(getString(R.string.title));
+                builder.setContentText(getString(R.string.reviewReply));
+                builder.setSmallIcon(R.drawable.devil_fruit);
+                builder.setAutoCancel(true);
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
+                managerCompat.notify(1,builder.build());
+            }
+        },5000);
+
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
         UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment, modelPhone);
         reference.child(newUserId).setValue(userReviewClass);
+    }
 
-        //Notification
-        Toast.makeText(getActivity(), R.string.reviewSubmitted, Toast.LENGTH_SHORT).show();
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),getString(R.string.notification));
-        builder.setContentTitle(getString(R.string.title));
-        builder.setContentText(getString(R.string.reviewReply));
-        builder.setSmallIcon(R.drawable.devil_fruit);
-        builder.setAutoCancel(true);
-        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
-        managerCompat.notify(1,builder.build());
+    public void LoadingDialog(){
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        View view = getLayoutInflater().inflate(R.layout.load_dialog,null);
+        builder.setCancelable(false);
+
+        builder.setView(view);
+        dialog = builder.create();
+
+        dialog.show();
     }
 }
