@@ -136,10 +136,6 @@ public class ReviewFragment extends Fragment {
 
     private void storeDataFB(String newUserId, String overall,
                              String username, String userPhone, String userEmail, String userComment, String modelPhone) {
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
-        UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment, modelPhone);
-        reference.child(newUserId).setValue(userReviewClass);
 
         LoadingDialog();
 
@@ -159,6 +155,11 @@ public class ReviewFragment extends Fragment {
                 managerCompat.notify(1,builder.build());
             }
         },5000);
+
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        DatabaseReference reference = rootNode.getReference(getString(R.string.childReg_reviews));
+        UserReviewClass userReviewClass = new UserReviewClass(overall, username, userPhone, userEmail, userComment, modelPhone);
+        reference.child(newUserId).setValue(userReviewClass);
     }
 
     public void LoadingDialog(){
