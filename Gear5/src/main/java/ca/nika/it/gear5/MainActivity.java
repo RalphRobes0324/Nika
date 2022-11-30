@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity{
 
         menu.findItem(R.id.nikaSettings).getActionView().setOnClickListener(view -> {
             this.replaceFragment(new SettingsFragment());
+
         });
 
         return true;
