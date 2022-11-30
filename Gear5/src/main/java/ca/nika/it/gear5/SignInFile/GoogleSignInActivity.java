@@ -33,6 +33,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
+import ca.nika.it.gear5.LoginSetup.UserClass;
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 
@@ -115,10 +116,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.exists()){
-
+                    storeUserGoogleFirebase(user);
                 }
                 else{
-
+                    String userID = user.getEmail() + user.getDisplayName();
                 }
             }
 
@@ -131,6 +132,23 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     }
 
+    private void storeUserGoogleFirebase(FirebaseUser user) {
+        String userId = user.getEmail() + user.getDisplayName();
+        String username = user.getDisplayName();
+        String password = null;
+        String email = user.getEmail();
+        int startCurrency = 500;
+        int startScore = 0;
+        String phone = null;
+        FirebaseDatabase rootNode;
+        DatabaseReference reference;
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone);
+        reference.child(userId).setValue(userClass);
+
+    }
+
     private void returnLogin() {
         finish();
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -138,20 +156,12 @@ public class GoogleSignInActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.enter_login_from_startup, R.anim.exit_startup);
     }
 
-    public void doSave(String userId)  {
-        SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        String typeLogin = "GoogleAccount";
-        editor.putString("typeLogin", typeLogin);
-        editor.putString(getString(R.string.userProfile), userId);
-        editor.apply();
-    }
+
 
 
 
     private void enterMainActivity(String username) {
         finish();
-        doSave(username);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
