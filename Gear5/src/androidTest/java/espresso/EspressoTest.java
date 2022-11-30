@@ -1,3 +1,6 @@
+// CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
+// CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
+
 package espresso;
 
 import static androidx.test.espresso.Espresso.*;
@@ -28,7 +31,7 @@ public class EspressoTest {
             FragmentTestRule.create(LoginFragment.class);
 
     @Test
-    public void validLogin()
+    public void validLogin() //username and password are in server and match
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("admin"), closeSoftKeyboard());
@@ -38,7 +41,7 @@ public class EspressoTest {
     }
 
     @Test
-    public void invalidLogin()
+    public void invalidLogin() //username and password are non-exisitent in server
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("fakeAccount"), closeSoftKeyboard());
@@ -48,7 +51,7 @@ public class EspressoTest {
     }
 
     @Test
-    public void validUserInvalidPassword()
+    public void validUserInvalidPassword() //admin is a verified user but the password is incorrect
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("admin"), closeSoftKeyboard());
@@ -58,7 +61,7 @@ public class EspressoTest {
     }
 
     @Test
-    public void invalidUserValidPassword()
+    public void invalidUserWrongAccountPassword() //fakeaccount is a non-existent account and the password is for a different account
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("fakeAccount"), closeSoftKeyboard());
@@ -68,7 +71,7 @@ public class EspressoTest {
     }
 
     @Test
-    public void capitalizationCheckUsername()
+    public void capitalizationCheckUsername() //username capitalization is wrong
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("Admin"), closeSoftKeyboard());
@@ -78,12 +81,22 @@ public class EspressoTest {
     }
 
     @Test
-    public void capitalizationCheckPassword()
+    public void capitalizationCheckPassword() //password capitalization is wrong
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("admin"), closeSoftKeyboard());
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
                 .perform(typeText("Admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
+    }
+
+    @Test
+    public void spaceAddedInLogin() //space added to end of username and start of password but everything else is valid
+    {
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("admin "), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText(" admin"), closeSoftKeyboard());
         onView(withId(R.id.nika_btn_login_login)).perform(click());
     }
 }
