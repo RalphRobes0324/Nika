@@ -89,4 +89,14 @@ public class EspressoTest {
                 .perform(typeText("Admin"), closeSoftKeyboard());
         onView(withId(R.id.nika_btn_login_login)).perform(click());
     }
+
+    @Test
+    public void spaceAddedInLogin() //space added to end of username and start of password but everything else is valid
+    {
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("admin "), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText(" admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
+    }
 }
