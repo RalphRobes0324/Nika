@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,18 +101,21 @@ public class ProfileFragment extends Fragment {
         if(sharedPreferences!= null) {
 
             String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
             Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
+
+
+
             checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
+                    if (snapshot.exists()) {
+                        String userName = snapshot.child(getUserId).child("username").getValue(String.class);
                         Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
                         Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                        usernameTextView.setText(getString(R.string.usernameDisplay) + getUserId);
-                        topScoreTextView.setText(getString(R.string.scoreDisplay)+ userScore);
-                        currencyTextView.setText(getString(R.string.currencyDisplay)+ userCur + getString(R.string.gears));
+                        usernameTextView.setText(getString(R.string.usernameDisplay) + userName);
+                        topScoreTextView.setText(getString(R.string.scoreDisplay) + userScore);
+                        currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
                     }
                 }
 
@@ -120,7 +124,6 @@ public class ProfileFragment extends Fragment {
 
                 }
             });
-
 
         }
 

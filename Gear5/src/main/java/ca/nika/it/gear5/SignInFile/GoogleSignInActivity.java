@@ -107,16 +107,17 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
 
-    public void doSave(String userId)  {
-        Toast.makeText(getApplicationContext(), userId,  Toast.LENGTH_SHORT).show();
-        Log.d("MSG CAP", userId);
+    public void doSave(String googleId)  {
+        Toast.makeText(getApplicationContext(), googleId,  Toast.LENGTH_SHORT).show();
+        Log.d("MSG CAP",googleId);
         SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String typeLogin = "GearGoogleAccount";
-        editor.putString("typeLogin", typeLogin);
-        editor.putString(getString(R.string.userProfile), userId);
+//        String googleLogin = "GearGoogleAccount";
+//        editor.putString("typeLogin", googleLogin);
+        editor.putString(getString(R.string.userProfile), googleId);
         editor.apply();
     }
+
 
     private void validateUserGoogleEmailFireBase(FirebaseUser user) {
         String userGoogleID = user.getUid();
@@ -171,10 +172,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
 
-    private void enterMainActivity(String userID) {
+    private void enterMainActivity(String googleId) {
         finish();
 
-        doSave(userID);
+        doSave(googleId);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
