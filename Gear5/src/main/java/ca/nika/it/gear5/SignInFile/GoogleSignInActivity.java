@@ -6,11 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
 import ca.nika.it.gear5.LoginSetup.UserClass;
 import ca.nika.it.gear5.MainActivity;
+import ca.nika.it.gear5.PreferenceManager;
 import ca.nika.it.gear5.R;
 
 public class GoogleSignInActivity extends AppCompatActivity {
@@ -104,6 +110,35 @@ public class GoogleSignInActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+
+    public void doSave() {
+        SharedPreferences sharedPreferences= getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+
+        if(sharedPreferences!= null) {
+
+            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+            Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
+            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+//                        Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+//                        topScoreTextView.setText(getString(R.string.scoreDisplay)+ userScore);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+        }
     }
 
     private void validateUserGoogleEmailFireBase(FirebaseUser user) {
