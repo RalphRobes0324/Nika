@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -23,8 +25,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
+import ca.nika.it.gear5.LoginSetup.UserClass;
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 
@@ -87,13 +96,57 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
-                            enterMainActivity();
+
+                            validateUserGoogleEmailFireBase(user);
                         }else{
                             Toast.makeText(getApplicationContext(), R.string.failAuth, Toast.LENGTH_SHORT).show();
                             returnLogin();
                         }
                     }
                 });
+    }
+
+    private void validateUserGoogleEmailFireBase(FirebaseUser user) {
+        String userGoogleEmail = user.getEmail();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userEmailRef = databaseReference.child(getString(R.string.childRef_reg_regFrag));
+        Query queryEmails = userEmailRef.orderByChild(getString(R.string.emailRef_reg_regFrag)).equalTo(userGoogleEmail);
+
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists()){
+                    storeUserGoogleFirebase(user);
+                }
+                else{
+                    String userID = user.getEmail() + user.getDisplayName();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        queryEmails.addListenerForSingleValueEvent(eventListener);
+
+    }
+
+    private void storeUserGoogleFirebase(FirebaseUser user) {
+        String userId = user.getEmail() + user.getDisplayName();
+        String username = user.getDisplayName();
+        String password = null;
+        String email = user.getEmail();
+        int startCurrency = 500;
+        int startScore = 0;
+        String phone = null;
+        FirebaseDatabase rootNode;
+        DatabaseReference reference;
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone);
+        reference.child(userId).setValue(userClass);
+
     }
 
     private void returnLogin() {
@@ -103,7 +156,11 @@ public class GoogleSignInActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.enter_login_from_startup, R.anim.exit_startup);
     }
 
-    private void enterMainActivity() {
+
+
+
+
+    private void enterMainActivity(String username) {
         finish();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

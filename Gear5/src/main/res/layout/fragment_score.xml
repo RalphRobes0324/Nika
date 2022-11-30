@@ -37,47 +37,9 @@
             android:orientation="vertical"
             android:showDividers="middle">
 
-            <TextView
-                android:id="@+id/nikaScore1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name_score"
-                android:textColor="#FFFF00"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:id="@+id/nikaSpace1"
+            <ListView
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
-
-            <TextView
-                android:id="@+id/nikaScore2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name_score"
-                android:textColor="#FFFF00"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:id="@+id/nikaSpace2"
-                android:layout_width="match_parent"
-                android:layout_height="5dp" />
-
-            <TextView
-                android:id="@+id/nikaScore3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name_score"
-                android:textColor="#FFFF00"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:id="@+id/nikaSpace3"
-                android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
     </ScrollView>
