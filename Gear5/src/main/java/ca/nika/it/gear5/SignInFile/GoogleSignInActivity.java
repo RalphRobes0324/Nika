@@ -6,16 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -40,7 +36,6 @@ import com.google.firebase.database.ValueEventListener;
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
 import ca.nika.it.gear5.LoginSetup.UserClass;
 import ca.nika.it.gear5.MainActivity;
-import ca.nika.it.gear5.PreferenceManager;
 import ca.nika.it.gear5.R;
 
 public class GoogleSignInActivity extends AppCompatActivity {
@@ -102,7 +97,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             validateUserGoogleEmailFireBase(user);
                         }else{
                             Toast.makeText(getApplicationContext(), R.string.failAuth, Toast.LENGTH_SHORT).show();
@@ -113,39 +107,23 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
 
-    public void doSave() {
-        SharedPreferences sharedPreferences= getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-
-        if(sharedPreferences!= null) {
-
-            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-            Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
-            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-//                        Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-//                        topScoreTextView.setText(getString(R.string.scoreDisplay)+ userScore);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-
-        }
+    public void doSave(String userId)  {
+        Toast.makeText(getApplicationContext(), userId,  Toast.LENGTH_SHORT).show();
+        Log.d("MSG CAP", userId);
+        SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String typeLogin = "GearGoogleAccount";
+        editor.putString("typeLogin", typeLogin);
+        editor.putString(getString(R.string.userProfile), userId);
+        editor.apply();
     }
 
     private void validateUserGoogleEmailFireBase(FirebaseUser user) {
-        String userGoogleEmail = user.getEmail();
+        String userGoogleID = user.getUid();
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userEmailRef = databaseReference.child(getString(R.string.childRef_reg_regFrag));
-        Query queryEmails = userEmailRef.orderByChild(getString(R.string.emailRef_reg_regFrag)).equalTo(userGoogleEmail);
+        Query queryEmails = userEmailRef.orderByChild(getString(R.string.emailRef_reg_regFrag)).equalTo(userGoogleID);
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
@@ -154,7 +132,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     storeUserGoogleFirebase(user);
                 }
                 else{
-                    String userID = user.getEmail() + user.getDisplayName();
+                    enterMainActivity(userGoogleID);
                 }
             }
 
@@ -168,19 +146,20 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
     private void storeUserGoogleFirebase(FirebaseUser user) {
-        String userId = user.getEmail() + user.getDisplayName();
+        String userId = user.getUid();
         String username = user.getDisplayName();
-        String password = null;
-        String email = user.getEmail();
+        String password = "No PASSWORD";
+        String email = "NO EMAIL";
         int startCurrency = 500;
         int startScore = 0;
-        String phone = null;
+        String phone = user.getPhoneNumber();
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
         UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone);
         reference.child(userId).setValue(userClass);
+        enterMainActivity(userId);
 
     }
 
@@ -192,11 +171,11 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    private void enterMainActivity(String username) {
+    private void enterMainActivity(String userID) {
         finish();
+
+        doSave(userID);
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);
