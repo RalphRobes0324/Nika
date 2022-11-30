@@ -28,7 +28,7 @@ public class EspressoTest {
             FragmentTestRule.create(LoginFragment.class);
 
     @Test
-    public void canLogin()
+    public void validLogin()
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("admin"), closeSoftKeyboard());
@@ -44,6 +44,46 @@ public class EspressoTest {
                 .perform(typeText("fakeAccount"), closeSoftKeyboard());
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
                 .perform(typeText("fakeAccount"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
+    }
+
+    @Test
+    public void validUserInvalidPassword()
+    {
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText("badPassword"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
+    }
+
+    @Test
+    public void invalidUserValidPassword()
+    {
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("fakeAccount"), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText("admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
+    }
+
+    @Test
+    public void capitalizationCheckUsername()
+    {
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("Admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText("admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
+    }
+
+    @Test
+    public void capitalizationCheckPassword()
+    {
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText("Admin"), closeSoftKeyboard());
         onView(withId(R.id.nika_btn_login_login)).perform(click());
     }
 }
