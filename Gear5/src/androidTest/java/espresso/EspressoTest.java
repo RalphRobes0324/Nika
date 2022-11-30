@@ -1,15 +1,17 @@
 package espresso;
 
 import static androidx.test.espresso.Espresso.*;
-import static androidx.test.espresso.assertion.PositionAssertions.isCompletelyAbove;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import ca.nika.it.gear5.MainActivity;
+import com.android21buttons.fragmenttestrule.FragmentTestRule;
+
+import ca.nika.it.gear5.LoginSetup.LoginFragment;
 import ca.nika.it.gear5.R;
 
 import org.junit.Rule;
@@ -20,14 +22,28 @@ import org.junit.runner.RunWith;
 @LargeTest
 
 public class EspressoTest {
+
     @Rule
-    public ActivityScenarioRule<MainActivity> activityRule =
-            new ActivityScenarioRule<MainActivity>(MainActivity.class);
+    public FragmentTestRule<?, LoginFragment> fragmentTestRule =
+            FragmentTestRule.create(LoginFragment.class);
 
     @Test
-    public void imageViewAboveBottomNav()
+    public void canLogin()
     {
-        onView(withId(R.id.nikaImageView)).check(matches(isDisplayed()));
-        onView(withId(R.id.nikaImageView)).check(isCompletelyAbove(withId(R.id.nikaBottomNavigationView)));
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText("admin"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
+    }
+
+    @Test
+    public void invalidLogin()
+    {
+        onView(withId(R.id.nika_edittext_username_loginFrag))
+                .perform(typeText("fakeAccount"), closeSoftKeyboard());
+        onView(withId(R.id.nika_edittext_pwd_loginFrag))
+                .perform(typeText("fakeAccount"), closeSoftKeyboard());
+        onView(withId(R.id.nika_btn_login_login)).perform(click());
     }
 }
