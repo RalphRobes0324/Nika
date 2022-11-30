@@ -199,11 +199,10 @@ public class LoginFragment extends Fragment {
     public void doSave(String userId)  {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
+        String typeLogin = "GearAccount";
+        editor.putString("typeLogin", typeLogin);
         editor.putString(getString(R.string.userProfile), userId);
-
         editor.apply();
-
     }
 
     private void moveToMainActivity(String userId){
