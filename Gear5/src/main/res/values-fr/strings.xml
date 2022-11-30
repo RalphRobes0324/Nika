@@ -102,8 +102,8 @@
     <string name="PermissionDenied">Permission refusée</string>
     <string name="error_msg_login">Impossible de trouver</string>
     <string name="error_msg_login_read">Impossible de lire</string>
-    <string name="login_page_remember_me">Remember me</string>
-    <string name="welcome_to_gear5_title_retail">Welcome to GEAR5</string>
+    <string name="login_page_remember_me">Souviens-toi de moi</string>
+    <string name="welcome_to_gear5_title_retail">Bienvenue à GEAR5</string>
     <string name="forgot_password_forgotFrag_title">Mot de passe oublié</string>
     <string name="ask_logout">Voulez-vous vous déconnecter?</string>
     <string name="create_account_title_registerfrag">Créer un compte</string>
