@@ -50,6 +50,8 @@ public class ScoreFragment extends Fragment {
     JSONArray sortedArray=new JSONArray();
     List<JSONObject> sortValues = new ArrayList<JSONObject>();
 
+    ListView listView;
+
 
     ProgressDialog progress;
     ImageView nikaSyncTaskImage;
@@ -104,16 +106,7 @@ public class ScoreFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
-        String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
-                "WebOS","Ubuntu","Windows7","Max OS X"};
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.list_view, mobileArray);
-
-        ListView listView = (ListView) view.findViewById(R.id.nika_userList);
-
-        listView.setAdapter(adapter);
-
+        listView = (ListView) view.findViewById(R.id.nika_userList);
 
         nikaSyncTaskImage = (ImageView) view.findViewById(R.id.nika_aSync);
 
@@ -158,13 +151,22 @@ public class ScoreFragment extends Fragment {
                 });
 
                 for(int i = 0; i < arrayFirebase.length(); i++) {
-                    try {
+                    sortedArray.put(sortValues.get(i));
+                    /*try {
                         sortedArray.put(sortValues.get(i));
-                        Log.d("AFTER", sortedArray.getString(i));
+                        Log.d("DONE", sortedArray.getString(i));
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 }
+
+                try {
+                    DisplayTopUsers(sortedArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }
 
             @Override
@@ -177,6 +179,22 @@ public class ScoreFragment extends Fragment {
         new LoadImage().execute();
 
         return view;
+
+    }
+
+    private void DisplayTopUsers(JSONArray sortedArray) throws JSONException {
+        String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
+                "WebOS","Ubuntu","Windows7","Max OS X"};
+        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.list_view, mobileArray);
+
+        for (int pos = 0; pos < sortedArray.length(); pos++){
+            String jsonStr = sortedArray.getString(pos);
+            Log.d("NEW_AFTER", sortedArray.getString(pos));
+        }
+
+
+        listView.setAdapter(adapter);
 
     }
 
