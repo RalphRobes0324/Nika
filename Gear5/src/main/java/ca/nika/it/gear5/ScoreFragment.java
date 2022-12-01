@@ -46,12 +46,6 @@ public class ScoreFragment extends Fragment {
 
     private TextView nikaScore1TextView, nikaScore2TextView, nikaScore3TextView;
 
-
-    ArrayList<String> arrayListOfUsers = new ArrayList<String>();
-    ArrayList<Integer> arrayListOfUserScores = new ArrayList<Integer>();
-
-
-
     JSONArray arrayFirebase=new JSONArray();
     JSONArray sortedArray=new JSONArray();
     List<JSONObject> sortValues = new ArrayList<JSONObject>();
@@ -165,17 +159,6 @@ public class ScoreFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
             }
 
             @Override
