@@ -35,8 +35,8 @@
 
     <LinearLayout
         android:id="@+id/nikaLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="235dp"
+        android:layout_width="416dp"
+        android:layout_height="142dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/grey_transparent"
         android:orientation="vertical"
@@ -77,23 +77,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="match_parent">
-
-
-            <ImageButton
-                android:id="@+id/nikaImgBtn"
-                android:layout_width="129dp"
-                android:layout_height="79dp"
-                android:layout_gravity="center_vertical"
-                android:adjustViewBounds="true"
-                android:background="@null"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_change_profile"
-                android:text="@string/click_to_add_image"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                app:cornerRadius="28dp" />
+            android:layout_height="match_parent"
+            android:gravity="center">
 
         </LinearLayout>
 
@@ -114,6 +99,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nikaLinearLayout" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/nikaImgBtn"
+            android:layout_width="125dp"
+            android:layout_height="108dp"
+            android:layout_gravity="bottom|right"
+            app:fab_expandDirection="down"
+            app:fab_colorNormal="@color/purple_500"
+            app:fab_colorPressed="@color/purple_700"
+            app:fab_icon="@drawable/ic_change_profile"
+            app:fab_labelsPosition="right"
+            android:layout_margin="16dp"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
