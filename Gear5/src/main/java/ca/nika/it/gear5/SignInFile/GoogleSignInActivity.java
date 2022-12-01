@@ -43,6 +43,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
     private FirebaseAuth mAuth;
 
+    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
+            "WebOS","Ubuntu","Windows7","Max OS X"};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +170,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
         finish();
 
         doSave(googleId);
-
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.exit_startup, R.anim.enter_login_from_startup);

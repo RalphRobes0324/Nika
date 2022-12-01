@@ -15,7 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -108,9 +110,11 @@ public class ScoreFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
-        nikaScore1TextView = (TextView) view.findViewById(R.id.nikaScore1);
-        nikaScore2TextView = (TextView) view.findViewById(R.id.nikaScore2);
-        nikaScore3TextView = (TextView) view.findViewById(R.id.nikaScore3);
+        String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
+                "WebOS","Ubuntu","Windows7","Max OS X"};
+
+
+
         nikaSyncTaskImage = (ImageView) view.findViewById(R.id.nika_aSync);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
