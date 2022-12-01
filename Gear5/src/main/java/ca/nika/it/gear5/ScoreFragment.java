@@ -190,7 +190,9 @@ public class ScoreFragment extends Fragment {
 
         for (int pos = 0; pos < sortedArray.length(); pos++){
             String jsonStr = sortedArray.getString(pos);
-            Log.d("NEW_AFTER", sortedArray.getString(pos));
+            JSONObject objectScore = new JSONObject(jsonStr);
+            String Score = (String) objectScore.get("UserScore");
+            Log.d("NEW_AFTER", Score);
         }
 
 
