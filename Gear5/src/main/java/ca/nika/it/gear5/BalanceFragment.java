@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +42,7 @@ public class BalanceFragment extends Fragment{
     EditText editTextNumber,editTextEXP,editTextCVV;
     AlertDialog dialog;
     Button pay;
-    String num,exp,cvv, getUserID;
+    String num,exp,cvv, getUserID, typeOFsignout;;
     int amount;
 
     public BalanceFragment() {
@@ -171,27 +174,63 @@ public class BalanceFragment extends Fragment{
 
     private void updateUserCurrFirebase() {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-        Query checkUser  = databaseReference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserID);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    Integer userCurrentCurr = snapshot.child(getUserID).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                    int sum = userCurrentCurr.intValue() + amount;
-                    Integer newSum = new Integer(sum);
-                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_Currency)).setValue(newSum);
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
 
-                }
+        if(sharedPreferences!= null) {
+            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+            typeOFsignout = typeOFLogin;
+            if(typeOFLogin.equals("GearAccount")) {
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+                Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
+
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Integer userCurrentCurr = snapshot.child(getUserID).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                            int sum = userCurrentCurr.intValue() + amount;
+                            Integer newSum = new Integer(sum);
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_Currency)).setValue(newSum);
+
+                        } else {
+                            Log.d("FAILED", "FAILED GEAR");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+            else if(typeOFLogin.equals("GearGoogleAccount")){
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference uidRef = db.child("users").child(getUserId);
+                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DataSnapshot snapshot = task.getResult();
+                            Integer userCurrentCurr = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                            int sum = userCurrentCurr.intValue() + amount;
+                            Integer newSum = new Integer(sum);
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_Currency)).setValue(newSum);
+                        }else{
+                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                        }
+                    }
+                });
 
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            else{
+                Log.d("FAILED", "FAILED");
             }
-        });
+
+        }
     }
 
     public void sendNotification(){
