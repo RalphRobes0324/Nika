@@ -237,13 +237,9 @@ public class ProfileFragment extends Fragment {
                                 if (typeOFsignout.equals("GearGoogleAccount")){
                                     FirebaseAuth.getInstance().signOut();
                                     Log.d("LOGOUT", "GOOGLE");
-                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                    startActivity(intent);
                                     getActivity().finish();
                                 }else{
                                     Log.d("LOGOUT", "NORM");
-                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                    startActivity(intent);
                                     getActivity().finish();
                                 }
 
