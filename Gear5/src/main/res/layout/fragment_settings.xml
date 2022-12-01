@@ -30,44 +30,44 @@
 
             <TextView
                 android:id="@+id/nikaTV2"
-                android:layout_width="198dp"
-                android:layout_height="56dp"
-                android:fontFamily="@font/press_start_2p"
+                android:layout_width="203dp"
+                android:layout_height="43dp"
                 android:text="@string/button_color"
                 android:textColor="#FFFF00"
-                android:textSize="20sp"
+                android:textSize="30sp"
+                android:fontFamily="@font/montserrat_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
                 android:id="@+id/nikaRG1"
-                android:layout_width="141dp"
+                android:layout_width="102dp"
                 android:layout_height="154dp"
                 app:layout_constraintStart_toEndOf="@+id/nikaTV2"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <RadioButton
                     android:id="@+id/nikaRB4"
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:fontFamily="@font/press_start_2p"
                     android:text="@string/red"
                     android:textColor="#FFFF00" />
 
                 <RadioButton
                     android:id="@+id/nikaRB5"
-                    android:layout_width="230dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/press_start_2p"
                     android:text="@string/yellow"
                     android:textColor="#FFFF00" />
 
                 <RadioButton
                     android:id="@+id/nikaRB6"
-                    android:layout_width="142dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/press_start_2p"
                     android:text="@string/green"
                     android:textColor="#FFFF00" />
             </RadioGroup>
@@ -79,12 +79,12 @@
 
             <TextView
                 android:id="@+id/nikaTV3"
-                android:layout_width="235dp"
-                android:layout_height="58dp"
-                android:fontFamily="@font/press_start_2p"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_width="205dp"
+                android:layout_height="39dp"
                 android:text="@string/mute_audio"
                 android:textColor="#FFFF00"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,12 +103,12 @@
 
             <TextView
                 android:id="@+id/nikaTV4"
-                android:layout_width="327dp"
-                android:layout_height="63dp"
-                android:fontFamily="@font/press_start_2p"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="@string/portrait"
                 android:textColor="#FFFF00"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -127,12 +127,12 @@
 
             <TextView
                 android:id="@+id/nikaTV5"
-                android:layout_width="327dp"
-                android:layout_height="59dp"
-                android:fontFamily="@font/press_start_2p"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
                 android:text="@string/show_joystick_stats"
                 android:textColor="#FFFF00"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -147,7 +147,7 @@
             <Space
                 android:id="@+id/nikaSpace5"
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="40dp" />
 
 
         </LinearLayout>
