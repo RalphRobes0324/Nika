@@ -108,8 +108,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
 
     public void doSave(String googleId)  {
-        Toast.makeText(getApplicationContext(), googleId,  Toast.LENGTH_SHORT).show();
-
         SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String googleLogin = "GearGoogleAccount";
