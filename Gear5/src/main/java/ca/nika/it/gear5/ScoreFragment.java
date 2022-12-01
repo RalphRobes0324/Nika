@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,18 +25,39 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import ca.nika.it.gear5.LoginSetup.LoginFragment;
+
 
 public class ScoreFragment extends Fragment {
 
     private TextView nikaScore1TextView, nikaScore2TextView, nikaScore3TextView;
 
+
     ArrayList<String> arrayListOfUsers = new ArrayList<String>();
     ArrayList<Integer> arrayListOfUserScores = new ArrayList<Integer>();
+
+
+
+    JSONArray arrayFirebase=new JSONArray();
+    JSONArray sortedArray=new JSONArray();
+    List<JSONObject> sortValues = new ArrayList<JSONObject>();
+
+
     ProgressDialog progress;
     ImageView nikaSyncTaskImage;
+
 
     public ScoreFragment() {
 
@@ -98,16 +120,56 @@ public class ScoreFragment extends Fragment {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()){
                     String username = item.child(getString(R.string.childRef_username)).getValue().toString();
-                    Integer userScore = item.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                    arrayListOfUserScores.add(userScore);
-                    arrayListOfUsers.add(username);
+                    String userScore = item.child(getString(R.string.childRef_topScore)).getValue(Integer.class).toString();
+                    try {
+                        arrayFirebase.put(new JSONObject().put("Username", username).put("UserScore", userScore));
+                    } catch (JSONException e) {
+                        Log.d("Failed", "STORING");
+                    }
                 }
 
-                /*
-                nikaScore1TextView.setText(getString(R.string.nameDisplay) + arrayListOfUsers.get(0) + getString(R.string.topScore) + arrayListOfUserScores.get(0).intValue());
-                nikaScore2TextView.setText(getString(R.string.nameDisplay) + arrayListOfUsers.get(1) + getString(R.string.topScore) + arrayListOfUserScores.get(1).intValue());
-                nikaScore3TextView.setText(getString(R.string.nameDisplay) + arrayListOfUsers.get(2) + getString(R.string.topScore) + arrayListOfUserScores.get(2).intValue());
-                 */
+                for (int i = 0; i < arrayFirebase.length(); i++){
+                    try {
+                        sortValues.add(arrayFirebase.getJSONObject(i));
+                        Log.d("BEFORE", arrayFirebase.getString(i));
+                    } catch (JSONException e) {
+                        Log.d("FAILED", "NULL ARRAY");
+                    }
+                }
+                Collections.sort(sortValues, new Comparator<JSONObject>() {
+                    private static final String KEY_NAME = "UserScore";
+                    @Override
+                    public int compare(JSONObject a, JSONObject b) {
+                        String str1 = new String();
+                        String str2 = new String();
+
+                        try {
+                            str1 = (String) a.get(KEY_NAME);
+                            str2 = (String) b.get(KEY_NAME);
+                        } catch (JSONException e) {
+                            Log.d("FAILED", "NULL SORT");
+                        }
+                        return -str1.compareTo(str2);
+                    }
+                });
+
+                for(int i = 0; i < arrayFirebase.length(); i++) {
+                    try {
+                        sortedArray.put(sortValues.get(i));
+                        Log.d("AFTER", sortedArray.getString(i));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+
+
+
+
+
+
 
 
             }
@@ -117,7 +179,6 @@ public class ScoreFragment extends Fragment {
 
             }
         });
-
 
 
         new LoadImage().execute();
