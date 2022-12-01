@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
 <!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -31,4 +31,4 @@
 
 
 
-</ScrollView>
+</LinearLayout>

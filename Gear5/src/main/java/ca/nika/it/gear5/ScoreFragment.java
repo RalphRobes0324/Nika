@@ -107,6 +107,12 @@ public class ScoreFragment extends Fragment {
         String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
                 "WebOS","Ubuntu","Windows7","Max OS X"};
 
+        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.list_view, mobileArray);
+
+        ListView listView = (ListView) view.findViewById(R.id.nika_userList);
+
+        listView.setAdapter(adapter);
 
 
         nikaSyncTaskImage = (ImageView) view.findViewById(R.id.nika_aSync);
