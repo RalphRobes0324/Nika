@@ -109,11 +109,11 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     public void doSave(String googleId)  {
         Toast.makeText(getApplicationContext(), googleId,  Toast.LENGTH_SHORT).show();
-        Log.d("MSG CAP",googleId);
+
         SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-//        String googleLogin = "GearGoogleAccount";
-//        editor.putString("typeLogin", googleLogin);
+        String googleLogin = "GearGoogleAccount";
+        editor.putString("typeLogin", googleLogin);
         editor.putString(getString(R.string.userProfile), googleId);
         editor.apply();
     }
@@ -122,27 +122,19 @@ public class GoogleSignInActivity extends AppCompatActivity {
     private void validateUserGoogleEmailFireBase(FirebaseUser user) {
         String userGoogleID = user.getUid();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userEmailRef = databaseReference.child(getString(R.string.childRef_reg_regFrag));
-        Query queryEmails = userEmailRef.orderByChild(getString(R.string.emailRef_reg_regFrag)).equalTo(userGoogleID);
-
-        ValueEventListener eventListener = new ValueEventListener() {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference uidRef = db.child("users").child(userGoogleID);
+        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!snapshot.exists()){
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    enterMainActivity(userGoogleID);
+                }else{
                     storeUserGoogleFirebase(user);
                 }
-                else{
-                    enterMainActivity(userGoogleID);
-                }
             }
+        });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        queryEmails.addListenerForSingleValueEvent(eventListener);
 
     }
 

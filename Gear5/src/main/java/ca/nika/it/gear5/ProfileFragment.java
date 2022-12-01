@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +56,7 @@ public class ProfileFragment extends Fragment {
     ImageButton mChooseBtn;
     Button btn;
     TextView usernameTextView, topScoreTextView, currencyTextView;
+    String typeOFsignout;
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int IMAGE_PICK_CODE = 1000;
@@ -97,33 +99,61 @@ public class ProfileFragment extends Fragment {
 
 
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-
         if(sharedPreferences!= null) {
+            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+            typeOFsignout = typeOFLogin;
+            if(typeOFLogin.equals("GearAccount")) {
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+                Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
 
-            String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-            Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
+                            Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                            usernameTextView.setText(getString(R.string.usernameDisplay) + userName);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + userScore);
+                            currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
 
-
-
-            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String userName = snapshot.child(getUserId).child("username").getValue(String.class);
-                        Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                        Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                        usernameTextView.setText(getString(R.string.usernameDisplay) + userName);
-                        topScoreTextView.setText(getString(R.string.scoreDisplay) + userScore);
-                        currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
+                        } else {
+                            Log.d("FAILED", "FAILED GEAR");
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+                    }
+                });
+            }
+            else if(typeOFLogin.equals("GearGoogleAccount")){
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference uidRef = db.child("users").child(getUserId);
+                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DataSnapshot snapshot = task.getResult();
+                            String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
+                            Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                            usernameTextView.setText(getString(R.string.usernameDisplay) + userName);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + userScore);
+                            currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
+                        }else{
+                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                        }
+                    }
+                });
+
+            }
+            else{
+                Log.d("FAILED", "FAILED");
+            }
 
         }
 
@@ -204,9 +234,20 @@ public class ProfileFragment extends Fragment {
                                 editor.putString(getString(R.string.remember), getString(R.string.unchecked));
                                 editor.apply();
 
-                                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                startActivity(intent);
-                                getActivity().finish();
+                                if (typeOFsignout.equals("GearGoogleAccount")){
+                                    FirebaseAuth.getInstance().signOut();
+                                    Log.d("LOGOUT", "GOOGLE");
+                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                }else{
+                                    Log.d("LOGOUT", "NORM");
+                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                }
+
+
                             }
                         })
                         .setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {

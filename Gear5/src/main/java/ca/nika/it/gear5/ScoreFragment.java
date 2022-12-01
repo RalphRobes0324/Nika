@@ -103,9 +103,11 @@ public class ScoreFragment extends Fragment {
                     arrayListOfUsers.add(username);
                 }
 
+                /*
                 nikaScore1TextView.setText(getString(R.string.nameDisplay) + arrayListOfUsers.get(0) + getString(R.string.topScore) + arrayListOfUserScores.get(0).intValue());
                 nikaScore2TextView.setText(getString(R.string.nameDisplay) + arrayListOfUsers.get(1) + getString(R.string.topScore) + arrayListOfUserScores.get(1).intValue());
                 nikaScore3TextView.setText(getString(R.string.nameDisplay) + arrayListOfUsers.get(2) + getString(R.string.topScore) + arrayListOfUserScores.get(2).intValue());
+                 */
 
 
             }
