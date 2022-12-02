@@ -20,10 +20,12 @@
             android:layout_width="135dp"
             android:layout_height="139dp"
             android:layout_gravity="center"/>
+
         <ListView
             android:id="@+id/nika_userList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 

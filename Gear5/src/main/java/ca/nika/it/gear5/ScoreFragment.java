@@ -152,12 +152,6 @@ public class ScoreFragment extends Fragment {
 
                 for(int i = 0; i < arrayFirebase.length(); i++) {
                     sortedArray.put(sortValues.get(i));
-                    /*try {
-                        sortedArray.put(sortValues.get(i));
-                        Log.d("DONE", sortedArray.getString(i));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }*/
                 }
 
                 try {
@@ -183,21 +177,31 @@ public class ScoreFragment extends Fragment {
     }
 
     private void DisplayTopUsers(JSONArray sortedArray) throws JSONException {
-        ArrayList<String> ar = new ArrayList<String>();
+        ArrayList<String> top15Array = new ArrayList<String>();
 
-
-        for (int pos = 0; pos < sortedArray.length(); pos++){
-            String jsonStr = sortedArray.getString(pos);
-            JSONObject objectData = new JSONObject(jsonStr);
-            String Score = (String) objectData.get("UserScore");
-            String Username = (String) objectData.get("Username");
-            String combinedData =  Username + " score: " + Score;
-            //mobileArray[pos] =
-            ar.add(combinedData);
-            Log.d("NEW_AFTER", combinedData);
+        if (sortedArray.length() < 15) {
+            for (int pos = 0; pos < sortedArray.length(); pos++) {
+                String jsonStr = sortedArray.getString(pos);
+                JSONObject objectData = new JSONObject(jsonStr);
+                String Score = (String) objectData.get("UserScore");
+                String Username = (String) objectData.get("Username");
+                String combinedData = Username + " score: " + Score;
+                top15Array.add(combinedData);
+                Log.d("NEW_AFTER", combinedData);
+            }
+        }else{
+            for (int pos = 0; pos < 15; pos++) {
+                String jsonStr = sortedArray.getString(pos);
+                JSONObject objectData = new JSONObject(jsonStr);
+                String Score = (String) objectData.get("UserScore");
+                String Username = (String) objectData.get("Username");
+                String combinedData = Username + " score: " + Score;
+                top15Array.add(combinedData);
+                Log.d("NEW_AFTER", combinedData);
+            }
         }
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.list_view, ar);
+                R.layout.list_view, top15Array);
 
         listView.setAdapter(adapter);
 
