@@ -128,9 +128,8 @@ public class ScoreFragment extends Fragment {
                 for (int i = 0; i < arrayFirebase.length(); i++){
                     try {
                         sortValues.add(arrayFirebase.getJSONObject(i));
-                        Log.d("BEFORE", arrayFirebase.getString(i));
                     } catch (JSONException e) {
-                        Log.d("FAILED", "NULL ARRAY");
+                        e.printStackTrace();
                     }
                 }
                 Collections.sort(sortValues, new Comparator<JSONObject>() {
@@ -185,9 +184,8 @@ public class ScoreFragment extends Fragment {
                 JSONObject objectData = new JSONObject(jsonStr);
                 String Score = (String) objectData.get("UserScore");
                 String Username = (String) objectData.get("Username");
-                String combinedData = Username + " score: " + Score;
+                String combinedData = Username + " : " + Score;
                 top15Array.add(combinedData);
-                Log.d("NEW_AFTER", combinedData);
             }
         }else{
             for (int pos = 0; pos < 15; pos++) {
@@ -197,7 +195,6 @@ public class ScoreFragment extends Fragment {
                 String Username = (String) objectData.get("Username");
                 String combinedData = Username + " score: " + Score;
                 top15Array.add(combinedData);
-                Log.d("NEW_AFTER", combinedData);
             }
         }
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
