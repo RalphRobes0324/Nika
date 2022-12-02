@@ -132,6 +132,9 @@ public class ScoreFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
+
+
+
                 Collections.sort(sortValues, new Comparator<JSONObject>() {
                     private static final String KEY_NAME = "UserScore";
                     @Override
@@ -148,6 +151,8 @@ public class ScoreFragment extends Fragment {
                         return -str1.compareTo(str2);
                     }
                 });
+
+
 
                 for(int i = 0; i < arrayFirebase.length(); i++) {
                     sortedArray.put(sortValues.get(i));
@@ -178,7 +183,7 @@ public class ScoreFragment extends Fragment {
     private void DisplayTopUsers(JSONArray sortedArray) throws JSONException {
         ArrayList<String> top15Array = new ArrayList<String>();
 
-        if (sortedArray.length() < 15) {
+        if (sortedArray.length() < 9) {
             for (int pos = 0; pos < sortedArray.length(); pos++) {
                 String jsonStr = sortedArray.getString(pos);
                 JSONObject objectData = new JSONObject(jsonStr);
@@ -188,7 +193,7 @@ public class ScoreFragment extends Fragment {
                 top15Array.add(combinedData);
             }
         }else{
-            for (int pos = 0; pos < 15; pos++) {
+            for (int pos = 0; pos < 9; pos++) {
                 String jsonStr = sortedArray.getString(pos);
                 JSONObject objectData = new JSONObject(jsonStr);
                 String Score = (String) objectData.get("UserScore");

@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
 <!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_1"
+    android:background="@color/black"
     tools:context=".ScoreFragment">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView2"
+        android:layout_width="429dp"
+        android:layout_height="1000dp"
+        android:src="@drawable/scoreboardwallpaper2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="80dp">
-        <ImageView
-            android:id="@+id/nika_aSync"
-            android:layout_width="135dp"
-            android:layout_height="139dp"
-            android:layout_gravity="center"/>
+        android:background="@drawable/grey_transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ListView
-            android:id="@+id/nika_userList"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="3000dp"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:id="@+id/nika_aSync"
+                android:layout_width="135dp"
+                android:layout_height="139dp"
+                android:layout_gravity="center"/>
 
-
+            <ListView
+                android:id="@+id/nika_userList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
     </LinearLayout>
-
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@
         android:id="@+id/gifImageView2"
         android:layout_width="1000dp"
         android:layout_height="1500dp"
-        android:src="@drawable/wallpaper_anim"
+        android:src="@drawable/profilewallper3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
