@@ -183,18 +183,21 @@ public class ScoreFragment extends Fragment {
     }
 
     private void DisplayTopUsers(JSONArray sortedArray) throws JSONException {
-        String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
-                "WebOS","Ubuntu","Windows7","Max OS X"};
-        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.list_view, mobileArray);
+        ArrayList<String> ar = new ArrayList<String>();
+
 
         for (int pos = 0; pos < sortedArray.length(); pos++){
             String jsonStr = sortedArray.getString(pos);
-            JSONObject objectScore = new JSONObject(jsonStr);
-            String Score = (String) objectScore.get("UserScore");
-            Log.d("NEW_AFTER", Score);
+            JSONObject objectData = new JSONObject(jsonStr);
+            String Score = (String) objectData.get("UserScore");
+            String Username = (String) objectData.get("Username");
+            String combinedData =  Username + " score: " + Score;
+            //mobileArray[pos] =
+            ar.add(combinedData);
+            Log.d("NEW_AFTER", combinedData);
         }
-
+        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.list_view, ar);
 
         listView.setAdapter(adapter);
 
