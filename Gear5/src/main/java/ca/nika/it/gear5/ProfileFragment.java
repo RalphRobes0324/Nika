@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
     ImageButton mChooseBtn;
     Button btn;
     TextView usernameTextView, topScoreTextView, currencyTextView;
-    String typeOFsignout;
+    String typeOFsignout, profileUser, profileCur, profileScore;;
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int IMAGE_PICK_CODE = 1000;
@@ -99,6 +99,7 @@ public class ProfileFragment extends Fragment {
 
 
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         if(sharedPreferences!= null) {
             String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
             typeOFsignout = typeOFLogin;
@@ -114,12 +115,23 @@ public class ProfileFragment extends Fragment {
                             String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
                             Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                            usernameTextView.setText(getString(R.string.usernameDisplay) + userName);
-                            topScoreTextView.setText(getString(R.string.scoreDisplay) + userScore);
-                            currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
+                            String scoreStore = Integer.toString(userScore);
+                            String curStore = Integer.toString(userCur);
+                            editor.putString("profileUsername", userName);
+                            editor.putString("profileScore", scoreStore);
+                            editor.putString("profileCur", curStore);
+                            editor.apply();
+
+                            String loadName = sharedPreferences.getString("profileUsername", profileUser);
+                            String loadCur = sharedPreferences.getString("profileCur", profileCur);
+                            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+
+                            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
 
                         } else {
-                            Log.d("FAILED", "FAILED GEAR");
+                            Log.d(getString(R.string.FAILED), "FAILED GEAR");
                         }
                     }
 
@@ -141,18 +153,29 @@ public class ProfileFragment extends Fragment {
                             String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
                             Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                            usernameTextView.setText(getString(R.string.usernameDisplay) + userName);
-                            topScoreTextView.setText(getString(R.string.scoreDisplay) + userScore);
-                            currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
+                            String scoreStore = Integer.toString(userScore);
+                            String curStore = Integer.toString(userCur);
+                            editor.putString("profileUsername", userName);
+                            editor.putString("profileScore", scoreStore);
+                            editor.putString("profileCur", curStore);
+                            editor.apply();
+
+                            String loadName = sharedPreferences.getString("profileUsername", profileUser);
+                            String loadCur = sharedPreferences.getString("profileCur", profileCur);
+                            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+
+                            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
                         }else{
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                            Log.d(getString(R.string.FAILED), "FAILED GOOGLE LOAD PROF");
                         }
                     }
                 });
 
             }
             else{
-                Log.d("FAILED", "FAILED");
+                Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
             }
 
         }
@@ -178,6 +201,26 @@ public class ProfileFragment extends Fragment {
                         getString(R.string.PermissionDenied), Snackbar.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void loadProfile()  {
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+
+        if(sharedPreferences!= null) {
+            String loadName = sharedPreferences.getString("profileUsername", profileUser);
+            String loadCur = sharedPreferences.getString("profileCur", profileCur);
+            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+
+            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadCur);
+            currencyTextView.setText(getString(R.string.currencyDisplay) + loadScore + getString(R.string.gears));
+
+        } else {
+            usernameTextView.setText(getString(R.string.usernameDisplay) + "Invalid");
+            topScoreTextView.setText(getString(R.string.scoreDisplay) + "Invalid");
+            currencyTextView.setText(getString(R.string.currencyDisplay) + "Invalid" + getString(R.string.gears));
+        }
+
     }
 
     @Override
@@ -258,6 +301,7 @@ public class ProfileFragment extends Fragment {
         });
 
         loadImage();
+        //loadProfile();
 
         return view;
     }
