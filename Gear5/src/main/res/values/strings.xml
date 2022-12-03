@@ -55,6 +55,8 @@
     <string name="key_GEAR">GEAR</string>
     <string name="onlineLink">https://media.discordapp.net/attachments/935271239788941412/1048239865155829912/unknown.png</string>
     <string name="plus">+</string>
+    <string name="key_typelogin">typeLogin</string>
+    <string name="gearaccount">GearAccount</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -221,5 +223,7 @@
     <string name="image_not_shown">ImageView Not Shown</string>
     <string name="FAILED">FAILED</string>
     <string name="username_email_loginFrag">Username||Email</string>
+    <string name="warning_emil_username_msg">Username Invalid or Email invalid</string>
+
 
 </resources>

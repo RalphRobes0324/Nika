@@ -166,7 +166,7 @@ public class LoginFragment extends Fragment {
 
             }
             else{
-                usernameInput.setError("Username Invalid or Email invalid", iconError);
+                usernameInput.setError(getString(R.string.warning_emil_username_msg), iconError);
             }
         }
 
@@ -189,16 +189,14 @@ public class LoginFragment extends Fragment {
                         String userId = dataSnapshot.child(getString(R.string.childRef_username)).getValue().toString();
                         String userEmailFound = snapshot.child(userId).child(getString(R.string.childReg_email)).getValue(String.class);
                         if(userEmailFound.matches(email)){
-                            //Toast.makeText(getActivity().getApplicationContext(), "FOUND", Toast.LENGTH_LONG).show();
                             String passwordFromDB = snapshot.child(userId).child(getString(R.string.childRef_password)).getValue(String.class);
                             if(passwordFromDB.equals(password)){
                                 moveToMainActivity(userId);
-                                break;
                             }
                             else{
                                 passwordInput.setError(getString(R.string.warning_msg_pwd_loginFrag),iconError);
-                                break;
                             }
+                            break;
                         }
                     }
                 }
@@ -217,7 +215,6 @@ public class LoginFragment extends Fragment {
 
     //With username
     private void validateUserFireBase(String username, String password) {
-        Context context = getActivity().getApplicationContext();
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -254,8 +251,8 @@ public class LoginFragment extends Fragment {
     public void doSave(String userId)  {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String typeLogin = "GearAccount";
-        editor.putString("typeLogin", typeLogin);
+        String typeLogin = getString(R.string.gearaccount);
+        editor.putString(getString(R.string.key_typelogin), typeLogin);
         editor.putString(getString(R.string.userProfile), userId);
         editor.apply();
     }
