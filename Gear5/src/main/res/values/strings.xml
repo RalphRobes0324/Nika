@@ -220,5 +220,6 @@
     <string name="pleaseWait">Please Wait</string>
     <string name="image_not_shown">ImageView Not Shown</string>
     <string name="FAILED">FAILED</string>
+    <string name="username_email_loginFrag">Username||Email</string>
 
 </resources>

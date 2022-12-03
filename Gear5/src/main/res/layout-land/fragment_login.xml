@@ -39,7 +39,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username||Email"
+                android:hint="@string/username_email_loginFrag"
                 app:hintTextColor="@color/white"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
