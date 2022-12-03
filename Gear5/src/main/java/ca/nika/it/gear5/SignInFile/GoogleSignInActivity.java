@@ -43,6 +43,7 @@ import ca.nika.it.gear5.R;
 public class GoogleSignInActivity extends AppCompatActivity {
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
+    private int found  = 0;
     private FirebaseAuth mAuth;
 
     @Override
@@ -131,10 +132,13 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     String parent = childSnapshot.getKey();
                     if (parent.equals(userGoogleID)){
                         enterMainActivity(userGoogleID);
+                        found = 1;
                         break;
                     }
                 }
-                storeUserGoogleFirebase(userGoogleID, _username, _phone);
+                if(found == 0) {
+                    storeUserGoogleFirebase(userGoogleID, _username, _phone);
+                }
 
             }
 
@@ -177,7 +181,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     private void enterMainActivity(String googleId) {
         finish();
-
         doSave(googleId);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
