@@ -123,7 +123,6 @@ public class ProfileFragment extends Fragment {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
                     Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
 //                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    Toast.makeText(getActivity(), "TEST", Toast.LENGTH_SHORT).show();
                     checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -190,9 +189,21 @@ public class ProfileFragment extends Fragment {
                                 String loadName = sharedPreferences.getString("profileUsername", profileUser);
                                 String loadCur = sharedPreferences.getString("profileCur", profileCur);
                                 String loadScore = sharedPreferences.getString("profileScore", profileScore);
+                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
 
                                 usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
-                                topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                                Log.d("Online OfflineScore", Integer.toString(offlineScore));
+                                Log.d("Online loadScore", loadScore);
+
+                                if (offlineScore > Integer.parseInt(loadScore)) {
+                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + offlineScore);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(offlineScore);
+
+                                } else {
+                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                                }
+
                                 currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
                             } else {
                                 Log.d(getString(R.string.FAILED), "FAILED GOOGLE LOAD PROF");
@@ -291,10 +302,16 @@ public class ProfileFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 DataSnapshot snapshot = task.getResult();
                                 Integer userCurrentScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                                int sumScore = userCurrentScore.intValue() + 1;
+                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
+                                int sumScore = offlineScore + 1;
                                 Integer newSum = new Integer(sumScore);
                                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                                 mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(newSum);
+
+                                editor.putInt("offlineScore", sumScore);
+                                editor.apply();
+
+                                loadImage();
                             } else {
                                 Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
                             }
