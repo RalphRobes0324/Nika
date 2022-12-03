@@ -11,6 +11,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -54,9 +56,12 @@ public class ProfileFragment extends Fragment {
 
     ImageView mImageView;
     ImageButton mChooseBtn;
-    Button btn;
+    Button btn, mSimulateScore;
     TextView usernameTextView, topScoreTextView, currencyTextView;
-    String typeOFsignout, profileUser, profileCur, profileScore;;
+    String typeOFsignout, profileUser, profileCur, profileScore, getUserID;
+    int profileScoreKeep;
+    boolean connected = false;
+
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int IMAGE_PICK_CODE = 1000;
@@ -97,86 +102,125 @@ public class ProfileFragment extends Fragment {
     public void loadImage() {
         preferenceManager=PreferenceManager.getInstance(getActivity());
 
-
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(sharedPreferences!= null) {
-            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
-            typeOFsignout = typeOFLogin;
-            if(typeOFLogin.equals("GearAccount")) {
-                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-                Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
 
-                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
-                            Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                            String scoreStore = Integer.toString(userScore);
-                            String curStore = Integer.toString(userCur);
-                            editor.putString("profileUsername", userName);
-                            editor.putString("profileScore", scoreStore);
-                            editor.putString("profileCur", curStore);
-                            editor.apply();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        }
+        else {
+            connected = false;
+        }
+        if (connected == true) {
 
-                            String loadName = sharedPreferences.getString("profileUsername", profileUser);
-                            String loadCur = sharedPreferences.getString("profileCur", profileCur);
-                            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+            if (sharedPreferences != null) {
+                String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+                typeOFsignout = typeOFLogin;
+                if (typeOFLogin.equals("GearAccount")) {
+                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+                    Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
+//                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                    Toast.makeText(getActivity(), "TEST", Toast.LENGTH_SHORT).show();
+                    checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
+                                Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                                Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                                String scoreStore = Integer.toString(userScore);
+                                String curStore = Integer.toString(userCur);
+                                editor.putString("profileUsername", userName);
+                                editor.putString("profileScore", scoreStore);
+                                editor.putString("profileCur", curStore);
+                                editor.apply();
 
-                            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
-                            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
-                            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
+                                String loadName = sharedPreferences.getString("profileUsername", profileUser);
+                                String loadCur = sharedPreferences.getString("profileCur", profileCur);
+                                String loadScore = sharedPreferences.getString("profileScore", profileScore);
+                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
 
-                        } else {
-                            Log.d(getString(R.string.FAILED), "FAILED GEAR");
+                                usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+                                Log.d("Online OfflineScore", Integer.toString(offlineScore));
+                                Log.d("Online loadScore", loadScore);
+
+                                if (offlineScore > Integer.parseInt(loadScore)) {
+                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + offlineScore);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(offlineScore);
+
+                                } else {
+                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                                }
+
+                                currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
+
+                            } else {
+                                Log.d(getString(R.string.FAILED), "FAILED GEAR");
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-            }
-            else if(typeOFLogin.equals("GearGoogleAccount")){
-                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child(getUserId);
-                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            DataSnapshot snapshot = task.getResult();
-                            String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
-                            Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                            String scoreStore = Integer.toString(userScore);
-                            String curStore = Integer.toString(userCur);
-                            editor.putString("profileUsername", userName);
-                            editor.putString("profileScore", scoreStore);
-                            editor.putString("profileCur", curStore);
-                            editor.apply();
-
-                            String loadName = sharedPreferences.getString("profileUsername", profileUser);
-                            String loadCur = sharedPreferences.getString("profileCur", profileCur);
-                            String loadScore = sharedPreferences.getString("profileScore", profileScore);
-
-                            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
-                            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
-                            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
-                        }else{
-                            Log.d(getString(R.string.FAILED), "FAILED GOOGLE LOAD PROF");
                         }
-                    }
-                });
+                    });
+                } else if (typeOFLogin.equals("GearGoogleAccount")) {
+                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference uidRef = db.child("users").child(getUserId);
+                    uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DataSnapshot snapshot = task.getResult();
+                                String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
+                                Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                                Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                                String scoreStore = Integer.toString(userScore);
+                                String curStore = Integer.toString(userCur);
+                                editor.putString("profileUsername", userName);
+                                editor.putString("profileScore", scoreStore);
+                                editor.putString("profileCur", curStore);
+                                editor.apply();
+
+                                String loadName = sharedPreferences.getString("profileUsername", profileUser);
+                                String loadCur = sharedPreferences.getString("profileCur", profileCur);
+                                String loadScore = sharedPreferences.getString("profileScore", profileScore);
+
+                                usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+                                topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                                currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
+                            } else {
+                                Log.d(getString(R.string.FAILED), "FAILED GOOGLE LOAD PROF");
+                            }
+                        }
+                    });
+
+                } else {
+                    Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
+                }
 
             }
-            else{
-                Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
+        } else {
+            String loadName = sharedPreferences.getString("profileUsername", profileUser);
+            String loadCur = sharedPreferences.getString("profileCur", profileCur);
+            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+            int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
+
+            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+            Log.d("Offline OfflineScore", Integer.toString(offlineScore));
+
+            if (offlineScore > Integer.parseInt(loadScore)) {
+                topScoreTextView.setText(getString(R.string.scoreDisplay) + offlineScore);
+            } else {
+                topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
             }
+
+            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
 
         }
 
@@ -186,6 +230,91 @@ public class ProfileFragment extends Fragment {
             byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
             mImageView.setImageBitmap(bitmap);
+        }
+    }
+
+    private void updateUserCurrFirebase() {
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        }
+        else {
+            connected = false;
+        }
+
+        if (connected == true) {
+
+            if (sharedPreferences != null) {
+                String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+                typeOFsignout = typeOFLogin;
+                if (typeOFLogin.equals("GearAccount")) {
+                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+                    Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
+
+                    checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                Integer userCurrentScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
+                                int sumScore = offlineScore + 1;
+                                Integer newSum = new Integer(sumScore);
+                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(newSum);
+
+                                editor.putInt("offlineScore", sumScore);
+                                editor.apply();
+
+                                loadImage();
+                            } else {
+                                Log.d("FAILED", "FAILED GEAR");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                } else if (typeOFLogin.equals("GearGoogleAccount")) {
+                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference uidRef = db.child("users").child(getUserId);
+                    uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DataSnapshot snapshot = task.getResult();
+                                Integer userCurrentScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                                int sumScore = userCurrentScore.intValue() + 1;
+                                Integer newSum = new Integer(sumScore);
+                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(newSum);
+                            } else {
+                                Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                            }
+                        }
+                    });
+
+                } else {
+                    Log.d("FAILED", "FAILED");
+                }
+
+            }
+        } else {
+            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+            int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
+            int sumScore = offlineScore + 1;
+
+            editor.putInt("offlineScore", sumScore);
+            editor.apply();
+
+            loadImage();
         }
     }
 
@@ -203,26 +332,6 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void loadProfile()  {
-        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-
-        if(sharedPreferences!= null) {
-            String loadName = sharedPreferences.getString("profileUsername", profileUser);
-            String loadCur = sharedPreferences.getString("profileCur", profileCur);
-            String loadScore = sharedPreferences.getString("profileScore", profileScore);
-
-            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
-            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadCur);
-            currencyTextView.setText(getString(R.string.currencyDisplay) + loadScore + getString(R.string.gears));
-
-        } else {
-            usernameTextView.setText(getString(R.string.usernameDisplay) + "Invalid");
-            topScoreTextView.setText(getString(R.string.scoreDisplay) + "Invalid");
-            currencyTextView.setText(getString(R.string.currencyDisplay) + "Invalid" + getString(R.string.gears));
-        }
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -235,9 +344,13 @@ public class ProfileFragment extends Fragment {
 
         mImageView = view.findViewById(R.id.nikaProfileView);
         mChooseBtn = view.findViewById(R.id.nikaImgBtn);
+        mSimulateScore = view.findViewById(R.id.nikaSimulateScore);
         usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
         topScoreTextView = (TextView) view.findViewById(R.id.nikaTopScore);
         currencyTextView = (TextView) view.findViewById(R.id.nikaCurrency);
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        getUserID = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
 
 
 
@@ -257,6 +370,14 @@ public class ProfileFragment extends Fragment {
                     imgMethod();
                     loadImage();
                 }
+
+            }
+        });
+
+        mSimulateScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateUserCurrFirebase();
 
             }
         });
@@ -301,7 +422,6 @@ public class ProfileFragment extends Fragment {
         });
 
         loadImage();
-        //loadProfile();
 
         return view;
     }

@@ -22,7 +22,7 @@
         android:id="@+id/nikaProfileView"
         android:layout_width="112dp"
         android:layout_height="106dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:scaleType="centerCrop"
         android:src="@drawable/devil_fruit"
         app:civ_border_color="#ecf2f4"
@@ -76,6 +76,7 @@
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -98,7 +99,7 @@
         android:layout_width="181dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rounded_button_normal"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/logout"
@@ -109,6 +110,21 @@
         app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nikaProfileView" />
+
+    <Button
+        android:id="@+id/nikaSimulateScore"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/purple_500"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Simulate Score"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/nikaLinearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nikaLogout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
