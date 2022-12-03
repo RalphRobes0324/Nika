@@ -58,6 +58,10 @@
     <string name="plus">+</string>
     <string name="key_typelogin">typeLogin</string>
     <string name="gearaccount">GearAccount</string>
+    <string name="geargoogleaccount">GearGoogleAccount</string>
+    <string name="null_pwd">No PASSWORD</string>
+    <string name="null_email">NO EMAIL</string>
+    <string name="null_name">No need full namme</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>

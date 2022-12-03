@@ -45,11 +45,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
     private FirebaseAuth mAuth;
 
-    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
-            "WebOS","Ubuntu","Windows7","Max OS X"};
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,8 +111,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
     public void doSave(String googleId)  {
         SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String googleLogin = "GearGoogleAccount";
-        editor.putString("typeLogin", googleLogin);
+        String googleLogin = getString(R.string.geargoogleaccount);
+        editor.putString(getString(R.string.key_typelogin), googleLogin);
         editor.putString(getString(R.string.userProfile), googleId);
         editor.apply();
     }
@@ -128,9 +123,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
         String _username = user.getDisplayName();
         String _phone = user.getPhoneNumber();
 
-        DatabaseReference uidRef = FirebaseDatabase.getInstance().getReference("users");
-
-
+        DatabaseReference uidRef = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
         uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -158,9 +151,9 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     private void storeUserGoogleFirebase(String userId, String usernameDisplay, String _phone) {
         String username = usernameDisplay;
-        String password = "No PASSWORD";
-        String email = "NO EMAIL";
-        String fullName = "No need full namme";
+        String password = getString(R.string.null_pwd);
+        String email = getString(R.string.null_email);
+        String fullName = getString(R.string.null_name);
         int startCurrency = 500;
         int startScore = 0;
         String phone = _phone;
