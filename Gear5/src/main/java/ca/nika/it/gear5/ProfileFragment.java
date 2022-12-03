@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
     ImageButton mChooseBtn;
     Button btn;
     TextView usernameTextView, topScoreTextView, currencyTextView;
-    String typeOFsignout, profileUser, profileCur, profileScore;
+    String typeOFsignout, profileUser, profileCur, profileScore;;
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int IMAGE_PICK_CODE = 1000;
@@ -98,69 +98,87 @@ public class ProfileFragment extends Fragment {
         preferenceManager=PreferenceManager.getInstance(getActivity());
 
 
-//        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        if(sharedPreferences!= null) {
-//            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
-//            typeOFsignout = typeOFLogin;
-//            if(typeOFLogin.equals("GearAccount")) {
-//                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-//                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-//                Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
-//
-//                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if (snapshot.exists()) {
-//                            String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
-//                            Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-//                            Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-//                            editor.putString("profileUsername", userName);
-//                            editor.putInt("profileScore", userScore);
-//                            editor.putInt("profileCur", userCur);
-//                            editor.apply();
-//
-//                        } else {
-//                            Log.d("FAILED", "FAILED GEAR");
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//            }
-//            else if(typeOFLogin.equals("GearGoogleAccount")){
-//                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-//                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-//                DatabaseReference uidRef = db.child("users").child(getUserId);
-//                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            DataSnapshot snapshot = task.getResult();
-//                            String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
-//                            Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-//                            Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-//                            editor.putString("profileUsername", userName);
-//                            editor.putInt("profileScore", userScore);
-//                            editor.putInt("profileCur", userCur);
-//                            editor.apply();
-//                        }else{
-//                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
-//                        }
-//                    }
-//                });
-//
-//            }
-//            else{
-//                Log.d("FAILED", "FAILED");
-//            }
-//
-//        }
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(sharedPreferences!= null) {
+            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+            typeOFsignout = typeOFLogin;
+            if(typeOFLogin.equals("GearAccount")) {
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+                Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
 
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
+                            Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                            String scoreStore = Integer.toString(userScore);
+                            String curStore = Integer.toString(userCur);
+                            editor.putString("profileUsername", userName);
+                            editor.putString("profileScore", scoreStore);
+                            editor.putString("profileCur", curStore);
+                            editor.apply();
 
+                            String loadName = sharedPreferences.getString("profileUsername", profileUser);
+                            String loadCur = sharedPreferences.getString("profileCur", profileCur);
+                            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+
+                            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
+
+                        } else {
+                            Log.d(getString(R.string.FAILED), "FAILED GEAR");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+            else if(typeOFLogin.equals("GearGoogleAccount")){
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference uidRef = db.child("users").child(getUserId);
+                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DataSnapshot snapshot = task.getResult();
+                            String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
+                            Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+                            String scoreStore = Integer.toString(userScore);
+                            String curStore = Integer.toString(userCur);
+                            editor.putString("profileUsername", userName);
+                            editor.putString("profileScore", scoreStore);
+                            editor.putString("profileCur", curStore);
+                            editor.apply();
+
+                            String loadName = sharedPreferences.getString("profileUsername", profileUser);
+                            String loadCur = sharedPreferences.getString("profileCur", profileCur);
+                            String loadScore = sharedPreferences.getString("profileScore", profileScore);
+
+                            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+                            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
+                        }else{
+                            Log.d(getString(R.string.FAILED), "FAILED GOOGLE LOAD PROF");
+                        }
+                    }
+                });
+
+            }
+            else{
+                Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
+            }
+
+        }
 
         String previouslyEncodedImage = preferenceManager.getString(getString(R.string.image_data));
 
@@ -168,6 +186,20 @@ public class ProfileFragment extends Fragment {
             byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
             mImageView.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Snackbar.make(getActivity().findViewById(android.R.id.content),
+                        getString(R.string.PermissionGranted), Snackbar.LENGTH_LONG).show();
+            } else {
+                Snackbar.make(getActivity().findViewById(android.R.id.content),
+                        getString(R.string.PermissionDenied), Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -189,20 +221,6 @@ public class ProfileFragment extends Fragment {
             currencyTextView.setText(getString(R.string.currencyDisplay) + "Invalid" + getString(R.string.gears));
         }
 
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_CAMERA_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Snackbar.make(getActivity().findViewById(android.R.id.content),
-                        getString(R.string.PermissionGranted), Snackbar.LENGTH_LONG).show();
-            } else {
-                Snackbar.make(getActivity().findViewById(android.R.id.content),
-                        getString(R.string.PermissionDenied), Snackbar.LENGTH_LONG).show();
-            }
-        }
     }
 
     @Override
@@ -259,15 +277,14 @@ public class ProfileFragment extends Fragment {
                                 editor.putString(getString(R.string.remember), getString(R.string.unchecked));
                                 editor.apply();
 
-                                getActivity().finish();
-//                                if (typeOFsignout.equals("GearGoogleAccount")){
-//                                    FirebaseAuth.getInstance().signOut();
-//                                    Log.d("LOGOUT", "GOOGLE");
-//                                    getActivity().finish();
-//                                }else{
-//                                    Log.d("LOGOUT", "NORM");
-//                                    getActivity().finish();
-//                                }
+                                if (typeOFsignout.equals("GearGoogleAccount")){
+                                    FirebaseAuth.getInstance().signOut();
+                                    Log.d("LOGOUT", "GOOGLE");
+                                    getActivity().finish();
+                                }else{
+                                    Log.d("LOGOUT", "NORM");
+                                    getActivity().finish();
+                                }
 
 
                             }
@@ -284,7 +301,7 @@ public class ProfileFragment extends Fragment {
         });
 
         loadImage();
-        loadProfile();
+        //loadProfile();
 
         return view;
     }

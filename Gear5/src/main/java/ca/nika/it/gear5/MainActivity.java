@@ -2,44 +2,25 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import ca.nika.it.gear5.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity{
 
     ActivityMainBinding binding;
-
-    String typeOFsignout, profileUser;
-    Integer profileCur, profileScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +55,6 @@ public class MainActivity extends AppCompatActivity{
 
 
     private void replaceFragment(Fragment fragment){
-        loadData();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.nikaFrameLayout,fragment);
@@ -138,73 +118,5 @@ public class MainActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void loadData() {
-        SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(sharedPreferences!= null) {
-            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
-            typeOFsignout = typeOFLogin;
-            if(typeOFLogin.equals("GearAccount")) {
-                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-                Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
-
-                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
-                            Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                            String scoreStore = Integer.toString(userScore);
-                            String curStore = Integer.toString(userCur);
-                            editor.putString("profileUsername", userName);
-                            editor.putString("profileScore", scoreStore);
-                            editor.putString("profileCur", curStore);
-                            editor.apply();
-
-                        } else {
-                            Log.d("FAILED", "FAILED GEAR");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-            else if(typeOFLogin.equals("GearGoogleAccount")){
-                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child(getUserId);
-                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            DataSnapshot snapshot = task.getResult();
-                            String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
-                            Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                            String scoreStore = Integer.toString(userScore);
-                            String curStore = Integer.toString(userCur);
-                            editor.putString("profileUsername", userName);
-                            editor.putString("profileScore", scoreStore);
-                            editor.putString("profileCur", curStore);
-                            editor.apply();
-                        }else{
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
-                        }
-                    }
-                });
-
-            }
-            else{
-                Log.d("FAILED", "FAILED");
-            }
-
-        }
     }
 }
