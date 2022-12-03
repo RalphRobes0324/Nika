@@ -2,6 +2,8 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.SignInFile;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -123,32 +125,45 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     private void validateUserGoogleEmailFireBase(FirebaseUser user) {
         String userGoogleID = user.getUid();
+        String _username = user.getDisplayName();
+        String _phone = user.getPhoneNumber();
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference uidRef = db.child("users").child(userGoogleID);
-        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        DatabaseReference uidRef = FirebaseDatabase.getInstance().getReference("users");
+
+
+        uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful()){
-                    enterMainActivity(userGoogleID);
-                }else{
-                    storeUserGoogleFirebase(user);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot childSnapshot : snapshot.getChildren()){
+                    String parent = childSnapshot.getKey();
+                    if (parent.equals(userGoogleID)){
+                        enterMainActivity(userGoogleID);
+                        break;
+                    }
                 }
+                storeUserGoogleFirebase(userGoogleID, _username, _phone);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
 
+
+
     }
 
-    private void storeUserGoogleFirebase(FirebaseUser user) {
-        String userId = user.getUid();
-        String username = user.getDisplayName();
+    private void storeUserGoogleFirebase(String userId, String usernameDisplay, String _phone) {
+        String username = usernameDisplay;
         String password = "No PASSWORD";
         String email = "NO EMAIL";
         String fullName = "No need full namme";
         int startCurrency = 500;
         int startScore = 0;
-        String phone = user.getPhoneNumber();
+        String phone = _phone;
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
