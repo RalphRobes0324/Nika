@@ -60,6 +60,30 @@
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- FULL NAME input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                app:startIconTint="@color/black"
+                app:hintTextColor="@color/white"
+                android:textColorHint="@color/black"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_fullname_regFrag"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/press_start_2p"
+                    android:background="@drawable/custom_edittextbox"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Email input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -184,48 +208,6 @@
             android:background="#0000"
             android:layout_marginTop="5dp"
             android:elevation="5dp"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-
-            <TextView
-                android:id="@+id/title_loign_with"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/muli_bold_italic"
-                android:text="@string/sign_up_with_regFrag"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <!-- create a sign in function-->
-        <LinearLayout
-            android:id="@+id/google_signIn_btn_regfrag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button_google_state"
-            android:layout_marginTop="100dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:gravity="center"
-            android:layout_marginVertical="@dimen/cardview_compat_inset_shadow">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/google_seeklogo"
-                android:layout_marginEnd="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/google_loginFrag"
-                android:textStyle="bold"
-                android:textSize="20sp" />
-        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

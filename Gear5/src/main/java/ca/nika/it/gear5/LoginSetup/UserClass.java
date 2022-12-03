@@ -3,7 +3,7 @@
 package ca.nika.it.gear5.LoginSetup;
 
 public class UserClass {
-    String username,password, email, phone;
+    String username,password, email, phone, fullName;
     int currency, topScore;
 
     public UserClass() {
@@ -11,13 +11,22 @@ public class UserClass {
     }
 
 
-    public UserClass(String username, String password, String email, int currency, int topScore, String phone) {
+    public UserClass(String username, String password, String email, int currency, int topScore, String phone, String fullName) {
         this.email = email;
         this.username = username;
         this.password = password;
         this.currency = currency;
         this.topScore = topScore;
         this.phone = phone;
+        this.fullName = fullName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPhone(){

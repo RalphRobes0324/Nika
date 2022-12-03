@@ -7,7 +7,8 @@
     <string name="users">users</string>
     <string name="df">df</string>
     <string name="username2">username</string>
-    <string name="limits">^[A-Za-z0-9_-]{3,15}$</string>
+    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{5,}$</string>
+    <string name="limits_regx_username">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
     <string name="warning_msg_reg_account_exist">This account exist</string>
     <string name="currency2">currency</string>
@@ -55,6 +56,12 @@
     <string name="key_GEAR">GEAR</string>
     <string name="onlineLink">https://media.discordapp.net/attachments/935271239788941412/1048239865155829912/unknown.png</string>
     <string name="plus">+</string>
+    <string name="key_typelogin">typeLogin</string>
+    <string name="gearaccount">GearAccount</string>
+    <string name="geargoogleaccount">GearGoogleAccount</string>
+    <string name="null_pwd">No PASSWORD</string>
+    <string name="null_email">NO EMAIL</string>
+    <string name="null_name">No need full namme</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -220,5 +227,7 @@
     <string name="pleaseWait">Please Wait</string>
     <string name="image_not_shown">ImageView Not Shown</string>
     <string name="FAILED">FAILED</string>
-
+    <string name="username_email_loginFrag">Username||Email</string>
+    <string name="warning_emil_username_msg">Username Invalid or Email invalid</string>
+    <string name="warning_msg_fullname">Invalid Full Name or must have space between name and last name</string>
 </resources>

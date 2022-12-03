@@ -2,6 +2,8 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.SignInFile;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -41,12 +43,8 @@ import ca.nika.it.gear5.R;
 public class GoogleSignInActivity extends AppCompatActivity {
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
+    private int found  = 0;
     private FirebaseAuth mAuth;
-
-    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
-            "WebOS","Ubuntu","Windows7","Max OS X"};
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +112,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
     public void doSave(String googleId)  {
         SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String googleLogin = "GearGoogleAccount";
-        editor.putString("typeLogin", googleLogin);
+        String googleLogin = getString(R.string.geargoogleaccount);
+        editor.putString(getString(R.string.key_typelogin), googleLogin);
         editor.putString(getString(R.string.userProfile), googleId);
         editor.apply();
     }
@@ -123,36 +121,51 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     private void validateUserGoogleEmailFireBase(FirebaseUser user) {
         String userGoogleID = user.getUid();
+        String _username = user.getDisplayName();
+        String _phone = user.getPhoneNumber();
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference uidRef = db.child("users").child(userGoogleID);
-        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        DatabaseReference uidRef = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+        uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful()){
-                    enterMainActivity(userGoogleID);
-                }else{
-                    storeUserGoogleFirebase(user);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot childSnapshot : snapshot.getChildren()){
+                    String parent = childSnapshot.getKey();
+                    if (parent.equals(userGoogleID)){
+                        enterMainActivity(userGoogleID);
+                        found = 1;
+                        break;
+                    }
                 }
+                if(found == 0) {
+                    storeUserGoogleFirebase(userGoogleID, _username, _phone);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
 
+
+
     }
 
-    private void storeUserGoogleFirebase(FirebaseUser user) {
-        String userId = user.getUid();
-        String username = user.getDisplayName();
-        String password = "No PASSWORD";
-        String email = "NO EMAIL";
+    private void storeUserGoogleFirebase(String userId, String usernameDisplay, String _phone) {
+        String username = usernameDisplay;
+        String password = getString(R.string.null_pwd);
+        String email = getString(R.string.null_email);
+        String fullName = getString(R.string.null_name);
         int startCurrency = 500;
         int startScore = 0;
-        String phone = user.getPhoneNumber();
+        String phone = _phone;
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
-        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone);
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName);
         reference.child(userId).setValue(userClass);
         enterMainActivity(userId);
 
@@ -168,7 +181,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     private void enterMainActivity(String googleId) {
         finish();
-
         doSave(googleId);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

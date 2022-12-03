@@ -60,6 +60,30 @@
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- FULL NAME input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                app:startIconTint="@color/black"
+                app:hintTextColor="@color/white"
+                android:textColorHint="@color/black"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nika_fullname_regFrag"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/press_start_2p"
+                    android:background="@drawable/custom_edittextbox"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Email input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

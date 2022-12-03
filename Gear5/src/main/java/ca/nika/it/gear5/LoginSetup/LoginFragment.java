@@ -27,6 +27,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -146,7 +147,7 @@ public class LoginFragment extends Fragment {
             passwordInput.setError(getString(R.string.warning_msg_reg_pwd), iconError);
         }
         else{
-            if (username.matches(getString(R.string.limits))){
+            if (username.matches(getString(R.string.limits_regx_username))){
                 if(password.matches(getString(R.string.limits))){
                     validateUserFireBase(username, password);
                 }
@@ -154,15 +155,66 @@ public class LoginFragment extends Fragment {
                     passwordInput.setError(getString(R.string.warning_pwd_length_reg),iconError);
                 }
             }
+            else if(username.matches(getString(R.string.limits_email_reg))){
+                if(password.matches(getString(R.string.limits))){
+                    validateUserFireBaseEmail(username, password);
+
+                }
+                else{
+                    passwordInput.setError(getString(R.string.warning_pwd_length_reg),iconError);
+                }
+
+            }
             else{
-                usernameInput.setError(getString(R.string.warning_username_length_reg), iconError);
+                usernameInput.setError(getString(R.string.warning_emil_username_msg), iconError);
             }
         }
 
     }
 
+    //With Email
+    private void validateUserFireBaseEmail(String email, String password) {
+        Drawable iconError = AppCompatResources.getDrawable(requireContext(),
+                R.drawable.ic_baseline_error_24);
+        iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+        DatabaseReference rootRef = databaseReference;
+        Query checkEmail = databaseReference.orderByChild(getString(R.string.emailRef_reg_regFrag)).equalTo(email);
+        checkEmail.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                        String userId = dataSnapshot.child(getString(R.string.childRef_username)).getValue().toString();
+                        String userEmailFound = snapshot.child(userId).child(getString(R.string.childReg_email)).getValue(String.class);
+                        if(userEmailFound.matches(email)){
+                            String passwordFromDB = snapshot.child(userId).child(getString(R.string.childRef_password)).getValue(String.class);
+                            if(passwordFromDB.equals(password)){
+                                moveToMainActivity(userId);
+                            }
+                            else{
+                                passwordInput.setError(getString(R.string.warning_msg_pwd_loginFrag),iconError);
+                            }
+                            break;
+                        }
+                    }
+                }
+                else{
+                    usernameInput.setError(getString(R.string.warning_email_reg_email_limits), iconError);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    //With username
     private void validateUserFireBase(String username, String password) {
-        Context context = getActivity().getApplicationContext();
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -199,8 +251,8 @@ public class LoginFragment extends Fragment {
     public void doSave(String userId)  {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String typeLogin = "GearAccount";
-        editor.putString("typeLogin", typeLogin);
+        String typeLogin = getString(R.string.gearaccount);
+        editor.putString(getString(R.string.key_typelogin), typeLogin);
         editor.putString(getString(R.string.userProfile), userId);
         editor.apply();
     }

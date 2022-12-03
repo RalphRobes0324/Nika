@@ -11,13 +11,13 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView2"
-        android:layout_width="729dp"
-        android:layout_height="1000dp"
+        android:layout_width="1000dp"
+        android:layout_height="1500dp"
         android:src="@drawable/scoreboardwallpaper2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
