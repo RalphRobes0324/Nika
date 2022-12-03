@@ -121,7 +121,7 @@ public class ScoreFragment extends Fragment {
                     try {
                         arrayFirebase.put(new JSONObject().put("Username", username).put("UserScore", userScore));
                     } catch (JSONException e) {
-                        Log.d("Failed", "STORING");
+                        Log.d("Failed", e.toString());
                     }
                 }
 
@@ -146,7 +146,7 @@ public class ScoreFragment extends Fragment {
                             str1 = (String) a.get(KEY_NAME);
                             str2 = (String) b.get(KEY_NAME);
                         } catch (JSONException e) {
-                            Log.d("FAILED", "NULL SORT");
+                            Log.d("Failed", e.toString());
                         }
                         return -str1.compareTo(str2);
                     }
@@ -161,7 +161,7 @@ public class ScoreFragment extends Fragment {
                 try {
                     DisplayTopUsers(sortedArray);
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("Failed", e.toString());
                 }
 
 
