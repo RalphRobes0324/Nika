@@ -219,5 +219,6 @@
     <string name="invalidPhone">Invalid Phone</string>
     <string name="pleaseWait">Please Wait</string>
     <string name="image_not_shown">ImageView Not Shown</string>
+    <string name="FAILED">FAILED</string>
 
 </resources>

@@ -119,7 +119,7 @@ public class ProfileFragment extends Fragment {
                             currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
 
                         } else {
-                            Log.d("FAILED", "FAILED GEAR");
+                            Log.d(getString(R.string.FAILED), "FAILED GEAR");
                         }
                     }
 
@@ -145,14 +145,14 @@ public class ProfileFragment extends Fragment {
                             topScoreTextView.setText(getString(R.string.scoreDisplay) + userScore);
                             currencyTextView.setText(getString(R.string.currencyDisplay) + userCur + getString(R.string.gears));
                         }else{
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                            Log.d(getString(R.string.FAILED), "FAILED GOOGLE LOAD PROF");
                         }
                     }
                 });
 
             }
             else{
-                Log.d("FAILED", "FAILED");
+                Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
             }
 
         }
