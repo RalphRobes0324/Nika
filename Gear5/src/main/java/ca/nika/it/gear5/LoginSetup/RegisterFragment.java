@@ -129,7 +129,7 @@ public class RegisterFragment extends Fragment {
         }
 
         else{
-            if (username.matches(getString(R.string.limits))){
+            if (username.matches(getString(R.string.limits_regx_username))){
                 if(email.matches(getString(R.string.limits_email_reg))){
                     if(password.matches(getString(R.string.limits))){
                         if(confirmPassword.matches(password)){
@@ -139,7 +139,7 @@ public class RegisterFragment extends Fragment {
                                     validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone, fullName);
                                 }
                                 else{
-                                    fullnameInput.setError("Invalid Full Name", iconError);
+                                    fullnameInput.setError(getString(R.string.warning_msg_fullname), iconError);
                                 }
                             }
                             else {

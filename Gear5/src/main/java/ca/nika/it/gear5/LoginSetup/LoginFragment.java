@@ -147,7 +147,7 @@ public class LoginFragment extends Fragment {
             passwordInput.setError(getString(R.string.warning_msg_reg_pwd), iconError);
         }
         else{
-            if (username.matches(getString(R.string.limits))){
+            if (username.matches(getString(R.string.limits_regx_username))){
                 if(password.matches(getString(R.string.limits))){
                     validateUserFireBase(username, password);
                 }

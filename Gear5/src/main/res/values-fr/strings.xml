@@ -7,7 +7,8 @@
     <string name="users">users</string>
     <string name="df">df</string>
     <string name="username2">username</string>
-    <string name="limits">^[A-Za-z0-9_-]{3,15}$</string>
+    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{5,}$</string>
+    <string name="limits_regx_username">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
     <string name="warning_msg_reg_account_exist">This account exist</string>
     <string name="currency2">currency</string>
@@ -228,4 +229,5 @@
     <string name="FAILED">FAILED</string>
     <string name="username_email_loginFrag">Username||Email</string>
     <string name="warning_emil_username_msg">Username Invalid or Email invalid</string>
+    <string name="warning_msg_fullname">Invalid Full Name or must have space between name and last name</string>
 </resources>
