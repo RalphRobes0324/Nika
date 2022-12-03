@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity{
 
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        loadData();
 
         binding.nikaBottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity{
 
 
     private void replaceFragment(Fragment fragment){
+        loadData();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.nikaFrameLayout,fragment);
