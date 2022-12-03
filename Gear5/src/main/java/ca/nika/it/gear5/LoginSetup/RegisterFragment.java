@@ -2,12 +2,10 @@
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
 package ca.nika.it.gear5.LoginSetup;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,24 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +30,7 @@ import ca.nika.it.gear5.R;
 
 public class RegisterFragment extends Fragment {
     private Button doneBtn, loginBtn;
-    EditText usernameInput, passwordInput, emailInput, confirmPasswordInput, phoneInput;
+    EditText usernameInput, passwordInput, emailInput, confirmPasswordInput, phoneInput, fullnameInput;
     ImageView backButton;
 
 
@@ -79,6 +62,7 @@ public class RegisterFragment extends Fragment {
         emailInput = (EditText) view.findViewById(R.id.nika_edittxt_email_regfrag);
         confirmPasswordInput = (EditText) view.findViewById(R.id.nika_edittxt_pwdConfirm_regfrag);
         phoneInput = (EditText) view.findViewById(R.id.nika_edittxt_phone_regfrag);
+        fullnameInput = (EditText) view.findViewById(R.id.nika_fullname_regFrag);
 
 
 
@@ -98,10 +82,11 @@ public class RegisterFragment extends Fragment {
                 String email = emailInput.getText().toString().trim();
                 String confirmPassword = confirmPasswordInput.getText().toString().trim();
                 String phone = phoneInput.getText().toString().trim();
+                String fullName = fullnameInput.getText().toString().trim();
                 int startCurrency = 500;
                 int startScore = 0;
 
-                validateUser(username,password, email, confirmPassword ,startCurrency, startScore , phone);
+                validateUser(username,password, email, confirmPassword ,startCurrency, startScore , phone, fullName);
             }
         });
 
@@ -119,13 +104,16 @@ public class RegisterFragment extends Fragment {
 
 
     private void validateUser(String username, String password, String email,
-                              String confirmPassword, int startCurrency, int startScore, String phone) {
+                              String confirmPassword, int startCurrency, int startScore, String phone, String fullName) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
 
         if(username.isEmpty()) {
             usernameInput.setError(getString(R.string.warning_msg_msg_username), iconError);
+        }
+        if (fullName.isEmpty()){
+            fullnameInput.setError("Missing Full Name", iconError);
         }
         if (password.isEmpty()){
             passwordInput.setError(getString(R.string.warning_msg_reg_pwd), iconError);
@@ -139,14 +127,20 @@ public class RegisterFragment extends Fragment {
         if (phone.isEmpty()){
             phoneInput.setError(getString(R.string.enterPhoneNumber), iconError);
         }
+
         else{
             if (username.matches(getString(R.string.limits))){
                 if(email.matches(getString(R.string.limits_email_reg))){
                     if(password.matches(getString(R.string.limits))){
                         if(confirmPassword.matches(password)){
                             if (phone.matches(getString(R.string.phone_regex))) {
-                                String userId = username;
-                                validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone);
+                                if (fullName.matches("^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$")){
+                                    String userId = username;
+                                    validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone, fullName);
+                                }
+                                else{
+                                    fullnameInput.setError("Invalid Full Name", iconError);
+                                }
                             }
                             else {
                                 phoneInput.setError(getString(R.string.invalidPhone), iconError);
@@ -175,7 +169,7 @@ public class RegisterFragment extends Fragment {
 
 
     private void validateDBFirebaseEmail(String userId, String username, String email, String password,
-                                         int startCurrency, int startScore, String phone) {
+                                         int startCurrency, int startScore, String phone, String fullName) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -187,7 +181,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.exists()){
-                    validateDBFirebaseUsername(userId, username,email,password,startCurrency, startScore, phone);
+                    validateDBFirebaseUsername(userId, username,email,password,startCurrency, startScore, phone, fullName);
                 }
                 else{
                     emailInput.setError(getString(R.string.warning_email_used_regFrag), iconError);
@@ -204,7 +198,7 @@ public class RegisterFragment extends Fragment {
     }
 
     private void validateDBFirebaseUsername(String userId, String username, String email, String password,
-                                            int startCurrency, int startScore, String phone) {
+                                            int startCurrency, int startScore, String phone, String fullName) {
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -216,7 +210,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.exists()){
-                    storeNewUserdata(userId, username,email,password,startCurrency, startScore, phone);
+                    storeNewUserdata(userId, username,email,password,startCurrency, startScore, phone, fullName);
                 }
                 else{
                     usernameInput.setError(getString(R.string.warning_username_used_regFrag), iconError);
@@ -235,12 +229,12 @@ public class RegisterFragment extends Fragment {
 
     //command design pattern, stores the information into a class which can later be added in the firebase
     private void storeNewUserdata(String userId, String username, String email,
-                                  String password, int startCurrency, int startScore, String phone) {
+                                  String password, int startCurrency, int startScore, String phone, String fullName) {
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
-        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone);
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName);
         reference.child(userId).setValue(userClass);
         replaceFragment(new LoginFragment());
 

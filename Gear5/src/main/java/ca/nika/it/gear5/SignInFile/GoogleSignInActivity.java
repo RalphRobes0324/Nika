@@ -145,6 +145,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
         String username = user.getDisplayName();
         String password = "No PASSWORD";
         String email = "NO EMAIL";
+        String fullName = "No need full namme";
         int startCurrency = 500;
         int startScore = 0;
         String phone = user.getPhoneNumber();
@@ -152,7 +153,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
-        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone);
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName);
         reference.child(userId).setValue(userClass);
         enterMainActivity(userId);
 

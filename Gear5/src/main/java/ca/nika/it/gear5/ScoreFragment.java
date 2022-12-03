@@ -44,8 +44,6 @@ import ca.nika.it.gear5.LoginSetup.LoginFragment;
 
 public class ScoreFragment extends Fragment {
 
-    private TextView nikaScore1TextView, nikaScore2TextView, nikaScore3TextView;
-
     JSONArray arrayFirebase=new JSONArray();
     JSONArray sortedArray=new JSONArray();
     List<JSONObject> sortValues = new ArrayList<JSONObject>();
@@ -183,7 +181,7 @@ public class ScoreFragment extends Fragment {
     private void DisplayTopUsers(JSONArray sortedArray) throws JSONException {
         ArrayList<String> top15Array = new ArrayList<String>();
 
-        if (sortedArray.length() < 9) {
+        if (sortedArray.length() < 15) {
             for (int pos = 0; pos < sortedArray.length(); pos++) {
                 String jsonStr = sortedArray.getString(pos);
                 JSONObject objectData = new JSONObject(jsonStr);
@@ -193,7 +191,7 @@ public class ScoreFragment extends Fragment {
                 top15Array.add(combinedData);
             }
         }else{
-            for (int pos = 0; pos < 9; pos++) {
+            for (int pos = 0; pos < 15; pos++) {
                 String jsonStr = sortedArray.getString(pos);
                 JSONObject objectData = new JSONObject(jsonStr);
                 String Score = (String) objectData.get("UserScore");
