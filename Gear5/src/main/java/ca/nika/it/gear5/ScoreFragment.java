@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,6 +48,8 @@ public class ScoreFragment extends Fragment {
     JSONArray arrayFirebase=new JSONArray();
     JSONArray sortedArray=new JSONArray();
     List<JSONObject> sortValues = new ArrayList<JSONObject>();
+
+    Button refreshBtn;
 
     ListView listView;
 
@@ -106,67 +109,77 @@ public class ScoreFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.nika_userList);
         nikaSyncTaskImage = (ImageView) view.findViewById(R.id.nika_aSync);
+        refreshBtn = (Button) view.findViewById(R.id.refresh_btn);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(getString(R.string.childRef_reg_regFrag));
-        myRef.addValueEventListener(new ValueEventListener() {
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot item : snapshot.getChildren()){
-                    String username = item.child(getString(R.string.childRef_username)).getValue().toString();
-                    String userScore = item.child(getString(R.string.childRef_topScore)).getValue(Integer.class).toString();
-                    try {
-                        arrayFirebase.put(new JSONObject().put("Username", username).put("UserScore", userScore));
-                    } catch (JSONException e) {
-                        Log.d("Failed", e.toString());
-                    }
-                }
-
-                for (int i = 0; i < arrayFirebase.length(); i++){
-                    try {
-                        sortValues.add(arrayFirebase.getJSONObject(i));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                Collections.sort(sortValues, new Comparator<JSONObject>() {
-                    private static final String KEY_NAME = "UserScore";
+            public void onClick(View view) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference(getString(R.string.childRef_reg_regFrag));
+                myRef.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public int compare(JSONObject a, JSONObject b) {
-                        String str1 = new String();
-                        String str2 = new String();
+                    public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot item : snapshot.getChildren()){
+                            String username = item.child(getString(R.string.childRef_username)).getValue().toString();
+                            String userScore = item.child(getString(R.string.childRef_topScore)).getValue(Integer.class).toString();
+                            try {
+                                arrayFirebase.put(new JSONObject().put("Username", username).put("UserScore", userScore));
+                            } catch (JSONException e) {
+                                Log.d("Failed", e.toString());
+                            }
+                        }
+
+                        for (int i = 0; i < arrayFirebase.length(); i++){
+                            try {
+                                sortValues.add(arrayFirebase.getJSONObject(i));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+
+                        Collections.sort(sortValues, new Comparator<JSONObject>() {
+                            private static final String KEY_NAME = "UserScore";
+                            @Override
+                            public int compare(JSONObject a, JSONObject b) {
+                                String str1 = new String();
+                                String str2 = new String();
+
+                                try {
+                                    str1 = (String) a.get(KEY_NAME);
+                                    str2 = (String) b.get(KEY_NAME);
+                                } catch (JSONException e) {
+                                    Log.d("Failed", e.toString());
+                                }
+                                return -str1.compareTo(str2);
+                            }
+                        });
+
+
+
+                        for(int i = 0; i < arrayFirebase.length(); i++) {
+                            sortedArray.put(sortValues.get(i));
+                        }
 
                         try {
-                            str1 = (String) a.get(KEY_NAME);
-                            str2 = (String) b.get(KEY_NAME);
+                            DisplayTopUsers(sortedArray);
                         } catch (JSONException e) {
                             Log.d("Failed", e.toString());
                         }
-                        return -str1.compareTo(str2);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
-
-
-
-                for(int i = 0; i < arrayFirebase.length(); i++) {
-                    sortedArray.put(sortValues.get(i));
-                }
-
-                try {
-                    DisplayTopUsers(sortedArray);
-                } catch (JSONException e) {
-                    Log.d("Failed", e.toString());
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+                
             }
         });
+
 
 
         new LoadImage().execute();

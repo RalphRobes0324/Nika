@@ -276,7 +276,7 @@ public class ProfileFragment extends Fragment {
                                 int sumScore = offlineScore + 1;
                                 Integer newSum = new Integer(sumScore);
                                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(newSum);
+                                mDatabase.child(getUserID).child(getString(R.string.childRef_topScore)).setValue(newSum);
 
                                 editor.putInt("offlineScore", sumScore);
                                 editor.apply();
