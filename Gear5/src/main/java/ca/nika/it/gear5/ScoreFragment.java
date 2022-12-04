@@ -45,9 +45,6 @@ import ca.nika.it.gear5.LoginSetup.LoginFragment;
 
 public class ScoreFragment extends Fragment {
 
-    JSONArray arrayFirebase=new JSONArray();
-    JSONArray sortedArray=new JSONArray();
-    List<JSONObject> sortValues = new ArrayList<JSONObject>();
 
     Button refreshBtn;
 
@@ -114,6 +111,11 @@ public class ScoreFragment extends Fragment {
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                JSONArray arrayFirebase=new JSONArray();
+                JSONArray sortedArray=new JSONArray();
+                List<JSONObject> sortValues = new ArrayList<JSONObject>();
+
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference(getString(R.string.childRef_reg_regFrag));
                 myRef.addValueEventListener(new ValueEventListener() {
@@ -176,7 +178,7 @@ public class ScoreFragment extends Fragment {
 
                     }
                 });
-                
+
             }
         });
 
