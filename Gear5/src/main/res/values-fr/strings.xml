@@ -7,7 +7,7 @@
     <string name="users">users</string>
     <string name="df">df</string>
     <string name="username2">username</string>
-    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{5,}$</string>
+    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{6,}$</string>
     <string name="limits_regx_username">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
     <string name="warning_msg_reg_account_exist">This account exist</string>
@@ -107,7 +107,7 @@
     <string name="warning_msg_msg_username">Mot de passe de confirmation manquant</string>
     <string name="warning_msg_reg_username_not_maching">Veuillez entrer un nom d\'utilisateur valide</string>
     <string name="warning_msg_reg_confir_not_maching">Le mot de passe ne correspond pas</string>
-    <string name="warning_msg_reg_pwd_not_maching">Veuillez entrer au moins 5 caractères</string>
+    <string name="warning_msg_reg_pwd_not_maching">Veuillez entrer au moins 6 caractères</string>
     <string name="click_to_add_image">cliquez pour ajouter une image</string>
     <string name="success_msg_reg">Inscription réussie</string>
     <string name="PermissionGranted">Permission accordée</string>
@@ -155,9 +155,9 @@
     <string name="verify_code_otpFrag">Vérifier le code</string>
     <string name="warning_username_used_regFrag">Nom d\'utilisateur utilisé</string>
     <string name="warning_email_used_regFrag">E-mail utilisé</string>
-    <string name="warning_pwd_length_reg">Le mot de passe doit être de 5 caractères ou long</string>
+    <string name="warning_pwd_length_reg">Le mot de passe doit comporter au moins 6 caractères ou être long et un caractère spécial, c\'est-à-dire !</string>
     <string name="warning_msg_username_loginFrag">Nom d\'utilisateur invalide</string>
-    <string name="warning_msg_pwd_loginFrag">Nom d\'utilisateur invalide</string>
+    <string name="warning_msg_pwd_loginFrag">Mot de passe incorrect</string>
     <string name="login_with_loginFrag">Connectez-vous avec</string>
     <string name="google_loginFrag">Google</string>
     <string name="sign_up_with_regFrag">Se connecter avech</string>

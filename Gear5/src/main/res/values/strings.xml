@@ -7,7 +7,7 @@
     <string name="users">users</string>
     <string name="df">df</string>
     <string name="username2">username</string>
-    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{5,}$</string>
+    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{6,}$</string>
     <string name="limits_regx_username">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
     <string name="warning_msg_reg_account_exist">This account exist</string>
@@ -105,7 +105,9 @@
     <string name="warning_msg_reg_pwd">Missing Password</string>
     <string name="warning_msg_msg_username">Missing Username</string>
     <string name="warning_msg_reg_confir_not_maching">Password did not match</string>
-    <string name="warning_msg_reg_pwd_not_maching">Please Enter at least 5 characters</string>
+
+    <string name="warning_msg_reg_pwd_not_maching">Please Enter at least 6 characters and one special character i.e !</string>
+
     <string name="warning_msg_reg_username_not_maching">Please Enter Valid Username</string>
     <string name="click_to_add_image">click to add image</string>
     <string name="success_msg_reg">Register Successful</string>
@@ -155,9 +157,9 @@
     <string name="topCurrency">topCurrency</string>
     <string name="warning_email_used_regFrag">Email being used</string>
     <string name="warning_username_used_regFrag">Username being used</string>
-    <string name="warning_pwd_length_reg">Password must be 5 characters or long</string>
+    <string name="warning_pwd_length_reg">Password must be at least 6 characters or long and one special character i.e !</string>
     <string name="warning_msg_username_loginFrag">Username Invalid</string>
-    <string name="warning_msg_pwd_loginFrag">Password Invalid</string>
+    <string name="warning_msg_pwd_loginFrag">Password Incorrect</string>
     <string name="login_with_loginFrag">Login with</string>
     <string name="google_loginFrag">Google</string>
     <string name="sign_up_with_regFrag">Sign-up with</string>

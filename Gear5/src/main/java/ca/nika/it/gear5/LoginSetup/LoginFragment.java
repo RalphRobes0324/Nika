@@ -148,7 +148,10 @@ public class LoginFragment extends Fragment {
         }
         else{
             if (username.matches(getString(R.string.limits_regx_username))){
-                if(password.matches(getString(R.string.limits))){
+                if(password.matches(getString(R.string.limits)) && (password.contains("!") ||
+                        password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^")
+                        || password.contains("&") || password.contains("*") || password.contains("+") || password.contains("=") || password.contains("/")
+                        || password.contains("?")) ){
                     validateUserFireBase(username, password);
                 }
                 else{
