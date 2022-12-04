@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -61,6 +63,7 @@ public class ScoreFragment extends Fragment {
     FloatingActionButton refreshBtn;
     private String userId;
     private String userScore, userScore2, userScore3, userScore4, userScore5;
+    boolean connected = false;
 
 
     public ScoreFragment() {
@@ -125,17 +128,23 @@ public class ScoreFragment extends Fragment {
         top4 = (TextView) view.findViewById(R.id.top4_nike);
         top5 = (TextView) view.findViewById(R.id.top5_nike);
 
-        getData();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            getData();
 
-        refreshBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getData();
-            }
-        });
+            refreshBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getData();
+                }
+            });
 
+            new LoadImage().execute();
 
-        new LoadImage().execute();
+        } else {
+            Toast.makeText(getActivity(), "You are on offline mode, turn on Internet to use this feature", Toast.LENGTH_SHORT).show();
+        }
 
         return view;
 
