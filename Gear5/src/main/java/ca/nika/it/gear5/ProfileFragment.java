@@ -141,10 +141,10 @@ public class ProfileFragment extends Fragment {
                             }
 
                             Integer userTopScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore2 = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore3 = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore4 = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore5 = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getUserId).child("topScore2").getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getUserId).child("topScore3").getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getUserId).child("topScore4").getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getUserId).child("topScore5").getValue(Integer.class);
                             Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
                             editor.putString("profileTopScore", Integer.toString(userTopScore));
@@ -179,12 +179,30 @@ public class ProfileFragment extends Fragment {
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
                             DataSnapshot snapshot = task.getResult();
-                            String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
-                            Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+
+                            int Checker = sharedPreferences.getInt("checker", offlineMode);
+                            if (Checker == 1) {
+                                updateDatabase(sharedPreferences, editor);
+
+                            }
+
+                            Integer userTopScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userScore2 = snapshot.child("topScore2").getValue(Integer.class);
+                            Integer userScore3 = snapshot.child("topScore3").getValue(Integer.class);
+                            Integer userScore4 = snapshot.child("topScore4").getValue(Integer.class);
+                            Integer userScore5 = snapshot.child("topScore5").getValue(Integer.class);
                             Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
+                            editor.putString("profileTopScore", Integer.toString(userTopScore));
+                            editor.putString("profileScore2", Integer.toString(userScore2));
+                            editor.putString("profileScore3", Integer.toString(userScore3));
+                            editor.putString("profileScore4", Integer.toString(userScore4));
+                            editor.putString("profileScore5", Integer.toString(userScore5));
                             editor.putString("profileCur", Integer.toString(userCur));
                             editor.apply();
+
+
+                            loadText();
                         }else{
                             Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
                         }
@@ -311,8 +329,6 @@ public class ProfileFragment extends Fragment {
                             Integer userScore3 = snapshot.child("topScore3").getValue(Integer.class);
                             Integer userScore4 = snapshot.child("topScore4").getValue(Integer.class);
                             Integer userScore5 = snapshot.child("topScore5").getValue(Integer.class);
-                            int topScore = userCurrentCurr.intValue();
-//                        Integer newSum = new Integer(i);
                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                         if (i > userCurrentCurr.intValue() ){
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore").setValue(i);
