@@ -107,7 +107,7 @@ public class junit4Test {
         assertArrayEquals(input2, concatenateStringArrays(null, input2));
     }
 
-    public int largest(final int[] list) {
+    public int largestNumber(final int[] list) {
         int index, max = Integer.MAX_VALUE;
         for (index = 0; index < list.length - 1; index++) {
             if (list[index] > max) {
@@ -116,10 +116,11 @@ public class junit4Test {
         }
         return max;
     }
+    @Test
+    public void testFail() {
 
 
-
-
+    }
 
 }
 
