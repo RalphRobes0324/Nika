@@ -40,4 +40,24 @@ public class junit4Test {
         assertFalse(isBlank("nika"));
         assertFalse(isBlank("  nika  "));
     }
+
+    public static boolean containsWhitespace(final CharSequence seq) {
+        if (seq == null || seq.length() == 0) {
+            return false;
+        }
+        final int strLen = seq.length();
+        for (int i = 0; i < strLen; i++) {
+            if (Character.isWhitespace(seq.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @Test
+    public void testContainsWhitespace() {
+
+    }
+
+
+
 }
