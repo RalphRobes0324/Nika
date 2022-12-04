@@ -104,18 +104,36 @@
 
     <Button
         android:id="@+id/nikaSimulateScore"
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="53dp"
         android:layout_gravity="center"
+        android:layout_marginLeft="175dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/purple_500"
         android:fontFamily="@font/montserrat_bold"
         android:text="Simulate Score"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="13sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/nikaLogout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/nikaInputScore"
+        android:layout_width="136dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:inputType="text"
+        android:hint="Score Input"
+        android:digits="0123456789"
+        android:maxLength="5"
+        app:layout_constraintBottom_toTopOf="@+id/nikaLogout"
+        app:layout_constraintEnd_toStartOf="@+id/nikaSimulateScore"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
