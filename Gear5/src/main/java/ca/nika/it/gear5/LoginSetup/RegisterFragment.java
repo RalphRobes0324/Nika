@@ -145,7 +145,7 @@ public class RegisterFragment extends Fragment {
                     if(PASSWORD_PATTERN.matcher(password).matches()){
                         if(confirmPassword.matches(password)){
                             if (phone.matches(getString(R.string.phone_regex))) {
-                                if (fullName.matches("^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$")){
+                                if (fullName.matches(getString(R.string.email_regex))){
                                     String userId = username;
                                     validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone, fullName);
                                 }

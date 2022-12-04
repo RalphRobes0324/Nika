@@ -67,6 +67,7 @@
     <string name="key_topScore3">topScore3</string>
     <string name="key_topScore4">topScore4</string>
     <string name="key_topScore5">topScore5</string>
+    <string name="email_regex">^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
