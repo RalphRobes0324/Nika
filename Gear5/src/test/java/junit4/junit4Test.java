@@ -122,9 +122,9 @@ public class junit4Test {
     public void testFail() {
         try {
             largestNumber(new int[] {});
-
+            fail("Throws an exception");
             } catch (final RuntimeException e) {
-            assertFalse(false);
+            assertTrue(true);
         }
     }
 
