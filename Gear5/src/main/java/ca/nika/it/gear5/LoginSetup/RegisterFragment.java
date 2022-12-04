@@ -230,11 +230,15 @@ public class RegisterFragment extends Fragment {
     //command design pattern, stores the information into a class which can later be added in the firebase
     private void storeNewUserdata(String userId, String username, String email,
                                   String password, int startCurrency, int startScore, String phone, String fullName) {
+        int topScore2 = 0;
+        int topScore3 = 0;
+        int topScore4 = 0;
+        int topScore5 = 0;
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
-        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName);
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName, topScore2, topScore3, topScore4, topScore5);
         reference.child(userId).setValue(userClass);
         replaceFragment(new LoginFragment());
 

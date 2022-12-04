@@ -136,11 +136,11 @@ public class ScoreFragment extends Fragment {
                     userScore4 = snapshot.child("topScore4").getValue(Integer.class).toString();
                     userScore5 = snapshot.child("topScore5").getValue(Integer.class).toString();
 
-                    top1.setText(userScore);
-                    top2.setText(userScore2);
-                    top3.setText(userScore3);
-                    top4.setText(userScore4);
-                    top5.setText(userScore5);
+                    top1.setText("1." + userScore);
+                    top2.setText("2." +userScore2);
+                    top3.setText("3." +userScore3);
+                    top4.setText("4." + userScore4);
+                    top5.setText("5." + userScore5);
 
                 }else{
                     Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
