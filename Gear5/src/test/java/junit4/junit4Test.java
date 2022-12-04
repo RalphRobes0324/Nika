@@ -114,8 +114,14 @@ public class junit4Test {
                 max = list[index];
             }
         }
-
+        return max;
     }
+
+
+
+
+
+}
 
 
 
