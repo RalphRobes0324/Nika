@@ -200,7 +200,6 @@ public class LoginFragment extends Fragment {
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-        DatabaseReference rootRef = databaseReference;
         Query checkEmail = databaseReference.orderByChild(getString(R.string.emailRef_reg_regFrag)).equalTo(email);
         checkEmail.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

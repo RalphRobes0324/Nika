@@ -128,7 +128,7 @@ public class RegisterFragment extends Fragment {
             usernameInput.setError(getString(R.string.warning_msg_msg_username), iconError);
         }
         if (fullName.isEmpty()){
-            fullnameInput.setError("Missing Full Name", iconError);
+            fullnameInput.setError(getString(R.string.warning_msg_fullName), iconError);
         }
         if (password.isEmpty()){
             passwordInput.setError(getString(R.string.warning_msg_reg_pwd), iconError);

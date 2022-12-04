@@ -69,6 +69,10 @@
     <string name="key_topScore4">topScore4</string>
     <string name="key_topScore5">topScore5</string>
     <string name="email_regex">^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$</string>
+    <string name="TAG_FAILED">FAILED</string>
+    <string name="ERROR_MSG_SCORFRAG">FAILED GOOGLE LOAD SCORE</string>
+    <string name="ERROR_MSG_BALAFRAG">FAILED GOOGLE LOAD BALANCE TO DB</string>
+
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -235,12 +239,13 @@
     <string name="pleaseWait">Please Wait</string>
     <string name="image_not_shown">ImageView Not Shown</string>
     <string name="FAILED">FAILED</string>
-    <string name="username_email_loginFrag">Username||Email</string>
+    <string name="username_email_loginFrag">Nom d\'utilisateur||E-mail</string>
     <string name="warning_emil_username_msg">Username Invalid or Email invalid</string>
-    <string name="warning_msg_fullname">Invalid Full Name or must have space between name and last name</string>
+    <string name="warning_msg_fullname">Nom d\'utilisateur invalide ou email invalide</string>
     <string name="sb_pos3">3.</string>
     <string name="sb_pos5">5.</string>
     <string name="sb_pos1">1.</string>
     <string name="sb_pos2">2.</string>
     <string name="sb_pos4">4.</string>
+    <string name="warning_msg_fullName">Nom complet manquant</string>
 </resources>

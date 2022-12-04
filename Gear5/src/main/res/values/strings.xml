@@ -68,6 +68,9 @@
     <string name="key_topScore4">topScore4</string>
     <string name="key_topScore5">topScore5</string>
     <string name="email_regex">^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$</string>
+    <string name="TAG_FAILED">FAILED</string>
+    <string name="ERROR_MSG_SCORFRAG">FAILED GOOGLE LOAD SCORE</string>
+    <string name="ERROR_MSG_BALAFRAG">FAILED GOOGLE LOAD BALANCE TO DB</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -243,4 +246,5 @@
     <string name="sb_pos3">3.</string>
     <string name="sb_pos4">4.</string>
     <string name="sb_pos5">5.</string>
+    <string name="warning_msg_fullName">Missing Full Name</string>
 </resources>

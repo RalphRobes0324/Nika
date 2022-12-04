@@ -162,7 +162,7 @@ public class ScoreFragment extends Fragment {
                     top5.setText(getString(R.string.sb_pos5) + userScore5);
 
                 }else{
-                    Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_SCORFRAG));
                 }
             }
         });

@@ -73,7 +73,7 @@ public class BluetoothFragment extends Fragment {
         });
         //discover bluetooth btn click
         mDiscoverBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("MissingPermission")
+            @SuppressLint("MissingPermission")//dont remove hard string, it will crash
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
@@ -86,7 +86,7 @@ public class BluetoothFragment extends Fragment {
         });
         //off btn click
         mOffBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("MissingPermission")
+            @SuppressLint("MissingPermission")//dont remove hard string, it will crash
             @Override
             public void onClick(View v) {
                 if (mBlueAdapter.isEnabled()) {
