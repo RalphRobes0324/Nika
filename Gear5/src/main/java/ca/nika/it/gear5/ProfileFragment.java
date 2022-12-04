@@ -61,6 +61,7 @@ public class ProfileFragment extends Fragment {
     String typeOFsignout, profileUser, profileCur, profileScore, getUserID;
     int profileScoreKeep;
     boolean connected = false;
+    String globalId;
 
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
@@ -120,6 +121,9 @@ public class ProfileFragment extends Fragment {
                 typeOFsignout = typeOFLogin;
                 if (typeOFLogin.equals("GearAccount")) {
                     String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                    //
+                    globalId = getUserId;
+                    //
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
                     Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
 //                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -169,6 +173,7 @@ public class ProfileFragment extends Fragment {
                     });
                 } else if (typeOFLogin.equals("GearGoogleAccount")) {
                     String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                    globalId = getUserId;
                     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference uidRef = db.child("users").child(getUserId);
                     uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -397,7 +402,7 @@ public class ProfileFragment extends Fragment {
                 //updateUserCurrFirebase();
                 int i = 1;
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child("admin");
+                DatabaseReference uidRef = db.child("users").child(globalId);
                 uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -407,7 +412,7 @@ public class ProfileFragment extends Fragment {
                             int sum = userCurrentCurr.intValue() + i;
                             Integer newSum = new Integer(sum);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin").child("topScore").setValue(newSum);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore").setValue(newSum);
                             topScoreTextView.setText(getString(R.string.scoreDisplay) + sum);
                         }else{
                             Log.d("FAILED", "FAILED GOOGLE LOAD PROF");

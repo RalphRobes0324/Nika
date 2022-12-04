@@ -39,6 +39,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import ca.nika.it.gear5.LoginSetup.LoginFragment;
 
@@ -111,6 +112,12 @@ public class ScoreFragment extends Fragment {
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 JSONArray arrayFirebase=new JSONArray();
                 JSONArray sortedArray=new JSONArray();
@@ -216,6 +223,7 @@ public class ScoreFragment extends Fragment {
                 R.layout.list_view, top15Array);
 
         listView.setAdapter(adapter);
+
 
     }
 
