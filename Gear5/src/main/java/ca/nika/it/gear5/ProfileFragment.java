@@ -394,7 +394,26 @@ public class ProfileFragment extends Fragment {
         mSimulateScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateUserCurrFirebase();
+                //updateUserCurrFirebase();
+                int i = 1;
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference uidRef = db.child("users").child("admin");
+                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DataSnapshot snapshot = task.getResult();
+                            Integer userCurrentCurr = snapshot.child("topScore").getValue(Integer.class);
+                            int sum = userCurrentCurr.intValue() + i;
+                            Integer newSum = new Integer(sum);
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin").child("topScore").setValue(newSum);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + sum);
+                        }else{
+                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                        }
+                    }
+                });
 
             }
         });
@@ -433,8 +452,6 @@ public class ProfileFragment extends Fragment {
                                 dialog.dismiss();
                             }
                         }).show();
-
-
             }
         });
 
