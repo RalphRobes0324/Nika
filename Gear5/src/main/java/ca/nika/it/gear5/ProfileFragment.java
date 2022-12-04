@@ -265,12 +265,10 @@ public class ProfileFragment extends Fragment {
                         editor.putString("profileCur", "");
                         editor.apply();
 
-                        if (typeOFsignout.equals("GearGoogleAccount")){
+                        if (typeOFsignout.equals(R.string.geargoogleaccount)){
                             FirebaseAuth.getInstance().signOut();
-                            Log.d("LOGOUT", "GOOGLE");
                             getActivity().finish();
                         }else{
-                            Log.d("LOGOUT", "NORM");
                             getActivity().finish();
                         }
 
