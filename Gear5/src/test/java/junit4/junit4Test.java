@@ -55,9 +55,24 @@ public class junit4Test {
     }
     @Test
     public void testContainsWhitespace() {
+            assertFalse(containsWhitespace(null));
+            assertFalse(containsWhitespace(""));
+            assertFalse(containsWhitespace("n"));
+            assertFalse(containsWhitespace("nika"));
+            assertTrue(containsWhitespace(" "));
+            assertTrue(containsWhitespace(" n"));
+            assertTrue(containsWhitespace("nika "));
+            assertTrue(containsWhitespace("n a"));
+            assertTrue(containsWhitespace("n  a"));
+        }
+
+
+
+
+
 
     }
 
 
 
-}
+
