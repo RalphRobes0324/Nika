@@ -12,18 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="50dp"
         android:gravity="center">
 
-
-        <TextView
-            android:id="@+id/statusBluetoothTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textColor="#000"/>
 
         <ImageView
             android:id="@+id/bluetoothIv"
