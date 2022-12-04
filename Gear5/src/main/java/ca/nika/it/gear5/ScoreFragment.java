@@ -25,6 +25,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +57,8 @@ public class ScoreFragment extends Fragment {
     PreferenceManager preferenceManager;
     ImageView nikaSyncTaskImage;
 
-    TextView top1, top2, top3, top4, top5;
+    private TextView top1, top2, top3, top4, top5;
+    FloatingActionButton refreshBtn;
     private String userId;
     private String userScore, userScore2, userScore3, userScore4, userScore5;
 
@@ -114,53 +116,56 @@ public class ScoreFragment extends Fragment {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         //Getting data from Share Preferences
         userId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-
         nikaSyncTaskImage = (ImageView) view.findViewById(R.id.nika_aSync);
 
+        refreshBtn = (FloatingActionButton) view.findViewById(R.id.refresh_nikaBtn);
         top1 = (TextView) view.findViewById(R.id.top1_nike);
         top2 = (TextView) view.findViewById(R.id.top2_nike);
         top3 = (TextView) view.findViewById(R.id.top3_nike);
         top4 = (TextView) view.findViewById(R.id.top4_nike);
         top5 = (TextView) view.findViewById(R.id.top5_nike);
 
+        getData();
+
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getData();
+            }
+        });
+
+
+        new LoadImage().execute();
+
+        return view;
+
+    }
+
+    private void getData() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference uidRef = db.child("users").child(userId);
+        DatabaseReference uidRef = db.child(getString(R.string.users)).child(userId);
         uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(task.isSuccessful()){
                     DataSnapshot snapshot = task.getResult();
-                    userScore = snapshot.child("topScore").getValue(Integer.class).toString();
-                    userScore2 = snapshot.child("topScore2").getValue(Integer.class).toString();
-                    userScore3 = snapshot.child("topScore3").getValue(Integer.class).toString();
-                    userScore4 = snapshot.child("topScore4").getValue(Integer.class).toString();
-                    userScore5 = snapshot.child("topScore5").getValue(Integer.class).toString();
+                    userScore = snapshot.child(getString(R.string.key_topScore)).getValue(Integer.class).toString();
+                    userScore2 = snapshot.child(getString(R.string.key_topScore2)).getValue(Integer.class).toString();
+                    userScore3 = snapshot.child(getString(R.string.key_topScore3)).getValue(Integer.class).toString();
+                    userScore4 = snapshot.child(getString(R.string.key_topScore4)).getValue(Integer.class).toString();
+                    userScore5 = snapshot.child(getString(R.string.key_topScore5)).getValue(Integer.class).toString();
 
-                    top1.setText("1." + userScore);
-                    top2.setText("2." +userScore2);
-                    top3.setText("3." +userScore3);
-                    top4.setText("4." + userScore4);
-                    top5.setText("5." + userScore5);
+                    top1.setText(getString(R.string.sb_pos1) + userScore);
+                    top2.setText(getString(R.string.sb_pos2) +userScore2);
+                    top3.setText(getString(R.string.sb_pos3) +userScore3);
+                    top4.setText(getString(R.string.sb_pos4) + userScore4);
+                    top5.setText(getString(R.string.sb_pos5) + userScore5);
 
                 }else{
                     Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
                 }
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-        new LoadImage().execute();
-
-        return view;
 
     }
 

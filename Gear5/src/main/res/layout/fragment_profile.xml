@@ -34,6 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <LinearLayout
         android:id="@+id/nikaLinearLayout"
         android:layout_width="416dp"
@@ -131,7 +132,7 @@
             app:fab_expandDirection="down"
             app:fab_colorNormal="@color/purple_500"
             app:fab_colorPressed="@color/purple_700"
-            app:fab_icon="@drawable/ic_change_profile"
+            app:fab_icon="@drawable/ic_baseline_add_photo_alternate_24"
             app:fab_labelsPosition="right"
             android:layout_margin="16dp"/>
 

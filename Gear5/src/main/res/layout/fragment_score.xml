@@ -114,6 +114,18 @@
                     android:gravity="center"
                     android:textSize="25dp"
                     android:layout_gravity="center"/>
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/refresh_nikaBtn"
+                    android:layout_width="125dp"
+                    android:layout_height="108dp"
+                    android:layout_gravity="right"
+                    app:fab_expandDirection="down"
+                    app:fab_colorNormal="@color/purple_500"
+                    app:fab_colorPressed="@color/purple_700"
+                    app:fab_icon="@drawable/ic_baseline_refresh_24"
+                    app:fab_labelsPosition="right"
+                    android:layout_margin="16dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
