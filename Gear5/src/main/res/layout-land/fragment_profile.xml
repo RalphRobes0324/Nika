@@ -126,5 +126,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nikaLogout" />
 
+    <EditText
+        android:id="@+id/nikaInputScore"
+        android:layout_width="136dp"
+        android:layout_height="47dp"
+        android:digits="0123456789"
+        android:ems="10"
+        android:hint="Score Input"
+        android:inputType="text"
+        android:maxLength="5"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textColorHint="@color/white"
+        android:layout_marginStart="240dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nikaLinearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
