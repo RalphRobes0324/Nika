@@ -121,9 +121,9 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if(sharedPreferences!= null) {
-            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+            String typeOFLogin = sharedPreferences.getString(getString(R.string.key_typelogin), getString(R.string.blank));
             typeOFsignout = typeOFLogin;
-            if(typeOFLogin.equals("GearAccount")) {
+            if(typeOFLogin.equals(getString(R.string.gearaccount))) {
                 String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
                 globalId = getUserId;
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
@@ -141,10 +141,10 @@ public class ProfileFragment extends Fragment {
                             }
 
                             Integer userTopScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore2 = snapshot.child(getUserId).child("topScore2").getValue(Integer.class);
-                            Integer userScore3 = snapshot.child(getUserId).child("topScore3").getValue(Integer.class);
-                            Integer userScore4 = snapshot.child(getUserId).child("topScore4").getValue(Integer.class);
-                            Integer userScore5 = snapshot.child(getUserId).child("topScore5").getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getUserId).child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getUserId).child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getUserId).child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getUserId).child(getString(R.string.key_topScore5)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
                             editor.putString("profileTopScore", Integer.toString(userTopScore));
@@ -159,7 +159,7 @@ public class ProfileFragment extends Fragment {
                             loadText();
 
                         } else {
-                            Log.d("FAILED", "FAILED GEAR");
+                            Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
                         }
                     }
 
@@ -169,11 +169,11 @@ public class ProfileFragment extends Fragment {
                     }
                 });
             }
-            else if(typeOFLogin.equals("GearGoogleAccount")){
+            else if(typeOFLogin.equals(getString(R.string.geargoogleaccount))){
                 String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
                 globalId = getUserId;
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child(getUserId);
+                DatabaseReference uidRef = db.child(getString(R.string.users)).child(getUserId);
                 uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -187,10 +187,10 @@ public class ProfileFragment extends Fragment {
                             }
 
                             Integer userTopScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore2 = snapshot.child("topScore2").getValue(Integer.class);
-                            Integer userScore3 = snapshot.child("topScore3").getValue(Integer.class);
-                            Integer userScore4 = snapshot.child("topScore4").getValue(Integer.class);
-                            Integer userScore5 = snapshot.child("topScore5").getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getString(R.string.key_topScore5)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
                             editor.putString("profileTopScore", Integer.toString(userTopScore));
@@ -204,14 +204,14 @@ public class ProfileFragment extends Fragment {
 
                             loadText();
                         }else{
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                            Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
                         }
                     }
                 });
 
             }
             else{
-                Log.d("FAILED", "FAILED");
+                Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
             }
 
         }
@@ -293,11 +293,11 @@ public class ProfileFragment extends Fragment {
         String topScr4 = sharedPreferences.getString("profileScore4", profileScore);
         String topScr5 = sharedPreferences.getString("profileScore5", profileScore);
 
-        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore").setValue(Integer.parseInt(topScr));
-        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore2").setValue(Integer.parseInt(topScr2));
-        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore3").setValue(Integer.parseInt(topScr3));
-        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore4").setValue(Integer.parseInt(topScr4));
-        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore5").setValue(Integer.parseInt(topScr5));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore)).setValue(Integer.parseInt(topScr));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(Integer.parseInt(topScr2));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(Integer.parseInt(topScr3));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(Integer.parseInt(topScr4));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(Integer.parseInt(topScr5));
 
         offlineMode = 0;
         editor.putInt("checker", offlineMode);
@@ -318,50 +318,50 @@ public class ProfileFragment extends Fragment {
             }
             if (connected == true) {
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child(globalId);
+                DatabaseReference uidRef = db.child(getString(R.string.users)).child(globalId);
                 uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
                             DataSnapshot snapshot = task.getResult();
-                            Integer userCurrentCurr = snapshot.child("topScore").getValue(Integer.class);
-                            Integer userScore2 = snapshot.child("topScore2").getValue(Integer.class);
-                            Integer userScore3 = snapshot.child("topScore3").getValue(Integer.class);
-                            Integer userScore4 = snapshot.child("topScore4").getValue(Integer.class);
-                            Integer userScore5 = snapshot.child("topScore5").getValue(Integer.class);
+                            Integer userCurrentCurr = snapshot.child(getString(R.string.key_topScore)).getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getString(R.string.key_topScore5)).getValue(Integer.class);
                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                         if (i > userCurrentCurr.intValue() ){
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore").setValue(i);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore2").setValue(userCurrentCurr);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore3").setValue(userScore2);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore4").setValue(userScore3);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore5").setValue(userScore4);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(userCurrentCurr);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(userScore2);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
                             Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                             topScoreTextView.setText(getString(R.string.scoreDisplay) + i);
                         } else if (i > userScore2.intValue()) {
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore2").setValue(i);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore3").setValue(userScore2);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore4").setValue(userScore3);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore5").setValue(userScore4);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(userScore2);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
                             Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                         } else if (i > userScore3.intValue()) {
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore3").setValue(i);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore4").setValue(userScore3);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore5").setValue(userScore4);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
                             Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                         } else if (i > userScore4.intValue()) {
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore4").setValue(i);
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore5").setValue(userScore4);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore4);
                             Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                         } else if (i > userScore5.intValue()) {
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore5").setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(i);
                             Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getActivity(), "No Update", Toast.LENGTH_SHORT).show();
                         }
 
                         } else {
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                            Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
                         }
                     }
                 });
