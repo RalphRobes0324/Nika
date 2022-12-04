@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Pattern;
+
 import ca.nika.it.gear5.R;
 
 
@@ -32,6 +34,14 @@ public class RegisterFragment extends Fragment {
     private Button doneBtn, loginBtn;
     EditText usernameInput, passwordInput, emailInput, confirmPasswordInput, phoneInput, fullnameInput;
     ImageView backButton;
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[!@#$%^&+=*])" +     // at least 1 special character
+                    "(?=.*[A-Z])" +           //at least 1 capital character
+                    "(?=\\S+$)" +            // no white spaces
+                    ".{6,}" +                // at least 6 characters
+                    "$");
 
 
     //Single responsibility as it will replace the current fragment to a new one that accomplishes its single goal/responsibility
@@ -131,7 +141,7 @@ public class RegisterFragment extends Fragment {
         else{
             if (username.matches(getString(R.string.limits_regx_username))){
                 if(email.matches(getString(R.string.limits_email_reg))){
-                    if(password.matches(getString(R.string.limits))){
+                    if(PASSWORD_PATTERN.matcher(password).matches()){
                         if(confirmPassword.matches(password)){
                             if (phone.matches(getString(R.string.phone_regex))) {
                                 if (fullName.matches("^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$")){

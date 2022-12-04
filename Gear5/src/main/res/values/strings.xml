@@ -157,7 +157,7 @@
     <string name="topCurrency">topCurrency</string>
     <string name="warning_email_used_regFrag">Email being used</string>
     <string name="warning_username_used_regFrag">Username being used</string>
-    <string name="warning_pwd_length_reg">Password must be at least 6 characters or long and one special character i.e !</string>
+    <string name="warning_pwd_length_reg"> Password must be at least 6 characters long and one special character, and one capital letter</string>
     <string name="warning_msg_username_loginFrag">Username Invalid</string>
     <string name="warning_msg_pwd_loginFrag">Password Incorrect</string>
     <string name="login_with_loginFrag">Login with</string>

@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 import ca.nika.it.gear5.SignInFile.GoogleSignInActivity;
@@ -49,6 +53,16 @@ public class LoginFragment extends Fragment {
     private EditText usernameInput, passwordInput;
     private LinearLayout googleBtn;
     private ImageView backButton;
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[!@#$%^&+=*])" +     // at least 1 special character
+                    "(?=.*[A-Z])" +
+                    "(?=\\S+$)" +            // no white spaces
+                    ".{6,}" +                // at least 6 characters
+                    "$");
+
+
 
 
     private void replaceFragment(Fragment fragment) {
@@ -136,6 +150,8 @@ public class LoginFragment extends Fragment {
 
 
     private void validateUserAndPwd(String username, String password) {
+
+
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);
         iconError.setBounds(0,0,iconError.getIntrinsicWidth(),iconError.getIntrinsicHeight());
@@ -148,10 +164,8 @@ public class LoginFragment extends Fragment {
         }
         else{
             if (username.matches(getString(R.string.limits_regx_username))){
-                if(password.matches(getString(R.string.limits)) && (password.contains("!") ||
-                        password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^")
-                        || password.contains("&") || password.contains("*") || password.contains("+") || password.contains("=") || password.contains("/")
-                        || password.contains("?")) ){
+
+                if(PASSWORD_PATTERN.matcher(password).matches()){
                     validateUserFireBase(username, password);
                 }
                 else{
@@ -159,7 +173,7 @@ public class LoginFragment extends Fragment {
                 }
             }
             else if(username.matches(getString(R.string.limits_email_reg))){
-                if(password.matches(getString(R.string.limits))){
+                if(PASSWORD_PATTERN.matcher(password).matches()){
                     validateUserFireBaseEmail(username, password);
 
                 }
