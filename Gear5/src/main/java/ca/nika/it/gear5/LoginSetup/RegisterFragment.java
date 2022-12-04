@@ -38,7 +38,8 @@ public class RegisterFragment extends Fragment {
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[!@#$%^&+=*])" +     // at least 1 special character
-                    "(?=.*[A-Z])" +           //at least 1 capital character
+                    "(?=.*[A-Z])" +
+                    "(?=.*[0-9])" +
                     "(?=\\S+$)" +            // no white spaces
                     ".{6,}" +                // at least 6 characters
                     "$");

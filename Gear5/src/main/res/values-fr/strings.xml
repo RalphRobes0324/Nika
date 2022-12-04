@@ -156,7 +156,7 @@
     <string name="warning_username_used_regFrag">Nom d\'utilisateur utilisé</string>
     <string name="warning_email_used_regFrag">E-mail utilisé</string>
 
-    <string name="warning_pwd_length_reg">Le mot de passe doit comporter au moins 6 caractères un caractère long et un caractère spécial, et une lettre majuscule</string>
+    <string name="warning_pwd_length_reg">Le mot de passe doit comporter au moins 6 caractères, un caractère spécial, une majuscule et un chiffre</string>
 
     <string name="warning_msg_username_loginFrag">Nom d\'utilisateur invalide</string>
     <string name="warning_msg_pwd_loginFrag">Mot de passe incorrect</string>

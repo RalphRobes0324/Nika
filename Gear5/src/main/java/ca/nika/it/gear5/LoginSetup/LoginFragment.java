@@ -58,6 +58,7 @@ public class LoginFragment extends Fragment {
             Pattern.compile("^" +
                     "(?=.*[!@#$%^&+=*])" +     // at least 1 special character
                     "(?=.*[A-Z])" +
+                    "(?=.*[0-9])" +
                     "(?=\\S+$)" +            // no white spaces
                     ".{6,}" +                // at least 6 characters
                     "$");
