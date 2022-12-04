@@ -50,13 +50,6 @@ public class BluetoothFragment extends Fragment {
         //adapter
         mBlueAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        //check if bluetooth is available or not
-        if (mBlueAdapter == null) {
-            mStatusBlueTv.setText(R.string.bluetoothUnavailable);
-        } else {
-            mStatusBlueTv.setText(R.string.bluetoothAvailable);
-        }
-
         //set image according to bluetooth status(on/off)
         if (mBlueAdapter.isEnabled()) {
             mBlueIv.setImageResource(R.drawable.b_on);
