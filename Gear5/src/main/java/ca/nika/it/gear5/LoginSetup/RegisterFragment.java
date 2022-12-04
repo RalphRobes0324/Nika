@@ -35,6 +35,10 @@ public class RegisterFragment extends Fragment {
     EditText usernameInput, passwordInput, emailInput, confirmPasswordInput, phoneInput, fullnameInput;
     ImageView backButton;
 
+
+    /*
+    DON'T REMOVE HARD STRINGS OR ELSE IT WILL CRASH THE LOGIN/REGIS
+     */
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[!@#$%^&+=*])" +     // at least 1 special character

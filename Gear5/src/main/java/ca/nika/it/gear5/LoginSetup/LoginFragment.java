@@ -54,9 +54,12 @@ public class LoginFragment extends Fragment {
     private LinearLayout googleBtn;
     private ImageView backButton;
 
+    /*
+    DONT REMOVE HARD STRINGS OR ELSE IT WILL CRASH THE LOGIN/REGIS
+     */
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
-                    "(?=.*[!@#$%^&+=*])" +     // at least 1 special character
+                    "(?=.*[!@#$%^&+=*])"+     // at least 1 special character
                     "(?=.*[A-Z])" +
                     "(?=.*[0-9])" +
                     "(?=\\S+$)" +            // no white spaces
