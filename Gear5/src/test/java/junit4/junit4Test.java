@@ -58,18 +58,19 @@ public class junit4Test {
         }
         return false;
     }
+
     @Test
     public void testContainsWhitespace() {
-            assertFalse(containsWhitespace(null));
-            assertFalse(containsWhitespace(""));
-            assertFalse(containsWhitespace("n"));
-            assertFalse(containsWhitespace("nika"));
-            assertTrue(containsWhitespace(" "));
-            assertTrue(containsWhitespace(" n"));
-            assertTrue(containsWhitespace("nika "));
-            assertTrue(containsWhitespace("n a"));
-            assertTrue(containsWhitespace("n  a"));
-        }
+        assertFalse(containsWhitespace(null));
+        assertFalse(containsWhitespace(""));
+        assertFalse(containsWhitespace("n"));
+        assertFalse(containsWhitespace("nika"));
+        assertTrue(containsWhitespace(" "));
+        assertTrue(containsWhitespace(" n"));
+        assertTrue(containsWhitespace("nika "));
+        assertTrue(containsWhitespace("n a"));
+        assertTrue(containsWhitespace("n  a"));
+    }
 
 
     public static String[] concatenateStringArrays(final String[] array1, final String[] array2) {
@@ -86,26 +87,27 @@ public class junit4Test {
         return newArr;
     }
 
+
     @Test
     public void testConcatenateStringArrays() {
 
-    }
-
-    final String[] input1 = new String[]{"nikaString2"};
-    final String[] input2 = new String[]{"nikaString1", "nikaString2"};
-    final String[] result = concatenateStringArrays(input1, input2);
+        final String[] input1 = new String[]{"nikaString2"};
+        final String[] input2 = new String[]{"nikaString1", "nikaString2"};
+        final String[] result = concatenateStringArrays(input1, input2);
 
         assertNull(concatenateStringArrays(null, null));
 
         assertEquals(3, result.length);
+
         assertEquals("nikaString2", result[0]);
         assertEquals("nikaString1", result[1]);
         assertEquals("nikaString2", result[2]);
 
         assertArrayEquals(input1, concatenateStringArrays(input1, null));
         assertArrayEquals(input2, concatenateStringArrays(null, input2));
-
     }
+}
+
 
 
 
