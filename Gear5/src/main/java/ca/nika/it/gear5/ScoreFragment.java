@@ -3,6 +3,8 @@
 package ca.nika.it.gear5;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -19,9 +21,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,13 +52,13 @@ import ca.nika.it.gear5.LoginSetup.LoginFragment;
 public class ScoreFragment extends Fragment {
 
 
-    Button refreshBtn;
-
-    ListView listView;
-
-
     ProgressDialog progress;
+    PreferenceManager preferenceManager;
     ImageView nikaSyncTaskImage;
+
+    TextView top1, top2, top3, top4, top5;
+    private String userId;
+    private String userScore, userScore2, userScore3, userScore4, userScore5;
 
 
     public ScoreFragment() {
@@ -105,125 +110,57 @@ public class ScoreFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
-        listView = (ListView) view.findViewById(R.id.nika_userList);
+        preferenceManager = PreferenceManager.getInstance(getActivity());
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+        //Getting data from Share Preferences
+        userId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+
         nikaSyncTaskImage = (ImageView) view.findViewById(R.id.nika_aSync);
-        refreshBtn = (Button) view.findViewById(R.id.refresh_btn);
 
-        refreshBtn.setOnClickListener(new View.OnClickListener() {
+        top1 = (TextView) view.findViewById(R.id.top1_nike);
+        top2 = (TextView) view.findViewById(R.id.top2_nike);
+        top3 = (TextView) view.findViewById(R.id.top3_nike);
+        top4 = (TextView) view.findViewById(R.id.top4_nike);
+        top5 = (TextView) view.findViewById(R.id.top5_nike);
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference uidRef = db.child("users").child(userId);
+        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onClick(View view) {
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    DataSnapshot snapshot = task.getResult();
+                    userScore = snapshot.child("topScore").getValue(Integer.class).toString();
+                    userScore2 = snapshot.child("topScore2").getValue(Integer.class).toString();
+                    userScore3 = snapshot.child("topScore3").getValue(Integer.class).toString();
+                    userScore4 = snapshot.child("topScore4").getValue(Integer.class).toString();
+                    userScore5 = snapshot.child("topScore5").getValue(Integer.class).toString();
 
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    top1.setText(userScore);
+                    top2.setText(userScore2);
+                    top3.setText(userScore3);
+                    top4.setText(userScore4);
+                    top5.setText(userScore5);
+
+                }else{
+                    Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
                 }
-
-                JSONArray arrayFirebase=new JSONArray();
-                JSONArray sortedArray=new JSONArray();
-                List<JSONObject> sortValues = new ArrayList<JSONObject>();
-
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference(getString(R.string.childRef_reg_regFrag));
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        for (DataSnapshot item : snapshot.getChildren()){
-                            String username = item.child(getString(R.string.childRef_username)).getValue().toString();
-                            String userScore = item.child(getString(R.string.childRef_topScore)).getValue(Integer.class).toString();
-                            try {
-                                arrayFirebase.put(new JSONObject().put("Username", username).put("UserScore", userScore));
-                            } catch (JSONException e) {
-                                Log.d("Failed", e.toString());
-                            }
-                        }
-
-                        for (int i = 0; i < arrayFirebase.length(); i++){
-                            try {
-                                sortValues.add(arrayFirebase.getJSONObject(i));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-
-
-                        Collections.sort(sortValues, new Comparator<JSONObject>() {
-                            private static final String KEY_NAME = "UserScore";
-                            @Override
-                            public int compare(JSONObject a, JSONObject b) {
-                                String str1 = new String();
-                                String str2 = new String();
-
-                                try {
-                                    str1 = (String) a.get(KEY_NAME);
-                                    str2 = (String) b.get(KEY_NAME);
-                                } catch (JSONException e) {
-                                    Log.d("Failed", e.toString());
-                                }
-                                return -str1.compareTo(str2);
-                            }
-                        });
-
-
-
-                        for(int i = 0; i < arrayFirebase.length(); i++) {
-                            sortedArray.put(sortValues.get(i));
-                        }
-
-                        try {
-                            DisplayTopUsers(sortedArray);
-                        } catch (JSONException e) {
-                            Log.d("Failed", e.toString());
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
             }
         });
+
+
+
+
+
+
+
+
 
 
 
         new LoadImage().execute();
 
         return view;
-
-    }
-
-    private void DisplayTopUsers(JSONArray sortedArray) throws JSONException {
-        ArrayList<String> top15Array = new ArrayList<String>();
-
-        if (sortedArray.length() < 15) {
-            for (int pos = 0; pos < sortedArray.length(); pos++) {
-                String jsonStr = sortedArray.getString(pos);
-                JSONObject objectData = new JSONObject(jsonStr);
-                String Score = (String) objectData.get("UserScore");
-                String Username = (String) objectData.get("Username");
-                String combinedData = Username + " : " + Score;
-                top15Array.add(combinedData);
-            }
-        }else{
-            for (int pos = 0; pos < 15; pos++) {
-                String jsonStr = sortedArray.getString(pos);
-                JSONObject objectData = new JSONObject(jsonStr);
-                String Score = (String) objectData.get("UserScore");
-                String Username = (String) objectData.get("Username");
-                String combinedData = Username + " score: " + Score;
-                top15Array.add(combinedData);
-            }
-        }
-        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.list_view, top15Array);
-
-        listView.setAdapter(adapter);
-
 
     }
 
