@@ -105,7 +105,6 @@ public class ScoreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
         listView = (ListView) view.findViewById(R.id.nika_userList);
-
         nikaSyncTaskImage = (ImageView) view.findViewById(R.id.nika_aSync);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -130,8 +129,6 @@ public class ScoreFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-
-
 
                 Collections.sort(sortValues, new Comparator<JSONObject>() {
                     private static final String KEY_NAME = "UserScore";
