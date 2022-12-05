@@ -55,7 +55,7 @@
                     android:textColor="@color/white"
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
-                    android:textSize="50sp"
+                    android:textSize="30sp"
                     android:layout_gravity="center"/>
 
                 <!-- Users Scores -->
