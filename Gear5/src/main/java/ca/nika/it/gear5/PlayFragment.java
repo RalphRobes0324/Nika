@@ -33,7 +33,6 @@ public class PlayFragment extends Fragment {
     int JoystickColor;
 
 
-
     public PlayFragment() {
         // Required empty public constructor
     }

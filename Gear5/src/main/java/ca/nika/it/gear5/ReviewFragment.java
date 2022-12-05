@@ -129,9 +129,6 @@ public class ReviewFragment extends Fragment {
 
             }
         });
-
-
-
     }
 
     private void storeDataFB(String newUserId, String overall,

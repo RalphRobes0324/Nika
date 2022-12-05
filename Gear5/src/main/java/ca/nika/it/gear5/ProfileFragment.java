@@ -5,8 +5,6 @@ package ca.nika.it.gear5;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
-import static java.sql.Types.NULL;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,7 +36,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -53,15 +50,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 
-import ca.nika.it.gear5.LoginSetup.LoginActivity;
-
 public class ProfileFragment extends Fragment {
 
     ImageView mImageView;
     ImageButton mChooseBtn;
     Button btn, mSimulateScore;
     TextView usernameTextView, topScoreTextView, currencyTextView;
-    String typeOFsignout, globalId, profileUser, profileCur, profileScore, profileHighestScore;
+    String typeOFsignout, globalId, profileUser, profileCur, profileScore;
     EditText inputScore;
     int offlineMode = 0;
 
