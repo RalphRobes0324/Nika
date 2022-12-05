@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -47,10 +47,86 @@
                     android:layout_height="139dp"
                     android:layout_gravity="center" />
 
-                <ListView
-                    android:id="@+id/nika_userList"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/personal_top_scores"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:textSize="50dp"
+                    android:layout_gravity="center"/>
+
+                <!-- Users Scores -->
+                <TextView
+                    android:id="@+id/top1_nike"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/blank"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/top2_nike"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/blank"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/top3_nike"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/blank"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/top4_nike"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/blank"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/top5_nike"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/blank"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/press_start_2p"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:layout_gravity="center"/>
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/refresh_nikaBtn"
+                    android:layout_width="125dp"
+                    android:layout_height="108dp"
+                    android:layout_gravity="right"
+                    android:layout_margin="16dp"
+                    app:fab_colorNormal="@color/purple_500"
+                    app:fab_colorPressed="@color/purple_700"
+                    app:fab_expandDirection="down"
+                    app:fab_icon="@drawable/ic_baseline_refresh_24"
+                    app:fab_labelsPosition="right"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Pattern;
+
 import ca.nika.it.gear5.R;
 
 
@@ -32,6 +34,19 @@ public class RegisterFragment extends Fragment {
     private Button doneBtn, loginBtn;
     EditText usernameInput, passwordInput, emailInput, confirmPasswordInput, phoneInput, fullnameInput;
     ImageView backButton;
+
+
+    /*
+    DON'T REMOVE HARD STRINGS OR ELSE IT WILL CRASH THE LOGIN/REGIS
+     */
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[!@#$%^&+=*])" +     // at least 1 special character
+                    "(?=.*[A-Z])" +
+                    "(?=.*[0-9])" +
+                    "(?=\\S+$)" +            // no white spaces
+                    ".{6,}" +                // at least 6 characters
+                    "$");
 
 
     //Single responsibility as it will replace the current fragment to a new one that accomplishes its single goal/responsibility
@@ -113,7 +128,7 @@ public class RegisterFragment extends Fragment {
             usernameInput.setError(getString(R.string.warning_msg_msg_username), iconError);
         }
         if (fullName.isEmpty()){
-            fullnameInput.setError("Missing Full Name", iconError);
+            fullnameInput.setError(getString(R.string.warning_msg_fullName), iconError);
         }
         if (password.isEmpty()){
             passwordInput.setError(getString(R.string.warning_msg_reg_pwd), iconError);
@@ -131,10 +146,10 @@ public class RegisterFragment extends Fragment {
         else{
             if (username.matches(getString(R.string.limits_regx_username))){
                 if(email.matches(getString(R.string.limits_email_reg))){
-                    if(password.matches(getString(R.string.limits))){
+                    if(PASSWORD_PATTERN.matcher(password).matches()){
                         if(confirmPassword.matches(password)){
                             if (phone.matches(getString(R.string.phone_regex))) {
-                                if (fullName.matches("^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$")){
+                                if (fullName.matches(getString(R.string.email_regex))){
                                     String userId = username;
                                     validateDBFirebaseEmail(userId, username, email, password, startCurrency, startScore, phone, fullName);
                                 }
@@ -230,11 +245,15 @@ public class RegisterFragment extends Fragment {
     //command design pattern, stores the information into a class which can later be added in the firebase
     private void storeNewUserdata(String userId, String username, String email,
                                   String password, int startCurrency, int startScore, String phone, String fullName) {
+        int topScore2 = 0;
+        int topScore3 = 0;
+        int topScore4 = 0;
+        int topScore5 = 0;
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
-        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName);
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName, topScore2, topScore3, topScore4, topScore5);
         reference.child(userId).setValue(userClass);
         replaceFragment(new LoginFragment());
 

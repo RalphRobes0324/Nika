@@ -18,7 +18,7 @@ public class PreferenceManager {
     synchronized public static PreferenceManager getInstance(Context context){
         if(INSTANCE==null){
             INSTANCE=new PreferenceManager();
-            preferences=context.getSharedPreferences("userinfo3",Context.MODE_PRIVATE);
+            preferences=context.getSharedPreferences("userinfo3",Context.MODE_PRIVATE); //dont remove hard string, it will crash
         }
         return INSTANCE;
     }

@@ -5,6 +5,8 @@ package ca.nika.it.gear5;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
+import static java.sql.Types.NULL;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,6 +34,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,11 +61,9 @@ public class ProfileFragment extends Fragment {
     ImageButton mChooseBtn;
     Button btn, mSimulateScore;
     TextView usernameTextView, topScoreTextView, currencyTextView;
-    String typeOFsignout, profileUser, profileCur, profileScore, getUserID;
-    int profileScoreKeep;
-    boolean connected = false;
-    String globalId;
-
+    String typeOFsignout, globalId, profileUser, profileCur, profileScore, profileHighestScore;
+    EditText inputScore;
+    int offlineMode = 0;
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int IMAGE_PICK_CODE = 1000;
@@ -70,6 +71,10 @@ public class ProfileFragment extends Fragment {
 
     PreferenceManager preferenceManager;
     Intent camera;
+
+    boolean connected = false;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,143 +108,6 @@ public class ProfileFragment extends Fragment {
     public void loadImage() {
         preferenceManager=PreferenceManager.getInstance(getActivity());
 
-        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            connected = true;
-        }
-        else {
-            connected = false;
-        }
-        if (connected == true) {
-
-            if (sharedPreferences != null) {
-                String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
-                typeOFsignout = typeOFLogin;
-                if (typeOFLogin.equals("GearAccount")) {
-                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                    //
-                    globalId = getUserId;
-                    //
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-                    Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
-//                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
-                                Integer userScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                                Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                                String scoreStore = Integer.toString(userScore);
-                                String curStore = Integer.toString(userCur);
-                                editor.putString("profileUsername", userName);
-                                editor.putString("profileScore", scoreStore);
-                                editor.putString("profileCur", curStore);
-                                editor.apply();
-
-                                String loadName = sharedPreferences.getString("profileUsername", profileUser);
-                                String loadCur = sharedPreferences.getString("profileCur", profileCur);
-                                String loadScore = sharedPreferences.getString("profileScore", profileScore);
-                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
-
-                                usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
-                                Log.d("Online OfflineScore", Integer.toString(offlineScore));
-                                Log.d("Online loadScore", loadScore);
-
-                                if (offlineScore > Integer.parseInt(loadScore)) {
-                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + offlineScore);
-                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(offlineScore);
-
-                                } else {
-                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
-                                }
-
-                                currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
-
-                            } else {
-                                Log.d(getString(R.string.FAILED), "FAILED GEAR");
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                } else if (typeOFLogin.equals("GearGoogleAccount")) {
-                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                    globalId = getUserId;
-                    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                    DatabaseReference uidRef = db.child("users").child(getUserId);
-                    uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DataSnapshot snapshot = task.getResult();
-                                String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
-                                Integer userScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                                Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
-                                String scoreStore = Integer.toString(userScore);
-                                String curStore = Integer.toString(userCur);
-                                editor.putString("profileUsername", userName);
-                                editor.putString("profileScore", scoreStore);
-                                editor.putString("profileCur", curStore);
-                                editor.apply();
-
-                                String loadName = sharedPreferences.getString("profileUsername", profileUser);
-                                String loadCur = sharedPreferences.getString("profileCur", profileCur);
-                                String loadScore = sharedPreferences.getString("profileScore", profileScore);
-                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
-
-                                usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
-                                Log.d("Online OfflineScore", Integer.toString(offlineScore));
-                                Log.d("Online loadScore", loadScore);
-
-                                if (offlineScore > Integer.parseInt(loadScore)) {
-                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + offlineScore);
-                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(offlineScore);
-
-                                } else {
-                                    topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
-                                }
-
-                                currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
-                            } else {
-                                Log.d(getString(R.string.FAILED), "FAILED GOOGLE LOAD PROF");
-                            }
-                        }
-                    });
-
-                } else {
-                    Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
-                }
-
-            }
-        } else {
-            String loadName = sharedPreferences.getString("profileUsername", profileUser);
-            String loadCur = sharedPreferences.getString("profileCur", profileCur);
-            String loadScore = sharedPreferences.getString("profileScore", profileScore);
-            int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
-
-            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
-            Log.d("Offline OfflineScore", Integer.toString(offlineScore));
-
-            if (offlineScore > Integer.parseInt(loadScore)) {
-                topScoreTextView.setText(getString(R.string.scoreDisplay) + offlineScore);
-            } else {
-                topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
-            }
-
-            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
-
-        }
-
         String previouslyEncodedImage = preferenceManager.getString(getString(R.string.image_data));
 
         if( !previouslyEncodedImage.equalsIgnoreCase(getString(R.string.blank)) ){
@@ -249,94 +117,283 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void updateUserCurrFirebase() {
+    public void loadProfile() {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(sharedPreferences!= null) {
+            String typeOFLogin = sharedPreferences.getString(getString(R.string.key_typelogin), getString(R.string.blank));
+            typeOFsignout = typeOFLogin;
+            if(typeOFLogin.equals(getString(R.string.gearaccount))) {
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                globalId = getUserId;
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
+                Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            connected = true;
-        }
-        else {
-            connected = false;
-        }
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
 
-        if (connected == true) {
+                            int Checker = sharedPreferences.getInt(getString(R.string.checker), offlineMode);
+                            if (Checker == 1) {
+                                updateDatabase(sharedPreferences, editor);
 
-            if (sharedPreferences != null) {
-                String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
-                typeOFsignout = typeOFLogin;
-                if (typeOFLogin.equals("GearAccount")) {
-                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
-                    Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
-
-                    checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                Integer userCurrentScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
-                                int sumScore = offlineScore + 1;
-                                Integer newSum = new Integer(sumScore);
-                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                mDatabase.child(getUserID).child(getString(R.string.childRef_topScore)).setValue(newSum);
-
-                                editor.putInt("offlineScore", sumScore);
-                                editor.apply();
-
-                                loadImage();
-                            } else {
-                                Log.d("FAILED", "FAILED GEAR");
                             }
+
+                            Integer userTopScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getUserId).child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getUserId).child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getUserId).child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getUserId).child(getString(R.string.key_topScore5)).getValue(Integer.class);
+                            Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+
+                            editor.putString(getString(R.string.profileTopScore), Integer.toString(userTopScore));
+                            editor.putString(getString(R.string.profileScore2), Integer.toString(userScore2));
+                            editor.putString(getString(R.string.profileScore3), Integer.toString(userScore3));
+                            editor.putString(getString(R.string.profileScore4), Integer.toString(userScore4));
+                            editor.putString(getString(R.string.profileScore5), Integer.toString(userScore5));
+                            editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
+                            editor.apply();
+
+
+                            loadText();
+
+                        } else {
+                            Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
-                } else if (typeOFLogin.equals("GearGoogleAccount")) {
-                    String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-                    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                    DatabaseReference uidRef = db.child("users").child(getUserId);
-                    uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DataSnapshot snapshot = task.getResult();
-                                Integer userCurrentScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                                int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
-                                int sumScore = offlineScore + 1;
-                                Integer newSum = new Integer(sumScore);
-                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_topScore)).setValue(newSum);
+                    }
+                });
+            }
+            else if(typeOFLogin.equals(getString(R.string.geargoogleaccount))){
+                String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
+                globalId = getUserId;
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference uidRef = db.child(getString(R.string.users)).child(getUserId);
+                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DataSnapshot snapshot = task.getResult();
 
-                                editor.putInt("offlineScore", sumScore);
-                                editor.apply();
+                            int Checker = sharedPreferences.getInt(getString(R.string.checker), offlineMode);
+                            if (Checker == 1) {
+                                updateDatabase(sharedPreferences, editor);
 
-                                loadImage();
-                            } else {
-                                Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
                             }
-                        }
-                    });
 
-                } else {
-                    Log.d("FAILED", "FAILED");
-                }
+                            Integer userTopScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getString(R.string.key_topScore5)).getValue(Integer.class);
+                            Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
+
+                            editor.putString(getString(R.string.profileTopScore), Integer.toString(userTopScore));
+                            editor.putString(getString(R.string.profileScore2), Integer.toString(userScore2));
+                            editor.putString(getString(R.string.profileScore3), Integer.toString(userScore3));
+                            editor.putString(getString(R.string.profileScore4), Integer.toString(userScore4));
+                            editor.putString(getString(R.string.profileScore5), Integer.toString(userScore5));
+                            editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
+                            editor.apply();
+
+
+                            loadText();
+                        }else{
+                            Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
+                        }
+                    }
+                });
 
             }
-        } else {
-            String loadScore = sharedPreferences.getString("profileScore", profileScore);
-            int offlineScore = sharedPreferences.getInt("offlineScore", profileScoreKeep);
-            int sumScore = offlineScore + 1;
+            else{
+                Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
+            }
 
-            editor.putInt("offlineScore", sumScore);
-            editor.apply();
+        }
+    }
 
+    public void checkPermission() {
+        if((ActivityCompat.checkSelfPermission(
+                getActivity(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                }
+            }
+        }
+        else{
+            imgMethod();
             loadImage();
+        }
+    }
+
+    public void loadText() {
+        SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+
+        if(sharedPreferences!= null) {
+            String loadName = sharedPreferences.getString(getString(R.string.profileUsername), profileUser);
+            String loadCur = sharedPreferences.getString(getString(R.string.profileCur), profileCur);
+            String loadScore = sharedPreferences.getString(getString(R.string.profileTopScore), profileScore);
+            usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
+            currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
+            topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
+        }
+    }
+
+    public void logOut(){
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.logout)
+                .setMessage(R.string.ask_logout)
+                .setIcon(R.drawable.devil_fruit)
+                .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString(getString(R.string.remember), getString(R.string.unchecked));
+                        editor.putString(getString(R.string.profileUsername), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileTopScore), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore2), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore3), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore4), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore5), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileCur), getString(R.string.blank));
+                        editor.apply();
+
+                        if (typeOFsignout.equals(R.string.geargoogleaccount)){
+                            FirebaseAuth.getInstance().signOut();
+                            getActivity().finish();
+                        }else{
+                            getActivity().finish();
+                        }
+
+
+                    }
+                })
+                .setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+    public void updateDatabase(SharedPreferences sharedPreferences, SharedPreferences.Editor editor) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String topScr = sharedPreferences.getString(getString(R.string.profileTopScore), profileScore);
+        String topScr2 = sharedPreferences.getString(getString(R.string.profileScore2), profileScore);
+        String topScr3 = sharedPreferences.getString(getString(R.string.profileScore3), profileScore);
+        String topScr4 = sharedPreferences.getString(getString(R.string.profileScore4), profileScore);
+        String topScr5 = sharedPreferences.getString(getString(R.string.profileScore5), profileScore);
+
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore)).setValue(Integer.parseInt(topScr));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(Integer.parseInt(topScr2));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(Integer.parseInt(topScr3));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(Integer.parseInt(topScr4));
+        mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(Integer.parseInt(topScr5));
+
+        offlineMode = 0;
+        editor.putInt(getString(R.string.checker), offlineMode);
+        editor.apply();
+    }
+
+    public void scoreUpdate() {
+        if (inputScore.getText().toString().trim().length() > 0) {
+            int i = Integer.parseInt(inputScore.getText().toString());
+
+            ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                connected = true;
+            }
+            else {
+                connected = false;
+            }
+            if (connected == true) {
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference uidRef = db.child(getString(R.string.users)).child(globalId);
+                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DataSnapshot snapshot = task.getResult();
+                            Integer userCurrentCurr = snapshot.child(getString(R.string.key_topScore)).getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getString(R.string.key_topScore5)).getValue(Integer.class);
+                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                        if (i > userCurrentCurr.intValue() ){
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(userCurrentCurr);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(userScore2);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
+                            topScoreTextView.setText(getString(R.string.scoreDisplay) + i);
+                        } else if (i > userScore2.intValue()) {
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(userScore2);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
+                        } else if (i > userScore3.intValue()) {
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
+                        } else if (i > userScore4.intValue()) {
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(i);
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore4);
+                        } else if (i > userScore5.intValue()) {
+                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(i);
+                        }
+
+                        } else {
+                            Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
+                        }
+                    }
+                });
+            } else {
+                SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                offlineMode = 1;
+                String topScr = sharedPreferences.getString(getString(R.string.profileTopScore), profileUser);
+                String topScr2 = sharedPreferences.getString(getString(R.string.profileScore2), profileCur);
+                String topScr3 = sharedPreferences.getString(getString(R.string.profileScore3), profileScore);
+                String topScr4 = sharedPreferences.getString(getString(R.string.profileScore4), profileScore);
+                String topScr5 = sharedPreferences.getString(getString(R.string.profileScore5), profileScore);
+                editor.putInt(getString(R.string.checker), offlineMode);
+
+                if (i > Integer.parseInt(topScr) ){
+                    editor.putString(getString(R.string.profileTopScore), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore2), topScr);
+                    editor.putString(getString(R.string.profileScore3), topScr2);
+                    editor.putString(getString(R.string.profileScore4), topScr3);
+                    editor.putString(getString(R.string.profileScore5), topScr4);
+                } else if (i > Integer.parseInt(topScr2) ) {
+                    editor.putString(getString(R.string.profileScore2), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore3), topScr2);
+                    editor.putString(getString(R.string.profileScore4), topScr3);
+                    editor.putString(getString(R.string.profileScore5), topScr4);
+                }
+                else if (i > Integer.parseInt(topScr3) ) {
+                    editor.putString(getString(R.string.profileScore3), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore4), topScr3);
+                    editor.putString(getString(R.string.profileScore5), topScr4);
+                }
+                else if (i > Integer.parseInt(topScr4) ) {
+                    editor.putString(getString(R.string.profileScore4), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore5), topScr4);
+                }
+                else if (i > Integer.parseInt(topScr5) ) {
+                    editor.putString(getString(R.string.profileScore5), String.valueOf(i));
+                }
+                editor.apply();
+
+            }
         }
     }
 
@@ -370,97 +427,45 @@ public class ProfileFragment extends Fragment {
         usernameTextView = (TextView) view.findViewById(R.id.nikaUsername);
         topScoreTextView = (TextView) view.findViewById(R.id.nikaTopScore);
         currencyTextView = (TextView) view.findViewById(R.id.nikaCurrency);
+        inputScore = (EditText) view.findViewById(R.id.nikaInputScore);
+        btn = view.findViewById(R.id.nikaLogout);
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
-        getUserID = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
-
-
+        loadImage();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        }
+        else {
+            connected = false;
+        }
+        if (connected == true) {
+            loadProfile();
+        } else {
+            loadText();
+        }
 
         mChooseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkPermission();
+            }
+        });
 
-                if((ActivityCompat.checkSelfPermission(
-                        getActivity(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-                        }
-                    }
-                }
-                else{
-                    imgMethod();
-                    loadImage();
-                }
-
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut();
             }
         });
 
         mSimulateScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //updateUserCurrFirebase();
-                int i = 1;
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child(globalId);
-                uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            DataSnapshot snapshot = task.getResult();
-                            Integer userCurrentCurr = snapshot.child("topScore").getValue(Integer.class);
-                            int sum = userCurrentCurr.intValue() + i;
-                            Integer newSum = new Integer(sum);
-                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                            mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child("topScore").setValue(newSum);
-                            topScoreTextView.setText(getString(R.string.scoreDisplay) + sum);
-                        }else{
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
-                        }
-                    }
-                });
-
+                scoreUpdate();
             }
         });
 
-        btn = view.findViewById(R.id.nikaLogout);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.logout)
-                        .setMessage(R.string.ask_logout)
-                        .setIcon(R.drawable.devil_fruit)
-                        .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                                SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString(getString(R.string.remember), getString(R.string.unchecked));
-                                editor.apply();
-
-                                if (typeOFsignout.equals("GearGoogleAccount")){
-                                    FirebaseAuth.getInstance().signOut();
-                                    Log.d("LOGOUT", "GOOGLE");
-                                    getActivity().finish();
-                                }else{
-                                    Log.d("LOGOUT", "NORM");
-                                    getActivity().finish();
-                                }
-
-
-                            }
-                        })
-                        .setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-            }
-        });
-
-        loadImage();
 
         return view;
     }

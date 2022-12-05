@@ -7,7 +7,7 @@
     <string name="users">users</string>
     <string name="df">df</string>
     <string name="username2">username</string>
-    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{5,}$</string>
+    <string name="limits">^[A-Za-z0-9!@#$%^&amp;*+=/?]{6,}$</string>
     <string name="limits_regx_username">^[A-Za-z0-9_-]{3,15}$</string>
     <string name="blank" />
     <string name="warning_msg_reg_account_exist">This account exist</string>
@@ -61,7 +61,24 @@
     <string name="geargoogleaccount">GearGoogleAccount</string>
     <string name="null_pwd">No PASSWORD</string>
     <string name="null_email">NO EMAIL</string>
-    <string name="null_name">No need full namme</string>
+    <string name="null_name">No need full name</string>
+    <string name="key_topScore">topScore</string>
+    <string name="key_topScore2">topScore2</string>
+    <string name="key_topScore3">topScore3</string>
+    <string name="key_topScore4">topScore4</string>
+    <string name="key_topScore5">topScore5</string>
+    <string name="email_regex">^([A-Z][a-z]*((\\s)))+[A-Z][a-z]*$</string>
+    <string name="TAG_FAILED">FAILED</string>
+    <string name="ERROR_MSG_SCORFRAG">FAILED GOOGLE LOAD SCORE</string>
+    <string name="ERROR_MSG_BALAFRAG">FAILED GOOGLE LOAD BALANCE TO DB</string>
+    <string name="profileTopScore">profileTopScore</string>
+    <string name="profileScore2">profileScore2</string>
+    <string name="profileScore3">profileScore3</string>
+    <string name="profileScore4">profileScore4</string>
+    <string name="profileScore5">profileScore5</string>
+    <string name="profileCur">profileCur</string>
+    <string name="checker">checker</string>
+    <string name="profileUsername">profileUsername</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -100,7 +117,9 @@
     <string name="warning_msg_reg_pwd">Missing Password</string>
     <string name="warning_msg_msg_username">Missing Username</string>
     <string name="warning_msg_reg_confir_not_maching">Password did not match</string>
-    <string name="warning_msg_reg_pwd_not_maching">Please Enter at least 5 characters</string>
+
+    <string name="warning_msg_reg_pwd_not_maching">Please Enter at least 6 characters and one special character i.e !</string>
+
     <string name="warning_msg_reg_username_not_maching">Please Enter Valid Username</string>
     <string name="click_to_add_image">click to add image</string>
     <string name="success_msg_reg">Register Successful</string>
@@ -150,9 +169,9 @@
     <string name="topCurrency">topCurrency</string>
     <string name="warning_email_used_regFrag">Email being used</string>
     <string name="warning_username_used_regFrag">Username being used</string>
-    <string name="warning_pwd_length_reg">Password must be 5 characters or long</string>
+    <string name="warning_pwd_length_reg"> Password must be at least 6 characters long, one special character, one capital letter, and one number</string>
     <string name="warning_msg_username_loginFrag">Username Invalid</string>
-    <string name="warning_msg_pwd_loginFrag">Password Invalid</string>
+    <string name="warning_msg_pwd_loginFrag">Password Incorrect</string>
     <string name="login_with_loginFrag">Login with</string>
     <string name="google_loginFrag">Google</string>
     <string name="sign_up_with_regFrag">Sign-up with</string>
@@ -230,4 +249,13 @@
     <string name="username_email_loginFrag">Username||Email</string>
     <string name="warning_emil_username_msg">Username Invalid or Email invalid</string>
     <string name="warning_msg_fullname">Invalid Full Name or must have space between name and last name</string>
+    <string name="sb_pos1">1.</string>
+    <string name="sb_pos2">2.</string>
+    <string name="sb_pos3">3.</string>
+    <string name="sb_pos4">4.</string>
+    <string name="sb_pos5">5.</string>
+    <string name="warning_msg_fullName">Missing Full Name</string>
+    <string name="score_input">Score Input</string>
+    <string name="simulate_score">Simulate Score</string>
+    <string name="personal_top_scores">Personal Top Scores</string>
 </resources>

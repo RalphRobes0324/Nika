@@ -179,7 +179,7 @@ public class BalanceFragment extends Fragment{
         if(sharedPreferences!= null) {
             String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
             typeOFsignout = typeOFLogin;
-            if(typeOFLogin.equals("GearAccount")) {
+            if(typeOFLogin.equals(getString(R.string.gearaccount))) {
                 String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
                 Query checkUser = reference.orderByChild(getString(R.string.childRef_username)).equalTo(getUserId);
@@ -205,10 +205,10 @@ public class BalanceFragment extends Fragment{
                     }
                 });
             }
-            else if(typeOFLogin.equals("GearGoogleAccount")){
+            else if(typeOFLogin.equals(getString(R.string.geargoogleaccount))){
                 String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child(getUserId);
+                DatabaseReference uidRef = db.child(getString(R.string.users)).child(getUserId);
                 uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -220,14 +220,14 @@ public class BalanceFragment extends Fragment{
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_Currency)).setValue(newSum);
                         }else{
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                            Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
                         }
                     }
                 });
 
             }
             else{
-                Log.d("FAILED", "FAILED");
+                Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
             }
 
         }
