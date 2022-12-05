@@ -11,7 +11,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import static android.os.Build.VERSION_CODES.S;
 import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertNull;
 
 import android.content.pm.ActivityInfo;
 import android.widget.FrameLayout;
@@ -25,8 +24,6 @@ import org.robolectric.android.controller.ActivityController;
 import ca.nika.it.gear5.LoginSetup.LoginActivity;
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
-import ca.nika.it.gear5.SignInFile.GoogleSignInActivity;
-import ca.nika.it.gear5.SplashActivity;
 
 @RunWith(RobolectricTestRunner.class)
 @Implements(value = org.robolectric.shadows.ShadowBackdropFrameRenderer.class, minSdk = S, isInAndroidSdk = false)
