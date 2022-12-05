@@ -50,7 +50,7 @@ public class junit4Test {
 
     public static boolean containsWhitespace(final CharSequence seq) {
         if (seq == null || seq.length() == 0) {
-            return false;
+                return false;
         }
         final int strLen = seq.length();
         for (int i = 0; i < strLen; i++) {
@@ -58,7 +58,7 @@ public class junit4Test {
                 return true;
             }
         }
-        return false;
+                return false;
     }
 
     @Test
