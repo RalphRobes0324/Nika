@@ -34,14 +34,14 @@ public class EspressoTest {
     public void validLogin() //username and password are in server and match
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
-                .perform(typeText("admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("aaa@bbb.com"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
-                .perform(typeText("admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("Admin101!"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_btn_login_login)).perform(click()); //clicks login button
     }
 
     @Test
-    public void invalidLogin() //username and password are non-exisitent in server
+    public void invalidLogin() //username and password are non-existent in server
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("fakeAccount"), closeSoftKeyboard()); //types text then closes keyboard
@@ -54,7 +54,7 @@ public class EspressoTest {
     public void validUserInvalidPassword() //admin is a verified user but the password is incorrect
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
-                .perform(typeText("admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("aaa@bbb.com"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
                 .perform(typeText("badPassword"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_btn_login_login)).perform(click()); //clicks login button
@@ -66,7 +66,7 @@ public class EspressoTest {
         onView(withId(R.id.nika_edittext_username_loginFrag))
                 .perform(typeText("fakeAccount"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
-                .perform(typeText("admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("Admin101!"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_btn_login_login)).perform(click()); //clicks login button
     }
 
@@ -74,9 +74,9 @@ public class EspressoTest {
     public void capitalizationCheckUsername() //username capitalization is wrong
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
-                .perform(typeText("Admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("aAa@bbb.com"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
-                .perform(typeText("admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("Admin101!"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_btn_login_login)).perform(click()); //clicks login button
     }
 
@@ -84,9 +84,9 @@ public class EspressoTest {
     public void capitalizationCheckPassword() //password capitalization is wrong
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
-                .perform(typeText("admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("aaa@bbb.com"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
-                .perform(typeText("Admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("admin101!"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_btn_login_login)).perform(click()); //clicks login button
     }
 
@@ -94,9 +94,9 @@ public class EspressoTest {
     public void spaceAddedInLogin() //space added to end of username and start of password but everything else is valid
     {
         onView(withId(R.id.nika_edittext_username_loginFrag))
-                .perform(typeText("admin "), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText("aaa@bbb.com "), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_edittext_pwd_loginFrag))
-                .perform(typeText(" admin"), closeSoftKeyboard()); //types text then closes keyboard
+                .perform(typeText(" Admin101!"), closeSoftKeyboard()); //types text then closes keyboard
         onView(withId(R.id.nika_btn_login_login)).perform(click()); //clicks login button
     }
 }
