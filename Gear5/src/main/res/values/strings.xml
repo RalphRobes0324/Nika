@@ -257,5 +257,5 @@
     <string name="warning_msg_fullName">Missing Full Name</string>
     <string name="score_input">Score Input</string>
     <string name="simulate_score">Simulate Score</string>
-    <string name="personal_top_scores">Personal Top Scores</string>
+    <string name="personal_top_scores">PB Top Scores</string>
 </resources>
