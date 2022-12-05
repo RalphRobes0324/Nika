@@ -1,6 +1,7 @@
-package ca.nika.it.gear5.LoginSetup;
 // CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
+package ca.nika.it.gear5.LoginSetup;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,14 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import ca.nika.it.gear5.R;
 
-
 public class GEAR5StartUpFragment extends Fragment {
     private Button registerBtn, loginBtn;
-    private LinearLayout linearLayout;
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -35,7 +33,6 @@ public class GEAR5StartUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_gear5_start_up, container, false);
-        linearLayout = (LinearLayout) view.findViewById(R.id.fram_Startup);
         loginBtn = (Button) view.findViewById(R.id.nika_startup_login_btn);
         registerBtn = (Button) view.findViewById(R.id.nika_startup_reg_btn);
 

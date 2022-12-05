@@ -1,6 +1,7 @@
-package ca.nika.it.gear5.LoginSetup;
 // CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
+package ca.nika.it.gear5.LoginSetup;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -10,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +19,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 import ca.nika.it.gear5.R;
 

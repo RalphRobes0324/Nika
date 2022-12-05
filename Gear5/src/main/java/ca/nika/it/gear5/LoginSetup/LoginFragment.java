@@ -4,11 +4,9 @@ package ca.nika.it.gear5.LoginSetup;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -18,17 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,13 +32,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ca.nika.it.gear5.MainActivity;
 import ca.nika.it.gear5.R;
 import ca.nika.it.gear5.SignInFile.GoogleSignInActivity;
-import ca.nika.it.gear5.SplashActivity;
 
 
 public class LoginFragment extends Fragment {
@@ -86,8 +79,6 @@ public class LoginFragment extends Fragment {
         transaction.replace(R.id.container, fragment);
         transaction.commit();
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -151,10 +142,7 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-
-
     private void validateUserAndPwd(String username, String password) {
-
 
         Drawable iconError = AppCompatResources.getDrawable(requireContext(),
                 R.drawable.ic_baseline_error_24);

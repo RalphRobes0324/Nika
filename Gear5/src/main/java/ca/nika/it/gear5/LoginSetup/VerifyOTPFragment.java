@@ -1,8 +1,7 @@
-package ca.nika.it.gear5.LoginSetup;
 // CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
+package ca.nika.it.gear5.LoginSetup;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -13,26 +12,22 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
@@ -43,7 +38,7 @@ import ca.nika.it.gear5.R;
 public class VerifyOTPFragment extends Fragment {
     PinView pinView;
     Button verifyBtn;
-    String codeBySystem, verificationId;
+    String codeBySystem;
     FirebaseAuth mAuth;
     ImageView crossBtn;
 

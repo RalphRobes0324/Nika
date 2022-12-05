@@ -1,6 +1,7 @@
-package ca.nika.it.gear5.LoginSetup;
 // CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892
 // CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560
+package ca.nika.it.gear5.LoginSetup;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -28,7 +29,7 @@ import ca.nika.it.gear5.R;
 
 public class ForgotPasswordFragment extends Fragment {
     Button button;
-    EditText emailEditxt, phoneEdittxt;
+    EditText emailEditxt;
     ImageView backpressArrow;
 
     private void replaceFragment(Fragment fragment, String email) {

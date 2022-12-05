@@ -80,8 +80,6 @@ public class RegisterFragment extends Fragment {
         fullnameInput = (EditText) view.findViewById(R.id.nika_fullname_regFrag);
 
 
-
-
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

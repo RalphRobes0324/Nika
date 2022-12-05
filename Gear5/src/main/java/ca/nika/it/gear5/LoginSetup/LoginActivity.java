@@ -7,9 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.inputmethod.InputMethodManager;
-
-import ca.nika.it.gear5.LoginSetup.GEAR5StartUpFragment;
 import ca.nika.it.gear5.R;
 
 public class LoginActivity extends AppCompatActivity {
