@@ -258,6 +258,6 @@
     <string name="warning_msg_fullName">Nom complet manquant</string>
     <string name="score_input">Saisie de score</string>
     <string name="simulate_score">Simuler le score</string>
-    <string name="personal_top_scores">Meilleurs scores personnels</string>
+    <string name="personal_top_scores">Meilleurs scores PB</string>
 
 </resources>
