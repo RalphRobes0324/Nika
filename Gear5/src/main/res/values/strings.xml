@@ -71,6 +71,14 @@
     <string name="TAG_FAILED">FAILED</string>
     <string name="ERROR_MSG_SCORFRAG">FAILED GOOGLE LOAD SCORE</string>
     <string name="ERROR_MSG_BALAFRAG">FAILED GOOGLE LOAD BALANCE TO DB</string>
+    <string name="profileTopScore">profileTopScore</string>
+    <string name="profileScore2">profileScore2</string>
+    <string name="profileScore3">profileScore3</string>
+    <string name="profileScore4">profileScore4</string>
+    <string name="profileScore5">profileScore5</string>
+    <string name="profileCur">profileCur</string>
+    <string name="checker">checker</string>
+    <string name="profileUsername">profileUsername</string>
     <!--^^ Don't change anything in this group. Related to shared preference or passing values ^^-->
 
     <string name="app_name">Gear5</string>
@@ -247,4 +255,7 @@
     <string name="sb_pos4">4.</string>
     <string name="sb_pos5">5.</string>
     <string name="warning_msg_fullName">Missing Full Name</string>
+    <string name="score_input">Score Input</string>
+    <string name="simulate_score">Simulate Score</string>
+    <string name="personal_top_scores">Personal Top Scores</string>
 </resources>

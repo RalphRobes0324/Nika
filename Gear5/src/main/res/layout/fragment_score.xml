@@ -51,11 +51,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Top Scores"
+                    android:text="@string/personal_top_scores"
                     android:textColor="@color/white"
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
-                    android:textSize="50dp"
+                    android:textSize="50sp"
                     android:layout_gravity="center"/>
 
                 <!-- Users Scores -->
@@ -64,55 +64,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text=""
+                    android:text="@string/blank"
                     android:textColor="@color/white"
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/top2_nike"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text=""
+                    android:text="@string/blank"
                     android:textColor="@color/white"
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/top3_nike"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text=""
+                    android:text="@string/blank"
                     android:textColor="@color/white"
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/top4_nike"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text=""
+                    android:text="@string/blank"
                     android:textColor="@color/white"
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/top5_nike"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text=""
+                    android:text="@string/blank"
                     android:textColor="@color/white"
                     android:fontFamily="@font/press_start_2p"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"/>
 
                 <com.getbase.floatingactionbutton.FloatingActionButton

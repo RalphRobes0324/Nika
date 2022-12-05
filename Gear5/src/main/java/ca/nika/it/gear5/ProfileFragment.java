@@ -134,7 +134,7 @@ public class ProfileFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
 
-                            int Checker = sharedPreferences.getInt("checker", offlineMode);
+                            int Checker = sharedPreferences.getInt(getString(R.string.checker), offlineMode);
                             if (Checker == 1) {
                                 updateDatabase(sharedPreferences, editor);
 
@@ -147,12 +147,12 @@ public class ProfileFragment extends Fragment {
                             Integer userScore5 = snapshot.child(getUserId).child(getString(R.string.key_topScore5)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
-                            editor.putString("profileTopScore", Integer.toString(userTopScore));
-                            editor.putString("profileScore2", Integer.toString(userScore2));
-                            editor.putString("profileScore3", Integer.toString(userScore3));
-                            editor.putString("profileScore4", Integer.toString(userScore4));
-                            editor.putString("profileScore5", Integer.toString(userScore5));
-                            editor.putString("profileCur", Integer.toString(userCur));
+                            editor.putString(getString(R.string.profileTopScore), Integer.toString(userTopScore));
+                            editor.putString(getString(R.string.profileScore2), Integer.toString(userScore2));
+                            editor.putString(getString(R.string.profileScore3), Integer.toString(userScore3));
+                            editor.putString(getString(R.string.profileScore4), Integer.toString(userScore4));
+                            editor.putString(getString(R.string.profileScore5), Integer.toString(userScore5));
+                            editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
                             editor.apply();
 
 
@@ -180,7 +180,7 @@ public class ProfileFragment extends Fragment {
                         if(task.isSuccessful()){
                             DataSnapshot snapshot = task.getResult();
 
-                            int Checker = sharedPreferences.getInt("checker", offlineMode);
+                            int Checker = sharedPreferences.getInt(getString(R.string.checker), offlineMode);
                             if (Checker == 1) {
                                 updateDatabase(sharedPreferences, editor);
 
@@ -193,12 +193,12 @@ public class ProfileFragment extends Fragment {
                             Integer userScore5 = snapshot.child(getString(R.string.key_topScore5)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
-                            editor.putString("profileTopScore", Integer.toString(userTopScore));
-                            editor.putString("profileScore2", Integer.toString(userScore2));
-                            editor.putString("profileScore3", Integer.toString(userScore3));
-                            editor.putString("profileScore4", Integer.toString(userScore4));
-                            editor.putString("profileScore5", Integer.toString(userScore5));
-                            editor.putString("profileCur", Integer.toString(userCur));
+                            editor.putString(getString(R.string.profileTopScore), Integer.toString(userTopScore));
+                            editor.putString(getString(R.string.profileScore2), Integer.toString(userScore2));
+                            editor.putString(getString(R.string.profileScore3), Integer.toString(userScore3));
+                            editor.putString(getString(R.string.profileScore4), Integer.toString(userScore4));
+                            editor.putString(getString(R.string.profileScore5), Integer.toString(userScore5));
+                            editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
                             editor.apply();
 
 
@@ -236,9 +236,9 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
 
         if(sharedPreferences!= null) {
-            String loadName = sharedPreferences.getString("profileUsername", profileUser);
-            String loadCur = sharedPreferences.getString("profileCur", profileCur);
-            String loadScore = sharedPreferences.getString("profileTopScore", profileScore);
+            String loadName = sharedPreferences.getString(getString(R.string.profileUsername), profileUser);
+            String loadCur = sharedPreferences.getString(getString(R.string.profileCur), profileCur);
+            String loadScore = sharedPreferences.getString(getString(R.string.profileTopScore), profileScore);
             usernameTextView.setText(getString(R.string.usernameDisplay) + loadName);
             currencyTextView.setText(getString(R.string.currencyDisplay) + loadCur + getString(R.string.gears));
             topScoreTextView.setText(getString(R.string.scoreDisplay) + loadScore);
@@ -256,13 +256,13 @@ public class ProfileFragment extends Fragment {
                         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.checkbox), MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(getString(R.string.remember), getString(R.string.unchecked));
-                        editor.putString("profileUsername", "");
-                        editor.putString("profileTopScore", "");
-                        editor.putString("profileScore2", "");
-                        editor.putString("profileScore3", "");
-                        editor.putString("profileScore4", "");
-                        editor.putString("profileScore5", "");
-                        editor.putString("profileCur", "");
+                        editor.putString(getString(R.string.profileUsername), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileTopScore), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore2), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore3), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore4), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileScore5), getString(R.string.blank));
+                        editor.putString(getString(R.string.profileCur), getString(R.string.blank));
                         editor.apply();
 
                         if (typeOFsignout.equals(R.string.geargoogleaccount)){
@@ -285,11 +285,11 @@ public class ProfileFragment extends Fragment {
 
     public void updateDatabase(SharedPreferences sharedPreferences, SharedPreferences.Editor editor) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        String topScr = sharedPreferences.getString("profileTopScore", profileScore);
-        String topScr2 = sharedPreferences.getString("profileScore2", profileScore);
-        String topScr3 = sharedPreferences.getString("profileScore3", profileScore);
-        String topScr4 = sharedPreferences.getString("profileScore4", profileScore);
-        String topScr5 = sharedPreferences.getString("profileScore5", profileScore);
+        String topScr = sharedPreferences.getString(getString(R.string.profileTopScore), profileScore);
+        String topScr2 = sharedPreferences.getString(getString(R.string.profileScore2), profileScore);
+        String topScr3 = sharedPreferences.getString(getString(R.string.profileScore3), profileScore);
+        String topScr4 = sharedPreferences.getString(getString(R.string.profileScore4), profileScore);
+        String topScr5 = sharedPreferences.getString(getString(R.string.profileScore5), profileScore);
 
         mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore)).setValue(Integer.parseInt(topScr));
         mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(Integer.parseInt(topScr2));
@@ -298,7 +298,7 @@ public class ProfileFragment extends Fragment {
         mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(Integer.parseInt(topScr5));
 
         offlineMode = 0;
-        editor.putInt("checker", offlineMode);
+        editor.putInt(getString(R.string.checker), offlineMode);
         editor.apply();
     }
 
@@ -334,28 +334,21 @@ public class ProfileFragment extends Fragment {
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(userScore2);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
-                            Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                             topScoreTextView.setText(getString(R.string.scoreDisplay) + i);
                         } else if (i > userScore2.intValue()) {
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore2)).setValue(i);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(userScore2);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
-                            Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                         } else if (i > userScore3.intValue()) {
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore3)).setValue(i);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore3);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(userScore4);
-                            Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                         } else if (i > userScore4.intValue()) {
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(i);
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore4)).setValue(userScore4);
-                            Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
                         } else if (i > userScore5.intValue()) {
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(globalId).child(getString(R.string.key_topScore5)).setValue(i);
-                            Toast.makeText(getActivity(), inputScore.getText().toString(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "No Update", Toast.LENGTH_SHORT).show();
                         }
 
                         } else {
@@ -367,36 +360,36 @@ public class ProfileFragment extends Fragment {
                 SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 offlineMode = 1;
-                String topScr = sharedPreferences.getString("profileTopScore", profileUser);
-                String topScr2 = sharedPreferences.getString("profileScore2", profileCur);
-                String topScr3 = sharedPreferences.getString("profileScore3", profileScore);
-                String topScr4 = sharedPreferences.getString("profileScore4", profileScore);
-                String topScr5 = sharedPreferences.getString("profileScore5", profileScore);
-                editor.putInt("checker", offlineMode);
+                String topScr = sharedPreferences.getString(getString(R.string.profileTopScore), profileUser);
+                String topScr2 = sharedPreferences.getString(getString(R.string.profileScore2), profileCur);
+                String topScr3 = sharedPreferences.getString(getString(R.string.profileScore3), profileScore);
+                String topScr4 = sharedPreferences.getString(getString(R.string.profileScore4), profileScore);
+                String topScr5 = sharedPreferences.getString(getString(R.string.profileScore5), profileScore);
+                editor.putInt(getString(R.string.checker), offlineMode);
 
                 if (i > Integer.parseInt(topScr) ){
-                    editor.putString("profileTopScore", String.valueOf(i));
-                    editor.putString("profileScore2", topScr);
-                    editor.putString("profileScore3", topScr2);
-                    editor.putString("profileScore4", topScr3);
-                    editor.putString("profileScore5", topScr4);
+                    editor.putString(getString(R.string.profileTopScore), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore2), topScr);
+                    editor.putString(getString(R.string.profileScore3), topScr2);
+                    editor.putString(getString(R.string.profileScore4), topScr3);
+                    editor.putString(getString(R.string.profileScore5), topScr4);
                 } else if (i > Integer.parseInt(topScr2) ) {
-                    editor.putString("profileScore2", String.valueOf(i));
-                    editor.putString("profileScore3", topScr2);
-                    editor.putString("profileScore4", topScr3);
-                    editor.putString("profileScore5", topScr4);
+                    editor.putString(getString(R.string.profileScore2), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore3), topScr2);
+                    editor.putString(getString(R.string.profileScore4), topScr3);
+                    editor.putString(getString(R.string.profileScore5), topScr4);
                 }
                 else if (i > Integer.parseInt(topScr3) ) {
-                    editor.putString("profileScore3", String.valueOf(i));
-                    editor.putString("profileScore4", topScr3);
-                    editor.putString("profileScore5", topScr4);
+                    editor.putString(getString(R.string.profileScore3), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore4), topScr3);
+                    editor.putString(getString(R.string.profileScore5), topScr4);
                 }
                 else if (i > Integer.parseInt(topScr4) ) {
-                    editor.putString("profileScore4", String.valueOf(i));
-                    editor.putString("profileScore5", topScr4);
+                    editor.putString(getString(R.string.profileScore4), String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore5), topScr4);
                 }
                 else if (i > Integer.parseInt(topScr5) ) {
-                    editor.putString("profileScore5", String.valueOf(i));
+                    editor.putString(getString(R.string.profileScore5), String.valueOf(i));
                 }
                 editor.apply();
 
