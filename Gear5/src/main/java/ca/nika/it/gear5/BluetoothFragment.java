@@ -47,17 +47,17 @@ public class BluetoothFragment extends Fragment {
         this.mDiscoverBtn = (Button) this.v.findViewById(R.id.discoverableBtn);
 
 
-        //adapter
+
         mBlueAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        //set image according to bluetooth status(on/off)
+
         if (mBlueAdapter.isEnabled()) {
             mBlueIv.setImageResource(R.drawable.b_on);
         } else {
             mBlueIv.setImageResource(R.drawable.b_off);
         }
 
-        //on btn click
+
         mOnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +71,7 @@ public class BluetoothFragment extends Fragment {
                 }
             }
         });
-        //discover bluetooth btn click
+
         mDiscoverBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")//dont remove hard string, it will crash
             @Override
@@ -84,9 +84,9 @@ public class BluetoothFragment extends Fragment {
                 }
             }
         });
-        //off btn click
+
         mOffBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("MissingPermission")//dont remove hard string, it will crash
+            @SuppressLint("MissingPermission")//don't remove hard string, it will crash
             @Override
             public void onClick(View v) {
                 if (mBlueAdapter.isEnabled()) {
@@ -112,7 +112,7 @@ public class BluetoothFragment extends Fragment {
                     showToast(getString(R.string.bluetoothOn));
                 }
                 else {
-                    //user denied to turn bluetooth on
+
                     showToast(getString(R.string.bluetoothDenied));
                 }
                 break;
@@ -120,7 +120,7 @@ public class BluetoothFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    //toast message function
+
     private void showToast(String msg){
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
