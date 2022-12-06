@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--     CENG-322-0NC Francisco Santos n01423860, Pradeep Singh n00975892-->
+<!--     CENG-322-0NB Ralph Robes n01410324, Elijah Tanimowo n01433560-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/background_purple_background"/>
+    <foreground android:drawable="@mipmap/background_purple_foreground"/>
+</adaptive-icon>
