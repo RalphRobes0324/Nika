@@ -177,7 +177,7 @@ public class BalanceFragment extends Fragment{
         SharedPreferences sharedPreferences= this.getActivity().getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
 
         if(sharedPreferences!= null) {
-            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+            String typeOFLogin = sharedPreferences.getString(getString(R.string.key_typelogin), getString(R.string.blank));
             typeOFsignout = typeOFLogin;
             if(typeOFLogin.equals(getString(R.string.gearaccount))) {
                 String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
@@ -195,7 +195,7 @@ public class BalanceFragment extends Fragment{
                             mDatabase.child(getString(R.string.childRef_reg_regFrag)).child(getUserID).child(getString(R.string.childRef_Currency)).setValue(newSum);
 
                         } else {
-                            Log.d("FAILED", "FAILED GEAR");
+                            Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
                         }
                     }
 

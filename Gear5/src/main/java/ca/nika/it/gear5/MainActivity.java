@@ -126,9 +126,9 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences sharedPreferences= this.getSharedPreferences(getString(R.string.SettingsPref), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if(sharedPreferences!= null) {
-            String typeOFLogin = sharedPreferences.getString("typeLogin", getString(R.string.blank));
+            String typeOFLogin = sharedPreferences.getString(getString(R.string.key_typelogin), getString(R.string.blank));
             typeOFsignout = typeOFLogin;
-            if(typeOFLogin.equals("GearAccount")) {
+            if(typeOFLogin.equals(getString(R.string.gearaccount))) {
                 String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
                 globalId = getUserId;
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(getString(R.string.childRef_reg_regFrag));
@@ -140,24 +140,24 @@ public class MainActivity extends AppCompatActivity{
                         if (snapshot.exists()) {
                             String userName = snapshot.child(getUserId).child(getString(R.string.childRef_username)).getValue(String.class);
                             Integer userTopScore = snapshot.child(getUserId).child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore2 = snapshot.child(getUserId).child("topScore2").getValue(Integer.class);
-                            Integer userScore3 = snapshot.child(getUserId).child("topScore3").getValue(Integer.class);
-                            Integer userScore4 = snapshot.child(getUserId).child("topScore4").getValue(Integer.class);
-                            Integer userScore5 = snapshot.child(getUserId).child("topScore5").getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getUserId).child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getUserId).child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getUserId).child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getUserId).child(getString(R.string.key_topScore5)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getUserId).child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
 
-                            editor.putString("profileUsername", userName);
-                            editor.putString("profileTopScore", Integer.toString(userTopScore));
-                            editor.putString("profileScore2", Integer.toString(userScore2));
-                            editor.putString("profileScore3", Integer.toString(userScore3));
-                            editor.putString("profileScore4", Integer.toString(userScore4));
-                            editor.putString("profileScore5", Integer.toString(userScore5));
-                            editor.putString("profileCur", Integer.toString(userCur));
+                            editor.putString(getString(R.string.profileUsername), userName);
+                            editor.putString(getString(R.string.profileTopScore), Integer.toString(userTopScore));
+                            editor.putString(getString(R.string.profileScore2), Integer.toString(userScore2));
+                            editor.putString(getString(R.string.profileScore3), Integer.toString(userScore3));
+                            editor.putString(getString(R.string.profileScore4), Integer.toString(userScore4));
+                            editor.putString(getString(R.string.profileScore5), Integer.toString(userScore5));
+                            editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
                             editor.apply();
 
                         } else {
-                            Log.d("FAILED", "FAILED GEAR");
+                            Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
                         }
                     }
 
@@ -167,11 +167,11 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
             }
-            else if(typeOFLogin.equals("GearGoogleAccount")){
+            else if(typeOFLogin.equals(getString(R.string.geargoogleaccount))){
                 String getUserId = sharedPreferences.getString(getString(R.string.userProfile), getString(R.string.blank));
                 globalId = getUserId;
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference uidRef = db.child("users").child(getUserId);
+                DatabaseReference uidRef = db.child(getString(R.string.users)).child(getUserId);
                 uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -179,29 +179,29 @@ public class MainActivity extends AppCompatActivity{
                             DataSnapshot snapshot = task.getResult();
                             String userName = snapshot.child(getString(R.string.childRef_username)).getValue(String.class);
                             Integer userTopScore = snapshot.child(getString(R.string.childRef_topScore)).getValue(Integer.class);
-                            Integer userScore2 = snapshot.child("topScore2").getValue(Integer.class);
-                            Integer userScore3 = snapshot.child("topScore3").getValue(Integer.class);
-                            Integer userScore4 = snapshot.child("topScore4").getValue(Integer.class);
-                            Integer userScore5 = snapshot.child("topScore5").getValue(Integer.class);
+                            Integer userScore2 = snapshot.child(getString(R.string.key_topScore2)).getValue(Integer.class);
+                            Integer userScore3 = snapshot.child(getString(R.string.key_topScore3)).getValue(Integer.class);
+                            Integer userScore4 = snapshot.child(getString(R.string.key_topScore4)).getValue(Integer.class);
+                            Integer userScore5 = snapshot.child(getString(R.string.key_topScore5)).getValue(Integer.class);
                             Integer userCur = snapshot.child(getString(R.string.childRef_Currency)).getValue(Integer.class);
 
-                            editor.putString("profileUsername", userName);
-                            editor.putString("profileTopScore", Integer.toString(userTopScore));
-                            editor.putString("profileScore2", Integer.toString(userScore2));
-                            editor.putString("profileScore3", Integer.toString(userScore3));
-                            editor.putString("profileScore4", Integer.toString(userScore4));
-                            editor.putString("profileScore5", Integer.toString(userScore5));
-                            editor.putString("profileCur", Integer.toString(userCur));
+                            editor.putString(getString(R.string.profileUsername), userName);
+                            editor.putString(getString(R.string.profileTopScore), Integer.toString(userTopScore));
+                            editor.putString(getString(R.string.profileScore2), Integer.toString(userScore2));
+                            editor.putString(getString(R.string.profileScore3), Integer.toString(userScore3));
+                            editor.putString(getString(R.string.profileScore4), Integer.toString(userScore4));
+                            editor.putString(getString(R.string.profileScore5), Integer.toString(userScore5));
+                            editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
                             editor.apply();
                         }else{
-                            Log.d("FAILED", "FAILED GOOGLE LOAD PROF");
+                            Log.d(getString(R.string.FAILED), getString(R.string.TAG_FAILED));
                         }
                     }
                 });
 
             }
             else{
-                Log.d("FAILED", "FAILED");
+                Log.d(getString(R.string.FAILED), getString(R.string.FAILED));
             }
 
         }

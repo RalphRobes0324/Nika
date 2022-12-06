@@ -161,8 +161,6 @@ public class ReviewFragment extends Fragment {
 
     public void LoadingDialog(){
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         View view = getLayoutInflater().inflate(R.layout.load_dialog,null);

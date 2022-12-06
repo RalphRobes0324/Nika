@@ -111,8 +111,6 @@ public class PlayFragment extends Fragment {
         js = new JoyStickClass(getActivity().getApplicationContext(), layout_joystick, JoystickColor);
         js.setStickSize(270, 270);
         js.setLayoutSize(500, 500);
-//        js.setLayoutAlpha(150);
-//        js.setStickAlpha(100);
         js.setOffset(90);
         js.setMinimumDistance(50);
 
