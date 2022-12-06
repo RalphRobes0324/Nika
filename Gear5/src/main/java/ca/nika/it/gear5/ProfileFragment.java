@@ -100,6 +100,7 @@ public class ProfileFragment extends Fragment {
         startActivityForResult(camera,118);
     }
 
+    // This loadImage used to be inside of a big block of code, but after the refactor, it is in its own function
     public void loadImage() {
         preferenceManager=PreferenceManager.getInstance(getActivity());
 
@@ -150,7 +151,7 @@ public class ProfileFragment extends Fragment {
                             editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
                             editor.apply();
 
-
+                            // When creating this fragment, originally all the code was here, now it used a function for the purpose
                             loadText();
 
                         } else {
@@ -196,7 +197,7 @@ public class ProfileFragment extends Fragment {
                             editor.putString(getString(R.string.profileCur), Integer.toString(userCur));
                             editor.apply();
 
-
+                            // When creating this fragment, originally all the code was here, now it used a function for the purpose
                             loadText();
                         }else{
                             Log.d(getString(R.string.TAG_FAILED), getString(R.string.TAG_FAILED));
