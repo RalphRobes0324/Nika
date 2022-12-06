@@ -123,7 +123,7 @@ public class ScoreFragment extends Fragment {
             new LoadImage().execute();
 
         } else {
-            Toast.makeText(getActivity(), "You are on offline mode, turn on Internet to use this feature", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.offline_msg), Toast.LENGTH_SHORT).show();
         }
 
         return view;

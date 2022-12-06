@@ -258,4 +258,5 @@
     <string name="score_input">Score Input</string>
     <string name="simulate_score">Simulate Score</string>
     <string name="personal_top_scores">PB Top Scores</string>
+    <string name="offline_msg">You are on offline mode, turn on Internet to use this feature</string>
 </resources>
