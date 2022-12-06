@@ -259,5 +259,6 @@
     <string name="score_input">Saisie de score</string>
     <string name="simulate_score">Simuler le score</string>
     <string name="personal_top_scores">Meilleurs scores PB</string>
+    <string name="offline_msg">Vous êtes en mode hors connexion, activez Internet pour utiliser cette fonctionnalité</string>
 
 </resources>
