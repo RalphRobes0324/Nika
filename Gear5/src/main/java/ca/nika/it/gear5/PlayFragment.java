@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PlayFragment extends Fragment {
     Button btnA;
@@ -31,6 +38,7 @@ public class PlayFragment extends Fragment {
     Boolean playAudio;
     JoyStickClass js;
     int JoystickColor;
+    String direction = "UP";
 
 
     public PlayFragment() {
@@ -47,6 +55,11 @@ public class PlayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_play, container, false);
+
+        //Ref to database
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference uidRef = db.child(getString(R.string.users)).child("admin2");
 
         this.btnA = (Button) this.v.findViewById(R.id.nikaButtonA);
         this.btnB = (Button) this.v.findViewById(R.id.nikaButtonB);
@@ -127,20 +140,125 @@ public class PlayFragment extends Fragment {
                     int direction = js.get8Direction();
                     if(direction == JoyStickClass.STICK_UP) {
                         textView5.setText(R.string.direction_up);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "UP";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
+
                     } else if(direction == JoyStickClass.STICK_UPRIGHT) {
                         textView5.setText(R.string.direction_up_right);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "RIGHT";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     } else if(direction == JoyStickClass.STICK_RIGHT) {
                         textView5.setText(R.string.direction_right);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "RIGHT";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     } else if(direction == JoyStickClass.STICK_DOWNRIGHT) {
                         textView5.setText(R.string.direction_down_right);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "RIGHT";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     } else if(direction == JoyStickClass.STICK_DOWN) {
                         textView5.setText(R.string.direction_down);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "DOWN";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     } else if(direction == JoyStickClass.STICK_DOWNLEFT) {
                         textView5.setText(R.string.direction_down_left);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "LEFT";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     } else if(direction == JoyStickClass.STICK_LEFT) {
                         textView5.setText(R.string.direction_left);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "LEFT";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     } else if(direction == JoyStickClass.STICK_UPLEFT) {
                         textView5.setText(R.string.direction_up_left);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "LEFT";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     } else if(direction == JoyStickClass.STICK_NONE) {
                         textView5.setText(R.string.direction_center);
                     }
