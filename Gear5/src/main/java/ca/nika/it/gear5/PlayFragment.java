@@ -261,6 +261,19 @@ public class PlayFragment extends Fragment {
                         });
                     } else if(direction == JoyStickClass.STICK_NONE) {
                         textView5.setText(R.string.direction_center);
+                        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String curDir = "CENTER";
+                                    String newUserDirStatus = new String(curDir);
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                    mDatabase.child(getString(R.string.childRef_reg_regFrag)).child("admin2").child("v_input").setValue(newUserDirStatus);
+                                }else{
+                                    Log.d(getString(R.string.TAG_FAILED), getString(R.string.ERROR_MSG_BALAFRAG));
+                                }
+                            }
+                        });
                     }
                 } else if(arg1.getAction() == MotionEvent.ACTION_UP) {
                     textView1.setText(getString(R.string.x_display));
