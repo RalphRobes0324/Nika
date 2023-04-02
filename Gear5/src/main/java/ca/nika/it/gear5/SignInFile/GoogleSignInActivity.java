@@ -160,12 +160,21 @@ public class GoogleSignInActivity extends AppCompatActivity {
         int topScore3 = 0;
         int topScore4 = 0;
         int topScore5 = 0;
+
+        String audio = "MUTE";
+        String status = "OFFLINE";
+        String monitor = "OFF";
+        String input = "";
+        String v_input = "";
+
         String phone = _phone;
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference(getString(R.string.childRef_reg_regFrag));
-        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore, phone, fullName, topScore2, topScore3, topScore4, topScore5);
+        UserClass userClass = new UserClass(username, password, email, startCurrency, startScore,
+                phone, fullName, topScore2, topScore3, topScore4, topScore5, audio,
+                status, monitor, input, v_input);
         reference.child(userId).setValue(userClass);
         enterMainActivity(userId);
 

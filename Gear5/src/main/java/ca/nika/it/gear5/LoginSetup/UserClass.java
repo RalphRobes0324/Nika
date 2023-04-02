@@ -3,7 +3,8 @@
 package ca.nika.it.gear5.LoginSetup;
 
 public class UserClass {
-    String username,password, email, phone, fullName;
+    String username,password, email, phone, fullName, audio,
+    status, monitor, v_input, input;
     int currency, topScore, topScore2, topScore3, topScore4, topScore5;
 
     public UserClass() {
@@ -11,10 +12,10 @@ public class UserClass {
     }
 
 
-
-
     public UserClass(String username, String password, String email, int currency, int topScore, String phone, String fullName,
-                     int topScore2, int topScore3, int topScore4, int topScore5) {
+                     int topScore2, int topScore3, int topScore4, int topScore5, String audio, String status,
+                     String monitor, String input, String v_input
+                     ) {
         this.email = email;
         this.username = username;
         this.password = password;
@@ -26,6 +27,52 @@ public class UserClass {
         this.topScore3 = topScore3;
         this.topScore4 = topScore4;
         this.topScore5 = topScore5;
+
+        this.audio = audio;
+        this.status = status;
+        this.monitor = monitor;
+        this.input = input;
+        this.v_input = v_input;
+    }
+
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMonitor() {
+        return monitor;
+    }
+
+    public void setMonitor(String monitor) {
+        this.monitor = monitor;
+    }
+
+    public String getV_input() {
+        return v_input;
+    }
+
+    public void setV_input(String v_input) {
+        this.v_input = v_input;
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 
     public int getTopScore2() {
